@@ -1,0 +1,101 @@
+[
+  {
+    "platform": "mohrss_public",
+    "name": "中国公共招聘网",
+    "kind": "job_board",
+    "priority": "high",
+    "entry_url": "https://job.mohrss.gov.cn/cjobs/jobinfolist/listJobinfolist",
+    "notes": "官方公开招聘平台，可按地区、岗位、行业、学历、月薪范围筛选，适合作为第一批样本来源。",
+    "supports_city": true,
+    "supports_keyword": true,
+    "supports_detail_pages": true
+  },
+  {
+    "platform": "mohrss_ranking",
+    "name": "中国公共招聘网招聘排行榜",
+    "kind": "aggregate_board",
+    "priority": "high",
+    "entry_url": "https://job.mohrss.gov.cn/cjobs/institution/rankingLists",
+    "notes": "提供区域、行业、职业层面的起薪、招聘人数和热门岗位排行，适合补充宏观背景。",
+    "supports_city": false,
+    "supports_keyword": false,
+    "supports_detail_pages": false
+  },
+  {
+    "platform": "ncss_jobs",
+    "name": "国家大学生就业服务平台",
+    "kind": "job_board",
+    "priority": "high",
+    "entry_url": "https://www.ncss.cn/student/jobs/index.html",
+    "notes": "高校毕业生岗位平台，适合抓应届生、实习和校招文本，文本质量通常较高。",
+    "supports_city": true,
+    "supports_keyword": true,
+    "supports_detail_pages": true
+  },
+  {
+    "platform": "zhaopin_detail",
+    "name": "智联招聘职位详情页",
+    "kind": "job_board",
+    "priority": "medium",
+    "entry_url": "https://www.zhaopin.com/jobs",
+    "notes": "详情页可被搜索引擎索引，适合手工补充若干公开职位详情页做样本扩展。",
+    "supports_city": true,
+    "supports_keyword": true,
+    "supports_detail_pages": true
+  },
+  {
+    "platform": "stats_data",
+    "name": "国家数据",
+    "kind": "official_data",
+    "priority": "high",
+    "entry_url": "https://data.stats.gov.cn/",
+    "notes": "用于补城市控制变量，如人口、GDP、第三产业占比、工资等。",
+    "supports_city": false,
+    "supports_keyword": false,
+    "supports_detail_pages": false
+  },
+  {
+    "platform": "stats_census",
+    "name": "国家统计局普查数据",
+    "kind": "official_data",
+    "priority": "high",
+    "entry_url": "https://www.stats.gov.cn/sj/pcsj/",
+    "notes": "用于补人口和教育结构变量，适合做城市层面的解释变量。",
+    "supports_city": false,
+    "supports_keyword": false,
+    "supports_detail_pages": false
+  },
+  {
+    "platform": "occupation_classification",
+    "name": "国家职业分类大典相关页面",
+    "kind": "classification",
+    "priority": "high",
+    "entry_url": "https://www.ndrc.gov.cn/fggz/jyysr/jysrsbxf/202210/t20221031_1340470.html",
+    "notes": "提供新版职业分类大典背景信息，是职业映射的政策锚点。",
+    "supports_city": false,
+    "supports_keyword": false,
+    "supports_detail_pages": false
+  },
+  {
+    "platform": "industry_classification",
+    "name": "国民经济行业分类",
+    "kind": "classification",
+    "priority": "high",
+    "entry_url": "https://www.stats.gov.cn/xxgk/tjbz/gjtjbz/201710/t20171017_1758922.html",
+    "notes": "用于把企业行业字段统一到官方行业分类口径。",
+    "supports_city": false,
+    "supports_keyword": false,
+    "supports_detail_pages": false
+  },
+  {
+    "platform": "clds_intro",
+    "name": "中国劳动力动态调查 CLDS",
+    "kind": "survey",
+    "priority": "medium",
+    "entry_url": "https://isg.sysu.edu.cn/article/300",
+    "notes": "作为补充数据源了解即可，三周内不建议把它作为主线依赖。",
+    "supports_city": false,
+    "supports_keyword": false,
+    "supports_detail_pages": false
+  }
+]

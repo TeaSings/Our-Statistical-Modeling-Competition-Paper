@@ -1,0 +1,37 @@
+{
+  "base_url": "https://www.ncss.cn",
+  "list_api": "https://www.ncss.cn/student/jobs/jobslist/ajax/",
+  "referer": "https://www.ncss.cn/student/jobs/index.html",
+  "limit": 20,
+  "max_pages_per_query": 3,
+  "delay_seconds": 0.2,
+  "request_params": {
+    "jobType": "",
+    "monthPay": "",
+    "industrySectors": "",
+    "recruitType": "",
+    "property": "",
+    "categoryCode": "",
+    "memberLevel": "",
+    "keyUnits": "",
+    "degreeCode": "",
+    "sourcesName": "",
+    "sourcesType": ""
+  },
+  "cities": [
+    {"name": "北京", "areaCode": "11"},
+    {"name": "上海", "areaCode": "31"},
+    {"name": "广州", "areaCode": "440100"},
+    {"name": "深圳", "areaCode": "440300"},
+    {"name": "武汉", "areaCode": "420100"},
+    {"name": "成都", "areaCode": "510100"}
+  ],
+  "keywords": [
+    "Python",
+    "数据分析",
+    "运营",
+    "行政",
+    "会计",
+    "产品经理"
+  ]
+}

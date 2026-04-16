@@ -1,0 +1,43 @@
+{
+  "platform": "ncss_jobs",
+  "request_headers": {
+    "User-Agent": "Mozilla/5.0"
+  },
+  "list_page": {
+    "base_url": "https://www.ncss.cn",
+    "item_selector": "div.REPLACE_LIST_ITEM_SELECTOR",
+    "detail_link_selector": "a.REPLACE_LIST_LINK_SELECTOR",
+    "detail_link_attr": "href"
+  },
+  "detail_page": {
+    "single_selectors": {
+      "job_title_raw": [
+        "li.job-title.basic-color"
+      ],
+      "company_name_raw": [
+        "#corpName span"
+      ],
+      "salary_raw": [
+        "ul.salary li:nth-of-type(1)"
+      ],
+      "education_raw": [
+        "ul.salary li:nth-of-type(3) span"
+      ],
+      "company_industry_raw": [
+        "div.company ul.details li:nth-of-type(2) span.show.fr"
+      ],
+      "company_size_raw": [
+        "div.company ul.details li:nth-of-type(5) span.show.fr"
+      ]
+    },
+    "multi_selectors": {
+      "jd_text_raw": [
+        "div.mainContent"
+      ],
+      "job_tags_raw": [
+        "#companyTags",
+        "div.major"
+      ]
+    }
+  }
+}

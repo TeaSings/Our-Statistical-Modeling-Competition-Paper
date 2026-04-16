@@ -2,8 +2,3 @@ tmp/
 __pycache__/
 *.pyc
 .DS_Store
-data/raw/html/
-data/raw/links/*.csv
-data/raw/records/*.jsonl
-data/raw/*manifest*.jsonl
-data/processed/*.csv

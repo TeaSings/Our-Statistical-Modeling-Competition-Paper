@@ -1,0 +1,2993 @@
+<!DOCTYPE html>
+<html xmlns:shiro="http://www.ncss.cn/thymeleaf/shiro">
+<head>
+        <meta charset="UTF-8" />
+        <title>职位信息-国家大学生就业服务平台</title>
+        <meta name="keywords" content="大学生就业,24365" />
+        <meta name="description" content="国家大学生就业服务平台是由教育部主管、教育部学生服务与素质发展中心运营的服务于高校毕业生及用人单位的公共就业服务平台。" />
+        <meta name="author" content="教育部学生服务与素质发展中心" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="renderer" content="webkit" />
+        <meta http-equiv="x-dns-prefetch-control" content="on" />
+        <link rel="dns-prefetch" href="https://t1.chei.com.cn" />
+        <link rel="dns-prefetch" href="https://t2.chei.com.cn" />
+        <link rel="dns-prefetch" href="https://t3.chei.com.cn" />
+        <link rel="dns-prefetch" href="https://t4.chei.com.cn" />
+        <link rel="dns-prefetch" href="//www.google-analytics.com" />
+        <link rel="shortcut icon" href="https://t3.chei.com.cn/ncss/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" type="text/css" href="https://t1.chei.com.cn/ncss/student/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="https://t3.chei.com.cn/ncss/student/css/iconfont-1.0.1.css" />
+        <link rel="stylesheet" type="text/css" href="https://t3.chei.com.cn/ncss/student/css/meta.min-1.0.0.css" />
+        <link rel="stylesheet" type="text/css" href="https://t3.chei.com.cn/ncss/student/css/select2.min.css" />
+        <link rel="stylesheet" type="text/css" href="https://t1.chei.com.cn/ncss/student/css/modal-1.0.6.css" />
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-105074615-1"></script>
+        <script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?378ff17a1ac046691cf78376632d1ed4";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+
+    (function(w, d, s, q) {
+          w[q] =w[q] || [];
+          var f=d.getElementsByTagName(s)[0],j=d.createElement(s);
+          j.async=true;
+          j.id='beacon-aplus';
+          j.src='https://o.alicdn.com/QTSDK/quicktracking-sdk/qt_web.umd.js';
+          f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'aplus_queue');
+    aplus_queue.push({ action: 'aplus.setMetaInfo', arguments: ['appKey', 'pe1u003gswd7xoe4wkhoap98']  })
+    aplus_queue.push({ action: 'aplus.setMetaInfo', arguments: ['trackDomain', 'qtedu.om.moe.edu.cn']  });
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-105074615-1');
+</script>
+        <style type="text/css">
+            header .navbar2 li a {
+                padding: 10px;
+            }
+            header .fz-header-nav li a {
+                padding: 10px 14px;
+            }
+            nav .navbar-inverse {
+                background-color: #f3f3f3;
+                border-bottom: 1px solid #e1e1e1;
+            }
+            nav nav .navbar .nav li a {
+                color: #777;
+            }
+            .navbar-inverse .navbar-nav > li > a:hover,
+            .navbar-inverse .navbar-nav > li > a:focus {
+                color: #03a9f4;
+            }
+            .navbar-inverse .navbar-nav > li > a:focus {
+                color: #777;
+            }
+            .navbar li:hover {
+                background: none;
+            }
+            nav .navbar .navbar-right li a {
+                line-height: 40px;
+            }
+            nav .navbar .nav li a {
+                height: 40px;
+                line-height: 40px;
+            }
+            nav .navbar .nav li:last-child {
+                padding-right: 0;
+            }
+            nav .navbar .nav li:first-child a {
+                padding-left: 0;
+            }
+            .loaction-span {
+                margin: 37px 6px 0 6px;
+            }
+            .officialVoice {
+                margin: 22px 20px 0 0;
+            }
+            .loaction-span .site-name {
+                margin-left: -3px;
+            }
+            .officialVoice {
+                margin: 28px 20px 0 0;
+            }
+            .header-nav li {
+                margin: 25px 0;
+            }
+            .header-nav li.act {
+                background: #0168d1;
+            }
+            header .navbar2 li a:hover {
+                background: #0168d1;
+            }
+        </style>
+    </head>
+<link rel="stylesheet" href="https://t4.chei.com.cn/ncss/student/css/normalize.css" />
+<link rel="stylesheet" href="https://t3.chei.com.cn/ncss/student/css/common.min.css" />
+<link rel="stylesheet" href="https://t2.chei.com.cn/ncss/student/css/job-1.0.1.css?20230327" />
+<link rel="stylesheet" href="https://t1.chei.com.cn/ncss/student/css/jobresume-1.0.1.css?20230414" />
+<link rel="stylesheet" href="https://t4.chei.com.cn/ncss/student/css/select2.min.css" />
+<!-- <script language="javascript" src="https://t1.chsi.com.cn/common/axvert/js/showchsi_m.js"></script> -->
+<style>
+    #container {
+        position: relative;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    #jobLIST {
+        overflow: hidden;
+        min-height: 140px;
+    }
+    #jobLIST .outer-box {
+        display: inline-block;
+        width: 90px;
+        height: 90px;
+        border: 1px solid #ababab;
+        vertical-align: middle;
+        overflow: hidden;
+    }
+    #jobLIST .img-box {
+        display: table-cell;
+        vertical-align: middle;
+        height: 88px;
+    }
+    #jobLIST .fl img {
+        width: 100%;
+        max-height: 100%;
+    }
+    #jobLIST ul {
+        padding: 0 20px 0 30px;
+        margin-bottom: 0;
+    }
+    #jobLIST .first-ul {
+        width: 320px;
+    }
+
+    .job-list-mid {
+        width: 33%;
+    }
+    .corp-title {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    .v-tag {
+        margin-left: 6px;
+        float: left;
+    }
+    .main-areaspan {
+        float: left;
+        padding: 0 4px;
+        height: 22px;
+        line-height: 20px;
+        border: 1px solid #ff1a31 !important;
+        color: #ff1a31 !important;
+        width: auto !important;
+        font-size: 12px !important;
+        border-radius: 3px;
+        margin-right: 8px;
+        margin-top: 4px;
+    }
+    .company-name {
+        float: left;
+        margin-top: 0px;
+        max-width: 300px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .company-name.single {
+        max-width: 264px;
+    }
+    .company-name.double {
+        max-width: 196px;
+    }
+    .mylist ul li.typeList,
+    .mylist ul li.memberLevel,
+    .mylist ul li.sourceList,
+    .mylist ul li.recruitType{
+        cursor: pointer;
+    }
+    .rankBy .dropdown-menu {
+        top: 48px;
+        left: 6px;
+        min-width: 90px;
+    }
+    .qg .dropdown-menu li span:hover {
+        background: #0168d1;
+        color: #fff;
+    }
+    #searchArea {
+        width: 202px;
+        text-align: left;
+        position: relative;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: none;
+        border-color: #0168d1;
+    }
+    #jobTypeSelect {
+        background: #fff;
+        box-shadow: none;
+        border-color: #0168d1;
+        width: 142px;
+    }
+    #searchArea .caret {
+        margin-left: 0;
+        position: absolute;
+        right: 9px;
+        top: 21px;
+    }
+    #degreeTypeSelect {
+        background: #fff;
+        box-shadow: none;
+        border-color: #0168d1;
+        width: 142px;
+        position: relative;
+    }
+    #degreeTypeSelect .caret {
+        position: absolute;
+        top: 20px;
+        right: 15px;
+    }
+    .qg .dropdown-menu .shilist span {
+        display: inline-block;
+        padding: 3px 5px;
+        width: auto;
+        cursor: pointer;
+    }
+    .qg .dropdown-menu .shilist span:hover {
+        background: #0168d1;
+        color: #fff;
+    }
+    .position-list .con-list .btns ul {
+        float: left;
+        padding: 0;
+        text-align: center;
+        line-height: 1.6;
+    }
+    #jobLIST .btns ul {
+        width: 87px;
+        padding: 0;
+        margin-left: 25px;
+    }
+    .position-list .con-list .btns ul li:first-child {
+        color: #0168d1;
+        line-height: 32px;
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+    .position-list .con-list .btns ul li:last-child {
+        color: #ff9900;
+        font-size: 12px;
+    }
+    #myModal .form-group {
+        overflow: hidden;
+        color: #000;
+    }
+    #myModal .form-group {
+        margin-left: 25px;
+    }
+    #myModal .form-group:last-child label {
+        padding-top: 6px;
+    }
+    #myModal .db-container {
+        color: #666;
+    }
+    .dotted:last-child {
+        display: none;
+    }
+    .shilist>li {
+        display: block;
+    }
+    .qg .dropdown-menu .shilist li {
+        float: left;
+        width: auto;
+        margin-right: 16px;
+        cursor: pointer;
+        padding: 2px 2px;
+    }
+    .qg .dropdown-menu .shilist li:hover {
+        background: #0168d1;
+        color: #fff;
+    }
+    .secUl {
+        background: #fff;
+        position: absolute;
+        color: #666;
+        padding: 8px 0px 8px 0px;
+        border: 1px solid #c0c0c0;
+        line-height: 27px;
+        z-index: 10;
+        margin: 2px 0 0 -5px;
+    }
+    .secUl div {
+        padding: 0 10px 0 9px;
+    }
+    .secUl div:hover {
+        background: #0168d1;
+        color: #fff;
+    }
+    .act {
+        background: #32b9e8;
+        color: #fff;
+    }
+    header .navbar2 .act a {
+        color: #fff;
+    }
+    .optionIndustry {
+        margin-top: 8px;
+    }
+    .optionIndustry .title {
+        margin-left: 14px;
+        float: left;
+        position: relative;
+        top: 2px;
+    }
+    .optionIndustry .selected-box {
+        float: left;
+        margin-left: 12px;
+        width: 1080px;
+    }
+    .optionOpt {
+        padding: 0 24px 0 13px;
+        line-height: 25px;
+        height: 25px;
+        display: inline-block;
+        background: #0168d1;
+        color: #fff;
+        margin-left: 3px;
+    }
+    .closeBtn {
+        display: inline-block;
+        width: 20px;
+        height: 25px;
+        text-align: center;
+        line-height: 25px;
+        color: #fff;
+        background: #0168d1;
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+    }
+    .closeBtn:hover {
+        background: #ff9900;
+    }
+    .grey {
+        background: #ccc;
+    }
+    .result_div {
+        text-align: center;
+        margin-top: 100px;
+    }
+    .loading-box {
+        text-align: center;
+        margin: 40px 0;
+    }
+    .loading-box img {
+        width: 60px;
+    }
+    .checklistnone {
+        text-align: center;
+        margin: 40px 0;
+    }
+    .tagsrow {
+        padding: 15px 0 15px 0;
+        font-size: 12px;
+        color: #999;
+        border-top: 1px dashed #eee;
+        margin: 0 20px;
+    }
+    .comtags {
+        float: left;
+        margin-left: 155px;
+        width: 300px;
+        height: 17px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .systags {
+        float: left;
+        margin-left: 30px;
+        width: 325px;
+    }
+    .companytag-span {
+        margin-right: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 2px 8px;
+    }
+    .money-area {
+        height: 31px;
+        border: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 110px;
+        background: #fff;
+        cursor: pointer;
+        position: relative;
+        top: 1px;
+    }
+    .source-sel {
+        height: 31px;
+        border: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        position: absolute;
+        top: 18px;
+        right: 145px;
+    }
+    .appLyHide {
+        opacity: 0;
+        pointer-events: none;
+    }
+    .salary-money {
+        color: rgb(255, 153, 0) !important;
+    }
+    .main-area {
+        position: absolute;
+        bottom: -10px;
+        right: -10px;
+    }
+    .main-area img {
+        width: 22px !important;
+        height: 22px !important;
+        border: none !important;
+    }
+
+    .position-list .select .areacard-box {
+        position: absolute;
+        right: 27px;
+        margin: 0;
+        height: 32px;
+        line-height: 30px;
+        top: 18px;
+        border: 2px solid #138ac1;
+        border-radius: 30px;
+    }
+    .areacard-box li {
+        display: inline-block;
+        cursor: pointer;
+        padding: 0 15px;
+    }
+    .areacard-box .active {
+        background: #138ac1;
+        border-radius: 13px;
+        color: #fff;
+    }
+    .mylist .jobSource-box span {
+        float: left;
+        margin-left: 14px;
+        position: relative;
+        top: 2px;
+    }
+    .mylist ul .sourceListimg {
+        padding: 0;
+        position: relative;
+        top: -4px;
+        border: 1px solid #efeff4;
+        background: #fff;
+    }
+    .mylist ul .sourceListimg.active {
+        background: #fff;
+    }
+    .mylist ul .sourceListimg:hover {
+        background: #fff;
+    }
+    .mylist ul .pad10 {
+        padding: 0 10px;
+    }
+    .mylist ul .sourceListimg:hover {
+        border: 1px solid #0168d1;
+    }
+    .mylist ul .sourceListimg:hover .icon-xuanze {
+        display: block;
+    }
+    .mylist ul .sourceListimg.active {
+        border: 1px solid #0168d1;
+    }
+    .mylist ul .sourceListimg .icon-xuanze {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background: #0168d1;
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        text-align: center;
+        line-height: 10px;
+        font-weight: bold;
+    }
+    .jobSource-box .jobsourceList li {
+        margin-left: 20px;
+    }
+    .jobSource-box .jobsourceList li:first-child {
+        margin-left: 15px;
+    }
+    .jobSource-box .jobsourceList .allsource {
+        margin-left: 15px;
+        width: 122px;
+        height: 32px;
+        text-align: center;
+        line-height: 32px;
+    }
+    .jobSource-box .jobsourceList li .icon-xuanze {
+        color: #fff;
+    }
+    #jobOutsiteSl {
+        position: absolute;
+        top: 17px;
+        left: 504px;
+    }
+    .position-list .select .select2-container {
+        float: none !important;
+        padding: 0 !important;
+        top: 17px;
+        left: 504px;
+        position: absolute;
+    }
+    .select2-container .select2-selection--single {
+        height: 31px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 31px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        top: 4px;
+    }
+    .select2-container--default .select2-selection--single {
+        border: 1px solid #ccc;
+    }
+    .select2-container .select2-selection--single .select2-selection__rendered {
+        font-size: 14px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+        border-style: hidden;
+    }
+    .position-list .select>span {
+        float: none;
+        padding-right: 0;
+    }
+    .sx-sp {
+        padding-left: 18px;
+        margin-left: 18px;
+        position: relative;
+    }
+    .sx-sp::after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: -1px;
+        width: 1px;
+        height: 20px;
+        background: #ccc;
+    }
+    .position-list button {
+        vertical-align: initial;
+    }
+    .position-list .select input {
+        vertical-align: initial;
+        top: 2px;
+    }
+    .position-list .select .jobcount-total {
+        float: right;
+        margin-right: 20px;
+    }
+    .jobcount-total .jobcount-text {
+        font-size: 14px;
+        color: #333;
+        font-weight: 400;
+    }
+    .jobcount-total .jobcount-text .zw-total {
+        color: #0168D1;
+        margin-left: 3px;
+    }
+    .jobcount-total img {
+        position: relative;
+        top: -1px;
+    }
+    #searchBar {
+        border-radius: 6px;
+    }
+    #searchBar.fixed-search-bar {
+        position: fixed;
+        top: 0;
+        z-index: 100;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 9px;
+    }
+    #searchBarBottom.with-fixed-search-bar {
+        margin-top: 68px;
+    }
+</style>
+<body style="position:relative;">
+    <div>
+      <style type="text/css">
+        body {
+          background-color: #f5f7fa;
+          font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, 微软雅黑, Arial, sans-serif,SimSun;
+          padding-bottom: 150px;
+          position: relative;
+          min-width: 1170px;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+        li {
+          list-style: none;
+        }
+
+        header {
+          margin-bottom: 0 !important;
+          background: #fff;
+        }
+        header img {
+          height: auto;
+        }
+        header a:hover {
+          text-decoration: underline;
+        }
+
+        header .navbar-top {
+          height: 110px;
+          line-height: 110px;
+          background: #fff;
+          width: 1170px;
+          margin: 0 auto;
+        }
+
+        header .navbar-top .navtop-ght {
+          /* float: right; */
+        }
+        header .navbar-top .logo-bl {
+          font-size: 36px;
+          color: #273b55;
+          font-weight: 700;
+          height: 110px;
+          display: inline-block;
+        }
+        .headernav-bl .navbar {
+          width: 1170px;
+          min-height: 30px;
+          margin: 0 auto;
+          border: none;
+          border-radius: 0;
+        }
+
+        .headernav-bl .navbar .nav li a {
+          padding: 0 15px;
+          line-height: 30px;
+          color: #ccc;
+        }
+
+        .headernav-bl .navbar .navbar-right li {
+          position: relative;
+          width: auto;
+          text-align: center;
+          padding: 0;
+          margin-right: 15px !important;
+        }
+
+        .headernav-bl .navbar .navbar-right li:last-child {
+          padding-right: 0;
+          margin-right: 7px !important;
+        }
+        .headernav-bl .navbar .navbar-right li a {
+          padding: 0;
+          line-height: 30px;
+          color: #ccc;
+        }
+        .headernav-bl .navbar .navbar-right li a:hover {
+          text-decoration: none;
+        }
+        .headernav-bl .navbar .navbar-right li .notlog-a:hover {
+          text-decoration: underline;
+        }
+        .headernav-bl .navbar .navbar-right li a img {
+          width: 24px;
+          height: 24px;
+          background: #fff;
+        }
+
+        .headernav-bl .navbar .navbar-right li .new:before {
+          font-size: 16px;
+        }
+
+        .headernav-bl .navbar .navbar-right li .new:after {
+          content: '\e641';
+          position: absolute;
+          top: -6px;
+          left: 29px;
+          font-size: 1px;
+          color: #de3131;
+        }
+
+        .headernav-bl .navbar .navbar-right .link ul {
+          display: none;
+          background: #505051;
+        }
+
+        .headernav-bl .navbar .navbar-right .link:hover ul {
+          display: block;
+          position: absolute;
+          z-index: 9999;
+          left: -9px;
+        }
+
+        .headernav-bl .navbar .navbar-right .link:hover ul li {
+          padding-left: 17px;
+          text-align: left;
+          font-size: 14px;
+          width: 88px;
+          margin: 0;
+        }
+
+        .headernav-bl .navbar .navbar-right .link:hover ul li:hover {
+          background: #666;
+        }
+
+        .headernav-bl .navbar .navbar-right .link:hover ul li .number {
+          margin-right: 5px;
+          color: #de3131;
+        }
+
+        .headernav-bl .navbar .navbar-right .link:hover ul li a:hover {
+          color: #fff;
+        }
+
+        .headernav-bl .navbar .navbar-right .link #collection {
+          left: -29px !important;
+        }
+
+        .headernav-bl .navbar .navbar-right .link #collection li {
+          padding-left: 0;
+          text-align: center;
+        }
+        .navbar-top .logo-bl .logo-img {
+			    width: 480px;
+          height: 110px;
+          background-image: url('https://t2.chei.com.cn/ncss/student/img/logo/logo-text.svg');
+          background-repeat: no-repeat;
+          background-position: 0 50%;
+			    overflow: hidden;
+			    display: inline-block;
+			  }
+        .headernav-bl .navbar .navbar-right li a {
+          color: #333;
+        }
+        .nav-bl {
+          height: 80px;
+          background: #0168d1;
+        }
+
+        .headernav-bl .navbar .navtop-ght .nav a {
+          height: 30px;
+          line-height: 30px;
+          color: #333;
+        }
+        .navbar-top img {
+          width: auto;
+        }
+
+        header .nav-wrapper {
+          width: 1170px;
+          margin: 0 auto;
+        }
+        header .nav-index-list {
+          padding: 0 0 0 83px;
+        }
+        header .nav-index-list li {
+          float: left;
+          color: #fff;
+        }
+
+        header .nav-index-list .nav-th {
+          float: left;
+          font-size: 16px;
+          font-weight: 700;
+        }
+
+        header .nav-index-list .nav-con {
+          float: left;
+        }
+
+        .nav-index-list .nav-fast-li {
+          position: relative;
+        }
+
+        .nav-index-list .nav-th {
+          padding: 0 37px;
+          height: 80px;
+          line-height: 80px;
+        }
+
+        .nav-index-list .nav-th a {
+          color: #fff;
+        }
+
+        .nav-index-list .nav-fast-li::after {
+          content: '';
+          display: inline-block;
+          width: 1px;
+          height: 56px;
+          background: rgba(255, 255, 255, 0.3);
+          position: absolute;
+          right: 0;
+          top: 50%;
+          margin-top: -28px;
+        }
+
+        .nav-index-list .nav-fast-li:last-child::after {
+          display: none;
+        }
+
+        .nav-index-list .nav-td {
+          padding: 12px 0;
+          font-size: 14px;
+          line-height: 28px;
+        }
+
+        .nav-index-list .nav-td li {
+          float: left;
+          margin-right: 33px;
+        }
+
+        .nav-td .td-a a {
+          color: #fff;
+        }
+
+        .nav-index-list .nav-td .fxts-a {
+          margin-right: 35px;
+        }
+
+        .loaction-span {
+          float: none;
+          height: 30px;
+          line-height: 30px;
+          text-align: right;
+          margin: 22px 0 2px 20px;;
+        }
+        .loaction-span .site-name {
+          font-size: 16px;
+          color: #333;
+          font-weight: 600;
+          max-width: 250px;
+        }
+        .navbar-right {
+          display: flex;
+          align-items: center;
+        }
+        .user-name {
+            display: inline-block;
+            overflow: hidden;
+            max-width: 50px;
+            white-space: nowrap;
+            line-height: 1;
+            vertical-align: top;
+            text-overflow: ellipsis;
+            margin-left: 3px;
+            display: inline-block;
+            line-height: 30px;
+            height: 30px;
+        }
+        nav .navbar .nav li:first-child a {
+          display: flex;
+          align-items: center;
+        }
+        header img {
+          height: auto;
+          max-width: 580px;
+          max-height: 70px;
+        }
+        .right-wrap {
+          float: right;
+        }
+
+        #notlogNav {
+          margin-top: 8px;
+          /* float: right; */
+          display: flex;
+        }
+
+        #notlogNav .nolog-a {
+          font-size: 14px;
+          color: #2068CA;
+          line-height: 1;
+          padding: 9px 10px;
+          background: #EFF4FA;
+          margin-left: 16px;
+          border-radius: 4px;
+          text-decoration: none;
+          transition: all .3s;
+        }
+        #notlogNav  .nolog-a:hover{
+          background: #2068CA;
+          color: #fff;
+        }
+        #notlogNav .nolog-a:last-child {
+          background: transparent;
+          padding: 9px 0;
+          color: #777;
+          margin-right: 7px;
+        }
+        #notlogNav .nolog-a:last-child:hover {
+          background: transparent;
+          color: #0168d1;
+        }
+        .navbar-top .top-nav-search-input {
+            display: block;
+            position: relative;
+        }
+        .navbar-top .search-button {
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: url(https://t2.chei.com.cn/common/images/icon-search.svg) center center no-repeat;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            position: absolute;
+            right: 7px;
+            top: 5px;
+        }
+        .top-nav-search-input .search-input {
+            width: 180px;
+            border-radius: 16px;
+            border: 1px solid #d4d9d7;
+            height: 30px;
+            color: #131b18;
+            background: #FFF;
+            border-radius: 4px;
+            outline: none;
+            padding: 0 28px 0 8px;
+            box-sizing: border-box;
+            position: relative;
+            display: block;
+        }
+        .top-nav-search-input .search-input:focus {
+            border: 1px solid #0168d1;
+        }
+        .navbar-top .rgt-bl {
+            display: flex;
+            justify-content: right;
+        }
+        .navbar-top .rgt-bl .top-nav-search-input{
+            margin-top: 22px;
+        }
+        .navbar-top .rgt-bl .ch-header-divide {
+            margin-left: 14px;
+            color: #e6e6e6;
+            font-size: 16px;
+            line-height: 1;
+            margin-top: 28px;
+        }
+      </style>
+
+      <!--导航 begin-->
+      <header>
+        <!-- 顶部登录入口 -->
+        <div class="headernav-bl">
+          <div class="navbar-top clearfix navbar">
+            <span class="logo-bl">
+               <span class="logo-img"></span>
+              
+            </span>
+            <div class="right-wrap">
+                <div class="rgt-bl">
+                    <div class="top-nav-search-input" id="top-nav-input">
+                        <form class="site-search" action="https://cn.bing.com/search" target="_blank" method="get">
+                            <input type="hidden" class="realQuery" name="q" value="">
+                            <input placeholder="" type="text" name="query" autocomplete="off" id="top-nav-search-input" class="search-input" value="" maxlength="100">
+                            <button type="submit" class="search-button"></button>
+                        </form>
+                    </div>
+                    <span class="ch-header-divide">|</span>
+                    <div class="loaction-span" id="siteChange">
+                        <i class="iconfont icon-dizhi"></i>
+                        <span class="site-name" title="全国">全国</span>
+                        <span class="quote basic-color" style="color: #0168d1; margin-left: 5px">【切换】</span>
+                    </div>
+                </div>
+              <div class="navtop-ght" id="otherBar">
+                <ul class="nav notlog-nav" id="notlogNav">
+                  <a class="nolog-a" href="/student/signin.html" target="_blank">求职者登录/注册</a>
+                  <a class="nolog-a" href="/corp/signin.html" target="_blank">用人单位登录/注册</a>
+                  <a class="nolog-a" href="/manager/signin.html" target="_blank">管理用户登录</a>
+                </ul>
+              </div>
+              
+              
+            </div>
+          </div>
+        </div>
+        <div class="nav-bl basic-color-bg">
+          <div class="nav-wrapper">
+            <ul class="nav-index-list clearfix">
+              <li class="nav-fast-li">
+                <div class="nav-th">
+                  <a href="/student/index.html">首页</a>
+                </div>
+              </li>
+              <li class="nav-fast-li">
+                <div class="nav-th">毕业生</div>
+                <div class="nav-con">
+                  <ul class="nav-td clearfix">
+                    <li>
+                      <div class="td-a"><a href="/student/jobs/index.html">职位信息</a></div>
+                      <div class="td-a"><a href="/zdxw">就业指导</a></div>
+                    </li>
+                    
+                      <li>
+                        <div class="td-a"><a href="/student/jobfair/index.html">专场招聘</a></div>
+                        <div class="td-a"><a href="/keyunits/">重点领域</a></div>
+                      </li>
+                      <li>
+                        <div class="td-a"><a href="/student/24365">联合招聘</a></div>
+                        <div class="td-a"><a href="/student/shixi.html">实习岗位</a></div>
+                      </li>
+                      <li>
+                        <div class="td-a"><a class="fxts-a" href="https://dj.ncss.cn/" target="_balnk">去向登记</a><a href="https://www.gfbzb.gov.cn/" target="_balnk">应征入伍</a></div>
+                        <div class="td-a"><a class="fxts-a" href="/jyfxts" target="_balnk">风险提示</a><a href="https://hzzh.chsi.com.cn/" target="_balnk">宏志助航</a></div>
+                      </li>
+                    
+                    
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-fast-li">
+                <div class="nav-th">资讯动态</div>
+                <div class="nav-con">
+                  <ul class="nav-td clearfix">
+                    <li>
+                      <div class="td-a"><a href="/jydtxw">就业资讯</a></div>
+                      <div class="td-a"><a href="/zcxw">就业政策</a></div>
+                    </li>
+                    <li>
+                      <div class="td-a"><a target="_balnk" href="https://jiuy.cbpt.cnki.net/" rel="noopenner noreferrer">就业杂志</a></div>
+                      <div class="td-a"><a href="/qnyz/">青年驿站</a></div>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+    </div>
+    
+    <div id="container">
+        <!-- 内容主体-->
+        <div id="content">
+            <div class="content-wrap">
+                <div class="btn-group btn-group-lg search-bar" id="searchBar">
+                    <div class="btn-group btn-group-lg jobtype-box">
+                        <button type="button" class="btn btn-default dropdown-toggle basic-bd-color borderwidth2" data-toggle="dropdown" id="jobTypeSelect">全部<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" id="jobTypeList">
+                            <li data-value="" class="target"><a href="javascript:;">全部</a></li>
+                            <li data-value="01"><a href="javascript:;">全职</a></li>
+                            <li data-value="02"><a href="javascript:;">兼职</a></li>
+                            <li data-value="03"><a href="javascript:;">实习</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group btn-group-lg degree-box hide" style="margin-left:0;">
+                        <button type="button" class="btn btn-default dropdown-toggle basic-bd-color borderwidth2" data-toggle="dropdown" id="degreeTypeSelect" style="border-left-width: 2px;border-top-left-radius: 6px;border-bottom-left-radius: 6px;text-align: left;">学历要求
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" id="degreeTypeList">
+                            <li data-value="" class="target"><a href="javascript:;">全部</a></li>
+                            <li data-value="51"><a href="javascript:;">不限</a></li>
+                            <li data-value="41"><a href="javascript:;">专科及以上</a></li>
+                            <li data-value="31"><a href="javascript:;">本科及以上</a></li>
+                            <li data-value="11"><a href="javascript:;">硕士及以上</a></li>
+                            <li data-value="01"><a href="javascript:;">博士及以上</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group btn-group-lg qg ">
+            <button type="button" class="btn btn-default dropdown-toggle basic-bd-color searchArea borderwidth2" id="searchArea" data-area="" data-name="全国">
+                全国
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu cityDropdown" role="menu" id="cityDropdown">
+                <li>
+                    <a href="javascript:;">热搜城市</a>
+                </li>
+                <li>
+                <a href="javascript:;">
+                    <span class="areacode" data-area="">全国</span>
+                    <span class="areacode" data-area="11">北京</span>
+                    <span class="areacode" data-area="31">上海</span>
+                    <span class="areacode" data-area="440100">广州</span>
+                    <span class="areacode" data-area="440300">深圳</span>
+                    <span class="areacode" data-area="330100">杭州</span>
+                    <span class="areacode" data-area="510100">成都</span>
+                    <span class="areacode" data-area="410100">郑州</span>
+                    <span class="areacode" data-area="12">天津</span>
+                    <span class="areacode" data-area="420100">武汉</span>
+                    <span class="areacode" data-area="610100">西安</span>
+                </a>
+                </li>
+                <li style="margin-top: 10px;">
+                    <a href="javascript:;">省市列表:</a>
+                </li>
+                <li>
+                    <a class="onecode" href="javascript:;">
+                        <span data-index="01" data-area="34">安徽</span>
+                        <span data-index="02" data-area="11">北京</span>
+                        <span data-index="03" data-area="50">重庆</span>
+                        <span data-index="04" data-area="35">福建</span>
+                        <span data-index="05" data-area="62">甘肃</span>
+                        <span data-index="06" data-area="44">广东</span>
+                        <span data-index="07" data-area="45">广西</span>
+                        <span data-index="08" data-area="52">贵州</span>
+                        <span data-index="09" data-area="46">海南</span>
+                        <span data-index="10" data-area="23">黑龙江</span>
+                        <span data-index="11" data-area="13">河北</span>
+                        <span data-index="12" data-area="41">河南</span>
+                    </a>
+                </li>
+                <ul class="shilist clearfix hide" data-index="01">
+                    <li class="areacode" data-area="34">安徽省</li>
+                    <li class="areacode" data-area="340100">合肥市</li>
+                    <li class="areacode" data-area="340200">芜湖市</li>
+                    <li class="areacode" data-area="340300">蚌埠市</li>
+                    <li class="areacode" data-area="340400">淮南市</li>
+                    <li class="areacode" data-area="340500">马鞍山市</li>
+                    <li class="areacode" data-area="340600">淮北市</li>
+                    <li class="areacode" data-area="340700">铜陵市</li>
+                    <li class="areacode" data-area="340800">安庆市</li>
+                    <li class="areacode" data-area="341000">黄山市</li>
+                    <li class="areacode" data-area="341100">滁州市</li>
+                    <li class="areacode" data-area="341200">阜阳市</li>
+                    <li class="areacode" data-area="341300">宿州市</li>
+                    <li class="areacode" data-area="341500">六安市</li>
+                    <li class="areacode" data-area="341600">亳州市</li>
+                    <li class="areacode" data-area="341700">池州市</li>
+                    <li class="areacode" data-area="341800">宣城市</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="02">
+                    <!-- <li class="areacode" data-area="110100">市辖区</li> -->
+                    <li class="areacode" data-area="11">北京市</li>
+                    <li class="areacode" data-area="110101">东城区</li>
+                    <li class="areacode" data-area="110102">西城区</li>
+                    <li class="areacode" data-area="110105">朝阳区</li>
+                    <li class="areacode" data-area="110106">丰台区</li>
+                    <li class="areacode" data-area="110107">石景山区</li>
+                    <li class="areacode" data-area="110108">海淀区</li>
+                    <li class="areacode" data-area="110109">门头沟区</li>
+                    <li class="areacode" data-area="110111">房山区</li>
+                    <li class="areacode" data-area="110112">通州区</li>
+                    <li class="areacode" data-area="110113">顺义区</li>
+                    <li class="areacode" data-area="110114">昌平区</li>
+                    <li class="areacode" data-area="110115">大兴区</li>
+                    <li class="areacode" data-area="110116">怀柔区</li>
+                    <li class="areacode" data-area="110117">平谷区</li>
+                    <li class="areacode" data-area="110118">密云区</li>
+                    <li class="areacode" data-area="110119">延庆区</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="03">
+                    <!-- <li class="areacode" data-area="500100">市辖区</li> -->
+                    <li class="areacode" data-area="50">重庆市</li>
+                    <li class="areacode" data-area="500101">万州区</li>
+                    <li class="areacode" data-area="500102">涪陵区</li>
+                    <li class="areacode" data-area="500103">渝中区</li>
+                    <li class="areacode" data-area="500104">大渡口区</li>
+                    <li class="areacode" data-area="500105">江北区</li>
+                    <li class="areacode" data-area="500106">沙坪坝区</li>
+                    <li class="areacode" data-area="500107">九龙坡区</li>
+                    <li class="areacode" data-area="500108">南岸区</li>
+                    <li class="areacode" data-area="500109">北碚区</li>
+                    <li class="areacode" data-area="500110">綦江区</li>
+                    <li class="areacode" data-area="500111">大足区</li>
+                    <li class="areacode" data-area="500112">渝北区</li>
+                    <li class="areacode" data-area="500113">巴南区</li>
+                    <li class="areacode" data-area="500114">黔江区</li>
+                    <li class="areacode" data-area="500115">长寿区</li>
+                    <li class="areacode" data-area="500116">江津区</li>
+                    <li class="areacode" data-area="500117">合川区</li>
+                    <li class="areacode" data-area="500118">永川区</li>
+                    <li class="areacode" data-area="500119">南川区</li>
+                    <li class="areacode" data-area="500120">璧山区</li>
+                    <li class="areacode" data-area="500151">铜梁区</li>
+                    <li class="areacode" data-area="500152">潼南区</li>
+                    <li class="areacode" data-area="500153">荣昌区</li>
+                    <li class="areacode" data-area="500154">开州区</li>
+                    <li class="areacode" data-area="500155">梁平区</li>
+                    <li class="areacode" data-area="500156">武隆区</li>
+                    <li class="areacode" data-area="500229">城口县</li>
+                    <li class="areacode" data-area="500230">丰都县</li>
+                    <li class="areacode" data-area="500231">垫江县</li>
+                    <li class="areacode" data-area="500233">忠县</li>
+                    <li class="areacode" data-area="500235">云阳县</li>
+                    <li class="areacode" data-area="500236">奉节县</li>
+                    <li class="areacode" data-area="500237">巫山县</li>
+                    <li class="areacode" data-area="500238">巫溪县</li>
+                    <li class="areacode" data-area="500240">石柱土家族自治县</li>
+                    <li class="areacode" data-area="500241">秀山土家族苗族自治县</li>
+                    <li class="areacode" data-area="500242">酉阳土家族苗族自治县</li>
+                    <li class="areacode" data-area="500243">彭水苗族土家族自治县</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="04">
+                    <li class="areacode" data-area="35">福建省</li>
+                    <li class="areacode" data-area="350100">福州市</li>
+                    <li class="areacode" data-area="350200">厦门市</li>
+                    <li class="areacode" data-area="350300">莆田市</li>
+                    <li class="areacode" data-area="350400">三明市</li>
+                    <li class="areacode" data-area="350500">泉州市</li>
+                    <li class="areacode" data-area="350600">漳州市</li>
+                    <li class="areacode" data-area="350700">南平市</li>
+                    <li class="areacode" data-area="350800">龙岩市</li>
+                    <li class="areacode" data-area="350900">宁德市</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="05">
+                    <li class="areacode" data-area="62">甘肃省</li>
+                    <li class="areacode" data-area="620100">兰州市</li>
+                    <li class="areacode" data-area="620200">嘉峪关市</li>
+                    <li class="areacode" data-area="620300">金昌市</li>
+                    <li class="areacode" data-area="620400">白银市</li>
+                    <li class="areacode" data-area="620500">天水市</li>
+                    <li class="areacode" data-area="620600">武威市</li>
+                    <li class="areacode" data-area="620700">张掖市</li>
+                    <li class="areacode" data-area="620800">平凉市</li>
+                    <li class="areacode" data-area="620900">酒泉市</li>
+                    <li class="areacode" data-area="621000">庆阳市</li>
+                    <li class="areacode" data-area="621100">定西市</li>
+                    <li class="areacode" data-area="621200">陇南市</li>
+                    <li class="areacode" data-area="622900">临夏回族自治州</li>
+                    <li class="areacode" data-area="623000">甘南藏族自治州</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="06">
+                    <li class="areacode" data-area="44">广东省</li>
+                    <li class="areacode" data-area="440100">广州市</li>
+                    <li class="areacode" data-area="440200">韶关市</li>
+                    <li class="areacode" data-area="440300">深圳市</li>
+                    <li class="areacode" data-area="440400">珠海市</li>
+                    <li class="areacode" data-area="440500">汕头市</li>
+                    <li class="areacode" data-area="440600">佛山市</li>
+                    <li class="areacode" data-area="440700">江门市</li>
+                    <li class="areacode" data-area="440800">湛江市</li>
+                    <li class="areacode" data-area="440900">茂名市</li>
+                    <li class="areacode" data-area="441200">肇庆市</li>
+                    <li class="areacode" data-area="441300">惠州市</li>
+                    <li class="areacode" data-area="441400">梅州市</li>
+                    <li class="areacode" data-area="441500">汕尾市</li>
+                    <li class="areacode" data-area="441600">河源市</li>
+                    <li class="areacode" data-area="441700">阳江市</li>
+                    <li class="areacode" data-area="441800">清远市</li>
+                    <li class="areacode" data-area="441900">东莞市</li>
+                    <li class="areacode" data-area="442000">中山市</li>
+                    <li class="areacode" data-area="445100">潮州市</li>
+                    <li class="areacode" data-area="445200">揭阳市</li>
+                    <li class="areacode" data-area="445300">云浮市</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="07">
+                    <li class="areacode" data-area="45">广西壮族自治区</li>
+                    <li class="areacode" data-area="450100">南宁市</li>
+                    <li class="areacode" data-area="450200">柳州市</li>
+                    <li class="areacode" data-area="450300">桂林市</li>
+                    <li class="areacode" data-area="450400">梧州市</li>
+                    <li class="areacode" data-area="450500">北海市</li>
+                    <li class="areacode" data-area="450600">防城港市</li>
+                    <li class="areacode" data-area="450700">钦州市</li>
+                    <li class="areacode" data-area="450800">贵港市</li>
+                    <li class="areacode" data-area="450900">玉林市</li>
+                    <li class="areacode" data-area="451000">百色市</li>
+                    <li class="areacode" data-area="451100">贺州市</li>
+                    <li class="areacode" data-area="451200">河池市</li>
+                    <li class="areacode" data-area="451300">来宾市</li>
+                    <li class="areacode" data-area="451400">崇左市</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="08">
+                    <li class="areacode" data-area="52">贵州省</li>
+                    <li class="areacode" data-area="520100">贵阳市</li>
+                    <li class="areacode" data-area="520200">六盘水市</li>
+                    <li class="areacode" data-area="520300">遵义市</li>
+                    <li class="areacode" data-area="520400">安顺市</li>
+                    <li class="areacode" data-area="520500">毕节市</li>
+                    <li class="areacode" data-area="520600">铜仁市</li>
+                    <li class="areacode" data-area="522300">黔西南布依族苗族自治州</li>
+                    <li class="areacode" data-area="522600">黔东南苗族侗族自治州</li>
+                    <li class="areacode" data-area="522700">黔南布依族苗族自治州</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="09">
+                    <li class="areacode" data-area="46">海南省</li>
+                    <li class="areacode" data-area="460100">海口市</li>
+                    <li class="areacode" data-area="460200">三亚市</li>
+                    <li class="areacode" data-area="460300">三沙市</li>
+                    <li class="areacode" data-area="460400">儋州市</li>
+                    <li class="areacode" data-area="469001">五指山市</li>
+                    <li class="areacode" data-area="469002">琼海市</li>
+                    <li class="areacode" data-area="469005">文昌市</li>
+                    <li class="areacode" data-area="469006">万宁市</li>
+                    <li class="areacode" data-area="469007">东方市</li>
+                    <li class="areacode" data-area="469021">定安县</li>
+                    <li class="areacode" data-area="469022">屯昌县</li>
+                    <li class="areacode" data-area="469023">澄迈县</li>
+                    <li class="areacode" data-area="469024">临高县</li>
+                    <li class="areacode" data-area="469025">白沙黎族自治县</li>
+                    <li class="areacode" data-area="469026">昌江黎族自治县</li>
+                    <li class="areacode" data-area="469027">乐东黎族自治县</li>
+                    <li class="areacode" data-area="469028">陵水黎族自治县</li>
+                    <li class="areacode" data-area="469029">保亭黎族苗族自治县</li>
+                    <li class="areacode" data-area="469030">琼中黎族苗族自治县</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="10">
+                    <li class="areacode" data-area="23">黑龙江省</li>
+                    <li class="areacode" data-area="230100">哈尔滨市</li>
+                    <li class="areacode" data-area="230200">齐齐哈尔市</li>
+                    <li class="areacode" data-area="230300">鸡西市</li>
+                    <li class="areacode" data-area="230400">鹤岗市</li>
+                    <li class="areacode" data-area="230500">双鸭山市</li>
+                    <li class="areacode" data-area="230600">大庆市</li>
+                    <li class="areacode" data-area="230700">伊春市</li>
+                    <li class="areacode" data-area="230800">佳木斯市</li>
+                    <li class="areacode" data-area="230900">七台河市</li>
+                    <li class="areacode" data-area="231000">牡丹江市</li>
+                    <li class="areacode" data-area="231100">黑河市</li>
+                    <li class="areacode" data-area="231200">绥化市</li>
+                    <li class="areacode" data-area="232700">大兴安岭地区</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="11">
+                    <li class="areacode" data-area="13">河北省</li>
+                    <li class="areacode" data-area="130100">石家庄市</li>
+                    <li class="areacode" data-area="130200">唐山市</li>
+                    <li class="areacode" data-area="130300">秦皇岛市</li>
+                    <li class="areacode" data-area="130400">邯郸市</li>
+                    <li class="areacode" data-area="130500">邢台市</li>
+                    <li class="areacode" data-area="130600">保定市</li>
+                    <li class="areacode" data-area="130700">张家口市</li>
+                    <li class="areacode" data-area="130800">承德市</li>
+                    <li class="areacode" data-area="130900">沧州市</li>
+                    <li class="areacode" data-area="131000">廊坊市</li>
+                    <li class="areacode" data-area="131100">衡水市</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="12">
+                    <li class="areacode" data-area="41">河南省</li>
+                    <li class="areacode" data-area="410100">郑州市</li>
+                    <li class="areacode" data-area="410200">开封市</li>
+                    <li class="areacode" data-area="410300">洛阳市</li>
+                    <li class="areacode" data-area="410400">平顶山市</li>
+                    <li class="areacode" data-area="410500">安阳市</li>
+                    <li class="areacode" data-area="410600">鹤壁市</li>
+                    <li class="areacode" data-area="410700">新乡市</li>
+                    <li class="areacode" data-area="410800">焦作市</li>
+                    <li class="areacode" data-area="410900">濮阳市</li>
+                    <li class="areacode" data-area="411000">许昌市</li>
+                    <li class="areacode" data-area="411100">漯河市</li>
+                    <li class="areacode" data-area="411200">三门峡市</li>
+                    <li class="areacode" data-area="411300">南阳市</li>
+                    <li class="areacode" data-area="411400">商丘市</li>
+                    <li class="areacode" data-area="411500">信阳市</li>
+                    <li class="areacode" data-area="411600">周口市</li>
+                    <li class="areacode" data-area="411700">驻马店市</li>
+                    <li class="areacode" data-area="419001">济源市</li>
+                </ul>
+                <li>
+                    <a class="onecode" href="javascript:;">
+                        <span data-index="13" data-area="42">湖北</span>
+                        <span data-index="14" data-area="43">湖南</span>
+                        <span data-index="15" data-area="22">吉林</span>
+                        <span data-index="16" data-area="32">江苏</span>
+                        <span data-index="17" data-area="36">江西</span>
+                        <span data-index="18" data-area="21">辽宁</span>
+                        <span data-index="19" data-area="15">内蒙古</span>
+                        <span data-index="20" data-area="64">宁夏</span>
+                        <span data-index="21" data-area="63">青海</span>
+                        <span data-index="22" data-area="37">山东</span>
+                        <span data-index="23" data-area="14">山西</span>
+                        <span data-index="24" data-area="61">陕西</span>
+                    </a>
+                </li>
+                <ul class="shilist clearfix hide" data-index="13">
+                    <li class="areacode" data-area="42">湖北省</li>
+                    <li class="areacode" data-area="420100">武汉市</li>
+                    <li class="areacode" data-area="420200">黄石市</li>
+                    <li class="areacode" data-area="420300">十堰市</li>
+                    <li class="areacode" data-area="420500">宜昌市</li>
+                    <li class="areacode" data-area="420600">襄阳市</li>
+                    <li class="areacode" data-area="420700">鄂州市</li>
+                    <li class="areacode" data-area="420800">荆门市</li>
+                    <li class="areacode" data-area="420900">孝感市</li>
+                    <li class="areacode" data-area="421000">荆州市</li>
+                    <li class="areacode" data-area="421100">黄冈市</li>
+                    <li class="areacode" data-area="421200">咸宁市</li>
+                    <li class="areacode" data-area="421300">随州市</li>
+                    <li class="areacode" data-area="422800">恩施土家族苗族自治州</li>
+                    <li class="areacode" data-area="429004">仙桃市</li>
+                    <li class="areacode" data-area="429005">潜江市</li>
+                    <li class="areacode" data-area="429006">天门市</li>
+                    <li class="areacode" data-area="429021">神农架林区</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="14">
+                    <li class="areacode" data-area="43">湖南省</li>
+                    <li class="areacode" data-area="430100">长沙市</li>
+                    <li class="areacode" data-area="430200">株洲市</li>
+                    <li class="areacode" data-area="430300">湘潭市</li>
+                    <li class="areacode" data-area="430400">衡阳市</li>
+                    <li class="areacode" data-area="430500">邵阳市</li>
+                    <li class="areacode" data-area="430600">岳阳市</li>
+                    <li class="areacode" data-area="430700">常德市</li>
+                    <li class="areacode" data-area="430800">张家界市</li>
+                    <li class="areacode" data-area="430900">益阳市</li>
+                    <li class="areacode" data-area="431000">郴州市</li>
+                    <li class="areacode" data-area="431100">永州市</li>
+                    <li class="areacode" data-area="431200">怀化市</li>
+                    <li class="areacode" data-area="431300">娄底市</li>
+                    <li class="areacode" data-area="433100">湘西土家族苗族自治州</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="15">
+                    <li class="areacode" data-area="22">吉林省</li>
+                    <li class="areacode" data-area="220100">长春市</li>
+                    <li class="areacode" data-area="220200">吉林市</li>
+                    <li class="areacode" data-area="220300">四平市</li>
+                    <li class="areacode" data-area="220400">辽源市</li>
+                    <li class="areacode" data-area="220500">通化市</li>
+                    <li class="areacode" data-area="220600">白山市</li>
+                    <li class="areacode" data-area="220700">松原市</li>
+                    <li class="areacode" data-area="220800">白城市</li>
+                    <li class="areacode" data-area="222400">延边朝鲜族自治州</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="16">
+                    <li class="areacode" data-area="32">江苏省</li>
+                    <li class="areacode" data-area="320100">南京市</li>
+                    <li class="areacode" data-area="320200">无锡市</li>
+                    <li class="areacode" data-area="320300">徐州市</li>
+                    <li class="areacode" data-area="320400">常州市</li>
+                    <li class="areacode" data-area="320500">苏州市</li>
+                    <li class="areacode" data-area="320600">南通市</li>
+                    <li class="areacode" data-area="320700">连云港市</li>
+                    <li class="areacode" data-area="320800">淮安市</li>
+                    <li class="areacode" data-area="320900">盐城市</li>
+                    <li class="areacode" data-area="321000">扬州市</li>
+                    <li class="areacode" data-area="321100">镇江市</li>
+                    <li class="areacode" data-area="321200">泰州市</li>
+                    <li class="areacode" data-area="321300">宿迁市</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="17">
+                    <li class="areacode" data-area="36">江西省</li>
+                    <li class="areacode" data-area="360100">南昌市</li>
+                    <li class="areacode" data-area="360200">景德镇市</li>
+                    <li class="areacode" data-area="360300">萍乡市</li>
+                    <li class="areacode" data-area="360400">九江市</li>
+                    <li class="areacode" data-area="360500">新余市</li>
+                    <li class="areacode" data-area="360600">鹰潭市</li>
+                    <li class="areacode" data-area="360700">赣州市</li>
+                    <li class="areacode" data-area="360800">吉安市</li>
+                    <li class="areacode" data-area="360900">宜春市</li>
+                    <li class="areacode" data-area="361000">抚州市</li>
+                    <li class="areacode" data-area="361100">上饶市</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="18">
+                    <li class="areacode" data-area="21">辽宁省</li>
+                    <li class="areacode" data-area="210100">沈阳市</li>
+                    <li class="areacode" data-area="210200">大连市</li>
+                    <li class="areacode" data-area="210300">鞍山市</li>
+                    <li class="areacode" data-area="210400">抚顺市</li>
+                    <li class="areacode" data-area="210500">本溪市</li>
+                    <li class="areacode" data-area="210600">丹东市</li>
+                    <li class="areacode" data-area="210700">锦州市</li>
+                    <li class="areacode" data-area="210800">营口市</li>
+                    <li class="areacode" data-area="210900">阜新市</li>
+                    <li class="areacode" data-area="211000">辽阳市</li>
+                    <li class="areacode" data-area="211100">盘锦市</li>
+                    <li class="areacode" data-area="211200">铁岭市</li>
+                    <li class="areacode" data-area="211300">朝阳市</li>
+                    <li class="areacode" data-area="211400">葫芦岛市</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="19">
+                    <li class="areacode" data-area="15">内蒙古</li>
+                    <li class="areacode" data-area="150100">呼和浩特市</li>
+                    <li class="areacode" data-area="150200">包头市</li>
+                    <li class="areacode" data-area="150300">乌海市</li>
+                    <li class="areacode" data-area="150400">赤峰市</li>
+                    <li class="areacode" data-area="150500">通辽市</li>
+                    <li class="areacode" data-area="150600">鄂尔多斯市</li>
+                    <li class="areacode" data-area="150700">呼伦贝尔市</li>
+                    <li class="areacode" data-area="150800">巴彦淖尔市</li>
+                    <li class="areacode" data-area="150900">乌兰察布市</li>
+                    <li class="areacode" data-area="152200">兴安盟</li>
+                    <li class="areacode" data-area="152500">锡林郭勒盟</li>
+                    <li class="areacode" data-area="152900">阿拉善盟</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="20">
+                    <li class="areacode" data-area="64">宁夏回族自治区</li>
+                    <li class="areacode" data-area="640100">银川市</li>
+                    <li class="areacode" data-area="640200">石嘴山市</li>
+                    <li class="areacode" data-area="640300">吴忠市</li>
+                    <li class="areacode" data-area="640400">固原市</li>
+                    <li class="areacode" data-area="640500">中卫市</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="21">
+                    <li class="areacode" data-area="63">青海省</li>
+                    <li class="areacode" data-area="630100">西宁市</li>
+                    <li class="areacode" data-area="630200">海东市</li>
+                    <li class="areacode" data-area="632200">海北藏族自治州</li>
+                    <li class="areacode" data-area="632300">黄南藏族自治州</li>
+                    <li class="areacode" data-area="632500">海南藏族自治州</li>
+                    <li class="areacode" data-area="632600">果洛藏族自治州</li>
+                    <li class="areacode" data-area="632700">玉树藏族自治州</li>
+                    <li class="areacode" data-area="632800">海西蒙古族藏族自治州</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="22">
+                    <li class="areacode" data-area="37">山东省</li>
+                    <li class="areacode" data-area="370100">济南市</li>
+                    <li class="areacode" data-area="370200">青岛市</li>
+                    <li class="areacode" data-area="370300">淄博市</li>
+                    <li class="areacode" data-area="370400">枣庄市</li>
+                    <li class="areacode" data-area="370500">东营市</li>
+                    <li class="areacode" data-area="370600">烟台市</li>
+                    <li class="areacode" data-area="370700">潍坊市</li>
+                    <li class="areacode" data-area="370800">济宁市</li>
+                    <li class="areacode" data-area="370900">泰安市</li>
+                    <li class="areacode" data-area="371000">威海市</li>
+                    <li class="areacode" data-area="371100">日照市</li>
+                    <li class="areacode" data-area="371200">莱芜市</li>
+                    <li class="areacode" data-area="371300">临沂市</li>
+                    <li class="areacode" data-area="371400">德州市</li>
+                    <li class="areacode" data-area="371500">聊城市</li>
+                    <li class="areacode" data-area="371600">滨州市</li>
+                    <li class="areacode" data-area="371700">菏泽市</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="23">
+                    <li class="areacode" data-area="14">山西省</li>
+                    <li class="areacode" data-area="140100">太原市</li>
+                    <li class="areacode" data-area="140200">大同市</li>
+                    <li class="areacode" data-area="140300">阳泉市</li>
+                    <li class="areacode" data-area="140400">长治市</li>
+                    <li class="areacode" data-area="140500">晋城市</li>
+                    <li class="areacode" data-area="140600">朔州市</li>
+                    <li class="areacode" data-area="140700">晋中市</li>
+                    <li class="areacode" data-area="140800">运城市</li>
+                    <li class="areacode" data-area="140900">忻州市</li>
+                    <li class="areacode" data-area="141000">临汾市</li>
+                    <li class="areacode" data-area="141100">吕梁市</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="24">
+                    <li class="areacode" data-area="61">陕西省</li>
+                    <li class="areacode" data-area="610100">西安市</li>
+                    <li class="areacode" data-area="610200">铜川市</li>
+                    <li class="areacode" data-area="610300">宝鸡市</li>
+                    <li class="areacode" data-area="610400">咸阳市</li>
+                    <li class="areacode" data-area="610500">渭南市</li>
+                    <li class="areacode" data-area="610600">延安市</li>
+                    <li class="areacode" data-area="610700">汉中市</li>
+                    <li class="areacode" data-area="610800">榆林市</li>
+                    <li class="areacode" data-area="610900">安康市</li>
+                    <li class="areacode" data-area="611000">商洛市</li>
+                </ul>
+                <li>
+                    <a class="onecode" href="javascript:;">
+                        <span data-index="25" data-area="31">上海</span>
+                        <span data-index="26" data-area="51">四川</span>
+                        <span data-index="27" data-area="12">天津</span>
+                        <span data-index="28" data-area="54">西藏</span>
+                        <span data-index="29" data-area="65">新疆</span>
+                        <span data-index="30" data-area="53">云南</span>
+                        <span data-index="31" data-area="33">浙江</span>
+                        <span data-index="32" data-area="71">台湾省</span>
+                        <span data-index="33" data-area="81">香港特别行政区</span>
+                        <span data-index="34" data-area="82">澳门特别行政区</span>
+                    </a>
+                </li>
+                <ul class="shilist clearfix hide" data-index="25">
+                    <!-- <Li class="areacode" data-area="310100">市辖区  </li>  -->
+                    <li class="areacode" data-area="31">上海市</li>
+                    <li class="areacode" data-area="310101">黄浦区</li>
+                    <li class="areacode" data-area="310104">徐汇区</li>
+                    <li class="areacode" data-area="310105">长宁区</li>
+                    <li class="areacode" data-area="310106">静安区</li>
+                    <li class="areacode" data-area="310107">普陀区</li>
+                    <li class="areacode" data-area="310109">虹口区</li>
+                    <li class="areacode" data-area="310110">杨浦区</li>
+                    <li class="areacode" data-area="310112">闵行区</li>
+                    <li class="areacode" data-area="310113">宝山区</li>
+                    <li class="areacode" data-area="310114">嘉定区</li>
+                    <li class="areacode" data-area="310115">浦东新区</li>
+                    <li class="areacode" data-area="310116">金山区</li>
+                    <li class="areacode" data-area="310117">松江区</li>
+                    <li class="areacode" data-area="310118">青浦区</li>
+                    <li class="areacode" data-area="310120">奉贤区</li>
+                    <li class="areacode" data-area="310151">崇明区</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="26">
+                    <li class="areacode" data-area="51">四川省</li>
+                    <li class="areacode" data-area="510100">成都市</li>
+                    <li class="areacode" data-area="510300">自贡市</li>
+                    <li class="areacode" data-area="510400">攀枝花市</li>
+                    <li class="areacode" data-area="510500">泸州市</li>
+                    <li class="areacode" data-area="510600">德阳市</li>
+                    <li class="areacode" data-area="510700">绵阳市</li>
+                    <li class="areacode" data-area="510800">广元市</li>
+                    <li class="areacode" data-area="510900">遂宁市</li>
+                    <li class="areacode" data-area="511000">内江市</li>
+                    <li class="areacode" data-area="511100">乐山市</li>
+                    <li class="areacode" data-area="511300">南充市</li>
+                    <li class="areacode" data-area="511400">眉山市</li>
+                    <li class="areacode" data-area="511500">宜宾市</li>
+                    <li class="areacode" data-area="511600">广安市</li>
+                    <li class="areacode" data-area="511700">达州市</li>
+                    <li class="areacode" data-area="511800">雅安市</li>
+                    <li class="areacode" data-area="511900">巴中市</li>
+                    <li class="areacode" data-area="512000">资阳市</li>
+                    <li class="areacode" data-area="513200">阿坝藏族羌族自治州</li>
+                    <li class="areacode" data-area="513300">甘孜藏族自治州</li>
+                    <li class="areacode" data-area="513400">凉山彝族自治州</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="27">
+                    <!-- <li class="areacode" data-area="120100">市辖区</li> -->
+                    <li class="areacode" data-area="12">天津市</li>
+                    <li class="areacode" data-area="120101">和平区</li>
+                    <li class="areacode" data-area="120102">河东区</li>
+                    <li class="areacode" data-area="120103">河西区</li>
+                    <li class="areacode" data-area="120104">南开区</li>
+                    <li class="areacode" data-area="120105">河北区</li>
+                    <li class="areacode" data-area="120106">红桥区</li>
+                    <li class="areacode" data-area="120110">东丽区</li>
+                    <li class="areacode" data-area="120111">西青区</li>
+                    <li class="areacode" data-area="120112">津南区</li>
+                    <li class="areacode" data-area="120113">北辰区</li>
+                    <li class="areacode" data-area="120114">武清区</li>
+                    <li class="areacode" data-area="120115">宝坻区</li>
+                    <li class="areacode" data-area="120116">滨海新区</li>
+                    <li class="areacode" data-area="120117">宁河区</li>
+                    <li class="areacode" data-area="120118">静海区</li>
+                    <li class="areacode" data-area="120119">蓟州区</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="28">
+                    <li class="areacode" data-area="54">西藏自治区</li>
+                    <li class="areacode" data-area="540100">拉萨市</li>
+                    <li class="areacode" data-area="540200">日喀则市</li>
+                    <li class="areacode" data-area="540300">昌都市</li>
+                    <li class="areacode" data-area="540400">林芝市</li>
+                    <li class="areacode" data-area="540500">山南市</li>
+                    <li class="areacode" data-area="542400">那曲地区</li>
+                    <li class="areacode" data-area="542500">阿里地区</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="29">
+                    <li class="areacode" data-area="65">新疆维吾尔自治区</li>
+                    <li class="areacode" data-area="650100">乌鲁木齐市</li>
+                    <li class="areacode" data-area="650200">克拉玛依市</li>
+                    <li class="areacode" data-area="650400">吐鲁番市</li>
+                    <li class="areacode" data-area="650500">哈密市</li>
+                    <li class="areacode" data-area="652300">昌吉回族自治州</li>
+                    <li class="areacode" data-area="652700">博尔塔拉蒙古自治州</li>
+                    <li class="areacode" data-area="652800">巴音郭楞蒙古自治州</li>
+                    <li class="areacode" data-area="652900">阿克苏地区</li>
+                    <li class="areacode" data-area="653000">克孜勒苏柯尔克孜自治州</li>
+                    <li class="areacode" data-area="653100">喀什地区</li>
+                    <li class="areacode" data-area="653200">和田地区</li>
+                    <li class="areacode" data-area="654000">伊犁哈萨克自治州</li>
+                    <li class="areacode" data-area="654200">塔城地区</li>
+                    <li class="areacode" data-area="654300">阿勒泰地区</li>
+                    <li class="areacode" data-area="659000">新疆生产建设兵团</li>
+                    <li class="areacode" data-area="659001">石河子市</li>
+                    <li class="areacode" data-area="659002">阿拉尔市</li>
+                    <li class="areacode" data-area="659003">图木舒克市</li>
+                    <li class="areacode" data-area="659004">五家渠市</li>
+                    <li class="areacode" data-area="659005">北屯市</li>
+                    <li class="areacode" data-area="659006">铁门关市</li>
+                    <li class="areacode" data-area="659009">昆玉市</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="30">
+                    <li class="areacode" data-area="53">云南省</li>
+                    <li class="areacode" data-area="530100">昆明市</li>
+                    <li class="areacode" data-area="530300">曲靖市</li>
+                    <li class="areacode" data-area="530400">玉溪市</li>
+                    <li class="areacode" data-area="530500">保山市</li>
+                    <li class="areacode" data-area="530600">昭通市</li>
+                    <li class="areacode" data-area="530700">丽江市</li>
+                    <li class="areacode" data-area="530800">普洱市</li>
+                    <li class="areacode" data-area="530900">临沧市</li>
+                    <li class="areacode" data-area="532300">楚雄彝族自治州</li>
+                    <li class="areacode" data-area="532500">红河哈尼族彝族自治州</li>
+                    <li class="areacode" data-area="532600">文山壮族苗族自治州</li>
+                    <li class="areacode" data-area="532800">西双版纳傣族自治州</li>
+                    <li class="areacode" data-area="532900">大理白族自治州</li>
+                    <li class="areacode" data-area="533100">德宏傣族景颇族自治州</li>
+                    <li class="areacode" data-area="533300">怒江傈僳族自治州</li>
+                    <li class="areacode" data-area="533400">迪庆藏族自治州</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="31">
+                    <li class="areacode" data-area="33">浙江省</li>
+                    <li class="areacode" data-area="330100">杭州市</li>
+                    <li class="areacode" data-area="330200">宁波市</li>
+                    <li class="areacode" data-area="330300">温州市</li>
+                    <li class="areacode" data-area="330400">嘉兴市</li>
+                    <li class="areacode" data-area="330500">湖州市</li>
+                    <li class="areacode" data-area="330600">绍兴市</li>
+                    <li class="areacode" data-area="330700">金华市</li>
+                    <li class="areacode" data-area="330800">衢州市</li>
+                    <li class="areacode" data-area="330900">舟山市</li>
+                    <li class="areacode" data-area="331000">台州市</li>
+                    <li class="areacode" data-area="331100">丽水市</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="32">
+                    <li class="areacode" data-area="710000">台湾省</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="33">
+                    <li class="areacode" data-area="810000">香港特别行政区</li>
+                </ul>
+                <ul class="shilist clearfix hide" data-index="34">
+                    <li class="areacode" data-area="820000">澳门特别行政区</li>
+                </ul>
+            </ul>
+        </div>
+                    <div class="btn-group input-group input-group-lg" style="position:relative;">
+                        <input type="text" style="border-radius: 0;" class="form-control searchKeywords basic-bd-color" autocomplete="off" placeholder="请输入职位或公司的关键字" />
+                        <div>
+            <style>
+                /* 热门职位 */
+                .hot-jobs {
+                    background: #fff;
+                    padding: 10px 12px;
+                    z-index: 100;
+                    position: absolute;
+                    top: 48px;
+                    left: 0;
+                    box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+                }
+                .hot-jobs li a {
+                    text-decoration: none;
+                    color: #333;
+                    padding: 2px 8px;
+                }
+                .hot-jobs li {
+                    margin-bottom: 10px;
+                }
+                /* .hot-jobs li a:hover{background:#0168d1;color:#fff;} */
+                .hot-jobs li .hot-active {
+                    background: #0168d1;
+                    color: #fff;
+                }
+            </style>
+            <ul class="hot-jobs hide clearfix">
+                <li>热搜职位</li>
+                <li>
+                    <a class="basic-bg-hv2" href="javascript:;">开发</a>
+                    <a class="basic-bg-hv2" href="javascript:;">硬件</a>
+                    <a class="basic-bg-hv2" href="javascript:;">运营</a>
+                    <a class="basic-bg-hv2" href="javascript:;">机械</a>
+                    <a class="basic-bg-hv2" href="javascript:;">土建</a>
+                    <a class="basic-bg-hv2" href="javascript:;">检测</a>
+                    <a class="basic-bg-hv2" href="javascript:;">会计</a>
+                    <a class="basic-bg-hv2" href="javascript:;">教师</a>
+                    <a class="basic-bg-hv2" href="javascript:;">采购</a>
+                    <a class="basic-bg-hv2" href="javascript:;">行政</a>
+                    <a class="basic-bg-hv2" href="javascript:;">销售</a>
+                    <a class="basic-bg-hv2" href="javascript:;">客服</a>
+                </li>
+            </ul>
+        </div>
+                    </div>
+                    <button class="btn btn-default btn-search btn-primary basic-color-bg basic-bd-color borderwidth2" type="button" id="jobSearch">搜索</button>
+                </div>
+                <!-- 行业列表 -->
+                <div class="mylist" id="searchBarBottom">
+                    <div class="optionIndustry clearfix hide">
+                        <span class="title">已选行业</span>
+                        <div class="selected-box"></div>
+                    </div>
+                    <div class="industryList-box clearfix">
+                        <span>所属行业</span>
+                        <ul class="industryList clearfix">
+                            <li class="active typeList" data-type="" value="">全部</li>
+                            <li class="typeList" data-type="0001" value="0001">互联网/通信/电子<div class="secUl hide"></div></li>
+                            <li class="typeList" data-type="0002" value="0002">金融<div class="secUl hide"></div></li>
+                            <li class="typeList" data-type="0003" value="0003">生产/加工/制造<div class="secUl hide"></div></li>
+                            <li class="typeList" data-type="0004" value="0004">制药/医疗<div class="secUl hide"></div></li>
+                            <li class="typeList" data-type="0005" value="0005">广告/传媒/文化/体育<div class="secUl hide"></div></li>
+                            <li class="typeList" data-type="0006" value="0006">教育<div class="secUl hide"></div></li>
+                            <li class="typeList" data-type="0007" value="0007">房地产/建筑业<div class="secUl hide"></div></li>
+                            <li class="typeList" data-type="0008" value="0008">贸易/工艺/消费品<div class="secUl hide"></div></li>
+                            <li class="typeList" data-type="0009" value="0009">能源/矿产<div class="secUl hide"></div></li>
+                            <li class="typeList" data-type="0010" value="0010">物流/运输<div class="secUl hide"></div></li>
+                            <li class="typeList" data-type="0011" value="0011">服务业<div class="secUl hide"></div></li>
+                            <li class="typeList" data-type="0012" value="0012">政府/非盈利机构/其他<div class="secUl hide"></div></li>
+                        </ul>
+                    </div>
+                    <div class="propertyList-box clearfix">
+                        <span>公司性质</span>
+                        <ul class="propertyList clearfix" style="margin-bottom: 10px;">
+                            <li class="active typeList" data-type="">全部</li>
+                            <li class="typeList" data-type="国有企业">国有企业</li>
+                            <li class="typeList" data-type="股份制企业">股份制企业</li>
+                            <li class="typeList" data-type="民营企业">民营企业</li>
+                            <li class="typeList" data-type="上市公司">上市公司</li>
+                            <li class="typeList" data-type="港澳台公司">港澳台公司</li>
+                            <li class="typeList" data-type="合资企业">合资企业</li>
+                            <li class="typeList" data-type="外商独资/外企代表处">外商独资/外企代表处</li>
+                            <li class="typeList" data-type="机关/事业单位/非营利机构">机关/事业单位/非营利机构</li>
+                            <li class="typeList" data-type="其他">其他</li>
+                        </ul>
+                    </div>
+                    <div class="jobPosition-box clearfix">
+                        <span>职位类别</span>
+                        <ul class="jobpositionList clearfix">
+                            <li class="active typeList" data-type="">全部</li>
+                            <li class="typeList" data-type="01" value="01">计算机/网络/技术类</li>
+                            <li class="typeList" data-type="02" value="02">电子/电器/通信技术类</li>
+                            <li class="typeList" data-type="03" value="03">行政/后勤类</li>
+                            <li class="typeList" data-type="04" value="04">翻译类</li>
+                            <li class="typeList" data-type="05" value="05">销售类</li>
+                            <li class="typeList" data-type="06" value="06">客户服务类</li>
+                            <li class="typeList" data-type="07" value="07">市场/公关/媒介类</li>
+                            <li class="typeList" data-type="08" value="08">咨询/顾问类</li>
+                            <li class="typeList" data-type="14" value="14">技工类</li>
+                            <li class="typeList" data-type="09" value="09">财务/审计/统计类</li>
+                            <li class="typeList" data-type="10" value="10">人力资源类</li>
+                            <li class="typeList" data-type="11" value="11">教育/培训类</li>
+                            <li class="typeList" data-type="12" value="12">质量管理类</li>
+                            <li class="typeList" data-type="13" value="13">美术/设计/创意类</li>
+                            <li class="typeList" data-type="15" value="15">金融保险类</li>
+                            <li class="typeList" data-type="16" value="16">贸易/物流/采购/运输类</li>
+                            <li class="typeList" data-type="17" value="17">经营管理类</li>
+                            <li class="typeList" data-type="18" value="18">商业零售类</li>
+                            <li class="typeList" data-type="19" value="19">建筑/房地产/装饰装修/物业管理类</li>
+                            <li class="typeList" data-type="20" value="20">法律类</li>
+                            <li class="typeList" data-type="21" value="21">酒店/餐饮/旅游/服务类</li>
+                            <li class="typeList" data-type="22" value="22">生物/制药/化工/环保类</li>
+                            <li class="typeList" data-type="23" value="23">文体/影视/写作/媒体类</li>
+                            <li class="typeList" data-type="24" value="24">机械/仪器仪表类</li>
+                            <li class="typeList" data-type="25" value="25">科研类</li>
+                            <li class="typeList" data-type="26" value="26">工厂生产类</li>
+                            <li class="typeList" data-type="27" value="27">医疗卫生/美容保健类</li>
+                            <li class="typeList" data-type="28" value="28">电气/能源/动力类</li>
+                            <li class="typeList" data-type="29" value="29">其他类</li>
+                        </ul>
+                    </div>
+                    <!-- 主站 -->
+                    <div class="jobSource-box clearfix">
+                        <span>职位来源</span>
+                        <ul class="jobsourceList clearfix" style="margin-bottom:5px;">
+                            <li class="sourceList" data-sourcesType="" data-sourcesName="" data-ly="全部">
+                                全部
+                            </li>
+                            <li class="active sourceList sourceListimg" data-sourcesType="" data-sourcesName="0" data-ly="国家大学生就业服务平台">
+                                <img src="https://t3.chei.com.cn/ncss/student/img/logo/zw-logo.jpg" />
+                                <span class="iconfont icon-xuanze fz-12"></span>
+                            </li>
+                            <li class="sourceList sourceListimg" data-sourcesType="1" data-sourcesName="" data-ly="省市及高校">
+                                <img src="https://t1.chei.com.cn/ncss/student/img/ssjgx.png">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                            <li class="sourceList sourceListimg pad10" data-sourcesType="0" data-sourcesName="2000846399" data-ly="boss直聘">
+                                <img src="https://t4.chei.com.cn/ncss/student/img/sourceimg04.jpg">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                            <li class="sourceList sourceListimg pad10" data-sourcesType="0" data-sourcesName="sx4tfd53g3drg3lhcabun0cjmylq8jan" data-ly="中华英才网">
+                                <img src="https://t2.chei.com.cn/ncss/student/img/sourceimg06-up.jpg">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                            <li class="sourceList sourceListimg" data-sourcesType="0" data-sourcesName="2000846397" data-ly="猎聘">
+                                <img src="https://t2.chei.com.cn/ncss/student/img/sourceimglp2024.png">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                            <li class="sourceList  sourceListimg" data-sourcesType="0" data-sourcesName="wppuiz6fu2k6pi030gvd45l8wky8l1ex" data-ly="全联人才在线">
+                                <img src="https://t3.chei.com.cn/ncss/student/img/sourceimg10.png">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                            <li class="sourceList  sourceListimg" data-sourcesType="0" data-sourcesName="19etdf5giehhg58vzrf5m0en8hldvkvw" data-ly="前程无忧">
+                                <img src="https://t2.chei.com.cn/ncss/student/img/sourceimgqcwy.png">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                        </ul>
+                        <ul class="jobsourceList clearfix" style="margin-left:128px;">
+                            <li class="sourceList sourceListimg pad10" data-sourcesType="0" data-sourcesName="fawzqa3wo3hy2x4uqe1b1bwy4met2wpb" data-ly="智联招聘">
+                                <img src="https://t1.chei.com.cn/ncss/student/img/sourceimg09.png">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                            <li class="sourceList sourceListimg pad10" data-sourcesType="0" data-sourcesName="2xy7zytm7pt75iz09glwxs5554t621uf" data-ly="实习僧">
+                                <img src="https://t4.chei.com.cn/ncss/student/img/sourceimg08.png">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                            <li class="sourceList sourceListimg pad10" data-sourcesType="0" data-sourcesName="gn5yn9s9wjydmrlh5kre1rzkma8mmjbu" data-ly="国聘">
+                                <img src="https://t1.chei.com.cn/ncss/student/img/sourceimg8.png">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                            <li class="sourceList sourceListimg pad10" data-sourcesType="0" data-sourcesName="bbqeda1p0l0fkoinaywn8yra176xrz2l" data-ly="一览英才">
+                                <img src="https://t4.chei.com.cn/ncss/student/img/sourceimg07-1.jpg">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                            <li class="sourceList sourceListimg" data-sourcesType="0" data-sourcesName="2000846398" data-ly="中小企业信息网">
+                                <img src="https://t4.chei.com.cn/ncss/student/img/sourceimg05.jpg">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                            <li class="sourceList sourceListimg" data-sourcesType="0" data-sourcesName="xrtjvzrkqlm0n2wo0nrh74dyo2kij9sm" data-ly="中智招聘">
+                                <img src="https://t1.chei.com.cn/ncss/student/img/sourcezzzp.jpg">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                            <li class="sourceList sourceListimg" data-sourcesType="0" data-sourcesName="1zl8wkl8ixb1e1c1095fmdtrzwzegltk" data-ly="北森">
+                                <img src="https://t2.chei.com.cn/ncss/student/img/source-bs.jpg">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                        </ul>
+                        <ul class="jobsourceList clearfix" style="margin-left:128px;">
+                            <li class="sourceList sourceListimg" data-sourcesType="0" data-sourcesName="rjrwyk6f2n6snh2c6fdz7dwfd6852gmb" data-ly="丁香人才">
+                                <img src="https://t1.chei.com.cn/ncss/student/img/sourceimg-dxrc.png">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                            <li class="sourceList sourceListimg" data-sourcesType="0" data-sourcesName="7u0o7wre7w3sojcpst4ssscjb4yqwz2d" data-ly="华图教育">
+                                <img src="https://t3.chei.com.cn/ncss/student/img/sourceimg-htjy.jpg">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                            <li class="sourceList sourceListimg" data-sourcesType="0" data-sourcesName="1fgc34ei0xf5ure5ce82cxtwz4ovq6gf" data-ly="易展翅">
+                                <img src="https://t3.chei.com.cn/ncss/student/img/sourceimg-yzc.png">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                            <li class="sourceList sourceListimg" data-sourcesType="0" data-sourcesName="mfd56jlomqoq2efagv04o9i6cn0krhvl" data-ly="北极星">
+                                <img src="https://t1.chei.com.cn/ncss/student/img/sourceimg-bjx.png">
+                                <span class="iconfont icon-xuanze fz-12" style="display: none"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 分站点 -->
+                    
+                    <div class="memberLevelList-box clearfix">
+                        <span>公司类型</span>
+                        <ul class="memberLevelList clearfix">
+                            <li class="active memberLevel" data-type="" data-key="all">全部</li>
+                            <li class="memberLevel" data-type="1" data-key="keyUnits">重点领域</li>
+                            <li class="memberLevel" data-type="2" data-key="memberLevel">精选企业</li>
+                        </ul>
+                    </div>
+                    <div class="recruitTypeList-box clearfix">
+                        <span>招聘类型</span>
+                        <ul class="recruitTypeList clearfix">
+                            <li class="active recruitType" data-type="" value="">全部</li>
+                            <li class="recruitType" data-type="0" value="0">职位</li>
+                            <li class="recruitType" data-type="1" value="1">公告</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 职位列表 -->
+                <div class="position-list">
+                    <!-- 全选框 -->
+                    <div class="select">
+                        <input type="checkbox" id="td-select" />全选
+                        <button type="button" class="btn btn-primary bgcolor multiApply basic-bg-hv" style="margin:0 14px 0 25px;border:none;">投递简历</button>
+                        <button type="button" class="btn btn-default multiLike">收藏</button>
+                        <span class="sx-sp">筛选：</span>
+                        <select id="jobOutsiteSl" class="jobOutsite hide" style="width: 200px;"></select>
+                        <select class="money-area" name="monthPay">
+                            <option value="">月薪（不限）</option>
+                            <option value="2">2K以下</option>
+                            <option value="2-5">2K-5K</option>
+                            <option value="5-10">5K-10K</option>
+                            <option value="10-15">10K-15K</option>
+                            <option value="15-25">15K-25K</option>
+                            <option value="25-50">25K-50K</option>
+                            <option value="50">50K以上</option>
+                            <option value="0">面议</option>
+                        </select>
+                        <span class="jobcount-total">
+                            <img src="https://t1.chei.com.cn/ncss/student/img/job-new.png">
+                            <span class="jobcount-text">
+                                平台今日职位总数<span class="zw-total">--</span>，欢迎投递
+                            </span>
+                        </span>
+                    </div>
+                    <div id="jobLIST" class="job-list-box"></div>
+                </div>
+                <div class="clearfix" id="pagebox">
+                    <div id="page" class="text-center"></div>
+                </div>
+                <div class="result_div hide">
+                    <p>暂时没有查询到符合要求的职位，条件放宽松一点机会更多噢~</p>
+                </div>
+            </div>
+        </div>
+        <div>
+            <style>
+                /* 右侧导航栏 */
+                @media (max-width: 1400px) {
+                .right-box {
+                    position: fixed;
+                    bottom: 200px;
+                    right: 20px;
+                }
+                }
+                @media (min-width: 1400px) {
+                .right-box {
+                    position: fixed;
+                    bottom: 200px;
+                    left: 50%;
+                    margin-left: 640px;
+                }
+                }
+                .box-img {
+                    margin-top: 10px;
+                    width: 60px;
+                    text-align: center;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                }
+                .box-img:hover {
+                    box-shadow:  0px 0px 8px 0px rgba(76,81,87,0.2);
+                }
+                .box-img img {
+                    display: block;
+                    width: 100%;
+                }
+                .right-box .box-bar {
+                    width: 60px;
+                    height: 50px;
+                    background: #999;
+                    margin-top: 10px;
+                    text-align: center;
+                    color: #fff;
+                    cursor: pointer;
+                }
+                .right-box .box-bar i {
+                    font-size: 22px;
+                    line-height: 50px;
+                }
+                .right-box .box-bar p {
+                    font-size: 14px;
+                }
+                .right-box p {
+                    padding-top: 5px;
+                }
+                .right-box .bar-three:hover,
+                .right-box .bar-two:hover {
+                    background: #808080;
+                }
+                .right-box .bar-two:hover .text {
+                    display: block !important;
+                }
+                .right-box .bar-two:hover .iconfont {
+                    display: none;
+                }
+                .right-box .bar-two .text {
+                    display: none;
+                }
+                /*增加联合招聘投诉举报  */
+                .right-box .lhfk {
+                    margin-top: 10px;
+                    height: 50px;
+                    text-align: center;
+                    background: #999;
+                    color: #fff;
+                    cursor: pointer;
+                }
+            </style>
+            <div class="right-box">
+                <div class="box-img bar-five">
+                    <a href="https://ai.ncss.cn/" target="_blank">
+                        <img src="https://t3.chei.com.cn/ncss/jyxw/images/ai-logo.png" alt="">
+                    </a>
+                </div>
+                <div class="lhfk hide">
+                    <p>投诉<br />举报</p>
+                </div>
+                <div class="box-bar bar-one">
+                    <i class="iconfont icon-qr-code"></i>
+                    <div class="bigPic" style="top: -34px; left: -162px;">
+                        <img style="width: 160px;height: 160px;" src="https://t3.chei.com.cn/ncss/student/img/logo/gzh.jpg" />
+                    </div>
+                </div>
+                <div class="box-bar bar-two">
+                    <i class="iconfont icon-speech-bubble"></i>
+                    <p class="text" style="color: #fff;">意见<br />反馈</p>
+                </div>
+                <div class="box-bar bar-three hide"><i class="iconfont icon-up-arrow"></i></div>
+            </div>
+        </div>
+    </div>
+    <div>
+            <div class="modal fade bs-example-modal-sm" id="ensureAppyjob" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel">简历投递确认</h4>
+                        </div>
+                        <div class="modal-body" id="errortext">
+                            <input type="hidden" name="jobId" />
+                            <p>您正在投递 <span class="corpName"></span> 的</p>
+                            <p><span class="jobName"></span> 职位</p>
+                            <div class="hasfjjl-tips hide" style="color:#666;padding: 5px 15px 5px 0px;font-size: 12px;">您已上传附件简历，投递时会发给用人单位</div>
+                            <div class="hidden" style="margin-top: 5px; font-size: 12px; color: #f53333;" id="remark"></div>
+                        </div>
+                        <div style="color:#f53333;font-size: 12px;padding: 0px 15px 10px 15px;">国家大学生就业服务平台提醒您注意甄别违法、虚假、高风险招聘信息，警惕索要隐私信息的行为。在投递简历前务必提前确认企业资质与职位真实性，若遇到诈骗、泄露个人隐私等情况，请向我们投诉举报。</div>
+                        <div class="modal-footer">
+                            <a class="btn btn-default" href="javascript:;" data-dismiss="modal">
+                            取消
+                            </a>
+                            <button class="btn btn-primary basic-bg-hv ensureApply">
+                            确认投递
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade bs-example-modal-sm" id="ensureAppyjobMuti" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel">简历投递确认</h4>
+                        </div>
+                        <div class="modal-body" id="errortext" style="min-height:auto;">
+                            <input type="hidden" name="jobId" />
+                            <p>您正在投递 <span class="jobName"></span> 等 <span class="count"></span> 个职位</p>
+                            <div class="hasfjjl-tips hide" style="color:#666;padding: 5px 15px 5px 0px;font-size: 12px;">您已上传附件简历，投递时会发给用人单位</div>
+                            <div class="hidden" style="margin-top: 5px; font-size: 12px; color: #f53333;" id="remark"></div>
+                        </div>
+                        <div style="color:#f53333;font-size: 12px;padding: 0px 15px 10px 15px;">国家大学生就业服务平台提醒您注意甄别违法、虚假、高风险招聘信息，警惕索要隐私信息的行为。在投递简历前务必提前确认企业资质与职位真实性，若遇到诈骗、泄露个人隐私等情况，请向我们投诉举报。</div>
+                        <div class="modal-footer">
+                            <a class="btn btn-default" href="javascript:;" data-dismiss="modal">
+                            取消
+                            </a>
+                            <button class="btn btn-primary basic-bg-hv ensureApply">
+                            确认投递
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="modal fade bs-example-modal-sm" id="maskSuccess" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">提示</h4>
+                </div>
+                <div class="modal-body" id="errortext">投递成功。</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary confirmBtn">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-sm" id="addjobfail" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">提示</h4>
+                </div>
+                <div class="modal-body" id="errortext">收藏失败。</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary confirmBtn" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-sm" id="maskSuccess1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="z-index:3000">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">提示</h4>
+                </div>
+                <div class="modal-body" id="errortext">投递成功。</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary confirmBtn" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+            <div class="modal fade bs-example-modal-sm" id="maskCommonModal" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel">提示</h4>
+                        </div>
+                        <div class="modal-body" id="errortext" style="min-height: 50px;"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary confirmBtn" data-dismiss="modal">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div>
+            <div class="modal fade bs-example-modal-sm" id="maskZwmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">提示</h4>
+                </div>
+                <div class="modal-body" id="errortext">
+                    <p class="zwqytext hide">您将要离开国家大学生就业服务平台，进入<span class="websiteName" style="font-weight: 700;"></span>投递个人简历，请保护好个人隐私安全。</p>
+                    <p class="zwssgxtext hide">您将要离开国家大学生就业服务平台，进入<span class="websiteName" style="font-weight: 700;"></span>就业网站投递，跳转网站可能存在投递限制，请注意。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary confirmBtn">确认</button>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    <div>
+            <style>
+                #mask-fankui .modal-dialog {
+                    width: 500px;
+                }
+                #mask-fankui .modal-content {
+                    width: 500px;
+                }
+                #mask-fankui textarea {
+                    height: 252px;
+                    resize: none;
+                }
+            </style>
+            <div class="modal fade" id="mask-fankui" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <form class="tankuang quxiao" id="fankui" action="/student/notification/addNon" method="post" role="form" autocomplete="off">
+                            <input id="csrf-student-notification-addNon" type="hidden" value="a0b38726d645381ca931dd09ee88d70c" name="cprmcsrf" />
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title" id="myModalLabel">意见反馈</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mask-con">
+                                    <div>
+                                        反馈类型：
+                                        <select class="categoriy-select form-control" name="type" required="required" style="display: inline-block; height: 34px; border-color: #ccc; margin-bottom: 0;">
+                                            <option value="" disabled selected="selected">请选择</option>
+                                            <option value="COMPLAIN">投诉</option>
+                                            <option value="FEEDBACK">反馈建议</option>
+                                            <option value="AIZNZS">AI助手</option>
+                                        </select>
+                                        <div class="error error-first model-body hide" style="margin-left: 75px;">反馈类型不能为空</div>
+                                    </div>
+                                    <div style="margin: 20px 0 20px 74px;">
+                                        <input class="title-input hide form-control" name="description" value="" placeholder="标题" maxlength="64" required="required" />
+                                        <div class="error hide">标题不能为空</div>
+                                    </div>
+                                    <div style="margin-left: 74px;">
+                                        <textarea class="form-inner form-control" style="margin-left: 0; width: 340px;" name="context" value="" placeholder="问题描述" maxlength="200" required="required"></textarea>
+                                        <div class="error hide">问题描述不能为空</div>
+                                    </div>
+                                    <input name="jobId" type="hidden" />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="btn btn-primary basic-bg-hv" id="fankui-submit">提交</div>
+                                <div class="giveUp btn btn-default">取消</div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div>
+            <div id="mask4" class="hide maskmodal">false</div>
+            <div id="maskUser" class="hide maskmodal">false</div>
+        </div>
+    <div>
+      <style>
+        footer {
+          font-size: 14px;
+        }
+        footer a:hover {
+          text-decoration: underline;
+        }
+      </style>
+      <footer style="height: 130px; background: #333; color: #fff; text-align: center; line-height: 27px; margin-top: 30px">
+        <div style="width: 1170px; margin: 0 auto; position: relative; padding-top: 24px">
+          <p style="margin: 0; word-spacing: 23px; color: #ccc">
+            <a style="color: #ccc" href="/intro" target="_blank">网站介绍</a>
+            <span>|</span>
+            <a style="color: #ccc" href="/contact" target="_blank">联系我们</a>
+          </p>
+          <p style="margin: 0">版权所有：<a style="color: #fff" href="https://chesicc.chsi.com.cn/" target="_blank">教育部学生服务与素质发展中心</a></p>
+          <p style="margin: 0;display: flex; align-items: center; justify-content: center">
+            <a style="color: #fff" href="https://beian.miit.gov.cn" target="_blank">京ICP备19004913号-1</a>
+            <a style="color: #fff; margin-left: 10px;display: flex; align-items: center;" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010202009747" target="_blank"><img src="https://t3.chei.com.cn/chsi/images/jgwab.svg" /><span style="margin-left: 5px">京公网安备11010202009747号</span></a>
+          </p>
+        </div>
+      </footer>
+      
+      <div class="modal fade bs-example-modal-sm" id="commonResultModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" id="commonModalCancel" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title">提示</h4>
+            </div>
+            <div class="modal-body" id="commonErrText"></div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script type="text/javascript" charset="utf-8" src="https://t1.chei.com.cn/ncss/student/js/jquery-1.11.1.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="https://t3.chei.com.cn/ncss/student/js/bootstrap.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="https://t2.chei.com.cn/ncss/student/js/slide-bar-1.0.7.js"></script>
+      <script>
+        $('#corpSignout').on('click', function () {
+          var $this = $(this);
+          $.ajax({
+            type: 'post',
+            url: '/student/signoutcorp.html',
+            success: function (data) {
+              if (escapeData) {
+                data = escapeData(data);
+              }
+              window.location.href = $this.attr('data-hr');
+            }
+          });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.querySelector('.search-input');
+            const realQuery = document.querySelector('.realQuery');
+            const searchForm = document.querySelector('.site-search');
+            // 提交表单前处理搜索词
+            if (searchForm) {
+                searchForm.addEventListener('submit', function (e) {
+                    e.preventDefault(); // 阻止默认提交
+                    const val = searchInput.value.trim();
+                    if (!val) {
+                        alert("请输入关键词");
+                        return;
+                    }
+                    // 设置 realQuery 的值为关键词 + site:xxx
+                    realQuery.value = val + ' site:www.ncss.cn';
+                    // 手动提交表单
+                    searchForm.submit();
+                });
+            }
+        });
+      </script>
+    </div>
+    
+    <div>
+            <div class="modal fade bs-example-modal-sm" id="fankui-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel">提示</h4>
+                        </div>
+                        <div class="modal-body" id="errortext">反馈成功，工作人员会尽快给您回复。</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div>
+            <style>
+                /* 切换站点弹框 */
+                .modal-site.modal .modal-dialog {
+                    width: 252px;
+                }
+                .modal-site.modal .modal-header {
+                    padding: 15px;
+                }
+                .modal-site.modal .left-ex {
+                    margin-left: 42px;
+                }
+                .modal-site.modal .site-type {
+                    color: #333;
+                    font-weight: bold;
+                }
+                .modal-site.modal .head-title {
+                    height: 60px;
+                    line-height: 60px;
+                    padding-left: 15px;
+                }
+                .modal-site.modal .modal-cont {
+                    padding: 0 47px;
+                }
+                .modal-site.modal .modal-header .close {
+                    background: transparent;
+                    font-size: 20px;
+                    height: 24px;
+                    line-height: 20px;
+                    border: none;
+                    font-size: 36px;
+                    float: right;
+                }
+                .modal-site.modal .modal-body .province-sel {
+                    width: 200px;
+                    height: 39px;
+                    border-radius: 0;
+                    float: left;
+                    border-color: #ccc !important;
+                    border-width: 1px !important;
+                    cursor: pointer;
+                }
+                .modal-site.modal .modal-body .province-sch {
+                    width: 200px;
+                    height: 39px;
+                    border-radius: 0;
+                    float: right;
+                    border-color: #ccc !important;
+                    border-width: 1px !important;
+                    cursor: pointer;
+                }
+                .modal-site.modal .checkeditem {
+                    display: inline-block;
+                    height: 40px;
+                    line-height: 40px;
+                    padding: 0 38px;
+                    border: 1px solid #ccc;
+                }
+                .modal-site.modal .quanguo-site {
+                    display: inline-block;
+                    height: 40px;
+                    line-height: 40px;
+                    padding: 0 38px;
+                    border: 1px solid #ccc;
+                    color: #333;
+                }
+                .modal-site.modal .quanguo-site:hover {
+                    border: 1px solid #03a9f4;
+                    color: #03a9f4;
+                }
+                .modal-site.modal .tuijian {
+                    display: inline-block;
+                    height: 40px;
+                    line-height: 40px;
+                    padding: 0 38px;
+                    border: 1px solid #ccc;
+                    color: #333;
+                }
+                .modal-site.modal .tuijian:hover {
+                    border: 1px solid #03a9f4;
+                    color: #03a9f4;
+                    text-decoration: none;
+                }
+                .modal-site.modal .has-siteItem {
+                    margin-top: 18px;
+                    cursor: pointer;
+                }
+                .modal-site.modal .checkeditem:hover {
+                    border: 1px solid #03a9f4;
+                    color: #03a9f4;
+                }
+                .modal-site.modal .modal-tishi {
+                    margin: 30px 0 18px 0;
+                }
+                .modal-site .select2-container {
+                    float: right;
+                }
+                .modal-site .select2-container .select2-selection--single {
+                    height: 40px;
+                }
+                .modal-site .select2-container--default .select2-selection--single .select2-selection__arrow {
+                    top: 6px;
+                }
+                .modal-site .select2-container--default .select2-selection--single .select2-selection__rendered {
+                    line-height: 40px;
+                }
+            </style>
+            <div class="modal fade bs-example-modal-sm modal-site" id="modal-site" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog" role="document" style="width: 560px; height: 615px;">
+                    <div class="modal-content" style="width: 560px; height: 615px;">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">切换就业网站</h4>
+                        </div>
+                        <div class="modal-body" style="padding: 0;">
+                            <div class="head-title">亲爱的用户：<span style="font-weight: bold;">切换分站</span>并登录后，将为您提供更准确的个性化职位推荐</div>
+                            <div class="modal-cont">
+                                <div class="modal-country">
+                                    <div style="margin-bottom: 18px;"><span class="site-type">国家大学生就业服务平台：</span>就业资源的完全网罗，不放过一个好职位</div>
+                                    <div class="left-ex">
+                                        <a>
+                                            <span class="btn-zd has-siteItem quanguo-site basic-cl-hv2" data-value="00" style="margin-top: 0px;">国家大学生就业服务平台</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="modal-province">
+                                    <div class="modal-tishi"><span class="site-type">省级就业网：</span>省内优质就业资源的集合</div>
+                                    <div class="form-group has-feedback clearfix left-ex">
+                                        <select class="form-control choose province-sel" id="pro-sel" data-item="pro-sel">
+                                        <option value="">省份</option>
+                                        <option value="11">北京市</option>
+                                        <option value="12">天津市</option>
+                                        <option value="13">河北省</option>
+                                        <option value="14">山西省</option>
+                                        <option value="15">内蒙古自治区</option>
+                                        <option value="21">辽宁省</option>
+                                        <option value="22">吉林省</option>
+                                        <option value="23">黑龙江省</option>
+                                        <option value="31">上海市</option>
+                                        <option value="32">江苏省</option>
+                                        <option value="33">浙江省</option>
+                                        <option value="34">安徽省</option>
+                                        <option value="35">福建省</option>
+                                        <option value="36">江西省</option>
+                                        <option value="37">山东省</option>
+                                        <option value="41">河南省</option>
+                                        <option value="42">湖北省</option>
+                                        <option value="43">湖南省</option>
+                                        <option value="44">广东省</option>
+                                        <option value="45">广西壮族自治区</option>
+                                        <option value="46">海南省</option>
+                                        <option value="50">重庆市</option>
+                                        <option value="51">四川省</option>
+                                        <option value="52">贵州省</option>
+                                        <option value="53">云南省</option>
+                                        <option value="54">西藏自治区</option>
+                                        <option value="61">陕西省</option>
+                                        <option value="62">甘肃省</option>
+                                        <option value="63">青海省</option>
+                                        <option value="64">宁夏回族自治区</option>
+                                        <option value="65">新疆维吾尔自治区</option>
+                                        </select>
+                                        <div class="haschecked tuijian-probox hide" style="float: right;">
+                                        <span>推荐：</span>
+                                        <a class="tuijian basic-cl-hv2"></a>
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-feedback has-siteItem clearfix left-ex">
+                                        <div class="haschecked pull-left" data-item="pro-sel" style="padding-left: 0;"></div>
+                                    </div>
+                                </div>
+                                <div class="modal-school">
+                                    <div class="modal-tishi"><span class="site-type">校级就业网：</span>母校亲选，为你更精准、个性化地推荐职位</div>
+                                    <div class="form-group has-feedback clearfix left-ex">
+                                        <select class="form-control province-sel" id="province-sch">
+                                        <option value="">省份</option>
+                                        <option value="11">北京市</option>
+                                        <option value="12">天津市</option>
+                                        <option value="13">河北省</option>
+                                        <option value="14">山西省</option>
+                                        <option value="15">内蒙古自治区</option>
+                                        <option value="21">辽宁省</option>
+                                        <option value="22">吉林省</option>
+                                        <option value="23">黑龙江省</option>
+                                        <option value="31">上海市</option>
+                                        <option value="32">江苏省</option>
+                                        <option value="33">浙江省</option>
+                                        <option value="34">安徽省</option>
+                                        <option value="35">福建省</option>
+                                        <option value="36">江西省</option>
+                                        <option value="37">山东省</option>
+                                        <option value="41">河南省</option>
+                                        <option value="42">湖北省</option>
+                                        <option value="43">湖南省</option>
+                                        <option value="44">广东省</option>
+                                        <option value="45">广西壮族自治区</option>
+                                        <option value="46">海南省</option>
+                                        <option value="50">重庆市</option>
+                                        <option value="51">四川省</option>
+                                        <option value="52">贵州省</option>
+                                        <option value="53">云南省</option>
+                                        <option value="54">西藏自治区</option>
+                                        <option value="61">陕西省</option>
+                                        <option value="62">甘肃省</option>
+                                        <option value="63">青海省</option>
+                                        <option value="64">宁夏回族自治区</option>
+                                        <option value="65">新疆维吾尔自治区</option>
+                                        <!-- <option value="71">台湾省</option>
+                                            <option value="81">香港特别行政区</option>
+                                            <option value="82">澳门特别行政区</option> -->
+                                        </select>
+                                        <select class="form-control choose province-sch" id="school-sel" data-item="school-sel"> </select>
+                                    </div>
+                                    <div class="form-group has-feedback has-siteItem clearfix left-ex">
+                                        <div class="haschecked pull-left" data-item="school-sel" style="padding-left: 0;"></div>
+                                        <div class="tuijian-schbox haschecked hide" style="float: right;">
+                                            <span>推荐：</span>
+                                            <a class="tuijian basic-cl-hv2"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript" charset="utf-8" src="https://t4.chei.com.cn/ncss/student/js/select2.min.js"></script>
+            <script type="text/javascript" charset="utf-8" src="https://t2.chei.com.cn/ncss/student/js/select-ZH-CN.js"></script>
+            <script type="text/javascript" charset="utf-8" src="https://t3.chei.com.cn/ncss/student/js/datas-1.0.1.js"></script>
+            <script>
+                /* 切换站点 */
+                var local = "";
+                for (var i = 3; i < location.href.split("/").length; i++) {
+                    local += location.href.split("/")[i] + "/";
+                }
+                local = local.substring(0, local.length - 1);
+                $("#siteChange").click(function () {
+                $("#pro-sel option").removeAttr("selected");
+                $("#pro-sel option").eq(0).attr("selected", "selected");
+                $("#school-sel").html("");
+                $("#school-sel").select2("val", "");
+                $("#school-sel").empty();
+                if ($("#pro-sel").val() == "") {
+                    $(".haschecked").each(function () {
+                    if ($(this).attr("data-item") == "pro-sel") {
+                        $(this).html("");
+                    }
+                    if ($(this).attr("data-item") == "school-sel") {
+                        $(this).html("");
+                    }
+                    });
+                }
+                $("#province-sch option").removeAttr("selected");
+                $("#province-sch option").eq(0).attr("selected", "selected");
+
+                $("#modal-site").modal("show");
+                });
+                /* 根据省份获取学校 */
+                function schoollistFun(dataSfdm) {
+                var innerSch = "";
+                $.ajax({
+                    type: "get",
+                    url: "/student/pubsite/schools",
+                    cache: false,
+                    data: {
+                    sfdm: dataSfdm
+                    },
+                    success: function (data) {
+                        data = escapeData(data);
+                        for (var i = 0; i < data.length; i++) {
+                            innerSch += '<option value="' + data[i].siteId + '">' + data[i].siteName + "</option>";
+                        }
+                        $("#school-sel").html(innerSch);
+                        $("#school-sel").select2("val", "");
+                        chooseFun();
+                    }
+                });
+                }
+                $("#school-sel").select2({
+                    placeholder: "请选择学校站点",
+                    language: "zh-CN"
+                });
+                $("#province-sch").change(function () {
+                    schoollistFun($(this).val());
+                });
+
+                function chooseFun() {
+                    $(".choose").change(function () {
+                        var _this = $(this);
+                        if (_this.val() != null) {
+                            $(".haschecked").each(function () {
+                                if (_this.attr("data-item") == $(this).attr("data-item")) {
+                                    $(this).html('<span class="checkeditem basic-cl-hv2" data-value="' + escapeData(_this.val()) + '">' + escapeData(_this.find("option:checked").text()) + "</span>");
+                                }
+                            });
+                            siteAjaxFun();
+                        }
+                    });
+                }
+                chooseFun();
+                /* 选择站点进行跳转 */
+                function changeSiteFun(siteId) {
+                    $.ajax({
+                        type: "get",
+                        url: "/student/pubsite/findOne",
+                        cache: false,
+                        data: {
+                        siteId: siteId
+                        },
+                        success: function (data) {
+                            if (data.webUrl) {
+                                if (data.webUrl != "") {
+                                    if (data.siteId == "11") {
+                                        if (local.indexOf("#") > 0) {
+                                            window.location.href = "https://" + data.webUrl.split("/")[2] + "/student/index.html";
+                                        } else {
+                                            window.location.href = "https://" + data.webUrl.split("/")[2] + "/" + local;
+                                        }
+                                    } else {
+                                        if (local.indexOf("#") > 0) {
+                                            window.location.href = "https://" + data.webUrl.split("/")[2] + "/student/index.html";
+                                        } else {
+                                            window.location.href = "https://" + data.webUrl.split("/")[2] + "/" + local;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (local.indexOf("#") > 0) {
+                                    window.location.href = "//job.ncss.cn/student/index.html";
+                                } else {
+                                    window.location.href = "//job.ncss.cn/" + local;
+                                }
+                            }
+                        }
+                    });
+                }
+                /*请求推荐站点*/
+                $("#modal-site").on("show.bs.modal", function () {
+                    if (!getRecFlag) {
+                        getRecSite();
+                    }
+                });
+                var getRecFlag = false;
+                function getRecSite() {
+                    $.ajax({
+                        type: "get",
+                        url: "/student/pubsite/recommendSite",
+                        cache: false,
+                        success: function (data) {
+                            getRecFlag = true;
+                            if (data != "" && data != null) {
+                                if (data.province && data.province != "") {
+                                    $(".tuijian-probox").removeClass("hide");
+                                    if (data.province.siteId == "11") {
+                                        if (local.indexOf("#") > 0) {
+                                            $(".tuijian-probox .tuijian")
+                                            .text(data.province.siteName)
+                                            .attr("href", "https://" + data.province.webUrl.split("/")[2] + "/student/index.html");
+                                        } else {
+                                            $(".tuijian-probox .tuijian")
+                                            .text(data.province.siteName)
+                                            .attr("href", "https://" + data.province.webUrl.split("/")[2] + "/" + local);
+                                        }
+                                    } else {
+                                        if (local.indexOf("#") > 0) {
+                                            $(".tuijian-probox .tuijian")
+                                            .text(data.province.siteName)
+                                            .attr("href", "//" + data.province.webUrl.split("/")[2] + "/student/index.html");
+                                        } else {
+                                            $(".tuijian-probox .tuijian")
+                                            .text(data.province.siteName)
+                                            .attr("href", "//" + data.province.webUrl.split("/")[2] + "/" + local);
+                                        }
+                                    }
+                                } else {
+                                    $(".tuijian-probox").addClass("hide");
+                                }
+                                if (data.school && data.school != "") {
+                                    $(".tuijian-schbox").removeClass("hide");
+                                    if (local.indexOf("#") > 0) {
+                                        $(".tuijian-schbox .tuijian")
+                                        .text(data.school.siteName)
+                                        .attr("href", "//" + data.school.webUrl.split("/")[2] + "/student/index.html");
+                                    } else {
+                                        $(".tuijian-schbox .tuijian")
+                                        .text(data.school.siteName)
+                                        .attr("href", "//" + data.school.webUrl.split("/")[2] + "/" + local);
+                                    }
+                                } else {
+                                    $(".tuijian-schbox").addClass("hide");
+                                }
+                            } else {
+                                $(".tuijian-probox").addClass("hide");
+                                $("tuijian-schbox").addClass("hide");
+                            }
+                        }
+                    });
+                }
+                function siteAjaxFun() {
+                    $(".checkeditem").each(function () {
+                        $(this).click(function () {
+                        changeSiteFun($(this).attr("data-value"));
+                        });
+                    });
+                }
+                siteAjaxFun();
+                $(".quanguo-site").click(function () {
+                    if (local.indexOf("#") > 0) {
+                        window.location.href = "//job.ncss.cn/student/index.html";
+                    } else {
+                        window.location.href = "//job.ncss.cn/" + local;
+                    }
+                });
+                /*ie11不能输入中文兼容*/
+                $.fn.modal.Constructor.prototype.enforceFocus = function () {};
+            </script>
+        </div>
+    <input id="csrf-student-myjobs-addjob" type="hidden" value="2f0cf51cd24a82763528826eace621c1" name="cprmcsrf" />
+    <input id="csrf-student-applyjobs-multi" type="hidden" value="d521ec0e0d70f84b2db166a92760bbe9" name="cprmcsrf" />
+    <input id="csrf-student-applyjobs-apply" type="hidden" value="4232f78bef725540fad470953123d31c" name="cprmcsrf" />
+    <input id="csrf-student-resume-checkapply" type="hidden" value="d04e64088ed23ffd00024945688055b7" name="cprmcsrf" />
+    <input id="csrf-student-outside-stat" type="hidden" value="7d4614d1df15c98a3c542de027cf4392" name="cprmcsrf" />
+    <script type="text/javascript" charset="utf-8" src="https://t4.chei.com.cn/ncss/student/js/jquery.pagination.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://t3.chei.com.cn/ncss/student/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://t1.chei.com.cn/ncss/student/js/select2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://t4.chei.com.cn/ncss/student/js/select-ZH-CN.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://t2.chei.com.cn/ncss/student/js/set-page-new-1.0.3.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://t3.chei.com.cn/ncss/student/js/job-list-apply-1.0.5.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://t1.chei.com.cn/ncss/student/js/jobindex-1.0.20.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        /* eslint-disable no-undef */
+        var degressData = [
+            {code: '', name: '全部'},
+            {code: '51', name: '不限'},
+            {code: '41', name: '专科及以上'},
+            {code: '31', name: '本科及以上'},
+            {code: '11', name: '硕士及以上'},
+            {code: '01', name: '博士及以上'}
+        ]
+        var jobTypeData = [
+            {code: '', name: '全部'},
+            {code: '01', name: '全职'},
+            {code: '02', name: '兼职'},
+            {code: '03', name: '实习'}
+        ]
+        $(".navbar2").find('li[data-type="job"]').addClass("act");
+        /* 获取参数并转换为对象 */
+        function getQueryStringArgs() {
+            var qs = (location.search.length > 0 ? location.search.substring(1) : ""),
+                args = {},
+                items = qs.length ? qs.split("&") : [],
+                item = null,
+                name = null,
+                value = null,
+                i = 0,
+                len = items.length;
+            for(i = 0; i < len; i++) {
+                item = items[i].split("=");
+                name = decodeURIComponent(item[0]);
+                value = decodeURIComponent(item[1]);
+                if(name.length) {
+                    args[name] = value;
+                }
+            }
+            return args;
+        }
+        var args=getQueryStringArgs();
+        if (!$.isEmptyObject(args)) {
+            var degreeNameInit = '';
+            parameter.jobName = args.jobName;
+            parameter.degreeCode = args.degreeCode;
+            parameter.monthPay = args.monthPay;
+            parameter.areaCode = args.areaCode;
+            parameter.jobType = args.jobType;
+            parameter.property = args.property;
+            parameter.categoryCode = args.categoryCode;
+            if (args.jobName) {
+                $(".searchKeywords").val(args.jobName);
+            }
+            /* 反显月薪 */
+            if (args.monthPay) {
+                $('.money-area option').each(function () {
+                    $(this).removeAttr('selected')
+                    if ($(this).val() == args.monthPay) {
+                        $(this).attr('selected', 'selected')
+                    }
+                })
+            }
+            /* 处理学历层次反显 */
+            if (args.degreeCode) {
+                $("#degreeTypeList li").removeClass('target');
+                for (var m = 0; m < degressData.length; m++) {
+                    if (args.degreeCode == degressData[m].code) {
+                        $("#degreeTypeList li").eq(m).addClass("target");
+                        degreeNameInit = degressData[m].name;
+                    }
+                }
+                if (degreeNameInit) {
+                    $("#degreeTypeSelect").html(escapeData(degreeNameInit) + '<span class="caret"></span>');
+                }
+            }
+            // 反显所选区域
+            if (args.areaName) {
+                $("#searchArea")
+                .html(escapeData(args.areaName) + '<span class="caret"></span>')
+                .attr({
+                    "data-area": escapeData(args.areaCode),
+                    "data-name": escapeData(args.areaName)
+                });
+            }
+            //反显职位类型
+            if (args.jobType) {
+                for (var m = 0; m < jobTypeData.length; m++) {
+                    if (args.jobType == jobTypeData[m].code) {
+                        $("#jobTypeList li").eq(m).addClass("target");
+                        jobTypeInitName = jobTypeData[m].name;
+                    }
+                }
+                $("#jobTypeSelect").html(escapeData(jobTypeInitName) + '<span class="caret"></span>');
+            }
+            // 反显公司性质
+            if (args.property) {
+                $(".propertyList li").each(function () {
+                    $(this).removeClass("active");
+                    if ($(this).attr("data-type") == args.property) {
+                        $(this).addClass("active");
+                    }
+                });
+            }
+            // 反显重点领域
+            if (args.keyCode) {
+                parameter.keyUnits = '1';
+                $(".memberLevelList .memberLevel").removeClass("active");
+                $(".memberLevelList .memberLevel").eq(1).addClass("active");
+            }
+            // 反显精选企业
+            if (args.memberLevel) {
+                parameter.memberLevel = '2';
+                $(".memberLevelList .memberLevel").removeClass("active");
+                $(".memberLevelList .memberLevel").eq(2).addClass("active");
+            }
+            // 反显职位类别
+            if (args.categoryCode) {
+                $(".jobpositionList li").each(function () {
+                    $(this).removeClass("active");
+                    if ($(this).attr("data-type") == args.categoryCode) {
+                        $(this).addClass("active");
+                    }
+                });
+            }
+            //从24365联合招聘页面跳转到职位列表
+            if (args.server){
+                $(".jobtype-box").addClass('hide');
+                $(".degree-box").removeClass('hide');
+
+            }
+            $(function () {
+                parameter.sourcesName = "0";
+                parameter.sourcesType = "";
+                pageInit.getHtml();
+            });
+        }else {
+            $("#jobTypeSelect").html('全部<span class="caret"></span>');
+            $(function () {
+                parameter.sourcesName = "0";
+                parameter.sourcesType = "";
+                parameter.jobType = "";
+                pageInit.getHtml();
+            });
+        }
+        /* 获取职位总数 */
+        var parameterTotal = {
+            jobType: "",
+            areaCode: "",
+            jobName: "",
+            monthPay: "",
+            industrySectors: "",
+            recruitType: "",
+            property: "",
+            categoryCode: "",
+            memberLevel: "",
+            offset: "1",
+            limit: "10",
+            keyUnits: "",
+            degreeCode: "",
+            sourcesName: "",
+            sourcesType: ""
+        };
+        function getJobTotalFun(){
+            $.ajax({
+                type: "get",
+                url: "/student/jobs/jobslist/jobcount",
+                cache: false,
+                data: {jobType: ''},
+                success: function (data) {
+                    $(".zw-total").text(data);
+                },
+            });
+        }
+        getJobTotalFun()
+        $(function(){
+            var searchBarTop = $('#searchBar').offset().top;
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop >= searchBarTop) {
+                $("#searchBar").addClass('fixed-search-bar');
+                $("#searchBarBottom").addClass('with-fixed-search-bar');
+            } else {
+                $("#searchBar").removeClass('fixed-search-bar');
+                $("#searchBarBottom").removeClass('with-fixed-search-bar');
+            }
+            $(window).scroll(function () {
+                var scrollTop = $(window).scrollTop();
+                if (scrollTop >= searchBarTop) {
+                    $("#searchBar").addClass('fixed-search-bar');
+                    $("#searchBarBottom").addClass('with-fixed-search-bar');
+                } else {
+                    $("#searchBar").removeClass('fixed-search-bar');
+                    $("#searchBarBottom").removeClass('with-fixed-search-bar');
+                }
+            });
+        })
+    </script>
+</body>
+</html>

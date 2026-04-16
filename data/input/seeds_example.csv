@@ -1,3 +1,0 @@
-platform,page_type,url,city,keyword
-demo_site,list,https://www.example.com/jobs?city=beijing&keyword=python,北京,Python
-demo_site,list,https://www.example.com/jobs?city=hangzhou&keyword=operations,杭州,运营

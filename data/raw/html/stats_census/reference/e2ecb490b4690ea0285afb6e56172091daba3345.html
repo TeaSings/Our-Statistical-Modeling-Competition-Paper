@@ -1,0 +1,2848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>普查数据 - 国家统计局</title>
+		<meta name="ColumnName" content="普查数据">
+		<meta name="ColumnType" content="普查数据">
+		<meta name="ColumnDescription" content="普查数据">
+		<meta name="ColumnKeywords" content="普查数据">
+  <link href="../../images/gtj2023_base.css" rel="stylesheet" />
+  <link href="../../images/gtj2023_pc_common.css" rel="stylesheet" />
+  <link href="../../images/gtj2023_index.css" rel="stylesheet" />
+  <link href="../../images/gtj2023_pcsj.css" rel="stylesheet" />
+  <link href="../../images/gtj2023_swiper-bundle.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="../../images/gtj2023_mobile_public.css" media="screen and (max-width:767px) and (orientation:portrait)" />
+  <link rel="stylesheet" type="text/css" href="../../images/gtj2023_mobile_index.css" media="screen and (max-width:767px) and (orientation:portrait)" />
+    <link rel="stylesheet" type="text/css" href="../../images/gtj2023_mobile_pcsj.css" media="screen and (max-width:767px) and (orientation:portrait)" />
+  <link rel="stylesheet" media="screen and (min-width:1680px)" href="../../images/gtj2023_pc_common_1600.css" />
+  <link rel="stylesheet" media="screen and (min-width:1680px)" href="../../images/gtj2023_index-1600.css" />
+  <link rel="stylesheet" media="screen and (min-width:1680px)" href="../../images/gtj2023_pcsj-1600.css" />
+  <script type="text/javascript" src="../../images/gtj2023_jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="../../images/gtj2023_h5.js"></script>
+  <script type="text/javascript" src="../../images/gtj2023_resize.js"></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <style>
+        .icon-list ul {
+                width: 225px;
+                margin-left: 37px;
+        }
+</style>
+               <a href="https://www.stats.gov.cn/znwd/" target="_black " style="display:block;position:fixed;top:50%;right:-1px;width:87px;margin-top:78px;z-index:11" title="AI问">
+                        <img src="/images/aiwen_logo_20251203.gif" alt="" style="width:100%" />
+                        <img src="/images/aiwen_logo2_20251203.png" alt="" style="position:absolute;left:-17px;top:47px;width:39px" />
+                </a>
+<div class="wrapper-header">
+	<div class="logo">
+		<img src="/images/gtj2023_logo.png" alt="" />
+	</div>
+	<div class="search-content">
+		<div class="icon-list mhide">
+			<ul>
+				<li>
+					<a href="/hd/xmt/" target="_blank" title="新媒体">
+						<img src="/images/gtj2023_header-icon7.png" alt="" />
+					</a>
+				</li>
+				<li>
+					<a href="/wzgl/rss/" target="_blank" title="RSS">
+						<img src="/images/gtj2023_header-icon2.png" alt="" />
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="toolbarSwitch" title="无障碍">
+						<img src="/images/gtj2023_header-icon3.png" alt="" />
+					</a>
+				</li>
+				<li>
+					<a href="http://wsxf.stats.gov.cn/" target="_blank" title="信访">
+						<img src="/images/gtj2023_header-icon1.png" alt="" />
+					</a>
+				</li>
+				<!--<li>
+					<a href="/hd/xmt/" target="_blank" title="新媒体">
+						<img src="/images/gtj2023_header-icon4.png" alt="" />
+					</a>
+				</li>
+				<li>
+					<a href="/znwd/" target="_blank" title="智能问答">
+						<img src="/images/gtj2023_header-icon5.png" alt="" />
+					</a>
+				</li>
+				<li>
+					<a href="http://weibo.com/nbsstatistics" target="_blank" title="中国统计">
+						<img src="/images/gtj2023_header-icon6.png" alt="" />
+					</a>
+				</li>-->
+				<li>
+					<a href="/english/" target="_blank" title="英文版"> EN </a>
+				</li>
+			</ul>
+		</div>
+		<form name="searchform" action="" target="_blank" onsubmit="return false">
+		<div class="search-input">
+			<!-- <input type="text" placeholder="请输入关键字" /> -->
+				<input oninput="replaceText(event)" placeholder="请输入关键字" name="qt" class="input1" id="search" value="" onfocus="if(value=='') {value='';}" onblur="if(value=='') {value='';}" type="text" autocomplete="off" />
+			<button onclick="submitFormT();">搜索</button>
+		</div>
+		</form>
+		<script type="text/javascript">
+			// 搜索
+			function submitFormT() {
+				var temp = searchform.qt.value;
+				if (temp == null || temp == "") {
+					alert("请输入搜索条件");
+				} else {
+					var url = '/search/s?qt=' + encodeURIComponent(temp);
+					window.open(url);
+				}
+			}
+			//回车执行查询
+			document.getElementById("search").onkeypress = function() {
+				if (event.keyCode == "13") {
+					submitFormT();
+				}
+			};
+        function scriptReplace(str) {
+		if (new RegExp(".*?script[^>]*?.*?(<\/.*?script.*?>)*", "ig").test(str)) {//包含
+			var str1 = str.replace('script', '</*script*/>');//替换的内容
+			 return str1
+		}if (new RegExp(".*?details[^>]*?.*?(<\/.*?details.*?>)*", "ig").test(str)) {//包含
+			var str1 = str.replace('details', '</*details*/>');//替换的内容
+			 return str1
+		}else{
+			return str
+		}
+	}
+        function replaceText(event) {
+          var textBox = event.target;
+          var originalText = textBox.value;
+          var replacedText = scriptReplace(originalText);
+          textBox.value = replacedText;
+        }
+		</script>
+	</div>
+</div>
+<div class="wrapper-nav">
+	<div class="wrapper-nav-left mhide"></div>
+	<div class="wrapper-content">
+		<div class="wrapper-nav-left-square mhide"></div>
+		<div class="wrapper-nav-left-circle mhide">
+			<img class="mhide" src="/images/gtj2023_nav_circle.png" alt="" />
+		</div>
+		<ul class="nav_menu_list" id="nav_menu_list_pc">
+			<li class="lis">
+				<a class="active" href="/">首页</a>
+			</li>
+			<li class="lis">
+				<a href="https://www.stats.gov.cn/jg/">机构</a>
+			</li>
+			<li class="lis">
+				<a href="javascript:;">新闻</a>
+				<div>
+					<img class="pchide" src="/images/mobile_arrow_icon.png" alt="" />
+					<ul class="menu_list_ul">
+						<li>
+							<a href="https://www.stats.gov.cn/xw/szyw/">
+								时政要闻
+							</a>
+						</li>
+						<li>
+							<a href="https://www.stats.gov.cn/xw/tjxw/">
+								统计新闻
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<li class="lis">
+				<a href="https://www.stats.gov.cn/sj/">数据</a>
+			</li>
+			<li class="lis">
+				<a href="https://www.stats.gov.cn/gk/">公开</a>
+			</li>
+			<li class="lis">
+				<a href="https://www.stats.gov.cn/fw/">服务</a>
+			</li>
+			<li class="lis">
+				<a href="https://www.stats.gov.cn/hd/">互动</a>
+			</li>
+			<li class="lis">
+				<a target="_blank" href="https://www.stats.gov.cn/zs/">知识</a>
+			</li>
+			<li class="lis">
+				<a href="https://www.stats.gov.cn/zt_18555/">专题</a>
+			</li>
+		</ul>
+	</div>
+	<script>
+		$(function(){
+			var url = window.location.href;
+			if (url.indexOf("/jg/") > 0) {
+				$("#nav_menu_list_pc .lis").eq(1).find('a').addClass("active").parent().siblings().find('a').removeClass("active");
+			}
+			if (url.indexOf("/xw/") > 0) {
+				$("#nav_menu_list_pc .lis").eq(2).find('a').addClass("active").parent().siblings().find('a').removeClass("active");
+			}
+			if (url.indexOf("/sj/") > 0) {
+				$("#nav_menu_list_pc .lis").eq(3).find('a').addClass("active").parent().siblings().find('a').removeClass("active");
+			}
+			if (url.indexOf("/gk/") > 0) {
+				$("#nav_menu_list_pc .lis").eq(4).find('a').addClass("active").parent().siblings().find('a').removeClass("active");
+			}
+			if (url.indexOf("/fw/") > 0) {
+				$("#nav_menu_list_pc .lis").eq(5).find('a').addClass("active").parent().siblings().find('a').removeClass("active");
+			}
+			if (url.indexOf("/hd/") > 0) {
+				$("#nav_menu_list_pc .lis").eq(6).find('a').addClass("active").parent().siblings().find('a').removeClass("active");
+			}
+			if (url.indexOf("/zt") > 0) {
+				$("#nav_menu_list_pc .lis").eq(8).find('a').addClass("active").parent().siblings().find('a').removeClass("active");
+			}
+		})
+	</script>
+	<!-- <div class="nav-list"></div> -->
+	<div class="wrapper-nav-right mhide"></div>
+</div>
+    <div class="pcsj-content">
+      <div class="pcsj-part">
+        <div class="pcsj-breadcrum mhide">
+            <span>当前位置 ><a href="../../" title="首页" class="CurrChnlCls">首页</a>&nbsp;&gt;&nbsp;<a href="../" title="数据" class="CurrChnlCls">数据</a>&nbsp;&gt;&nbsp;<a href="./" title="普查数据" class="CurrChnlCls">普查数据</a></span>
+        </div>
+        <div class="pcsj-fg mhide">
+          <img src="../../images/gjt2023_pcsj_bread.png" />
+        </div>
+        <div class="pcsj-title">普查数据</div>
+        <table class="pcsj-table mhide">
+          <tr>
+            <td rowspan="2" class="column first">
+              <a>人口普查</a>
+            </td>
+            
+              <td class="column">
+                <a href="/sj/pcsj/rkpc/7rp/indexch.htm" target="_blank">
+                  第七次人口普查数据
+              </a>
+              </td>
+            
+              <td class="column">
+                <a href="/sj/pcsj/rkpc/d7c/202111/P020211126523667366751.pdf" target="_blank">
+                  第七次人口普查主要数据
+              </a>
+              </td>
+            
+          </tr>
+          <tr>
+            
+              <td class="column">
+                <a href="/sj/pcsj/rkpc/6rp/indexch.htm" target="_blank">
+                  第六次人口普查数据
+              </a>
+              </td>
+            
+              <td class="column">
+                <a href="/sj/pcsj/rkpc/5rp/index.htm" target="_blank">
+                  第五次人口普查数据
+              </a>
+              </td>
+            
+          </tr>
+          <tr>
+            <td rowspan="3" class="column first"><a>经济普查</a></td>
+            
+              <td class="column">
+                <a href="https://www.stats.gov.cn/sj/pcsj/jjpc/5jp/indexch.htm" target="_blank">
+                  第五次经济普查
+              </a>
+              </td>
+            
+              <td class="column">
+                <a href="/sj/pcsj/jjpc/4jp/indexch.htm" target="_blank">
+                  第四次经济普查
+              </a>
+              </td>
+            
+          </tr>
+          <tr>
+            
+              <td class="column">
+                <a href="/sj/pcsj/jjpc/3jp/indexch.htm" target="_blank">
+                  第三次经济普查
+              </a>
+              </td>
+            
+              <td class="column">
+                <a href="/sj/pcsj/jjpc/2jp/indexch.htm" target="_blank">
+                  第二次经济普查
+              </a>
+              </td>
+            
+          </tr>
+      <tr>
+            
+              <td class="column">
+                <a href="/sj/pcsj/jjpc/1jp/indexch.htm" target="_blank">
+                  第一次经济普查
+              </a>
+              </td>
+            
+           <td class="column"> </td>
+          </tr>
+          <tr>
+            <td rowspan="2" class="column first"><a>农业普查</a></td>
+            
+              <td class="column">
+                <a href="./nypc/202302/U020230223531273769774.pdf" target="_blank">
+                  第三次农业普查
+              </a>
+              </td>
+            
+              <td class="column">
+                <a href="./nypc/202302/t20230223_1918380.html" target="_blank">
+                  第二次农业普查
+              </a>
+              </td>
+            
+          </tr>
+          <tr>
+            
+              <td class="column">
+                <a href="/sj/pcsj/nypc/dycnypc/" target="_blank">
+                  第一次农业普查
+              </a>
+              </td>
+            
+            <td class="column"><a></a></td>
+          </tr>
+          <!--<tr>
+            
+            
+          </tr>-->
+          <tr>
+            <td class="column first"><a>R&D资源清查</a></td>
+            
+              <td class="column">
+                <a href="/sj/pcsj/rdzyqc/decrdzyqc/" target="_blank">
+                  第二次R&D资源清查
+              </a>
+              </td>
+            
+            <td class="column"></td>
+          </tr>
+          <tr>
+            <td class="column first"><a>工业普查</a></td>
+            
+              <td class="column">
+                <a href="/sj/pcsj/gypc/dscgypc/" target="_blank">
+                  第三次工业普查
+              </a>
+              </td>
+            
+            <td class="column"></td>
+          </tr>
+          <tr>
+            <td class="column first"><a>三产普查</a></td>
+            
+              <td class="column">
+                <a href="/sj/pcsj/scpc/dycscpc/" target="_blank">
+                  第一次三产普查
+              </a>
+              </td>
+            
+            <td class="column"></td>
+          </tr>
+          <tr>
+            <td class="column first"><a>基本单位普查</a></td>
+            
+              <td class="column">
+                <a href="/sj/pcsj/jbdwpc/decjbdwpcsj/" target="_blank">
+                  第二次基本单位普查
+              </a>
+              </td>
+            
+              <td class="column">
+                <a href="/sj/pcsj/jbdwpc/dycjbdwpc/" target="_blank">
+                  第一次基本单位普查
+              </a>
+              </td>
+            
+          </tr>
+        </table>
+        <table class="pcsj-m-table pchide">
+          <tr>
+            <td class="pcsj-m-column first" rowspan="4"><a>人口普查</a></td>
+            
+              <td class="pcsj-m-column">
+                <a href="/sj/pcsj/rkpc/7rp/indexch.htm" target="_blank">
+                    第七次人口普查数据
+                </a>
+              </td>
+            
+          </tr>
+          
+            <tr>
+              <td class="pcsj-m-column">
+                <a href="/sj/pcsj/rkpc/d7c/202111/P020211126523667366751.pdf" target="_blank">
+                  第七次人口普查主要数据
+              </a>
+              </td>
+            </tr>
+          
+            <tr>
+              <td class="pcsj-m-column">
+                <a href="/sj/pcsj/rkpc/6rp/indexch.htm" target="_blank">
+                  第六次人口普查数据
+              </a>
+              </td>
+            </tr>
+          
+            <tr>
+              <td class="pcsj-m-column">
+                <a href="/sj/pcsj/rkpc/5rp/index.htm" target="_blank">
+                  第五次人口普查数据
+              </a>
+              </td>
+            </tr>
+          
+
+          <tr>
+            <td class="pcsj-m-column first" rowspan="5"><a>经济普查</a></td>
+            
+              <td class="pcsj-m-column">
+                <a href="https://www.stats.gov.cn/sj/pcsj/jjpc/5jp/indexch.htm" target="_blank">
+                    第五次经济普查
+                </a>
+              </td>
+            
+          </tr>
+          
+            <tr>
+              <td class="pcsj-m-column">
+                <a href="/sj/pcsj/jjpc/4jp/indexch.htm" target="_blank">
+                  第四次经济普查
+              </a>
+              </td>
+            </tr>
+          
+            <tr>
+              <td class="pcsj-m-column">
+                <a href="/sj/pcsj/jjpc/3jp/indexch.htm" target="_blank">
+                  第三次经济普查
+              </a>
+              </td>
+            </tr>
+          
+            <tr>
+              <td class="pcsj-m-column">
+                <a href="/sj/pcsj/jjpc/2jp/indexch.htm" target="_blank">
+                  第二次经济普查
+              </a>
+              </td>
+            </tr>
+          
+            <tr>
+              <td class="pcsj-m-column">
+                <a href="/sj/pcsj/jjpc/1jp/indexch.htm" target="_blank">
+                  第一次经济普查
+              </a>
+              </td>
+            </tr>
+          
+
+          <tr>
+            <td class="pcsj-m-column first" rowspan="5"><a>农业普查</a></td>
+            
+              <td class="pcsj-m-column">
+                <a href="./nypc/202302/U020230223531273769774.pdf" target="_blank">
+                    第三次农业普查
+                </a>
+              </td>
+            
+              <td class="pcsj-m-column">
+                <a href="./nypc/202302/t20230223_1918380.html" target="_blank">
+                    第二次农业普查
+                </a>
+              </td>
+            
+          </tr>
+          
+            <tr>
+              <td class="pcsj-m-column">
+                <a href="/sj/pcsj/nypc/dycnypc/" target="_blank">
+                  第一次农业普查
+              </a>
+              </td>
+              <td class="pcsj-m-column"></td>
+            </tr>
+          
+
+          <tr>
+            <td class="pcsj-m-column first"><a>R&D资源清查</a></td>
+            
+              <td class="pcsj-m-column">
+                <a href="./nypc/202302/U020230223531273769774.pdf" target="_blank">
+                    第三次农业普查
+                </a>
+              </td>
+            
+          </tr>
+          <tr>
+            <td class="pcsj-m-column first"><a>工业普查</a></td>
+            
+              <td class="pcsj-m-column">
+                <a href="/sj/pcsj/gypc/dscgypc/" target="_blank">
+                    第三次工业普查
+                </a>
+              </td>
+            
+          </tr>
+          <tr>
+            <td class="pcsj-m-column first"><a>三产普查</a></td>
+            
+              <td class="pcsj-m-column">
+                <a href="/sj/pcsj/scpc/dycscpc/" target="_blank">
+                    第一次三产普查
+                </a>
+              </td>
+            
+          </tr>
+          <tr>
+            <td class="pcsj-m-column first" rowspan="2"><a>基本单位普查</a></td>
+            
+              <td class="pcsj-m-column">
+                <a href="/sj/pcsj/jbdwpc/decjbdwpcsj/" target="_blank">
+                    第二次基本单位普查
+                </a>
+              </td>
+            
+          </tr>
+          <tr>
+            
+              <td class="pcsj-m-column">
+                <a href="/sj/pcsj/jbdwpc/dycjbdwpc/" target="_blank">
+                    第一次基本单位普查
+                </a>
+              </td>
+            
+          </tr>
+        </table>
+        <div class="pcsj-zy">注： “人口普查” 、 “经济普查” 建议使用IE7以上版本普通模式（非“兼容性视图”），或360浏览器极速模式浏览。</div>
+      </div>
+
+      <link href="../../images/gtj2023_index.css" rel="stylesheet" />
+				<link rel="stylesheet" type="text/css" href="../../images/gtj2023_mobile_index.css" media="screen and (max-width:767px) and (orientation:portrait)" />
+				<link rel="stylesheet" media="screen and (min-width:1680px)" href="../../images/gtj2023_index-1600.css" />
+				
+				<div class="wrapper-content">
+				<div class="wrapper-content6">
+					<div class="wrapper-content-title">
+						<a href="../../zt_18555/" target="_blank"> 热点专题 </a>
+					</div>
+					<div class="swiper-container2">
+						<div class="swiper-wrapper">
+							
+								<div class="swiper-slide">
+									<a href="https://www.stats.gov.cn/zt_18555/zthd/lhfw/2026lhzt/index.html" target="_blank" title='2026年全国两会服务'>
+										<img class="pchide" src="../../zt_18555/202603/W020260304319887097021.jpg" alt="" />
+										<img class="mhide pc1200" src="../../zt_18555/202603/W020260304319887097021.jpg" alt="" />
+										<img class="pc_1600" src="../../zt_18555/202603/W020260304319887097021.jpg" alt="" />
+									</a>
+								</div>
+							
+								<div class="swiper-slide">
+									<a href="https://www.stats.gov.cn/zt_18555/zdtjgz/zgnypc/d4cnypc/index.html" target="_blank" title='第四次全国农业普查'>
+										<img class="pchide" src="../../zt_18555/202512/W020251212321059795848.png" alt="" />
+										<img class="mhide pc1200" src="../../zt_18555/202512/W020251212321059795848.png" alt="" />
+										<img class="pc_1600" src="../../zt_18555/202512/W020251212321059795848.png" alt="" />
+									</a>
+								</div>
+							
+								<div class="swiper-slide">
+									<a href="https://www.stats.gov.cn/zt_18555/zthd/sjtjr/tjr16/index.html" target="_blank" title='第十六届中国统计开放日'>
+										<img class="pchide" src="../../zt_18555/202509/W020250918532728851553_ORIGIN.png" alt="" />
+										<img class="mhide pc1200" src="../../zt_18555/202509/W020250918532728851553_ORIGIN.png" alt="" />
+										<img class="pc_1600" src="../../zt_18555/202509/W020250918532728851553_ORIGIN.png" alt="" />
+									</a>
+								</div>
+							
+								<div class="swiper-slide">
+									<a href="https://www.stats.gov.cn/zt_18555/zdtjgz/cydc/2025cydc/" target="_blank" title='2025年全国1%人口抽样调查'>
+										<img class="pchide" src="../../zt_18555/202506/W020250624390347897889_ORIGIN.png" alt="" />
+										<img class="mhide pc1200" src="../../zt_18555/202506/W020250624390347897889_ORIGIN.png" alt="" />
+										<img class="pc_1600" src="../../zt_18555/202506/W020250624390347897889_ORIGIN.png" alt="" />
+									</a>
+								</div>
+							
+								<div class="swiper-slide">
+									<a href="https://www.stats.gov.cn/zt_18555/zthd/lhfw/2025/index.html" target="_blank" title='2025年全国两会服务'>
+										<img class="pchide" src="../../zt_18555/202502/W020250228355104710215.jpg" alt="" />
+										<img class="mhide pc1200" src="../../zt_18555/202502/W020250228355104710215.jpg" alt="" />
+										<img class="pc_1600" src="../../zt_18555/202502/W020250228355104710215.jpg" alt="" />
+									</a>
+								</div>
+							
+								<div class="swiper-slide">
+									<a href="/zt_18555/ztfx/xzg75njjshfzcj/" target="_blank" title='新中国75年经济社会发展成就'>
+										<img class="pchide" src="../../zt_18555/202409/W020240912435242556863.jpg" alt="" />
+										<img class="mhide pc1200" src="../../zt_18555/202409/W020240912435242556863.jpg" alt="" />
+										<img class="pc_1600" src="../../zt_18555/202409/W020240912435242556863.jpg" alt="" />
+									</a>
+								</div>
+							
+								<div class="swiper-slide">
+									<a href="/zt_18555/tjfz/tjfzjs/fzjsdt/" target="_blank" title='统计法制建设'>
+										<img class="pchide" src="../../zt_18555/202406/W020240604627367915264.jpg" alt="" />
+										<img class="mhide pc1200" src="../../zt_18555/202406/W020240604627367915264.jpg" alt="" />
+										<img class="pc_1600" src="../../zt_18555/202406/W020240604627367915264.jpg" alt="" />
+									</a>
+								</div>
+							
+								<div class="swiper-slide">
+									<a href="/zt_18555/tjfz/tjdc/" target="_blank" title='统计督察'>
+										<img class="pchide" src="../../zt_18555/202301/W020230220400556845549.jpg" alt="" />
+										<img class="mhide pc1200" src="../../zt_18555/202301/W020230220400556845549.jpg" alt="" />
+										<img class="pc_1600" src="../../zt_18555/202301/W020230220400556845549.jpg" alt="" />
+									</a>
+								</div>
+							
+								<div class="swiper-slide">
+									<a href="https://tousu.www.gov.cn/dc/2024yxyshjjs/index.htm" target="_blank" title='国务院互联网+督查'>
+										<img class="pchide" src="../../zt_18555/202310/W020231025349930025682.jpg" alt="" />
+										<img class="mhide pc1200" src="../../zt_18555/202310/W020231025349930025682.jpg" alt="" />
+										<img class="pc_1600" src="../../zt_18555/202310/W020231025349930025682.jpg" alt="" />
+									</a>
+								</div>
+							
+						</div>
+					</div>
+					<div class="swiper-button-next"></div>
+					<div class="swiper-button-prev"></div>
+				</div>
+				</div>
+				<script>
+					$(function(){
+						var slide_num = IsPC() ? $(".wrapper-content6").width() > 1300 ? 6 :5 :2.5;
+						var swiper_rdzts = new Swiper(".swiper-container2", {
+							loop: true,
+							loopedSlides: 8,
+							slidesPerView: slide_num,
+							spaceBetween: 22,
+							prevButton: ".wrapper-content6 .swiper-button-prev",
+							nextButton: ".wrapper-content6 .swiper-button-next",
+							onAfterResize: function(swiper){
+								slide_num = IsPC() ? $(".wrapper-content6").width() > 1300 ? 6 :5 :2.5;
+								this.slidesPerView = slide_num;
+							}
+						});
+						
+						window.onresize = function(){
+							// console.log('尺寸发生变化了');
+							swiper_rdzts.update();
+							swiper_rdzts.onResize();
+						}
+					})
+				</script>
+
+    </div>
+<!-- 相关链接点击显示隐藏修改 -->
+<!-- 2024年6月7日切换上线 -->
+<style>
+	.select-item-list {
+		bottom: 67px;
+	}
+</style>
+<script>
+	$(function(){
+		$('.select-list-item-w').hover(function(){},function(){
+			index = undefined;
+			$('.select-item-list-w .select-item-list').slideUp();
+			// $('.select-item-list ul').slideUp();
+			$('.select-list ul li').removeClass('select-active');
+			$('.select-list-item-w .select-list-item .select-list ul li div').removeClass('select-active-icon');
+		})
+	})
+</script>
+<div class="footer">
+	<div class="footer-select-list">
+		<div class="wrapper-content select-list-item-w">
+			<div class="select-list-item">
+				<span>相关链接</span>
+				<div class="select-list mhide">
+					<ul>
+						<li>
+							<div>
+								政府机构网站
+							</div>
+						</li>
+						<li>
+							<div>
+								地方政府网站
+							</div>
+						</li>
+						<li>
+							<div>
+								地方统计网站
+							</div>
+						</li>
+						<li>
+							<div>
+								社会团体网站
+							</div>
+						</li>
+						<li>
+							<div>
+								国际组织网站
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="select-list1 pchide">
+					<ul>
+						<li>
+							<div>
+								政府机构网站
+							</div>
+						</li>
+						<li>
+							<div>
+								地方政府网站
+							</div>
+						</li>
+						<li>
+							<div>
+								地方统计网站
+							</div>
+						</li>
+						<li>
+							<div>
+								社会团体网站
+							</div>
+						</li>
+						<li>
+							<div>
+								国际组织网站
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="footer-rel mhide select-item-list-w">
+				<div class="select-item-list">
+					<ul style="display: block;">
+						
+							<li>
+								<a href="http://www.gov.cn/" target="_blank">
+									中央人民政府门户网站
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.fmprc.gov.cn/" target="_blank">
+									外交部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.mod.gov.cn/" target="_blank">
+									国防部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.ndrc.gov.cn/" target="_blank">
+									国家发展改革委
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.moe.gov.cn/" target="_blank">
+									教育部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.most.gov.cn/" target="_blank">
+									科技部
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://www.miit.gov.cn/" target="_blank">
+									工业和信息化部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.seac.gov.cn/" target="_blank">
+									国家民委
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.mps.gov.cn/n16/index.html" target="_blank">
+									公安部
+								</a>
+							</li>
+						
+							<li>
+								<a href="#" target="_blank">
+									国家安全部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.mca.gov.cn/" target="_blank">
+									民政部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.moj.gov.cn/" target="_blank">
+									司法部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.mof.gov.cn/" target="_blank">
+									财政部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.mohrss.gov.cn/" target="_blank">
+									人力资源社会保障部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.mnr.gov.cn/" target="_blank">
+									自然资源部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.mee.gov.cn/" target="_blank">
+									生态环境部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.mohurd.gov.cn/" target="_blank">
+									住房城乡建设部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.mot.gov.cn/" target="_blank">
+									交通运输部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.mwr.gov.cn/" target="_blank">
+									水利部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.moa.gov.cn/" target="_blank">
+									农业农村部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.mofcom.gov.cn/" target="_blank">
+									商务部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.mct.gov.cn/" target="_blank">
+									文化和旅游部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.nhc.gov.cn/" target="_blank">
+									国家卫生健康委
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.mva.gov.cn/" target="_blank">
+									退役军人事务部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.mem.gov.cn/" target="_blank">
+									应急管理部
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.pbc.gov.cn/" target="_blank">
+									中国人民银行
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.audit.gov.cn/" target="_blank">
+									审计署
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.sasac.gov.cn/" target="_blank">
+									国务院国资委
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.customs.gov.cn/" target="_blank">
+									海关总署
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.chinatax.gov.cn/" target="_blank">
+									税务总局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.samr.gov.cn/" target="_blank">
+									市场监管总局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.cbirc.gov.cn/" target="_blank">
+									金融监管总局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.csrc.gov.cn/pub/newsite/" target="_blank">
+									中国证监会
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.nrta.gov.cn/" target="_blank">
+									广电总局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.sport.gov.cn/" target="_blank">
+									体育总局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.gjxfj.gov.cn/" target="_blank">
+									国家信访局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.stats.gov.cn/" target="_blank">
+									国家统计局
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://www.cnipa.gov.cn/" target="_blank">
+									国家知识产权局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.cidca.gov.cn/" target="_blank">
+									国家国际发展合作署
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.nhsa.gov.cn/" target="_blank">
+									国家医保局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.counsellor.gov.cn/" target="_blank">
+									国务院参事室
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.ggj.gov.cn/" target="_blank">
+									国管局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.gov.cn/guoqing/2005-12/26/content_2652073.htm" target="_blank">
+									国务院研究室
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://www.gqb.gov.cn/" target="_blank">
+									国务院侨办
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.hmo.gov.cn/" target="_blank">
+									国务院港澳办
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.gwytb.gov.cn/" target="_blank">
+									国务院台办
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.cac.gov.cn/" target="_blank">
+									国家网信办
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.scio.gov.cn/" target="_blank">
+									国务院新闻办
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://203.192.6.89/xhs/" target="_blank">
+									新华社
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.cas.cn/" target="_blank">
+									中国科学院
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.cssn.cn/" target="_blank">
+									中国社科院
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.cae.cn/cae/html/main/index.html" target="_blank">
+									中国工程院
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.drc.gov.cn/" target="_blank">
+									国务院发展研究中心
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.cnr.cn/" target="_blank">
+									中央广电总台
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.cma.gov.cn/" target="_blank">
+									中国气象局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.lswz.gov.cn/" target="_blank">
+									国家粮食和物资储备局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.nea.gov.cn/" target="_blank">
+									国家能源局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.sastind.gov.cn/" target="_blank">
+									国家国防科工局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.tobacco.gov.cn/gjyc/index.shtml" target="_blank">
+									国家烟草局
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://www.nia.gov.cn/" target="_blank">
+									国家移民局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.forestry.gov.cn/" target="_blank">
+									国家林草局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.nra.gov.cn/" target="_blank">
+									国家铁路局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.caac.gov.cn/" target="_blank">
+									中国民航局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.spb.gov.cn/" target="_blank">
+									国家邮政局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.ncha.gov.cn/" target="_blank">
+									国家文物局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.natcm.gov.cn/" target="_blank">
+									国家中医药局
+								</a>
+							</li>
+						
+							<li>
+								<a href="#" target="_blank">
+									国家疾控局
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://www.chinamine-safety.gov.cn/?ivk_sa=1024320u" target="_blank">
+									国家矿山安监局
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://www.119.gov.cn/" target="_blank">
+									国家消防救援局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.safe.gov.cn/" target="_blank">
+									国家外汇局
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://www.nmpa.gov.cn/" target="_blank">
+									国家药监局
+								</a>
+							</li>
+						
+					</ul>
+				</div>
+				<div class="select-item-list">
+					<ul style="display: block;">
+						
+							<li>
+								<a href="http://www.beijing.gov.cn/" target="_blank">
+									北京
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.tj.gov.cn/" target="_blank">
+									天津
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.hebei.gov.cn/" target="_blank">
+									河北
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.shanxi.gov.cn/" target="_blank">
+									山西
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.nmg.gov.cn" target="_blank">
+									内蒙古
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.ln.gov.cn/" target="_blank">
+									辽宁
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.jl.gov.cn/" target="_blank">
+									吉林
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.hlj.gov.cn/" target="_blank">
+									黑龙江
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.shanghai.gov.cn/" target="_blank">
+									上海
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.jiangsu.gov.cn/" target="_blank">
+									江苏
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.zj.gov.cn/" target="_blank">
+									浙江
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.ah.gov.cn/" target="_blank">
+									安徽
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.fujian.gov.cn/" target="_blank">
+									福建
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.jiangxi.gov.cn/" target="_blank">
+									江西
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.shandong.gov.cn/" target="_blank">
+									山东
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.henan.gov.cn/" target="_blank">
+									河南
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.hubei.gov.cn/" target="_blank">
+									湖北
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.hunan.gov.cn/" target="_blank">
+									湖南
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.gd.gov.cn/" target="_blank">
+									广东
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.gxzf.gov.cn/" target="_blank">
+									广西
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.hainan.gov.cn/" target="_blank">
+									海南
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.cq.gov.cn/" target="_blank">
+									重庆
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.sc.gov.cn/" target="_blank">
+									四川
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.guizhou.gov.cn/" target="_blank">
+									贵州
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.yn.gov.cn/" target="_blank">
+									云南
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.xizang.gov.cn/" target="_blank">
+									西藏
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.shaanxi.gov.cn/" target="_blank">
+									陕西
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.gansu.gov.cn/" target="_blank">
+									甘肃
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.qinghai.gov.cn/" target="_blank">
+									青海
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.nx.gov.cn/" target="_blank">
+									宁夏
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.xinjiang.gov.cn/" target="_blank">
+									新疆
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.xjbt.gov.cn/" target="_blank">
+									兵团
+								</a>
+							</li>
+						
+					</ul>
+				</div>
+				<div class="select-item-list">
+					<ul style="display: block;">
+						
+							<li>
+								<a href="https://tjj.beijing.gov.cn/" target="_blank">
+									北京局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://stats.tj.gov.cn" target="_blank">
+									天津局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.hebei.gov.cn/" target="_blank">
+									河北局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.shanxi.gov.cn/" target="_blank">
+									山西局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tj.nmg.gov.cn/" target="_blank">
+									内蒙古局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.ln.gov.cn/" target="_blank">
+									辽宁局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.jl.gov.cn/" target="_blank">
+									吉林局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.hlj.gov.cn/" target="_blank">
+									黑龙江局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.sh.gov.cn/" target="_blank">
+									上海局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tj.jiangsu.gov.cn/index.html" target="_blank">
+									江苏局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.zj.gov.cn/" target="_blank">
+									浙江局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.ah.gov.cn/" target="_blank">
+									安徽局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.fujian.gov.cn/" target="_blank">
+									福建局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.jiangxi.gov.cn/" target="_blank">
+									江西局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.shandong.gov.cn/" target="_blank">
+									山东局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.henan.gov.cn/" target="_blank">
+									河南局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.hubei.gov.cn" target="_blank">
+									湖北局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.hunan.gov.cn/" target="_blank">
+									湖南局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://stats.gd.gov.cn/" target="_blank">
+									广东局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.gxzf.gov.cn/" target="_blank">
+									广西局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://stats.hainan.gov.cn" target="_blank">
+									海南局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.cq.gov.cn/" target="_blank">
+									重庆局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.sc.gov.cn/" target="_blank">
+									四川局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://stjj.guizhou.gov.cn/" target="_blank">
+									贵州局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://stats.yn.gov.cn/" target="_blank">
+									云南局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.xizang.gov.cn/" target="_blank">
+									西藏局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.shaanxi.gov.cn/" target="_blank">
+									陕西局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.gansu.gov.cn/" target="_blank">
+									甘肃局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.qinghai.gov.cn/" target="_blank">
+									青海局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tj.nx.gov.cn/" target="_blank">
+									宁夏局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.xinjiang.gov.cn/" target="_blank">
+									新疆局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjj.xjbt.gov.cn/" target="_blank">
+									兵团局
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://tjzd.stats.gov.cn/" target="_blank">
+									天津总队
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://sxzd.stats.gov.cn/" target="_blank">
+									山西总队
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://jszd.stats.gov.cn/" target="_blank">
+									江苏总队
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://zjzd.stats.gov.cn/" target="_blank">
+									浙江总队
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://ahzd.stats.gov.cn" target="_blank">
+									安徽总队
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://hazd.stats.gov.cn/" target="_blank">
+									河南总队
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://hnzd.stats.gov.cn/" target="_blank">
+									湖南总队
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://gdzd.stats.gov.cn/" target="_blank">
+									广东总队
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://ynzd.stats.gov.cn/" target="_blank">
+									云南总队
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://snzd.stats.gov.cn" target="_blank">
+									陕西总队
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://xjzd.stats.gov.cn/" target="_blank">
+									新疆总队
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://dczd.xjbt.gov.cn/" target="_blank">
+									兵团总队
+								</a>
+							</li>
+						
+					</ul>
+				</div>
+				<div class="select-item-list">
+					<ul style="display: block;">
+						
+							<li>
+								<a href="http://www.nssc.stats.gov.cn" target="_blank">
+									中国统计学会
+								</a>
+							</li>
+						
+					</ul>
+				</div>
+				<div class="select-item-list">
+					<ul style="display: block;">
+						
+							<li>
+								<a href="https://www.un.org/zh/" target="_blank">
+									联合国
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://www.un.org/zh/desa" target="_blank">
+									联合国经济和社会事务部
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://unstats.un.org/UNSDWebsite/" target="_blank">
+									联合国统计司
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.wto.org/" target="_blank">
+									世贸组织
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.fao.org/" target="_blank">
+									粮农组织
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.ilo.org/global/lang--en/index.htm" target="_blank">
+									劳工组织
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.imf.org/external/chinese/index.htm" target="_blank">
+									基金组织
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://www.unido.org/" target="_blank">
+									工发组织
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://en.unesco.org/" target="_blank">
+									教科文组织
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://www.who.int/" target="_blank">
+									世卫组织
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://www.worldbank.org/en/home" target="_blank">
+									世界银行
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://europa.eu/index_en.htm" target="_blank">
+									欧盟
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://www.oecd.org/" target="_blank">
+									经合组织
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.undp.org/content/undp/en/home.html" target="_blank">
+									联合国开发署
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.unfpa.org/public/" target="_blank">
+									联合国人口基金
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://www.unenvironment.org/" target="_blank">
+									联合国环境署
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://www.unicef.org/" target="_blank">
+									联合国儿童基金
+								</a>
+							</li>
+						
+							<li>
+								<a href="http://www.wfp.org/" target="_blank">
+									世界粮食计划署
+								</a>
+							</li>
+						
+							<li>
+								<a href="https://www.stats.gov.cn/xglj/gjzz/202302/t20230219_1913504.html" target="_blank">
+									国际组织网站
+								</a>
+							</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer_xh">
+			<!-- <a target="_blank" href="https://www.stats.gov.cn/zt_18555/xhwz/zgtjxh/">
+				中国统计学会
+			</a> -->
+			<!--<a target="_blank" href="https://www.stats.gov.cn/zt_18555/xhwz/hsyjh1/">
+				中国国民经济核算研究会
+			</a>
+			<a target="_blank" href="https://www.stats.gov.cn/zt_18555/xhwz/tjjyxh/">
+				中国统计教育学会
+			</a>-->
+		</div>
+	</div>
+	<div class="site-address">
+		<div class="ddjg">
+			<!-- <img src="/images/gtj2023_gtj2023_002.png" alt="" /> -->
+			<script type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript src='https://dcs.conac.cn/js/33/000/0000/60409131/CA330000000604091310003.js' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+		<div class="address">
+			<div>
+				<p>版权所有: 国家统计局&emsp;&emsp;<a href="/wzgl/202302/t20230217_1912858.html" target="_blank">联系我们</a>&emsp;&emsp;<a href="/wzgl/202302/t20230217_1912857.html" target="_blank">服务条款</a>&emsp;&emsp;<a href="/wzgl/wzdt/" target="_blank">网站地图</a></p>
+				<p>地址: 北京市西城区月坛南街57号 (100826)</p>
+				<p>
+					<span class="bbh"> <a href="https://beian.miit.gov.cn" target="_blank">京ICP备05034670号-2</a> </span>
+					<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11040102700142">
+					<img class="gh" src="/images/gh.png" alt="" />
+					<span> 京公网安备 11040102700142号 </span>
+					</a>
+				</p>
+				<p>
+					<span class="bsm">网站标识码bm36000002</span>
+					<!--<span>联系方式: 010-68783311</span>-->
+				</p>
+			</div>
+		</div>
+		<div class="zfzc">
+			<!-- <img src="/images/gtj2023_zc.png" alt="" /> -->
+			<!--<script id="_jiucuo_" sitecode='bm36000002' src='../../images/jiucuo.js'></script>-->
+                         <script id="_jiucuo_" sitecode='bm36000002' src='/images/jiucuo.js'></script>
+		</div>
+	</div>
+</div>
+
+<div class="listbox pchide" id="newgwybmbox">
+	<div class="select_con" style="display: none;">
+		
+			<div class="select_con1">
+				<a href="http://www.gov.cn/" target="_blank">
+					中央人民政府门户网站
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.fmprc.gov.cn/" target="_blank">
+					外交部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.mod.gov.cn/" target="_blank">
+					国防部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.ndrc.gov.cn/" target="_blank">
+					国家发展改革委
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.moe.gov.cn/" target="_blank">
+					教育部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.most.gov.cn/" target="_blank">
+					科技部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://www.miit.gov.cn/" target="_blank">
+					工业和信息化部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.seac.gov.cn/" target="_blank">
+					国家民委
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.mps.gov.cn/n16/index.html" target="_blank">
+					公安部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="#" target="_blank">
+					国家安全部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.mca.gov.cn/" target="_blank">
+					民政部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.moj.gov.cn/" target="_blank">
+					司法部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.mof.gov.cn/" target="_blank">
+					财政部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.mohrss.gov.cn/" target="_blank">
+					人力资源社会保障部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.mnr.gov.cn/" target="_blank">
+					自然资源部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.mee.gov.cn/" target="_blank">
+					生态环境部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.mohurd.gov.cn/" target="_blank">
+					住房城乡建设部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.mot.gov.cn/" target="_blank">
+					交通运输部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.mwr.gov.cn/" target="_blank">
+					水利部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.moa.gov.cn/" target="_blank">
+					农业农村部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.mofcom.gov.cn/" target="_blank">
+					商务部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.mct.gov.cn/" target="_blank">
+					文化和旅游部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.nhc.gov.cn/" target="_blank">
+					国家卫生健康委
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.mva.gov.cn/" target="_blank">
+					退役军人事务部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.mem.gov.cn/" target="_blank">
+					应急管理部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.pbc.gov.cn/" target="_blank">
+					中国人民银行
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.audit.gov.cn/" target="_blank">
+					审计署
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.sasac.gov.cn/" target="_blank">
+					国务院国资委
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.customs.gov.cn/" target="_blank">
+					海关总署
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.chinatax.gov.cn/" target="_blank">
+					税务总局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.samr.gov.cn/" target="_blank">
+					市场监管总局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.cbirc.gov.cn/" target="_blank">
+					金融监管总局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.csrc.gov.cn/pub/newsite/" target="_blank">
+					中国证监会
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.nrta.gov.cn/" target="_blank">
+					广电总局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.sport.gov.cn/" target="_blank">
+					体育总局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.gjxfj.gov.cn/" target="_blank">
+					国家信访局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.stats.gov.cn/" target="_blank">
+					国家统计局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://www.cnipa.gov.cn/" target="_blank">
+					国家知识产权局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.cidca.gov.cn/" target="_blank">
+					国家国际发展合作署
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.nhsa.gov.cn/" target="_blank">
+					国家医保局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.counsellor.gov.cn/" target="_blank">
+					国务院参事室
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.ggj.gov.cn/" target="_blank">
+					国管局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.gov.cn/guoqing/2005-12/26/content_2652073.htm" target="_blank">
+					国务院研究室
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://www.gqb.gov.cn/" target="_blank">
+					国务院侨办
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.hmo.gov.cn/" target="_blank">
+					国务院港澳办
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.gwytb.gov.cn/" target="_blank">
+					国务院台办
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.cac.gov.cn/" target="_blank">
+					国家网信办
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.scio.gov.cn/" target="_blank">
+					国务院新闻办
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://203.192.6.89/xhs/" target="_blank">
+					新华社
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.cas.cn/" target="_blank">
+					中国科学院
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.cssn.cn/" target="_blank">
+					中国社科院
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.cae.cn/cae/html/main/index.html" target="_blank">
+					中国工程院
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.drc.gov.cn/" target="_blank">
+					国务院发展研究中心
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.cnr.cn/" target="_blank">
+					中央广电总台
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.cma.gov.cn/" target="_blank">
+					中国气象局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.lswz.gov.cn/" target="_blank">
+					国家粮食和物资储备局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.nea.gov.cn/" target="_blank">
+					国家能源局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.sastind.gov.cn/" target="_blank">
+					国家国防科工局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.tobacco.gov.cn/gjyc/index.shtml" target="_blank">
+					国家烟草局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://www.nia.gov.cn/" target="_blank">
+					国家移民局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.forestry.gov.cn/" target="_blank">
+					国家林草局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.nra.gov.cn/" target="_blank">
+					国家铁路局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.caac.gov.cn/" target="_blank">
+					中国民航局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.spb.gov.cn/" target="_blank">
+					国家邮政局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.ncha.gov.cn/" target="_blank">
+					国家文物局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.natcm.gov.cn/" target="_blank">
+					国家中医药局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="#" target="_blank">
+					国家疾控局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://www.chinamine-safety.gov.cn/?ivk_sa=1024320u" target="_blank">
+					国家矿山安监局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://www.119.gov.cn/" target="_blank">
+					国家消防救援局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.safe.gov.cn/" target="_blank">
+					国家外汇局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://www.nmpa.gov.cn/" target="_blank">
+					国家药监局
+				</a>
+			</div>
+		
+	</div>
+	<div class="select_con" style="display: none;">
+		
+			<div class="select_con1">
+				<a href="http://www.beijing.gov.cn/" target="_blank">
+					北京
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.tj.gov.cn/" target="_blank">
+					天津
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.hebei.gov.cn/" target="_blank">
+					河北
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.shanxi.gov.cn/" target="_blank">
+					山西
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.nmg.gov.cn" target="_blank">
+					内蒙古
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.ln.gov.cn/" target="_blank">
+					辽宁
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.jl.gov.cn/" target="_blank">
+					吉林
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.hlj.gov.cn/" target="_blank">
+					黑龙江
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.shanghai.gov.cn/" target="_blank">
+					上海
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.jiangsu.gov.cn/" target="_blank">
+					江苏
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.zj.gov.cn/" target="_blank">
+					浙江
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.ah.gov.cn/" target="_blank">
+					安徽
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.fujian.gov.cn/" target="_blank">
+					福建
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.jiangxi.gov.cn/" target="_blank">
+					江西
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.shandong.gov.cn/" target="_blank">
+					山东
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.henan.gov.cn/" target="_blank">
+					河南
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.hubei.gov.cn/" target="_blank">
+					湖北
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.hunan.gov.cn/" target="_blank">
+					湖南
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.gd.gov.cn/" target="_blank">
+					广东
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.gxzf.gov.cn/" target="_blank">
+					广西
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.hainan.gov.cn/" target="_blank">
+					海南
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.cq.gov.cn/" target="_blank">
+					重庆
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.sc.gov.cn/" target="_blank">
+					四川
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.guizhou.gov.cn/" target="_blank">
+					贵州
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.yn.gov.cn/" target="_blank">
+					云南
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.xizang.gov.cn/" target="_blank">
+					西藏
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.shaanxi.gov.cn/" target="_blank">
+					陕西
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.gansu.gov.cn/" target="_blank">
+					甘肃
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.qinghai.gov.cn/" target="_blank">
+					青海
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.nx.gov.cn/" target="_blank">
+					宁夏
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.xinjiang.gov.cn/" target="_blank">
+					新疆
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.xjbt.gov.cn/" target="_blank">
+					兵团
+				</a>
+			</div>
+		
+	</div>
+	<div class="select_con" style="display: none;">
+		
+			<div class="select_con1">
+				<a href="https://tjj.beijing.gov.cn/" target="_blank">
+					北京局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://stats.tj.gov.cn" target="_blank">
+					天津局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.hebei.gov.cn/" target="_blank">
+					河北局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.shanxi.gov.cn/" target="_blank">
+					山西局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tj.nmg.gov.cn/" target="_blank">
+					内蒙古局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.ln.gov.cn/" target="_blank">
+					辽宁局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.jl.gov.cn/" target="_blank">
+					吉林局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.hlj.gov.cn/" target="_blank">
+					黑龙江局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.sh.gov.cn/" target="_blank">
+					上海局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tj.jiangsu.gov.cn/index.html" target="_blank">
+					江苏局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.zj.gov.cn/" target="_blank">
+					浙江局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.ah.gov.cn/" target="_blank">
+					安徽局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.fujian.gov.cn/" target="_blank">
+					福建局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.jiangxi.gov.cn/" target="_blank">
+					江西局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.shandong.gov.cn/" target="_blank">
+					山东局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.henan.gov.cn/" target="_blank">
+					河南局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.hubei.gov.cn" target="_blank">
+					湖北局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.hunan.gov.cn/" target="_blank">
+					湖南局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://stats.gd.gov.cn/" target="_blank">
+					广东局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.gxzf.gov.cn/" target="_blank">
+					广西局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://stats.hainan.gov.cn" target="_blank">
+					海南局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.cq.gov.cn/" target="_blank">
+					重庆局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.sc.gov.cn/" target="_blank">
+					四川局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://stjj.guizhou.gov.cn/" target="_blank">
+					贵州局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://stats.yn.gov.cn/" target="_blank">
+					云南局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.xizang.gov.cn/" target="_blank">
+					西藏局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.shaanxi.gov.cn/" target="_blank">
+					陕西局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.gansu.gov.cn/" target="_blank">
+					甘肃局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.qinghai.gov.cn/" target="_blank">
+					青海局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tj.nx.gov.cn/" target="_blank">
+					宁夏局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.xinjiang.gov.cn/" target="_blank">
+					新疆局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjj.xjbt.gov.cn/" target="_blank">
+					兵团局
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://tjzd.stats.gov.cn/" target="_blank">
+					天津总队
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://sxzd.stats.gov.cn/" target="_blank">
+					山西总队
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://jszd.stats.gov.cn/" target="_blank">
+					江苏总队
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://zjzd.stats.gov.cn/" target="_blank">
+					浙江总队
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://ahzd.stats.gov.cn" target="_blank">
+					安徽总队
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://hazd.stats.gov.cn/" target="_blank">
+					河南总队
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://hnzd.stats.gov.cn/" target="_blank">
+					湖南总队
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://gdzd.stats.gov.cn/" target="_blank">
+					广东总队
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://ynzd.stats.gov.cn/" target="_blank">
+					云南总队
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://snzd.stats.gov.cn" target="_blank">
+					陕西总队
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://xjzd.stats.gov.cn/" target="_blank">
+					新疆总队
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://dczd.xjbt.gov.cn/" target="_blank">
+					兵团总队
+				</a>
+			</div>
+		
+	</div>
+	<div class="select_con" style="display: none;">
+		
+			<div class="select_con1">
+				<a href="http://www.nssc.stats.gov.cn" target="_blank">
+					中国统计学会
+				</a>
+			</div>
+		
+	</div>
+	<div class="select_con" style="display: none;">
+		
+			<div class="select_con1">
+				<a href="https://www.un.org/zh/" target="_blank">
+					联合国
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://www.un.org/zh/desa" target="_blank">
+					联合国经济和社会事务部
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://unstats.un.org/UNSDWebsite/" target="_blank">
+					联合国统计司
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.wto.org/" target="_blank">
+					世贸组织
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.fao.org/" target="_blank">
+					粮农组织
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.ilo.org/global/lang--en/index.htm" target="_blank">
+					劳工组织
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.imf.org/external/chinese/index.htm" target="_blank">
+					基金组织
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://www.unido.org/" target="_blank">
+					工发组织
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://en.unesco.org/" target="_blank">
+					教科文组织
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://www.who.int/" target="_blank">
+					世卫组织
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://www.worldbank.org/en/home" target="_blank">
+					世界银行
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://europa.eu/index_en.htm" target="_blank">
+					欧盟
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://www.oecd.org/" target="_blank">
+					经合组织
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.undp.org/content/undp/en/home.html" target="_blank">
+					联合国开发署
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.unfpa.org/public/" target="_blank">
+					联合国人口基金
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://www.unenvironment.org/" target="_blank">
+					联合国环境署
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://www.unicef.org/" target="_blank">
+					联合国儿童基金
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="http://www.wfp.org/" target="_blank">
+					世界粮食计划署
+				</a>
+			</div>
+		
+			<div class="select_con1">
+				<a href="https://www.stats.gov.cn/xglj/gjzz/202302/t20230219_1913504.html" target="_blank">
+					国际组织网站
+				</a>
+			</div>
+		
+	</div>
+</div>
+<script src="/images/esdToolsInit.js" type="text/javascript"></script>
+<script id="_trs_ta_js" src="//ta.trs.cn/c/js/ta.js?mpid=6267" async="async" defer="defer"></script>
+    <script src="../../images/gtj2023_publish.js"></script>
+    <script src="../../images/gtj2023_swiper-bundle.min.js"></script>
+    <script>
+      // var mySwiper = new Swiper('.pcsj-swiper', {
+      //   autoplay: false,
+      //   loop: true,
+      //   speed: 1000,
+      //   slidesPerView: 5,
+      //   prevButton: '.next',
+      //   nextButton: '.prev',
+      // })
+      // mySwiper.onResize()
+    </script>
+  </div>
+  <script>
+
+  </script>
+</body>
+
+</html>
