@@ -33,6 +33,17 @@
     "supports_detail_pages": true
   },
   {
+    "platform": "51job_campus",
+    "name": "前程无忧校园招聘专题页",
+    "kind": "job_board",
+    "priority": "high",
+    "entry_url": "https://campus.51job.com/",
+    "notes": "优先抓取前程无忧官方校招专题页；当前已支持 coapi 动态职位页、job.js 内嵌职位页和静态公告/折叠职位页三类模板。",
+    "supports_city": true,
+    "supports_keyword": false,
+    "supports_detail_pages": true
+  },
+  {
     "platform": "zhaopin_detail",
     "name": "智联招聘职位详情页",
     "kind": "job_board",

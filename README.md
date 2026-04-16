@@ -7,6 +7,7 @@
 - 主体可分析 JD 数据：`data/processed/ncss/ncss_jobs_all_areas_clean.csv`，当前快照为 `30985` 条清洗后职位
 - 全国职位覆盖底表：`data/processed/ncss/ncss_listings_all_areas_flat.csv`，覆盖 `41407` 个唯一职位
 - 全量详情解析原始表：`data/raw/ncss/records/ncss_jobs_all_areas_raw.jsonl`，当前为 `41400` 条有效详情
+- 51job 校招专题页验证样本：`data/processed/51job/51job_campus_jobs_clean.csv`，当前快照为 `245` 条带真实 JD 的清洗后职位
 - 最终核验与交付说明：`docs/NCSS全量数据核验与交付说明-2026-04-16.md`
 
 ## 项目结构
@@ -17,12 +18,14 @@
 │   ├── README.md
 │   ├── input/
 │   │   ├── README.md
+│   │   ├── 51job/
 │   │   ├── mohrss/
 │   │   ├── ncss/
 │   │   ├── sources/
 │   │   └── zhaopin/
 │   ├── raw/
 │   │   ├── README.md
+│   │   ├── 51job/
 │   │   ├── clds/
 │   │   ├── mohrss/
 │   │   ├── ncss/
@@ -31,11 +34,14 @@
 │   │   └── zhaopin/
 │   └── processed/
 │       ├── README.md
+│       ├── 51job/
 │       └── ncss/
 ├── docs/
 ├── papers/
 │   └── reference_library/
 ├── src/
+│   └── platforms/
+│       └── job51/
 ├── requirements.txt
 └── README.md
 ```
@@ -45,7 +51,7 @@
 - `data/`：项目数据区，按 `input -> raw -> processed` 分层，并在每层内部按站点组织
 - `docs/`：研究过程文档、交付核验说明、方法笔记，不再存放论文 PDF
 - `papers/`：参考论文原文、论文下载记录和分类文献库
-- `src/`：数据获取、解析、清洗相关脚本
+- `src/`：数据获取、解析、清洗相关脚本；其中新的站点逻辑放到 `src/platforms/`
 - `requirements.txt`：项目 Python 依赖
 
 ## 子目录索引

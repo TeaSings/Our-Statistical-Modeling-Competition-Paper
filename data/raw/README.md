@@ -4,6 +4,7 @@
 
 ## 子目录
 
+- `51job/`：前程无忧校招专题页的原始记录、专题页 HTML 和 manifest
 - `ncss/`：NCSS 列表原始记录、详情页 HTML、抓取 manifest
 - `mohrss/`：中国公共招聘网相关 HTML 快照
 - `zhaopin/`：智联公开详情页快照
@@ -28,6 +29,9 @@
 
 ## 当前主线文件
 
+- `51job/records/51job_campus_jobs_raw.jsonl`：51job 校招专题页原始职位记录，当前为 `249` 条
+- `51job/manifests/51job_campus_seed_manifest.jsonl`：51job 专题页处理 manifest
+- `51job/html/pages/`：51job 专题页 HTML 快照
 - `ncss/records/ncss_listings_all_areas_raw.jsonl`：NCSS 全地区列表原始记录
 - `ncss/manifests/ncss_list_query_progress_all_areas.jsonl`：NCSS 全地区列表抓取进度日志
 - `ncss/manifests/ncss_detail_manifest_all_areas.jsonl`：NCSS 全地区详情抓取主 manifest，当前为 `41407` 行

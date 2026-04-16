@@ -1,6 +1,9 @@
 # src 说明
 
-这个目录存放项目脚本，当前默认围绕 `NCSS` 主线组织。
+这个目录存放项目脚本。当前保留两种组织方式：
+
+- 老的平铺脚本：仍以 `NCSS` 主线为主，方便兼容现有命令
+- 新的结构化脚本：放到 `src/platforms/` 下，按站点拆分
 
 ## 主流程脚本
 
@@ -14,6 +17,28 @@
 | `clean_jobs.py` | 清洗、标准化、去重并输出分析用 CSV |
 | `watch_ncss_progress.py` | 实时显示 NCSS 全量抓取/解析进度、分片速度和 ETA |
 | `rebuild_local_manifest.py` | 当 manifest 中断或跨机器失效时，根据种子和本地 HTML 重建可用 manifest |
+
+## 结构化站点目录
+
+| 目录 | 作用 |
+| --- | --- |
+| `platforms/job51/` | 前程无忧校招专题页抓取逻辑，已支持 `coapi`、内嵌 `job.js` 和静态公告页 |
+
+前程无忧当前推荐命令：
+
+```bash
+python src/platforms/job51/fetch_campus_jobs.py --workers 12
+```
+
+```bash
+python src/clean_jobs.py ^
+  --input data/raw/51job/records/51job_campus_jobs_raw.jsonl ^
+  --output data/processed/51job/51job_campus_jobs_clean.csv
+```
+
+```bash
+python src/platforms/job51/watch_51job_progress.py --once
+```
 
 ## 辅助脚本
 

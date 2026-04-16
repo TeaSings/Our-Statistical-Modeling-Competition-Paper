@@ -4,6 +4,7 @@
 
 ## 子目录
 
+- `51job/`：前程无忧校招专题页种子
 - `ncss/`：NCSS 的抓取配置、地区码、详情页种子和分片种子
 - `mohrss/`：中国公共招聘网的示例详情页种子
 - `zhaopin/`：智联公开详情页示例种子
@@ -11,6 +12,7 @@
 
 ## 常用入口
 
+- `51job/campus_seed_urls.csv`：51job 官方专题页主种子，当前包含 `6` 个已验证专题页
 - `ncss/ncss_batch_config.json`：NCSS 常规列表抓取配置
 - `ncss/ncss_batch_config_all_areas.json`：NCSS 全地区列表抓取配置
 - `ncss/platform_ncss_detail.json`：NCSS 详情页解析选择器
@@ -20,6 +22,7 @@
 
 ## 使用建议
 
+- 需要补充 51job 校招页时，优先在 `51job/campus_seed_urls.csv` 中维护正式种子
 - 需要扩充 NCSS 覆盖范围时，优先看 `ncss/README.md`
 - 需要补充其他平台入口时，优先看 `sources/README.md`
 - 手工补链时，不要把结果混写到别的平台目录里
