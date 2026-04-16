@@ -5,7 +5,7 @@ import csv
 from pathlib import Path
 from urllib.parse import urljoin
 
-from common import ROOT_DIR, load_json, load_jsonl
+from common import ROOT_DIR, load_json, load_jsonl, resolve_html_path
 
 
 def parse_args() -> argparse.Namespace:
@@ -40,8 +40,13 @@ def main() -> None:
         if row.get("error"):
             continue
 
-        html_path = Path(row["local_path"])
-        if not html_path.exists():
+        html_path = resolve_html_path(
+            local_path=row.get("local_path", ""),
+            platform=row.get("platform", ""),
+            page_type=row.get("page_type", ""),
+            url=row.get("url", ""),
+        )
+        if html_path is None:
             continue
 
         html = html_path.read_text(encoding="utf-8", errors="ignore")

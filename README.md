@@ -2,6 +2,13 @@
 
 当前题目：`生成式人工智能冲击下城市就业技能结构重塑研究：基于招聘文本与大模型信息抽取`
 
+## 当前交付状态
+
+- 主体可分析 JD 数据：`data/processed/ncss/ncss_jobs_all_areas_clean.csv`，当前快照为 `30985` 条清洗后职位
+- 全国职位覆盖底表：`data/processed/ncss/ncss_listings_all_areas_flat.csv`，覆盖 `41407` 个唯一职位
+- 全量详情解析原始表：`data/raw/ncss/records/ncss_jobs_all_areas_raw.jsonl`，当前为 `41400` 条有效详情
+- 最终核验与交付说明：`docs/NCSS全量数据核验与交付说明-2026-04-16.md`
+
 ## 项目结构
 
 ```text
@@ -27,6 +34,7 @@
 │       └── ncss/
 ├── docs/
 ├── papers/
+│   └── reference_library/
 ├── src/
 ├── requirements.txt
 └── README.md
@@ -35,8 +43,8 @@
 ## 目录说明
 
 - `data/`：项目数据区，按 `input -> raw -> processed` 分层，并在每层内部按站点组织
-- `docs/`：研究过程文档、数据来源说明、抓取记录
-- `papers/`：参考论文与论文目录说明
+- `docs/`：研究过程文档、交付核验说明、方法笔记，不再存放论文 PDF
+- `papers/`：参考论文原文、论文下载记录和分类文献库
 - `src/`：数据获取、解析、清洗相关脚本
 - `requirements.txt`：项目 Python 依赖
 
@@ -47,5 +55,5 @@
 - `data/raw/README.md`：原始抓取结果、网页快照和 manifest 说明
 - `data/processed/README.md`：清洗后数据说明
 - `docs/README.md`：文档索引
-- `papers/README.md`：参考论文说明
+- `papers/README.md`：论文库说明
 - `src/README.md`：脚本索引

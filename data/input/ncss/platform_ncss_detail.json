@@ -32,7 +32,7 @@
     },
     "multi_selectors": {
       "jd_text_raw": [
-        "div.mainContent"
+        ".mainContent"
       ],
       "job_tags_raw": [
         "#companyTags",

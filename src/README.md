@@ -12,7 +12,8 @@
 | `fetch_pages.py` | 根据种子抓取详情页或参考页面 HTML |
 | `parse_details.py` | 按选择器解析一个或多个 manifest 对应的详情页字段 |
 | `clean_jobs.py` | 清洗、标准化、去重并输出分析用 CSV |
-| `watch_ncss_progress.py` | 实时显示 NCSS 详情抓取总进度和各分片进度条 |
+| `watch_ncss_progress.py` | 实时显示 NCSS 全量抓取/解析进度、分片速度和 ETA |
+| `rebuild_local_manifest.py` | 当 manifest 中断或跨机器失效时，根据种子和本地 HTML 重建可用 manifest |
 
 ## 辅助脚本
 
@@ -25,15 +26,49 @@
 
 ## 推荐顺序
 
-1. 先跑 `fetch_ncss_jobs.py`
-2. 再用 `fetch_pages.py` 抓详情页
-3. 用 `parse_details.py` 解析
-4. 最后用 `clean_jobs.py` 输出清洗表
+1. 先跑 `fetch_ncss_jobs.py` 生成全地区列表和详情种子
+2. 再用 `fetch_pages.py` 抓详情页 HTML
+3. 用 `parse_details.py` 从种子或 manifest 解析详情
+4. 必要时用 `rebuild_local_manifest.py` 从本地 HTML 重建 manifest
+5. 最后用 `clean_jobs.py` 输出清洗表
 
 实时查看进度时直接运行：
 
 ```bash
-python3 src/watch_ncss_progress.py
+python src/watch_ncss_progress.py
+```
+
+只看一次当前快照时运行：
+
+```bash
+python src/watch_ncss_progress.py --once
+```
+
+## 当前推荐全量命令
+
+```bash
+python src/fetch_pages.py ^
+  --seed-file data/input/ncss/ncss_detail_urls_all_areas.csv ^
+  --manifest data/raw/ncss/manifests/ncss_detail_manifest_all_areas.jsonl ^
+  --output-dir data/raw/ncss/html ^
+  --config data/input/ncss/platform_ncss_detail.json ^
+  --skip-existing ^
+  --workers 16
+```
+
+```bash
+python src/parse_details.py ^
+  --seed-file data/input/ncss/ncss_detail_urls_all_areas.csv ^
+  --config data/input/ncss/platform_ncss_detail.json ^
+  --output data/raw/ncss/records/ncss_jobs_all_areas_raw.jsonl ^
+  --overwrite ^
+  --workers 16
+```
+
+```bash
+python src/clean_jobs.py ^
+  --input data/raw/ncss/records/ncss_jobs_all_areas_raw.jsonl ^
+  --output data/processed/ncss/ncss_jobs_all_areas_clean.csv
 ```
 
 ## 默认路径约定

@@ -14,7 +14,8 @@
 - `ncss/ncss_batch_config.json`：NCSS 常规列表抓取配置
 - `ncss/ncss_batch_config_all_areas.json`：NCSS 全地区列表抓取配置
 - `ncss/platform_ncss_detail.json`：NCSS 详情页解析选择器
-- `ncss/ncss_detail_urls_all_areas.csv`：NCSS 全地区详情页种子
+- `ncss/ncss_detail_urls_all_areas.csv`：NCSS 全地区详情页主种子，当前覆盖 `41407` 个唯一职位
+- `ncss/shards/`：由主种子切分出的并发抓取分片
 - `sources/job_source_registry.json`：全项目中文数据源登记表
 
 ## 使用建议
@@ -22,3 +23,4 @@
 - 需要扩充 NCSS 覆盖范围时，优先看 `ncss/README.md`
 - 需要补充其他平台入口时，优先看 `sources/README.md`
 - 手工补链时，不要把结果混写到别的平台目录里
+- 临时补抓种子不要长期留在仓库里，核验后只保留正式主种子和分片

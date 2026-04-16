@@ -13,7 +13,7 @@ input/<site> -> raw/<site> -> processed/<site>
 
 ## 当前站点目录
 
-- `input/ncss/`、`raw/ncss/`、`processed/ncss/`：当前主线数据源，已经形成可分析结果
+- `input/ncss/`、`raw/ncss/`、`processed/ncss/`：当前主线数据源，已经形成全国范围可分析结果
 - `input/mohrss/`、`raw/mohrss/`：中国公共招聘网相关种子和参考页面
 - `input/zhaopin/`、`raw/zhaopin/`：智联公开详情页样例
 - `input/sources/`：数据源注册表、参考页面清单和人工补链任务表
@@ -27,9 +27,9 @@ input/<site> -> raw/<site> -> processed/<site>
 
 ## 当前主用文件
 
-- `processed/ncss/ncss_jobs_balanced_clean.csv`：第一版清洗后 JD 数据
+- `processed/ncss/ncss_jobs_all_areas_clean.csv`：当前主用 JD 数据，快照为 `30985` 条清洗后职位
 - `processed/ncss/ncss_listings_all_areas_flat.csv`：NCSS 全地区列表平铺表，覆盖 `41407` 个唯一职位
-- `processed/ncss/ncss_jobs_all_areas_clean.csv`：NCSS 全地区详情快照清洗表，基于当前已抓到的详情页持续更新
+- `raw/ncss/records/ncss_jobs_all_areas_raw.jsonl`：NCSS 全地区详情解析原始表，当前为 `41400` 条有效详情
 - `processed/ncss/ncss_list_query_summary_all_areas.csv`：NCSS 全地区列表查询摘要
-- `raw/ncss/records/ncss_listings_all_areas_raw.jsonl`：NCSS 全地区列表原始记录
 - `input/ncss/ncss_detail_urls_all_areas.csv`：NCSS 全地区详情页种子
+- `processed/ncss/ncss_jobs_balanced_clean.csv`：第一版均衡样本清洗表，适合小样本调试

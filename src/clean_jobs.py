@@ -21,6 +21,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="清洗招聘字段并去重")
     parser.add_argument("--input", required=True, help="原始 jsonl")
     parser.add_argument("--output", required=True, help="输出 csv")
+    parser.add_argument("--allow-empty-jd", action="store_true", help="保留没有正文的记录")
     return parser.parse_args()
 
 
@@ -156,8 +157,12 @@ def main() -> None:
 
     cleaned_rows = []
     seen = set()
+    dropped_empty_jd = 0
     for index, row in enumerate(rows, start=1):
         clean_row = build_clean_row(row, index)
+        if (not clean_row["job_title_std"] or not clean_row["jd_text_clean"]) and not args.allow_empty_jd:
+            dropped_empty_jd += 1
+            continue
         dedupe_key = (
             clean_row["job_title_std"],
             clean_row["company_name_std"],
@@ -178,7 +183,10 @@ def main() -> None:
         writer.writeheader()
         writer.writerows(cleaned_rows)
 
-    print(f"saved {len(cleaned_rows)} cleaned jobs to {output_path}")
+    print(
+        f"saved {len(cleaned_rows)} cleaned jobs to {output_path}; "
+        f"dropped_empty_jd={dropped_empty_jd}"
+    )
 
 
 if __name__ == "__main__":

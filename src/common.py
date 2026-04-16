@@ -9,6 +9,10 @@ from pathlib import Path
 from typing import Any, Iterable, List
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
+HTML_BASE_DIR_CANDIDATES = (
+    Path("data/raw/html"),
+    Path("data/raw/ncss/html"),
+)
 
 DEFAULT_HEADERS = {
     "User-Agent": (
@@ -26,6 +30,48 @@ def ensure_parent(path: Path) -> None:
 
 def sha1_text(text: str) -> str:
     return hashlib.sha1(text.encode("utf-8")).hexdigest()
+
+
+def portable_path(path: str | Path) -> str:
+    path = Path(path)
+    try:
+        return str(path.relative_to(ROOT_DIR))
+    except ValueError:
+        return str(path)
+
+
+def resolve_html_path(
+    local_path: str | Path,
+    platform: str,
+    page_type: str,
+    url: str,
+) -> Path | None:
+    candidates: list[Path] = []
+    seen: set[str] = set()
+
+    if local_path:
+        path = Path(local_path)
+        candidates.append(path)
+        if not path.is_absolute():
+            candidates.append(ROOT_DIR / path)
+        if path.name:
+            for base_dir in HTML_BASE_DIR_CANDIDATES:
+                candidates.append(ROOT_DIR / base_dir / platform / page_type / path.name)
+
+    if url and platform and page_type:
+        filename = f"{sha1_text(url)}.html"
+        for base_dir in HTML_BASE_DIR_CANDIDATES:
+            candidates.append(ROOT_DIR / base_dir / platform / page_type / filename)
+
+    for candidate in candidates:
+        key = str(candidate)
+        if key in seen:
+            continue
+        seen.add(key)
+        if candidate.exists():
+            return candidate
+
+    return None
 
 
 def load_json(path: str | Path) -> Any:

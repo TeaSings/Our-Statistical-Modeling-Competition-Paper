@@ -8,15 +8,15 @@
 
 ## 当前主用文件
 
-- `ncss/ncss_jobs_balanced_clean.csv`：第一版清洗后的 JD 主数据
+- `ncss/ncss_jobs_all_areas_clean.csv`：当前主用 JD 数据，快照为 `30985` 条清洗后职位
 - `ncss/ncss_listings_all_areas_flat.csv`：全地区列表平铺表，适合做城市覆盖、薪资和学历要求分析
-- `ncss/ncss_jobs_all_areas_clean.csv`：全地区详情快照清洗表，适合做技能抽取和正文分析
+- `ncss/ncss_jobs_balanced_clean.csv`：第一版均衡样本清洗表，适合小样本调试
 - `ncss/ncss_list_query_summary.csv`：第一版均衡抓取查询摘要
 - `ncss/ncss_list_query_summary_all_areas.csv`：全地区列表抓取摘要
 
 ## 使用建议
 
-- 现在就要做文本分析，先用 `ncss/ncss_jobs_balanced_clean.csv`
-- 需要更大规模正文样本时，用 `ncss/ncss_jobs_all_areas_clean.csv`
+- 现在就要做正文分析或技能抽取，优先用 `ncss/ncss_jobs_all_areas_clean.csv`
 - 需要交代覆盖范围，配合 `ncss/ncss_list_query_summary_all_areas.csv`
+- 需要全国职位总覆盖口径时，配合 `ncss/ncss_listings_all_areas_flat.csv`
 - 后续新的清洗表也都放到 `processed/ncss/` 下，不再散落在顶层
