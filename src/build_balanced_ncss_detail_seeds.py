@@ -13,12 +13,12 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="从 NCSS 列表结果中均衡抽取详情页种子")
     parser.add_argument(
         "--input",
-        default="data/raw/records/ncss_listings_raw.jsonl",
+        default="data/raw/ncss/records/ncss_listings_raw.jsonl",
         help="NCSS 列表原始 jsonl",
     )
     parser.add_argument(
         "--output",
-        default="data/input/ncss_detail_urls_balanced.csv",
+        default="data/input/ncss/ncss_detail_urls_balanced.csv",
         help="输出详情页种子 csv",
     )
     parser.add_argument(

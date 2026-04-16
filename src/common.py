@@ -52,6 +52,14 @@ def append_jsonl(path: str | Path, rows: Iterable[dict]) -> None:
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 
+def write_jsonl(path: str | Path, rows: Iterable[dict]) -> None:
+    path = Path(path)
+    ensure_parent(path)
+    with open(path, "w", encoding="utf-8") as f:
+        for row in rows:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+
 def clean_text(value: str | None) -> str:
     if not value:
         return ""
@@ -66,5 +74,7 @@ def clean_text_list(values: Iterable[str]) -> List[str]:
 
 
 def sleep_with_jitter(base_seconds: float) -> None:
-    delay = max(base_seconds, 0) + random.uniform(0, 0.5)
+    base_seconds = max(base_seconds, 0)
+    jitter = min(max(base_seconds, 0.05), 0.5)
+    delay = base_seconds + random.uniform(0, jitter)
     time.sleep(delay)

@@ -11,7 +11,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="为人工搜集招聘种子链接生成任务表")
     parser.add_argument(
         "--registry",
-        default="data/input/job_source_registry.json",
+        default="data/input/sources/job_source_registry.json",
         help="数据源注册表 json",
     )
     parser.add_argument(
@@ -31,7 +31,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--output",
-        default="data/input/manual_seed_tasks.csv",
+        default="data/input/sources/manual_seed_tasks.csv",
         help="输出 csv",
     )
     return parser.parse_args()

@@ -1,27 +1,35 @@
 # 数据目录说明
 
-`data/` 目录按照数据生命周期拆成三层：
+`data/` 现在同时按两条逻辑组织：
 
-- `input/`：抓取配置、种子链接、来源登记表
-- `raw/`：未经清洗的原始抓取结果、网页快照、抓取 manifest
-- `processed/`：已经标准化、可直接分析的结果表
+1. 按数据生命周期分层：`input -> raw -> processed`
+2. 在每一层内部按站点或来源分目录
 
-推荐把数据流理解成：
+整体可理解为：
 
 ```text
-input -> raw -> processed
+input/<site> -> raw/<site> -> processed/<site>
 ```
 
-当前项目已经实际跑通的主线是 `NCSS`，因此下面三个子目录里的说明都优先围绕 NCSS 数据组织。
+## 当前站点目录
 
-## 使用建议
+- `input/ncss/`、`raw/ncss/`、`processed/ncss/`：当前主线数据源，已经形成可分析结果
+- `input/mohrss/`、`raw/mohrss/`：中国公共招聘网相关种子和参考页面
+- `input/zhaopin/`、`raw/zhaopin/`：智联公开详情页样例
+- `input/sources/`：数据源注册表、参考页面清单和人工补链任务表
+- `raw/stats/`、`raw/occupation/`、`raw/clds/`：官方统计、分类与参考资料快照
 
-- 需要看“从哪里来”，优先读 `input/README.md`
-- 需要看“原始抓了什么”，优先读 `raw/README.md`
-- 需要看“最后拿什么建模”，优先读 `processed/README.md`
+## 建议阅读顺序
 
-## 版本控制说明
+- 看数据入口：先读 `input/README.md`
+- 看原始抓取：再读 `raw/README.md`
+- 看可分析数据：最后读 `processed/README.md`
 
-- `data/input/` 中的小型配置文件适合纳入版本控制
-- `data/raw/` 和 `data/processed/` 中的大文件默认按 `.gitignore` 规则忽略
-- 即使某些大文件未被 Git 跟踪，也仍然属于项目正式目录的一部分
+## 当前主用文件
+
+- `processed/ncss/ncss_jobs_balanced_clean.csv`：第一版清洗后 JD 数据
+- `processed/ncss/ncss_listings_all_areas_flat.csv`：NCSS 全地区列表平铺表，覆盖 `41407` 个唯一职位
+- `processed/ncss/ncss_jobs_all_areas_clean.csv`：NCSS 全地区详情快照清洗表，基于当前已抓到的详情页持续更新
+- `processed/ncss/ncss_list_query_summary_all_areas.csv`：NCSS 全地区列表查询摘要
+- `raw/ncss/records/ncss_listings_all_areas_raw.jsonl`：NCSS 全地区列表原始记录
+- `input/ncss/ncss_detail_urls_all_areas.csv`：NCSS 全地区详情页种子

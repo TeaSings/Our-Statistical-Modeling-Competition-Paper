@@ -19,6 +19,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--page-type-column", default="page_type", help="页面类型列名")
     parser.add_argument("--delay", type=float, default=2.0, help="请求间隔秒数")
     parser.add_argument("--timeout", type=float, default=20.0, help="超时时间")
+    parser.add_argument("--retries", type=int, default=3, help="失败时最多重试次数")
     parser.add_argument("--skip-existing", action="store_true", help="已存在则跳过")
     parser.add_argument("--limit", type=int, default=0, help="只抓前 N 条，0 表示不限制")
     parser.add_argument("--config", default="", help="可选的平台配置 json")
@@ -45,7 +46,6 @@ def main() -> None:
         config = load_json(ROOT_DIR / args.config)
         headers.update(config.get("request_headers", {}))
 
-    manifest_rows = []
     for row in rows:
         url = (row.get(args.url_column) or "").strip()
         if not url:
@@ -64,16 +64,22 @@ def main() -> None:
         if args.skip_existing and html_path.exists():
             fetched = False
         else:
-            try:
-                request = Request(url, headers=headers)
-                with urlopen(request, timeout=args.timeout) as response:
-                    status_code = getattr(response, "status", None) or response.getcode()
-                    body = response.read()
-                    encoding = response.headers.get_content_charset() or "utf-8"
-                    html_path.write_text(body.decode(encoding, errors="ignore"), encoding="utf-8")
-                fetched = True
-            except Exception as exc:  # noqa: BLE001
-                error = str(exc)
+            for attempt in range(1, max(args.retries, 1) + 1):
+                try:
+                    request = Request(url, headers=headers)
+                    with urlopen(request, timeout=args.timeout) as response:
+                        status_code = getattr(response, "status", None) or response.getcode()
+                        body = response.read()
+                        encoding = response.headers.get_content_charset() or "utf-8"
+                        html_path.write_text(body.decode(encoding, errors="ignore"), encoding="utf-8")
+                    fetched = True
+                    error = ""
+                    break
+                except Exception as exc:  # noqa: BLE001
+                    error = str(exc)
+                    if attempt >= max(args.retries, 1):
+                        break
+                    sleep_with_jitter(min(args.delay + 0.5 * attempt, 2.0))
 
         manifest_row = {
             "fetched_at": datetime.now().isoformat(timespec="seconds"),
@@ -90,11 +96,10 @@ def main() -> None:
             if key not in manifest_row:
                 manifest_row[key] = value
 
-        manifest_rows.append(manifest_row)
+        append_jsonl(manifest_path, [manifest_row])
         sleep_with_jitter(args.delay)
 
-    append_jsonl(manifest_path, manifest_rows)
-    print(f"saved {len(manifest_rows)} rows to {manifest_path}")
+    print(f"saved {len(rows)} rows to {manifest_path}")
 
 
 if __name__ == "__main__":

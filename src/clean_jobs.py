@@ -120,9 +120,11 @@ def build_clean_row(row: dict, index: int) -> dict:
 
     return {
         "job_id": f"job_{index:06d}",
+        "source_job_id": row.get("job_id", ""),
         "platform": row.get("platform", ""),
         "detail_url": row.get("detail_url", ""),
         "source_url": row.get("source_url", ""),
+        "city_seed": city_seed,
         "keyword_seed": row.get("keyword_seed", ""),
         "job_title_raw": row.get("job_title_raw", ""),
         "job_title_std": clean_text(row.get("job_title_raw", "")),
