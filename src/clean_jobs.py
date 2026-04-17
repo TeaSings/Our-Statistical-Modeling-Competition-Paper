@@ -4,6 +4,7 @@ import argparse
 import csv
 import json
 import re
+from pathlib import Path
 
 from common import ROOT_DIR, clean_text
 
@@ -149,18 +150,13 @@ def build_clean_row(row: dict, index: int) -> dict:
     }
 
 
-def main() -> None:
-    args = parse_args()
-    rows = load_jsonl(str(ROOT_DIR / args.input))
-    if not rows:
-        raise SystemExit("input file is empty")
-
+def clean_rows(rows: list[dict], allow_empty_jd: bool = False) -> tuple[list[dict], int]:
     cleaned_rows = []
     seen = set()
     dropped_empty_jd = 0
     for index, row in enumerate(rows, start=1):
         clean_row = build_clean_row(row, index)
-        if (not clean_row["job_title_std"] or not clean_row["jd_text_clean"]) and not args.allow_empty_jd:
+        if (not clean_row["job_title_std"] or not clean_row["jd_text_clean"]) and not allow_empty_jd:
             dropped_empty_jd += 1
             continue
         dedupe_key = (
@@ -174,17 +170,46 @@ def main() -> None:
             continue
         seen.add(dedupe_key)
         cleaned_rows.append(clean_row)
+    return cleaned_rows, dropped_empty_jd
 
-    output_path = ROOT_DIR / args.output
+
+def write_clean_csv(output_path: Path, cleaned_rows: list[dict]) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    if not cleaned_rows:
+        raise SystemExit("no cleaned rows produced")
     fieldnames = list(cleaned_rows[0].keys())
     with open(output_path, "w", encoding="utf-8-sig", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(cleaned_rows)
 
+
+def clean_jsonl_to_csv(
+    input_path: Path,
+    output_path: Path,
+    *,
+    allow_empty_jd: bool = False,
+) -> tuple[int, int]:
+    rows = load_jsonl(str(input_path))
+    if not rows:
+        raise SystemExit("input file is empty")
+    cleaned_rows, dropped_empty_jd = clean_rows(rows, allow_empty_jd=allow_empty_jd)
+    write_clean_csv(output_path, cleaned_rows)
+    return len(cleaned_rows), dropped_empty_jd
+
+
+def main() -> None:
+    args = parse_args()
+    input_path = ROOT_DIR / args.input
+    output_path = ROOT_DIR / args.output
+    cleaned_count, dropped_empty_jd = clean_jsonl_to_csv(
+        input_path,
+        output_path,
+        allow_empty_jd=args.allow_empty_jd,
+    )
+
     print(
-        f"saved {len(cleaned_rows)} cleaned jobs to {output_path}; "
+        f"saved {cleaned_count} cleaned jobs to {output_path}; "
         f"dropped_empty_jd={dropped_empty_jd}"
     )
 

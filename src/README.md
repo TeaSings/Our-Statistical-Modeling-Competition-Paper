@@ -1,103 +1,128 @@
 # src 说明
 
-这个目录存放项目脚本。当前保留两种组织方式：
+这个目录存放项目脚本。当前结构已经按“平台方案”和“跨平台工具”拆开，避免不同网站的脚本混在一起。
 
-- 老的平铺脚本：仍以 `NCSS` 主线为主，方便兼容现有命令
-- 新的结构化脚本：放到 `src/platforms/` 下，按站点拆分
+## 目录分工
 
-## 主流程脚本
-
-| 文件 | 作用 |
+| 路径 | 作用 |
 | --- | --- |
-| `fetch_ncss_jobs.py` | 抓取 NCSS 列表接口，输出原始列表、详情页种子和查询摘要 |
-| `extract_ncss_area_codes.py` | 从 NCSS 列表页 HTML 提取全部地区代码 |
-| `build_balanced_ncss_detail_seeds.py` | 从 NCSS 列表结果中均衡抽样详情页种子 |
-| `fetch_pages.py` | 根据种子抓取详情页或参考页面 HTML |
-| `parse_details.py` | 按选择器解析一个或多个 manifest 对应的详情页字段 |
-| `clean_jobs.py` | 清洗、标准化、去重并输出分析用 CSV |
-| `watch_ncss_progress.py` | 实时显示 NCSS 全量抓取/解析进度、分片速度和 ETA |
-| `rebuild_local_manifest.py` | 当 manifest 中断或跨机器失效时，根据种子和本地 HTML 重建可用 manifest |
+| `clean_jobs.py` | 各平台 RAW 统一清洗入口 |
+| `common.py` | 公共工具函数 |
+| `platforms/ncss/` | NCSS 列表抓取、详情抓取、解析、进度监控和 manifest 重建 |
+| `platforms/job51/` | 51job 校招专题页与社招搜索抓取方案 |
+| `tools/` | 不属于单一平台的辅助脚本 |
 
-## 结构化站点目录
+## 结构迁移说明
 
-| 目录 | 作用 |
-| --- | --- |
-| `platforms/job51/` | 前程无忧校招专题页抓取逻辑，已支持 `coapi`、内嵌 `job.js` 和静态公告页 |
+旧的顶层脚本已经按职责迁移：
 
-前程无忧当前推荐命令：
+- 原 `src/fetch_ncss_jobs.py` 等 NCSS 脚本迁入 `src/platforms/ncss/`
+- 原 `src/build_manual_seed_sheet.py`、`src/extract_links.py`、`src/parse_job_pages_by_text.py` 迁入 `src/tools/`
+- 这样做的目的，是让每个平台的抓取、解析和监控脚本都能在各自目录中闭环
 
-```bash
+## NCSS 推荐命令
+
+```powershell
+python src/platforms/ncss/fetch_ncss_jobs.py --resume
+```
+
+```powershell
+python src/platforms/ncss/fetch_pages.py `
+  --seed-file data/input/ncss/ncss_detail_urls_all_areas.csv `
+  --manifest data/raw/ncss/manifests/ncss_detail_manifest_all_areas.jsonl `
+  --output-dir data/raw/ncss/html `
+  --config data/input/ncss/platform_ncss_detail.json `
+  --skip-existing `
+  --workers 16
+```
+
+```powershell
+python src/platforms/ncss/parse_details.py `
+  --seed-file data/input/ncss/ncss_detail_urls_all_areas.csv `
+  --config data/input/ncss/platform_ncss_detail.json `
+  --output data/raw/ncss/records/ncss_jobs_all_areas_raw.jsonl `
+  --overwrite `
+  --workers 16
+```
+
+```powershell
+python src/platforms/ncss/watch_ncss_progress.py --once
+```
+
+## 51job 推荐命令
+
+以下命令建议统一在仓库根目录运行：
+
+```powershell
+cd <repo-root>
+```
+
+校招专题页：
+
+```powershell
 python src/platforms/job51/fetch_campus_jobs.py --workers 12
 ```
 
-```bash
-python src/clean_jobs.py ^
-  --input data/raw/51job/records/51job_campus_jobs_raw.jsonl ^
+社招顺序抓取：
+
+```powershell
+python src/platforms/job51/run_sequential_social_crawl.py `
+  --transport browser `
+  --browser-cdp-url http://127.0.0.1:9222 `
+  --browser-min-interval 0.6 `
+  --browser-max-retries 4 `
+  --manual-verify `
+  --manual-verify-wait 120 `
+  --workers 1 `
+  --page-size 50 `
+  --specific-only
+```
+
+这个顺序调度器现在会同时保存：
+
+- 批次级 cursor
+- 当前批次的页级断点
+- watcher 可读的进度快照
+
+中途中断后再次执行同一条命令，会优先从上次停下的位置继续。
+
+如果只想跑某一个职能、并按全国顶层地区顺序慢速推进：
+
+```powershell
+python src/platforms/job51/fetch_social_jobs.py `
+  --transport browser `
+  --browser-cdp-url http://127.0.0.1:9222 `
+  --browser-min-interval 0.6 `
+  --browser-max-retries 4 `
+  --function-code 0106 `
+  --top-level-area-offset 0 `
+  --top-level-area-limit 1 `
+  --append-output `
+  --append-manifest
+```
+
+清洗输出：
+
+```powershell
+python src/clean_jobs.py `
+  --input data/raw/51job/records/51job_campus_jobs_raw.jsonl `
   --output data/processed/51job/51job_campus_jobs_clean.csv
 ```
 
-```bash
-python src/platforms/job51/watch_51job_progress.py --once
+```powershell
+python src/clean_jobs.py `
+  --input data/raw/51job/records/51job_social_jobs_raw.jsonl `
+  --output data/processed/51job/51job_social_jobs_clean.csv
 ```
 
-## 辅助脚本
+实时进度条：
 
-| 文件 | 作用 |
-| --- | --- |
-| `common.py` | 公共工具函数 |
-| `extract_links.py` | 从列表页 HTML 中提取详情页链接 |
-| `build_manual_seed_sheet.py` | 生成手工搜集链接的任务表 |
-| `parse_job_pages_by_text.py` | 用文本规则解析详情页，适合调试非 NCSS 页面 |
-
-## 推荐顺序
-
-1. 先跑 `fetch_ncss_jobs.py` 生成全地区列表和详情种子
-2. 再用 `fetch_pages.py` 抓详情页 HTML
-3. 用 `parse_details.py` 从种子或 manifest 解析详情
-4. 必要时用 `rebuild_local_manifest.py` 从本地 HTML 重建 manifest
-5. 最后用 `clean_jobs.py` 输出清洗表
-
-实时查看进度时直接运行：
-
-```bash
-python src/watch_ncss_progress.py
+```powershell
+python src/platforms/job51/watch_51job_progress.py --mode social --interval 5
 ```
 
-只看一次当前快照时运行：
+快速看一眼当前状态：
 
-```bash
-python src/watch_ncss_progress.py --once
+```powershell
+python src/platforms/job51/watch_51job_progress.py --mode social --once
 ```
-
-## 当前推荐全量命令
-
-```bash
-python src/fetch_pages.py ^
-  --seed-file data/input/ncss/ncss_detail_urls_all_areas.csv ^
-  --manifest data/raw/ncss/manifests/ncss_detail_manifest_all_areas.jsonl ^
-  --output-dir data/raw/ncss/html ^
-  --config data/input/ncss/platform_ncss_detail.json ^
-  --skip-existing ^
-  --workers 16
-```
-
-```bash
-python src/parse_details.py ^
-  --seed-file data/input/ncss/ncss_detail_urls_all_areas.csv ^
-  --config data/input/ncss/platform_ncss_detail.json ^
-  --output data/raw/ncss/records/ncss_jobs_all_areas_raw.jsonl ^
-  --overwrite ^
-  --workers 16
-```
-
-```bash
-python src/clean_jobs.py ^
-  --input data/raw/ncss/records/ncss_jobs_all_areas_raw.jsonl ^
-  --output data/processed/ncss/ncss_jobs_all_areas_clean.csv
-```
-
-## 默认路径约定
-
-- `data/input/ncss/`：NCSS 配置、地区码、种子和分片种子
-- `data/raw/ncss/`：NCSS 原始列表、HTML 和 manifest
-- `data/processed/ncss/`：NCSS 清洗后表和查询摘要

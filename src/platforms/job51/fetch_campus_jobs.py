@@ -26,6 +26,7 @@ from common import (  # noqa: E402
     DEFAULT_HEADERS,
     ROOT_DIR,
     clean_text,
+    configure_utf8_stdio,
     ensure_parent,
     portable_path,
     sha1_text,
@@ -848,6 +849,7 @@ def process_seed(
 
 
 def main() -> None:
+    configure_utf8_stdio()
     args = parse_args()
     seed_file = ROOT_DIR / args.seed_file
     output_raw = ROOT_DIR / args.output_raw

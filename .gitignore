@@ -2,3 +2,12 @@ tmp/
 __pycache__/
 *.pyc
 .DS_Store
+data/runtime/
+third_party/
+
+# 51job social crawl live outputs are rolling local artifacts.
+data/raw/51job/manifests/51job_social_cursor.json
+data/raw/51job/manifests/51job_social_progress.json
+data/raw/51job/manifests/51job_social_partition_manifest.jsonl
+data/raw/51job/manifests/51job_social_scheduler.stdout.log
+data/raw/51job/manifests/51job_social_scheduler.stderr.log

@@ -4,6 +4,7 @@ import hashlib
 import json
 import random
 import re
+import sys
 import time
 from pathlib import Path
 from typing import Any, Iterable, List
@@ -26,6 +27,19 @@ DEFAULT_HEADERS = {
 
 def ensure_parent(path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+
+
+def configure_utf8_stdio() -> None:
+    for name in ("stdout", "stderr"):
+        stream = getattr(sys, name, None)
+        reconfigure = getattr(stream, "reconfigure", None)
+        if not callable(reconfigure):
+            continue
+        try:
+            reconfigure(encoding="utf-8", errors="replace")
+        except ValueError:
+            # Some embedded or already-closed streams do not allow reconfigure.
+            continue
 
 
 def sha1_text(text: str) -> str:

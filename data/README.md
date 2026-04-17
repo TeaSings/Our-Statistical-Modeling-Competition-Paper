@@ -1,39 +1,45 @@
 # 数据目录说明
 
-`data/` 现在同时按两条逻辑组织：
+`data/` 按两条轴组织：
 
-1. 按数据生命周期分层：`input -> raw -> processed`
-2. 在每一层内部按站点或来源分目录
+1. 按生命周期分层：`input -> raw -> processed`
+2. 在每一层内部按平台分目录
 
-整体可理解为：
+整体可以理解为：
 
 ```text
-input/<site> -> raw/<site> -> processed/<site>
+input/<platform> -> raw/<platform> -> processed/<platform>
 ```
 
-## 当前站点目录
+## 先看什么
 
-- `input/51job/`、`raw/51job/`、`processed/51job/`：前程无忧校招专题页种子、原始记录与清洗表
-- `input/ncss/`、`raw/ncss/`、`processed/ncss/`：当前主线数据源，已经形成全国范围可分析结果
-- `input/mohrss/`、`raw/mohrss/`：中国公共招聘网相关种子和参考页面
-- `input/zhaopin/`、`raw/zhaopin/`：智联公开详情页样例
-- `input/sources/`：数据源注册表、参考页面清单和人工补链任务表
-- `raw/stats/`、`raw/occupation/`、`raw/clds/`：官方统计、分类与参考资料快照
+- 要找抓取配置、种子和缓存：先读 `input/README.md`
+- 要看 HTML、manifest 和原始 JSONL：再读 `raw/README.md`
+- 要直接拿可分析表：最后读 `processed/README.md`
 
-## 建议阅读顺序
+## 当前各平台定位
 
-- 看数据入口：先读 `input/README.md`
-- 看原始抓取：再读 `raw/README.md`
-- 看可分析数据：最后读 `processed/README.md`
+- `ncss/`：当前主线数据源，已经形成全国范围可分析结果
+- `51job/`：新增的浏览器顺序抓取方案；校招样本已稳定，社招全量仍以本地滚动抓取为主
+- `mohrss/`：中国公共招聘网参考输入与页面快照
+- `zhaopin/`：智联公开详情页样例
+- `sources/`：跨平台来源登记、参考页面和人工补链表
+- `stats/`、`occupation/`、`clds/`：统计口径、职业分类和参考资料快照
 
 ## 当前主用文件
 
-- `processed/51job/51job_campus_jobs_clean.csv`：前程无忧校招专题页样本，当前为 `245` 条带真实 JD 的清洗后职位
-- `raw/51job/records/51job_campus_jobs_raw.jsonl`：51job 校招原始职位记录，当前为 `249` 条
-- `input/51job/campus_seed_urls.csv`：首批已验证的 51job 官方专题页种子
-- `processed/ncss/ncss_jobs_all_areas_clean.csv`：当前主用 JD 数据，快照为 `30985` 条清洗后职位
-- `processed/ncss/ncss_listings_all_areas_flat.csv`：NCSS 全地区列表平铺表，覆盖 `41407` 个唯一职位
-- `raw/ncss/records/ncss_jobs_all_areas_raw.jsonl`：NCSS 全地区详情解析原始表，当前为 `41400` 条有效详情
-- `processed/ncss/ncss_list_query_summary_all_areas.csv`：NCSS 全地区列表查询摘要
-- `input/ncss/ncss_detail_urls_all_areas.csv`：NCSS 全地区详情页种子
-- `processed/ncss/ncss_jobs_balanced_clean.csv`：第一版均衡样本清洗表，适合小样本调试
+- `processed/ncss/ncss_jobs_all_areas_clean.csv`：NCSS 全国主线 JD 表，`30985` 条清洗后职位
+- `processed/ncss/ncss_listings_all_areas_flat.csv`：全国职位覆盖底表，`41407` 个唯一职位
+- `raw/ncss/records/ncss_jobs_all_areas_raw.jsonl`：NCSS 全国详情 RAW，`41400` 条有效详情
+- `processed/51job/51job_campus_jobs_clean.csv`：51job 校招专题页验证样本，`245` 条
+- `raw/51job/records/51job_campus_jobs_raw.jsonl`：51job 校招 RAW，`249` 条
+- `processed/51job/51job_social_jobs_clean.csv`：51job 社招阶段性 clean 快照，`13989` 条
+- `raw/51job/records/51job_social_jobs_raw.jsonl`：51job 社招阶段性 RAW 快照，`14141` 条
+- `input/51job/51job_search_area_tree.json`：51job 全国地区树缓存
+- `input/51job/51job_search_function_codes.json`：51job 职能编码缓存
+
+## 版本库和本地运行态的边界
+
+- `NCSS` 主线数据和 `51job` 校招样本属于稳定交付物，适合进入版本库
+- `51job` 社招顺序抓取的 cursor、progress、rolling RAW 和 rolling clean 表属于本地运行产物，默认不提交
+- `data/runtime/` 只放浏览器 profile 和临时运行文件，始终不纳入版本库

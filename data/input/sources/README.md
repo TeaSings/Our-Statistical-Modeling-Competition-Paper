@@ -11,4 +11,4 @@
 
 - 选数据源时先看 `job_source_registry.json`
 - 需要补抓官方参考页时用 `reference_pages.csv`
-- 需要人工分工补链时运行 `src/build_manual_seed_sheet.py`
+- 需要人工分工补链时运行 `src/tools/build_manual_seed_sheet.py`

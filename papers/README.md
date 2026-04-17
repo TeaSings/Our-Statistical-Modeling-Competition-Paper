@@ -1,17 +1,19 @@
 # papers 说明
 
-这个目录存放参考论文原文和论文下载记录，不再与 `docs/` 混放。
+这个目录只存放论文原文和下载记录，不再与 `docs/` 混放。
 
 ## 当前结构
 
 | 路径 | 作用 |
 | --- | --- |
-| `reference_library/pdfs/04_china_studies/LLM_Work_China_CER_2025.pdf` | 当前项目重点参考论文，用于借鉴职业暴露度构造、数据组织方式和实证框架 |
-| `reference_library/pdfs/` | 分类整理后的参考论文 PDF 库 |
-| `reference_library/download_results.csv` | 参考论文下载记录与结果日志 |
+| `pdfs/01_foundations/` | 劳动经济学与自动化基础文献 |
+| `pdfs/02_ai_employment/` | AI 与就业、技能需求变化相关论文 |
+| `pdfs/03_text_methods/` | 招聘文本解析、技能抽取方法论文 |
+| `pdfs/04_china_studies/` | 中国劳动力市场与招聘文本相关研究 |
+| `download_results.csv` | 论文下载结果与记录 |
 
-## 使用建议
+## 维护原则
 
-- 论文内容解读放在 `docs/` 中
-- `papers/` 只保留原始论文文件、目录说明和必要的下载记录
-- 不再在 `docs/` 中保留论文副本，避免重复和混乱
+- `papers/` 只放论文 PDF、目录说明和下载记录
+- 论文解读、方法笔记和项目讨论统一放到 `docs/`
+- 不再创建 `papers/reference_library/` 或 `papers/libraries/` 这类额外中间层
