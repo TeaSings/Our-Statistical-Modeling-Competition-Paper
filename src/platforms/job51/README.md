@@ -44,7 +44,6 @@ python src/platforms/job51/fetch_campus_jobs.py --workers 12
 ```powershell
 python src/platforms/job51/run_sequential_social_crawl.py `
   --transport browser `
-  --browser-cdp-url http://127.0.0.1:9222 `
   --browser-min-interval 0.6 `
   --browser-max-retries 4 `
   --manual-verify `
@@ -57,6 +56,7 @@ python src/platforms/job51/run_sequential_social_crawl.py `
 这个入口的默认特点：
 
 - 单浏览器会话、低速顺序推进，尽量降低 `405` 和滑块重复触发概率
+- 开启 `--manual-verify` 时，会自动启动一个本地可见浏览器并附着，不再要求手动先准备 `9222` 端口
 - 自动把当前职业、地区、批次位置写入 `data/raw/51job/manifests/51job_social_cursor.json`
 - 当前批次内部也会保存页级断点，中途中断后可从上次停下的位置继续
 - 会持续写入 `data/raw/51job/manifests/51job_social_progress.json`，供 watcher 读取
@@ -70,7 +70,6 @@ python src/platforms/job51/run_sequential_social_crawl.py `
 ```powershell
 python src/platforms/job51/fetch_social_jobs.py `
   --transport browser `
-  --browser-cdp-url http://127.0.0.1:9222 `
   --browser-min-interval 0.6 `
   --browser-max-retries 4 `
   --manual-verify `

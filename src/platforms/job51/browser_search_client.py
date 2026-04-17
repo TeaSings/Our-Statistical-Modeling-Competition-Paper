@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import socket
+import subprocess
 import sys
 import time
 from dataclasses import dataclass
@@ -59,6 +61,8 @@ class BrowserSearchClient:
         self._playwright = self._playwright_manager.start()
         self._browser = None
         self._attached_via_cdp = False
+        self._spawned_browser_process: subprocess.Popen[str] | None = None
+        self._owns_browser_process = False
         if self.cdp_url:
             self._browser = self._playwright.chromium.connect_over_cdp(self.cdp_url)
             self._attached_via_cdp = True
@@ -68,6 +72,12 @@ class BrowserSearchClient:
             self._page = self._context.pages[0] if self._context.pages else self._context.new_page()
             self._last_request_at = 0.0
             self._prime()
+            return
+
+        # When manual verification is enabled, auto-start a real visible browser
+        # and attach over CDP so the user no longer has to launch port 9222 manually.
+        if self.allow_manual_verification:
+            self._launch_auto_debug_browser()
             return
 
         launch_args = {
@@ -105,6 +115,76 @@ class BrowserSearchClient:
         self._last_request_at = 0.0
         self._prime()
 
+    def _resolve_profile_dir(self) -> Path:
+        profile_dir = Path(self.user_data_dir or "data/runtime/51job/browser_profile_auto")
+        if not profile_dir.is_absolute():
+            profile_dir = ROOT_DIR / profile_dir
+        # Keep the auto-started browser on a dedicated sub-profile so it does not
+        # conflict with other normal Edge / Chrome sessions.
+        profile_dir = profile_dir / "manual_verify_cdp"
+        profile_dir.mkdir(parents=True, exist_ok=True)
+        return profile_dir
+
+    def _pick_free_port(self) -> int:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.bind(("127.0.0.1", 0))
+            return int(sock.getsockname()[1])
+
+    def _connect_over_cdp_with_retry(self, cdp_url: str, timeout_seconds: float = 20.0) -> Any:
+        deadline = time.time() + timeout_seconds
+        last_error = ""
+        while time.time() < deadline:
+            if self._spawned_browser_process is not None and self._spawned_browser_process.poll() is not None:
+                raise RuntimeError(
+                    "auto-started browser exited before CDP became ready; "
+                    f"return_code={self._spawned_browser_process.returncode}"
+                )
+            try:
+                browser = self._playwright.chromium.connect_over_cdp(cdp_url)
+                if browser.contexts:
+                    return browser
+                last_error = f"no browser contexts available at {cdp_url}"
+                try:
+                    browser.close()
+                except Exception:
+                    pass
+            except Exception as exc:
+                last_error = repr(exc)
+            time.sleep(0.5)
+        raise RuntimeError(f"timed out waiting for CDP browser at {cdp_url}: {last_error}")
+
+    def _launch_auto_debug_browser(self) -> None:
+        profile_dir = self._resolve_profile_dir()
+        port = self._pick_free_port()
+        cdp_url = f"http://127.0.0.1:{port}"
+        launch_args = [
+            self.browser_path,
+            f"--user-data-dir={profile_dir}",
+            f"--remote-debugging-port={port}",
+            "--no-first-run",
+            "--disable-blink-features=AutomationControlled",
+            SEARCH_PAGE_URL,
+        ]
+        print(
+            "Auto-starting a local browser for 51job manual verification: "
+            f"{cdp_url}",
+            flush=True,
+        )
+        self._spawned_browser_process = subprocess.Popen(
+            launch_args,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            text=True,
+        )
+        self._browser = self._connect_over_cdp_with_retry(cdp_url)
+        self._attached_via_cdp = True
+        self._owns_browser_process = True
+        self.cdp_url = cdp_url
+        self._context = self._browser.contexts[0]
+        self._page = self._context.pages[0] if self._context.pages else self._context.new_page()
+        self._last_request_at = 0.0
+        self._prime()
+
     def _prime(self) -> None:
         self._page.goto(SEARCH_PAGE_URL, wait_until="domcontentloaded", timeout=int(self.timeout * 1000))
         self._page.wait_for_timeout(self.ready_wait_ms)
@@ -118,7 +198,16 @@ class BrowserSearchClient:
                 if self._browser is not None:
                     self._browser.close()
             finally:
-                self._playwright.stop()
+                try:
+                    if self._owns_browser_process and self._spawned_browser_process is not None:
+                        if self._spawned_browser_process.poll() is None:
+                            self._spawned_browser_process.terminate()
+                            try:
+                                self._spawned_browser_process.wait(timeout=5)
+                            except subprocess.TimeoutExpired:
+                                self._spawned_browser_process.kill()
+                finally:
+                    self._playwright.stop()
 
     def _reprime(self) -> None:
         try:

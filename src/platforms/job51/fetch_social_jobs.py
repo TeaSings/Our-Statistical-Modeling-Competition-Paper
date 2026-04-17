@@ -259,7 +259,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--browser-visible",
         action="store_true",
-        help="Run 51job browser transport with a visible window instead of headless mode",
+        help="Run 51job browser transport with a visible Playwright window when not auto-starting a manual-verification browser",
     )
     parser.add_argument(
         "--browser-profile-dir",
@@ -269,7 +269,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--browser-cdp-url",
         default="",
-        help="Attach browser transport to an already-running real browser via CDP, for example http://127.0.0.1:9222",
+        help="Optional CDP endpoint for an already-running real browser; when omitted with --manual-verify, the script auto-starts a local browser",
     )
     parser.add_argument(
         "--browser-min-interval",

@@ -68,7 +68,6 @@ python src/platforms/job51/fetch_campus_jobs.py --workers 12
 ```powershell
 python src/platforms/job51/run_sequential_social_crawl.py `
   --transport browser `
-  --browser-cdp-url http://127.0.0.1:9222 `
   --browser-min-interval 0.6 `
   --browser-max-retries 4 `
   --manual-verify `
@@ -91,7 +90,6 @@ python src/platforms/job51/run_sequential_social_crawl.py `
 ```powershell
 python src/platforms/job51/fetch_social_jobs.py `
   --transport browser `
-  --browser-cdp-url http://127.0.0.1:9222 `
   --browser-min-interval 0.6 `
   --browser-max-retries 4 `
   --function-code 0106 `

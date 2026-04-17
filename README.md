@@ -40,7 +40,6 @@ python -m pip install -r requirements.txt
 ```powershell
 python src/platforms/job51/run_sequential_social_crawl.py `
   --transport browser `
-  --browser-cdp-url http://127.0.0.1:9222 `
   --browser-min-interval 0.6 `
   --browser-max-retries 4 `
   --manual-verify `
@@ -80,6 +79,8 @@ python src/clean_jobs.py `
 - `data/raw/51job/manifests/51job_social_progress.json`
 - `data/raw/51job/records/51job_social_jobs_raw.jsonl`
 - `data/processed/51job/51job_social_jobs_clean.csv`
+
+现在如果你开启了 `--manual-verify`，脚本会自动拉起一个本地可见浏览器并附着过去，不再要求你手动先准备 `http://127.0.0.1:9222`。
 
 其中 `cursor`、`progress` 和调度日志属于运行态文件，默认不提交；`raw` 与 `clean` 则可以按阶段固化成数据快照，推送给组员直接分析。
 
