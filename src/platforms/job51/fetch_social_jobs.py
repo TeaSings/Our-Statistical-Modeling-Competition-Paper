@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import argparse
+import collections
 import json
 import math
+import queue
 import sys
 import threading
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import Future, ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable
@@ -31,6 +33,32 @@ CAP_THRESHOLD = 990
 PAGE_SIZE = 100
 ROOT_AREA_CODE = "000000"
 ROOT_AREA_LABEL = "全国"
+MAX_BROWSER_FETCH_WORKERS = 16
+MAX_BROWSER_PLANNING_WORKERS = 12
+DEFAULT_PROGRESS_WRITE_INTERVAL = 2.0
+DEFAULT_MANIFEST_FLUSH_INTERVAL = 2.0
+BROWSER_SPEED_PROFILES: dict[str, dict[str, int]] = {
+    "conservative": {
+        "cap_adjust": -2,
+        "manual_verify_cap": 10,
+        "cdp_cap": 8,
+    },
+    "balanced": {
+        "cap_adjust": 0,
+        "manual_verify_cap": 12,
+        "cdp_cap": 10,
+    },
+    "aggressive": {
+        "cap_adjust": 2,
+        "manual_verify_cap": 14,
+        "cdp_cap": 12,
+    },
+    "max": {
+        "cap_adjust": 4,
+        "manual_verify_cap": 16,
+        "cdp_cap": 14,
+    },
+}
 
 
 @dataclass
@@ -45,6 +73,8 @@ class Partition:
     function_label: str
     job_area: str
     job_area_label: str
+    root_job_area: str = ""
+    root_job_area_label: str = ""
     depth: int = 0
     total_count: int = 0
     status: str = ""
@@ -71,6 +101,17 @@ class ProgressState:
     empty_jd_dropped: int = 0
     current_label: str = ""
     status_note: str = ""
+    browser_requested_workers: int = 0
+    browser_planning_workers: int = 0
+    browser_fetch_workers: int = 0
+    browser_speed_profile: str = ""
+    browser_max_effective_workers: int = 0
+    manual_verification_active: bool = False
+    manual_verification_owner: str = ""
+    manual_verification_wait_seconds: int = 0
+    manual_verification_pause_count: int = 0
+    manual_verification_started_at: float = 0.0
+    manual_verification_last_resumed_at: float = 0.0
     last_render_at: float = 0.0
 
     def render(self, force: bool = False) -> None:
@@ -138,9 +179,111 @@ class ProgressState:
             "empty_jd_dropped": self.empty_jd_dropped,
             "current_label": self.current_label,
             "status_note": self.status_note,
+            "browser_requested_workers": self.browser_requested_workers,
+            "browser_planning_workers": self.browser_planning_workers,
+            "browser_fetch_workers": self.browser_fetch_workers,
+            "browser_speed_profile": self.browser_speed_profile,
+            "browser_max_effective_workers": self.browser_max_effective_workers,
+            "manual_verification_active": self.manual_verification_active,
+            "manual_verification_owner": self.manual_verification_owner,
+            "manual_verification_wait_seconds": self.manual_verification_wait_seconds,
+            "manual_verification_pause_count": self.manual_verification_pause_count,
+            "manual_verification_started_at": self.manual_verification_started_at,
+            "manual_verification_last_resumed_at": self.manual_verification_last_resumed_at,
             "started_at": self.started_at,
             "updated_at": time.time(),
         }
+
+
+@dataclass(frozen=True)
+class BrowserExecutionPlan:
+    requested_workers: int
+    planning_workers: int
+    fetch_workers: int
+    speed_profile: str
+    max_effective_workers: int
+    reason: str
+
+
+@dataclass
+class PlanningSnapshot:
+    final_partitions: list[Partition] = field(default_factory=list)
+    manifest_rows: list[dict[str, Any]] = field(default_factory=list)
+    partition_total: int = 0
+    final_partition_total: int = 0
+    capped_partition_total: int = 0
+
+
+@dataclass
+class ThrottledAction:
+    min_interval_seconds: float
+    last_run_at: float = 0.0
+
+    def ready(self, *, force: bool = False) -> bool:
+        now = time.time()
+        if force or self.min_interval_seconds <= 0 or now - self.last_run_at >= self.min_interval_seconds:
+            self.last_run_at = now
+            return True
+        return False
+
+
+class BrowserWorkerPool:
+    def __init__(self, worker_count: int, clone_factory: Callable[[int], Any]) -> None:
+        self._worker_count = max(worker_count, 1)
+        self._clone_factory = clone_factory
+        self._queue: queue.Queue[Any] = queue.Queue()
+        self._threads: list[threading.Thread] = []
+        self._closed = False
+        for worker_index in range(self._worker_count):
+            thread = threading.Thread(
+                target=self._worker_main,
+                args=(worker_index,),
+                name=f"browser-worker-pool-{worker_index + 1:02d}",
+                daemon=True,
+            )
+            thread.start()
+            self._threads.append(thread)
+
+    def _worker_main(self, worker_index: int) -> None:
+        client = None
+        try:
+            while True:
+                item = self._queue.get()
+                if item is None:
+                    break
+                future, fn, args = item
+                if future.cancelled():
+                    continue
+                try:
+                    if client is None:
+                        client = self._clone_factory(worker_index)
+                    if not future.set_running_or_notify_cancel():
+                        continue
+                    result = fn(client, *args)
+                except BaseException as exc:
+                    future.set_exception(exc)
+                else:
+                    future.set_result(result)
+        finally:
+            if client is not None:
+                try:
+                    close_client(client)
+                except Exception:
+                    pass
+
+    def submit(self, fn: Callable[..., Any], *args: Any) -> Future:
+        future: Future = Future()
+        self._queue.put((future, fn, args))
+        return future
+
+    def close(self) -> None:
+        if self._closed:
+            return
+        self._closed = True
+        for _ in self._threads:
+            self._queue.put(None)
+        for thread in self._threads:
+            thread.join(timeout=30)
 
 
 def format_seconds(seconds: int | None) -> str:
@@ -157,22 +300,137 @@ def format_seconds(seconds: int | None) -> str:
     return f"{sec}s"
 
 
+def resolve_browser_execution_plan(
+    client: BrowserSearchClient,
+    *,
+    requested_workers: int,
+    page_size: int,
+) -> BrowserExecutionPlan:
+    requested = max(requested_workers, 1)
+    speed_profile = clean_text(getattr(client, "speed_profile", "balanced")).lower() or "balanced"
+    if speed_profile not in BROWSER_SPEED_PROFILES:
+        speed_profile = "balanced"
+    explicit_cap = max(int(getattr(client, "max_effective_workers", 0) or 0), 0)
+    if requested <= 1:
+        return BrowserExecutionPlan(
+            requested_workers=requested,
+            planning_workers=1,
+            fetch_workers=1,
+            speed_profile=speed_profile,
+            max_effective_workers=explicit_cap,
+            reason="workers=1 keeps the browser transport single-lane",
+        )
+
+    interval = max(float(client.min_interval_seconds), 0.0)
+    if interval >= 1.20:
+        cap = 4
+    elif interval >= 0.90:
+        cap = 6
+    elif interval >= 0.60:
+        cap = 12
+    elif interval >= 0.45:
+        cap = 14
+    elif interval >= 0.30:
+        cap = 16
+    elif interval >= 0.20:
+        cap = 18
+    else:
+        cap = 20
+
+    if max(page_size, 1) >= 80:
+        cap += 1
+    if max(page_size, 1) >= 100:
+        cap += 2
+    elif max(page_size, 1) <= 15:
+        cap -= 2
+    elif max(page_size, 1) <= 30:
+        cap -= 1
+
+    profile_settings = BROWSER_SPEED_PROFILES[speed_profile]
+    cap += int(profile_settings["cap_adjust"])
+    if not client.headless:
+        cap -= 1
+    shared_cdp_mode = bool(getattr(client, "_attached_via_cdp", False))
+    cap_limit_reason = ""
+    if client.allow_manual_verification:
+        manual_verify_cap = int(profile_settings["manual_verify_cap"])
+        if explicit_cap > 0:
+            manual_verify_cap = min(manual_verify_cap, explicit_cap)
+        if cap > manual_verify_cap:
+            cap_limit_reason = f"shared manual-verification profile cap {manual_verify_cap}"
+        cap = min(cap, manual_verify_cap)
+    elif shared_cdp_mode:
+        cdp_cap = int(profile_settings["cdp_cap"])
+        if explicit_cap > 0:
+            cdp_cap = min(cdp_cap, explicit_cap)
+        if cap > cdp_cap:
+            cap_limit_reason = f"shared CDP profile cap {cdp_cap}"
+        cap = min(cap, cdp_cap)
+
+    if explicit_cap > 0 and cap > explicit_cap:
+        cap = explicit_cap
+        cap_limit_reason = f"explicit browser max-effective-workers cap {explicit_cap}"
+
+    cap = max(1, min(cap, MAX_BROWSER_FETCH_WORKERS))
+    fetch_workers = max(1, min(requested, cap))
+    planning_workers = max(1, min(fetch_workers, MAX_BROWSER_PLANNING_WORKERS))
+    if client.allow_manual_verification and fetch_workers < requested:
+        reason = (
+            "manual verification shared-browser mode auto-scaled to "
+            f"{fetch_workers} lanes "
+            f"(profile={speed_profile}, interval={interval:.2f}s, page_size={max(page_size, 1)}"
+            f"{'; ' + cap_limit_reason if cap_limit_reason else ''})"
+        )
+    elif shared_cdp_mode and fetch_workers < requested:
+        reason = (
+            "shared CDP browser mode auto-scaled to "
+            f"{fetch_workers} lanes "
+            f"(profile={speed_profile}, interval={interval:.2f}s, page_size={max(page_size, 1)}"
+            f"{'; ' + cap_limit_reason if cap_limit_reason else ''})"
+        )
+    elif fetch_workers < requested:
+        reason = (
+            "requested workers were capped by browser speed heuristics "
+            f"(profile={speed_profile}, interval={interval:.2f}s, page_size={max(page_size, 1)}"
+            f"{'; ' + cap_limit_reason if cap_limit_reason else ''})"
+        )
+    else:
+        reason = (
+            "parallel browser lanes enabled from the current workers/page-size/min-interval settings "
+            f"(profile={speed_profile}, interval={interval:.2f}s, page_size={max(page_size, 1)})"
+        )
+    return BrowserExecutionPlan(
+        requested_workers=requested,
+        planning_workers=planning_workers,
+        fetch_workers=fetch_workers,
+        speed_profile=speed_profile,
+        max_effective_workers=explicit_cap,
+        reason=reason,
+    )
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Fetch full social-recruiting jobs from 51job")
     parser.add_argument(
         "--output-raw",
-        default="data/raw/51job/records/51job_social_jobs_raw.jsonl",
+        default="data/raw/51job/records/51job_social_jobs_raw_with_publish.jsonl",
         help="Output JSONL with normalized 51job social job rows",
     )
     parser.add_argument(
         "--partition-manifest",
-        default="data/raw/51job/manifests/51job_social_partition_manifest.jsonl",
+        default="data/raw/51job/manifests/51job_social_partition_manifest_with_publish.jsonl",
         help="Partition planning manifest JSONL",
     )
     parser.add_argument(
         "--progress-file",
-        default="data/raw/51job/manifests/51job_social_progress.json",
+        default="data/raw/51job/manifests/51job_social_progress_with_publish.json",
         help="Progress snapshot JSON file",
+    )
+    parser.add_argument(
+        "--progress-write-interval",
+        type=float,
+        default=DEFAULT_PROGRESS_WRITE_INTERVAL,
+        help="Minimum seconds between progress snapshot writes; smaller values improve checkpoint freshness but add more scheduler I/O",
     )
     parser.add_argument(
         "--function-file",
@@ -185,10 +443,21 @@ def parse_args() -> argparse.Namespace:
         help="Cached area tree JSON extracted from the live search bundle",
     )
     parser.add_argument(
+        "--refresh-taxonomies",
+        action="store_true",
+        help="Force a live refresh of the cached 51job function/area taxonomies before crawling",
+    )
+    parser.add_argument(
+        "--taxonomy-timeout",
+        type=float,
+        default=12.0,
+        help="Per-request timeout in seconds for live taxonomy refresh; ignored unless a live refresh is attempted",
+    )
+    parser.add_argument(
         "--workers",
         type=int,
         default=6,
-        help="Concurrent workers for page fetching",
+        help="Requested concurrent workers; browser mode auto-caps this into an adaptive effective speed",
     )
     parser.add_argument(
         "--page-size",
@@ -275,13 +544,25 @@ def parse_args() -> argparse.Namespace:
         "--browser-min-interval",
         type=float,
         default=0.35,
-        help="Minimum seconds between browser-side 51job API requests",
+        help="Minimum seconds between requests from one browser worker; together with --workers determines effective speed",
     )
     parser.add_argument(
         "--browser-max-retries",
         type=int,
         default=3,
         help="Maximum retries for one browser-side 51job API request",
+    )
+    parser.add_argument(
+        "--browser-speed-profile",
+        choices=sorted(BROWSER_SPEED_PROFILES.keys()),
+        default="balanced",
+        help="Adaptive browser speed profile; more aggressive profiles allow higher effective worker caps",
+    )
+    parser.add_argument(
+        "--browser-max-effective-workers",
+        type=int,
+        default=0,
+        help="Optional hard ceiling for the auto-derived effective browser workers; 0 keeps pure profile-based auto scaling",
     )
     parser.add_argument(
         "--manual-verify",
@@ -297,7 +578,15 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def write_progress(path: Path, state: ProgressState) -> None:
+def write_progress(
+    path: Path,
+    state: ProgressState,
+    *,
+    force: bool = False,
+    throttle: ThrottledAction | None = None,
+) -> None:
+    if throttle is not None and not throttle.ready(force=force):
+        return
     ensure_parent(path)
     path.write_text(json.dumps(state.snapshot(), ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -307,11 +596,31 @@ def refresh_taxonomies(
     function_path: Path,
     area_path: Path,
     verbose: bool = True,
+    refresh_live: bool = False,
+    timeout_seconds: float = 12.0,
 ) -> tuple[list[FunctionCode], list[AreaNode], dict[str, AreaNode]]:
+    if not refresh_live and area_path.exists() and function_path.exists():
+        if verbose:
+            print(
+                "Using cached 51job taxonomies; pass --refresh-taxonomies to force a live refresh.",
+                flush=True,
+            )
+        function_codes = load_function_codes(function_path)
+        area_tree = load_area_tree(area_path)
+        area_index = flatten_area_index(area_tree)
+        return function_codes, area_tree, area_index
+
     if verbose:
-        print("Refreshing 51job live taxonomies...", flush=True)
+        print(
+            f"Refreshing 51job live taxonomies (timeout={max(timeout_seconds, 1.0):.1f}s)...",
+            flush=True,
+        )
     try:
-        fetch_search_taxonomies(area_output=area_path, function_output=function_path)
+        fetch_search_taxonomies(
+            area_output=area_path,
+            function_output=function_path,
+            timeout=max(timeout_seconds, 1.0),
+        )
     except Exception as exc:
         if not area_path.exists() or not function_path.exists():
             raise
@@ -402,6 +711,119 @@ def load_existing_job_ids(path: Path) -> set[str]:
     return job_ids
 
 
+def serialize_partition(partition: Partition) -> dict[str, Any]:
+    return {
+        "function_code": partition.function_code,
+        "function_label": partition.function_label,
+        "job_area": partition.job_area,
+        "job_area_label": partition.job_area_label,
+        "root_job_area": partition.root_job_area or partition.job_area,
+        "root_job_area_label": partition.root_job_area_label or partition.job_area_label,
+        "depth": int(partition.depth),
+        "total_count": int(partition.total_count),
+        "status": clean_text(partition.status),
+    }
+
+
+def deserialize_partition(payload: dict[str, Any]) -> Partition:
+    return Partition(
+        function_code=clean_text(payload.get("function_code", "")),
+        function_label=clean_text(payload.get("function_label", "")),
+        job_area=clean_text(payload.get("job_area", "")),
+        job_area_label=clean_text(payload.get("job_area_label", "")),
+        root_job_area=clean_text(payload.get("root_job_area", "")),
+        root_job_area_label=clean_text(payload.get("root_job_area_label", "")),
+        depth=int(payload.get("depth") or 0),
+        total_count=int(payload.get("total_count") or 0),
+        status=clean_text(payload.get("status", "")),
+    )
+
+
+def build_partition_manifest_row(
+    partition: Partition,
+    *,
+    is_capped_leaf: bool = False,
+) -> dict[str, Any]:
+    row = serialize_partition(partition)
+    row["is_capped_leaf"] = bool(is_capped_leaf)
+    return row
+
+
+def serialize_planning_snapshot(snapshot: PlanningSnapshot) -> dict[str, Any]:
+    return {
+        "partition_total": int(snapshot.partition_total),
+        "final_partition_total": int(snapshot.final_partition_total),
+        "capped_partition_total": int(snapshot.capped_partition_total),
+        "manifest_rows": list(snapshot.manifest_rows),
+        "final_partitions": [serialize_partition(partition) for partition in snapshot.final_partitions],
+    }
+
+
+def deserialize_planning_snapshot(payload: dict[str, Any]) -> PlanningSnapshot:
+    manifest_rows = list(payload.get("manifest_rows") or [])
+    final_partitions = [
+        deserialize_partition(row)
+        for row in payload.get("final_partitions", []) or []
+    ]
+    partition_total = int(payload.get("partition_total") or len(manifest_rows))
+    final_partition_total = int(
+        payload.get("final_partition_total")
+        or sum(1 for row in manifest_rows if clean_text(row.get("status", "")) == "final")
+    )
+    capped_partition_total = int(
+        payload.get("capped_partition_total")
+        or sum(1 for row in manifest_rows if bool(row.get("is_capped_leaf")))
+    )
+    return PlanningSnapshot(
+        final_partitions=final_partitions,
+        manifest_rows=manifest_rows,
+        partition_total=partition_total,
+        final_partition_total=final_partition_total,
+        capped_partition_total=capped_partition_total,
+    )
+
+
+def split_planning_snapshot_by_root(snapshot: PlanningSnapshot) -> dict[str, PlanningSnapshot]:
+    ordered_root_keys: list[str] = []
+    manifest_rows_by_root: dict[str, list[dict[str, Any]]] = {}
+    final_partitions_by_root: dict[str, list[Partition]] = {}
+
+    for row in snapshot.manifest_rows:
+        root_job_area = clean_text(row.get("root_job_area", "")) or clean_text(row.get("job_area", ""))
+        if not root_job_area:
+            continue
+        if root_job_area not in manifest_rows_by_root:
+            manifest_rows_by_root[root_job_area] = []
+            ordered_root_keys.append(root_job_area)
+        manifest_rows_by_root[root_job_area].append(row)
+
+    for partition in snapshot.final_partitions:
+        root_job_area = partition.root_job_area or partition.job_area
+        if not root_job_area:
+            continue
+        if root_job_area not in final_partitions_by_root:
+            final_partitions_by_root[root_job_area] = []
+            if root_job_area not in ordered_root_keys:
+                ordered_root_keys.append(root_job_area)
+        final_partitions_by_root[root_job_area].append(partition)
+
+    grouped_snapshots: dict[str, PlanningSnapshot] = {}
+    for root_job_area in ordered_root_keys:
+        root_manifest_rows = manifest_rows_by_root.get(root_job_area, [])
+        grouped_snapshots[root_job_area] = PlanningSnapshot(
+            final_partitions=list(final_partitions_by_root.get(root_job_area, [])),
+            manifest_rows=list(root_manifest_rows),
+            partition_total=len(root_manifest_rows),
+            final_partition_total=sum(
+                1 for row in root_manifest_rows if clean_text(row.get("status", "")) == "final"
+            ),
+            capped_partition_total=sum(
+                1 for row in root_manifest_rows if bool(row.get("is_capped_leaf"))
+            ),
+        )
+    return grouped_snapshots
+
+
 def get_child_areas(area_code: str, area_tree: list[AreaNode], area_index: dict[str, AreaNode]) -> list[AreaNode]:
     if area_code == ROOT_AREA_CODE:
         return get_root_children(area_tree)
@@ -473,6 +895,11 @@ def normalize_job_row(item: dict[str, Any], partition: Partition, page_num: int)
         "salary_raw": clean_text(item.get("provideSalaryString", "")),
         "education_raw": clean_text(item.get("degreeString", "")),
         "experience_raw": clean_text(item.get("workYearString", "")),
+        "publish_time_raw": clean_text(
+            item.get("issueDateString", "") or item.get("confirmDateString", "")
+        ),
+        "update_time_raw": clean_text(item.get("updateDateTime", "")),
+        "apply_time_text_raw": clean_text(item.get("applyTimeText", "")),
         "company_industry_raw": normalize_company_industry(item),
         "company_size_raw": clean_text(item.get("companySizeString", "")),
         "job_tags_raw": " | ".join(clean_text(tag) for tag in tags if clean_text(tag)),
@@ -492,6 +919,196 @@ def normalize_job_row(item: dict[str, Any], partition: Partition, page_num: int)
     }
 
 
+def plan_partition_scope(
+    *,
+    client: Any,
+    function_codes: list[FunctionCode],
+    area_tree: list[AreaNode],
+    area_index: dict[str, AreaNode],
+    manifest_path: Path,
+    progress_path: Path | None,
+    state: ProgressState,
+    cap_threshold: int,
+    workers: int = 1,
+    page_size: int = PAGE_SIZE,
+    browser_plan: BrowserExecutionPlan | None = None,
+    start_job_area: str = "",
+    root_area_offset: int = 0,
+    root_area_limit: int = 0,
+    append_manifest: bool = False,
+    write_manifest: bool = True,
+    progress_write_interval: float = DEFAULT_PROGRESS_WRITE_INTERVAL,
+    render_progress: bool = True,
+) -> PlanningSnapshot:
+    planning_snapshot = PlanningSnapshot()
+    planning_workers = 1
+    parallel_browser_pool: BrowserWorkerPool | None = None
+    progress_writer = ThrottledAction(max(progress_write_interval, 0.0))
+    if isinstance(client, BrowserSearchClient):
+        resolved_browser_plan = browser_plan or resolve_browser_execution_plan(
+            client,
+            requested_workers=max(workers, 1),
+            page_size=max(page_size, 1),
+        )
+        planning_workers = resolved_browser_plan.planning_workers
+        if planning_workers > 1:
+            parallel_browser_pool = BrowserWorkerPool(
+                planning_workers,
+                lambda worker_index: client.clone_for_parallel_worker(
+                    worker_index,
+                    headless=True,
+                ),
+            )
+
+    manifest_file = None
+    if write_manifest:
+        ensure_parent(manifest_path)
+        manifest_mode = "a" if append_manifest else "w"
+        manifest_file = manifest_path.open(manifest_mode, encoding="utf-8")
+    manifest_flush_gate = ThrottledAction(DEFAULT_MANIFEST_FLUSH_INTERVAL)
+    try:
+        for fn in function_codes:
+            if start_job_area:
+                start_area = area_index.get(start_job_area)
+                queue = collections.deque([
+                    Partition(
+                        function_code=fn.function_code,
+                        function_label=fn.function_label,
+                        job_area=start_job_area,
+                        job_area_label=clean_text(start_area.label if start_area else start_job_area),
+                        root_job_area=start_job_area,
+                        root_job_area_label=clean_text(start_area.label if start_area else start_job_area),
+                        depth=1,
+                    )
+                ])
+            else:
+                root_children = select_root_children(
+                    area_tree,
+                    offset=max(root_area_offset, 0),
+                    limit=max(root_area_limit, 0),
+                )
+                queue = collections.deque([
+                    Partition(
+                        function_code=fn.function_code,
+                        function_label=fn.function_label,
+                        job_area=child.area_id,
+                        job_area_label=child.label,
+                        root_job_area=child.area_id,
+                        root_job_area_label=child.label,
+                        depth=1,
+                    )
+                    for child in root_children
+                ])
+            if not queue:
+                queue = collections.deque(
+                    [
+                        Partition(
+                            function_code=fn.function_code,
+                            function_label=fn.function_label,
+                            job_area=ROOT_AREA_CODE,
+                            job_area_label=ROOT_AREA_LABEL,
+                            root_job_area=ROOT_AREA_CODE,
+                            root_job_area_label=ROOT_AREA_LABEL,
+                            depth=0,
+                        )
+                    ]
+                )
+            seen_partitions: set[str] = set()
+            state.current_label = f"{fn.function_label} ({fn.function_code})"
+            if isinstance(client, BrowserSearchClient) and planning_workers > 1:
+                state.status_note = f"plan x{planning_workers}"
+            if render_progress:
+                state.render(force=True)
+            while queue:
+                chunk_size = max(planning_workers, 1)
+                chunk: list[Partition] = []
+                while queue and len(chunk) < chunk_size:
+                    partition = queue.popleft()
+                    if partition.key in seen_partitions:
+                        continue
+                    seen_partitions.add(partition.key)
+                    chunk.append(partition)
+                if not chunk:
+                    continue
+
+                if parallel_browser_pool is not None and len(chunk) > 1:
+                    futures = [
+                        parallel_browser_pool.submit(fetch_partition_total_task, partition)
+                        for partition in chunk
+                    ]
+                    results = [future.result() for future in futures]
+                else:
+                    results = [
+                        fetch_partition_total_task(client, partition)
+                        for partition in chunk
+                    ]
+
+                for partition, total_count in results:
+                    partition.total_count = total_count
+                    state.partition_total += 1
+                    state.partition_done += 1
+
+                    child_areas = get_child_areas(partition.job_area, area_tree, area_index)
+                    is_capped_leaf = False
+                    if total_count <= 0:
+                        partition.status = "empty"
+                    elif total_count >= cap_threshold and child_areas:
+                        partition.status = "split"
+                        for child in child_areas:
+                            queue.append(
+                                Partition(
+                                    function_code=partition.function_code,
+                                    function_label=partition.function_label,
+                                    job_area=child.area_id,
+                                    job_area_label=child.label,
+                                    root_job_area=partition.root_job_area or partition.job_area,
+                                    root_job_area_label=partition.root_job_area_label or partition.job_area_label,
+                                    depth=partition.depth + 1,
+                                )
+                            )
+                    else:
+                        partition.status = "final"
+                        planning_snapshot.final_partitions.append(partition)
+                        state.final_partition_total += 1
+                        if total_count >= cap_threshold and not child_areas:
+                            is_capped_leaf = True
+                            state.capped_partition_total += 1
+
+                    manifest_row = build_partition_manifest_row(
+                        partition,
+                        is_capped_leaf=is_capped_leaf,
+                    )
+                    planning_snapshot.manifest_rows.append(manifest_row)
+                    if manifest_file is not None:
+                        manifest_file.write(json.dumps(manifest_row, ensure_ascii=False) + "\n")
+                        if manifest_flush_gate.ready():
+                            manifest_file.flush()
+                    if progress_path is not None:
+                        write_progress(progress_path, state, throttle=progress_writer)
+                    if render_progress:
+                        state.render()
+                    if parallel_browser_pool is None:
+                        time.sleep(0.05 if isinstance(client, SearchClient) else 0.02)
+
+            state.function_done += 1
+            if progress_path is not None:
+                write_progress(progress_path, state, force=True, throttle=progress_writer)
+            if render_progress:
+                state.render(force=True)
+
+    finally:
+        if manifest_file is not None:
+            manifest_file.flush()
+            manifest_file.close()
+        if parallel_browser_pool is not None:
+            parallel_browser_pool.close()
+
+    planning_snapshot.partition_total = int(state.partition_total)
+    planning_snapshot.final_partition_total = int(state.final_partition_total)
+    planning_snapshot.capped_partition_total = int(state.capped_partition_total)
+    return planning_snapshot
+
+
 def plan_partitions(
     *,
     client: Any,
@@ -499,119 +1116,40 @@ def plan_partitions(
     area_tree: list[AreaNode],
     area_index: dict[str, AreaNode],
     manifest_path: Path,
-    progress_path: Path,
+    progress_path: Path | None,
     state: ProgressState,
     cap_threshold: int,
+    workers: int = 1,
+    page_size: int = PAGE_SIZE,
+    browser_plan: BrowserExecutionPlan | None = None,
     start_job_area: str = "",
     root_area_offset: int = 0,
     root_area_limit: int = 0,
     append_manifest: bool = False,
     write_manifest: bool = True,
+    progress_write_interval: float = DEFAULT_PROGRESS_WRITE_INTERVAL,
+    render_progress: bool = True,
 ) -> list[Partition]:
-    final_partitions: list[Partition] = []
-    manifest_file = None
-    if write_manifest:
-        ensure_parent(manifest_path)
-        manifest_mode = "a" if append_manifest else "w"
-        manifest_file = manifest_path.open(manifest_mode, encoding="utf-8")
-    try:
-        for fn in function_codes:
-            if start_job_area:
-                start_area = area_index.get(start_job_area)
-                queue = [
-                    Partition(
-                        fn.function_code,
-                        fn.function_label,
-                        start_job_area,
-                        clean_text(start_area.label if start_area else start_job_area),
-                        depth=1,
-                    )
-                ]
-            else:
-                root_children = select_root_children(
-                    area_tree,
-                    offset=max(root_area_offset, 0),
-                    limit=max(root_area_limit, 0),
-                )
-                queue = [
-                    Partition(
-                        fn.function_code,
-                        fn.function_label,
-                        child.area_id,
-                        child.label,
-                        depth=1,
-                    )
-                    for child in root_children
-                ]
-            if not queue:
-                queue = [Partition(fn.function_code, fn.function_label, ROOT_AREA_CODE, ROOT_AREA_LABEL, depth=0)]
-            seen_partitions: set[str] = set()
-            state.current_label = f"{fn.function_label} ({fn.function_code})"
-            state.render(force=True)
-            while queue:
-                partition = queue.pop(0)
-                if partition.key in seen_partitions:
-                    continue
-                seen_partitions.add(partition.key)
-                _, total_count = client.get_job_page(
-                    function_code=partition.function_code,
-                    job_area=partition.job_area,
-                    page_num=1,
-                    page_size=1,
-                )
-                partition.total_count = total_count
-                state.partition_total += 1
-                state.partition_done += 1
-
-                child_areas = get_child_areas(partition.job_area, area_tree, area_index)
-                if total_count <= 0:
-                    partition.status = "empty"
-                elif total_count >= cap_threshold and child_areas:
-                    partition.status = "split"
-                    for child in child_areas:
-                        queue.append(
-                            Partition(
-                                function_code=partition.function_code,
-                                function_label=partition.function_label,
-                                job_area=child.area_id,
-                                job_area_label=child.label,
-                                depth=partition.depth + 1,
-                            )
-                        )
-                else:
-                    partition.status = "final"
-                    final_partitions.append(partition)
-                    state.final_partition_total += 1
-                    if total_count >= cap_threshold and not child_areas:
-                        state.capped_partition_total += 1
-
-                if manifest_file is not None:
-                    manifest_file.write(json.dumps(
-                        {
-                            "function_code": partition.function_code,
-                            "function_label": partition.function_label,
-                            "job_area": partition.job_area,
-                            "job_area_label": partition.job_area_label,
-                            "depth": partition.depth,
-                            "total_count": partition.total_count,
-                            "status": partition.status,
-                        },
-                        ensure_ascii=False,
-                    ) + "\n")
-                    manifest_file.flush()
-                write_progress(progress_path, state)
-                state.render()
-                time.sleep(0.05 if isinstance(client, SearchClient) else 0.02)
-
-            state.function_done += 1
-            write_progress(progress_path, state)
-            state.render(force=True)
-
-    finally:
-        if manifest_file is not None:
-            manifest_file.close()
-
-    return final_partitions
+    return plan_partition_scope(
+        client=client,
+        function_codes=function_codes,
+        area_tree=area_tree,
+        area_index=area_index,
+        manifest_path=manifest_path,
+        progress_path=progress_path,
+        state=state,
+        cap_threshold=cap_threshold,
+        workers=workers,
+        page_size=page_size,
+        browser_plan=browser_plan,
+        start_job_area=start_job_area,
+        root_area_offset=root_area_offset,
+        root_area_limit=root_area_limit,
+        append_manifest=append_manifest,
+        write_manifest=write_manifest,
+        progress_write_interval=progress_write_interval,
+        render_progress=render_progress,
+    ).final_partitions
 
 
 _THREAD_LOCAL = threading.local()
@@ -627,6 +1165,34 @@ def get_thread_client() -> SearchClient:
 
 def fetch_page_task(partition: Partition, page_num: int, page_size: int) -> tuple[Partition, int, int, list[dict[str, Any]]]:
     client = get_thread_client()
+    items, total_count = client.get_job_page(
+        function_code=partition.function_code,
+        job_area=partition.job_area,
+        page_num=page_num,
+        page_size=page_size,
+    )
+    return partition, page_num, total_count, items
+
+
+def fetch_partition_total_task(
+    client: Any,
+    partition: Partition,
+) -> tuple[Partition, int]:
+    _, total_count = client.get_job_page(
+        function_code=partition.function_code,
+        job_area=partition.job_area,
+        page_num=1,
+        page_size=1,
+    )
+    return partition, total_count
+
+
+def fetch_page_task_with_client(
+    client: Any,
+    partition: Partition,
+    page_num: int,
+    page_size: int,
+) -> tuple[Partition, int, int, list[dict[str, Any]]]:
     items, total_count = client.get_job_page(
         function_code=partition.function_code,
         job_area=partition.job_area,
@@ -667,6 +1233,37 @@ def resolve_resume_start_index(
     return min(max(page_done, 0), len(page_tasks))
 
 
+def write_page_items(
+    *,
+    raw_file: Any,
+    items: list[dict[str, Any]],
+    partition: Partition,
+    page_num: int,
+    seen_job_ids: set[str],
+    state: ProgressState,
+    keep_empty_jd: bool,
+    flush_gate: ThrottledAction | None = None,
+    force_flush: bool = False,
+) -> int:
+    emitted = 0
+    for item in items:
+        source_job_id = clean_text(item.get("jobId", ""))
+        if not source_job_id or source_job_id in seen_job_ids:
+            continue
+        row = normalize_job_row(item, partition, page_num)
+        if not row["jd_text_raw"] and not keep_empty_jd:
+            state.empty_jd_dropped += 1
+            continue
+        seen_job_ids.add(source_job_id)
+        raw_file.write(json.dumps(row, ensure_ascii=False) + "\n")
+        emitted += 1
+    if flush_gate is None:
+        raw_file.flush()
+    elif flush_gate.ready(force=force_flush):
+        raw_file.flush()
+    return emitted
+
+
 def build_client(
     *,
     transport: str = "browser",
@@ -677,6 +1274,8 @@ def build_client(
     browser_cdp_url: str = "",
     browser_min_interval: float = 0.35,
     browser_max_retries: int = 3,
+    browser_speed_profile: str = "balanced",
+    browser_max_effective_workers: int = 0,
 ) -> Any:
     if transport == "browser":
         return BrowserSearchClient(
@@ -687,6 +1286,8 @@ def build_client(
             cdp_url=clean_text(browser_cdp_url),
             min_interval_seconds=max(browser_min_interval, 0.0),
             max_retries=max(browser_max_retries, 1),
+            speed_profile=clean_text(browser_speed_profile).lower() or "balanced",
+            max_effective_workers=max(browser_max_effective_workers, 0),
         )
     return SearchClient()
 
@@ -718,6 +1319,9 @@ def crawl_scope(
     write_manifest: bool = True,
     resume_state: dict[str, Any] | None = None,
     progress_callback: Callable[[dict[str, Any]], None] | None = None,
+    existing_job_ids: set[str] | None = None,
+    progress_write_interval: float = DEFAULT_PROGRESS_WRITE_INTERVAL,
+    planned_snapshot: PlanningSnapshot | None = None,
 ) -> dict[str, Any]:
     resume_started_at = 0.0
     if resume_state:
@@ -729,6 +1333,7 @@ def crawl_scope(
         function_total=len(function_codes),
         started_at=resume_started_at or time.time(),
     )
+    progress_writer = ThrottledAction(max(progress_write_interval, 0.0))
     page_tasks: list[tuple[Partition, int]] = []
     next_page_index = 0
 
@@ -736,71 +1341,136 @@ def crawl_scope(
         next_page = None
         if 0 <= next_index < len(page_tasks):
             next_page = describe_page_task(*page_tasks[next_index])
-        return {
-            "stage": state.stage,
-            "function_total": state.function_total,
-            "function_done": state.function_done,
-            "partition_total": state.partition_total,
-            "partition_done": state.partition_done,
-            "final_partition_total": state.final_partition_total,
-            "capped_partition_total": state.capped_partition_total,
-            "page_total": state.page_total,
-            "page_done": state.page_done,
-            "page_failures": state.page_failures,
-            "records_written": state.records_written,
-            "empty_jd_dropped": state.empty_jd_dropped,
-            "current_label": state.current_label,
-            "status_note": state.status_note,
-            "started_at": state.started_at,
-            "resume_page_index": next_index,
-            "resume_next_page": next_page,
-        }
+        snapshot = state.snapshot()
+        snapshot["resume_page_index"] = next_index
+        snapshot["resume_next_page"] = next_page
+        return snapshot
 
-    def emit_progress(*, force_render: bool = False, next_index: int | None = None) -> None:
+    def emit_progress(
+        *,
+        force_render: bool = False,
+        next_index: int | None = None,
+        force_write: bool = False,
+    ) -> None:
         nonlocal next_page_index
         if next_index is not None:
             next_page_index = next_index
-        write_progress(progress_path, state)
+        write_progress(
+            progress_path,
+            state,
+            force=force_write or force_render,
+            throttle=progress_writer,
+        )
         if callable(progress_callback):
             progress_callback(build_checkpoint(next_page_index))
         state.render(force=force_render)
 
-    emit_progress(force_render=True, next_index=0)
+    def default_browser_status_note() -> str:
+        if planned_snapshot is not None and state.stage == "planning":
+            return "plan cached"
+        if browser_plan is None:
+            return ""
+        if state.stage == "planning":
+            return f"plan x{browser_plan.planning_workers}"
+        if state.stage == "fetching":
+            return f"fetch x{browser_plan.fetch_workers}"
+        return ""
 
+    emit_progress(force_render=True, next_index=0, force_write=True)
+
+    browser_plan: BrowserExecutionPlan | None = None
     if isinstance(client, BrowserSearchClient):
+        browser_plan = resolve_browser_execution_plan(
+            client,
+            requested_workers=max(workers, 1),
+            page_size=max(page_size, 1),
+        )
+        print(
+            "Browser execution plan: "
+            f"requested_workers={browser_plan.requested_workers} "
+            f"planning_workers={browser_plan.planning_workers} "
+            f"fetch_workers={browser_plan.fetch_workers} "
+            f"| {browser_plan.reason}",
+            flush=True,
+        )
+        state.browser_requested_workers = browser_plan.requested_workers
+        state.browser_planning_workers = browser_plan.planning_workers
+        state.browser_fetch_workers = browser_plan.fetch_workers
+        state.browser_speed_profile = browser_plan.speed_profile
+        state.browser_max_effective_workers = browser_plan.max_effective_workers
+
         def handle_browser_status(event: str, payload: dict[str, Any]) -> None:
             if event == "manual_verification_waiting":
                 wait_seconds = int(payload.get("wait_seconds") or 0)
+                owner = clean_text(payload.get("owner", "")) or "browser"
+                state.manual_verification_active = True
+                state.manual_verification_owner = owner
+                state.manual_verification_wait_seconds = wait_seconds
+                state.manual_verification_pause_count = int(payload.get("pause_count") or state.manual_verification_pause_count)
+                try:
+                    state.manual_verification_started_at = float(payload.get("started_at") or state.manual_verification_started_at)
+                except (TypeError, ValueError):
+                    pass
                 state.status_note = (
-                    f"waiting manual verification ({wait_seconds}s)"
+                    f"manual verify: {owner} ({wait_seconds}s)"
                     if wait_seconds > 0
-                    else "waiting manual verification"
+                    else f"manual verify: {owner}"
                 )
             elif event == "manual_verification_resumed":
-                state.status_note = ""
+                state.manual_verification_active = False
+                state.manual_verification_wait_seconds = 0
+                try:
+                    state.manual_verification_last_resumed_at = float(
+                        payload.get("last_resumed_at") or state.manual_verification_last_resumed_at
+                    )
+                except (TypeError, ValueError):
+                    pass
+                state.status_note = default_browser_status_note()
             else:
                 return
-            emit_progress(force_render=True)
+            emit_progress(force_render=True, force_write=True)
 
         client.status_callback = handle_browser_status
+        state.status_note = default_browser_status_note()
 
     state.stage = "planning"
-    emit_progress()
-    final_partitions = plan_partitions(
-        client=client,
-        function_codes=function_codes,
-        area_tree=area_tree,
-        area_index=area_index,
-        manifest_path=manifest_path,
-        progress_path=progress_path,
-        state=state,
-        cap_threshold=max(cap_threshold, 1),
-        start_job_area=clean_text(start_job_area),
-        root_area_offset=max(root_area_offset, 0),
-        root_area_limit=max(root_area_limit, 0),
-        append_manifest=append_manifest,
-        write_manifest=write_manifest,
-    )
+    emit_progress(force_write=True)
+    if planned_snapshot is None:
+        planning_snapshot = plan_partition_scope(
+            client=client,
+            function_codes=function_codes,
+            area_tree=area_tree,
+            area_index=area_index,
+            manifest_path=manifest_path,
+            progress_path=progress_path,
+            state=state,
+            cap_threshold=max(cap_threshold, 1),
+            workers=max(workers, 1),
+            page_size=max(page_size, 1),
+            browser_plan=browser_plan,
+            start_job_area=clean_text(start_job_area),
+            root_area_offset=max(root_area_offset, 0),
+            root_area_limit=max(root_area_limit, 0),
+            append_manifest=append_manifest,
+            write_manifest=write_manifest,
+            progress_write_interval=progress_write_interval,
+        )
+    else:
+        planning_snapshot = planned_snapshot
+        state.function_done = len(function_codes)
+        state.partition_total = int(planning_snapshot.partition_total)
+        state.partition_done = int(planning_snapshot.partition_total)
+        state.final_partition_total = int(planning_snapshot.final_partition_total)
+        state.capped_partition_total = int(planning_snapshot.capped_partition_total)
+        state.status_note = default_browser_status_note()
+        emit_progress(force_render=True, force_write=True)
+        print(
+            "Using cached partition plan: "
+            f"final_partitions={planning_snapshot.final_partition_total} "
+            f"partition_total={planning_snapshot.partition_total}",
+            flush=True,
+        )
+    final_partitions = planning_snapshot.final_partitions
 
     effective_page_size = max(page_size, 1)
     for partition in final_partitions:
@@ -819,7 +1489,9 @@ def crawl_scope(
         state.current_label = describe_page_task(*page_tasks[resume_start_index])["label"]
     else:
         state.current_label = ""
-    emit_progress(force_render=True, next_index=resume_start_index)
+    if browser_plan is not None and not state.manual_verification_active:
+        state.status_note = default_browser_status_note()
+    emit_progress(force_render=True, next_index=resume_start_index, force_write=True)
     if resume_start_index > 0:
         if resume_start_index < len(page_tasks):
             print(
@@ -834,7 +1506,10 @@ def crawl_scope(
             )
 
     ensure_parent(output_raw)
-    seen_job_ids: set[str] = load_existing_job_ids(output_raw) if append_output else set()
+    if existing_job_ids is None:
+        seen_job_ids: set[str] = load_existing_job_ids(output_raw) if append_output else set()
+    else:
+        seen_job_ids = existing_job_ids
     raw_mode = "a" if append_output else "w"
     if append_output:
         print(
@@ -843,46 +1518,131 @@ def crawl_scope(
         )
 
     with output_raw.open(raw_mode, encoding="utf-8") as raw_file:
+        raw_flush_gate = ThrottledAction(1.0)
         if isinstance(client, BrowserSearchClient):
-            for page_index, (partition, page_num) in enumerate(page_tasks[resume_start_index:], start=resume_start_index):
-                next_page_index = page_index
-                state.current_label = f"{partition.function_label} | {partition.job_area_label} | page {page_num}"
-                try:
-                    items, _ = client.get_job_page(
-                        function_code=partition.function_code,
-                        job_area=partition.job_area,
+            browser_fetch_workers = browser_plan.fetch_workers if browser_plan is not None else 1
+            if browser_fetch_workers <= 1:
+                for page_index, (partition, page_num) in enumerate(page_tasks[resume_start_index:], start=resume_start_index):
+                    next_page_index = page_index
+                    state.current_label = f"{partition.function_label} | {partition.job_area_label} | page {page_num}"
+                    try:
+                        items, _ = client.get_job_page(
+                            function_code=partition.function_code,
+                            job_area=partition.job_area,
+                            page_num=page_num,
+                            page_size=effective_page_size,
+                        )
+                    except Exception as exc:
+                        print("", flush=True)
+                        print(
+                            f"page fetch failed for {partition.function_code}/{partition.job_area}/page={page_num}: {exc}",
+                            flush=True,
+                        )
+                        state.page_failures += 1
+                        state.status_note = "page fetch failed; rerun will resume from this page"
+                        emit_progress(force_render=True, next_index=page_index, force_write=True)
+                        break
+
+                    emitted = write_page_items(
+                        raw_file=raw_file,
+                        items=items,
+                        partition=partition,
                         page_num=page_num,
-                        page_size=effective_page_size,
+                        seen_job_ids=seen_job_ids,
+                        state=state,
+                        keep_empty_jd=keep_empty_jd,
+                        flush_gate=raw_flush_gate,
                     )
-                except Exception as exc:
-                    print("", flush=True)
-                    print(
-                        f"page fetch failed for {partition.function_code}/{partition.job_area}/page={page_num}: {exc}",
-                        flush=True,
-                    )
-                    state.page_failures += 1
-                    state.status_note = "page fetch failed; rerun will resume from this page"
-                    emit_progress(force_render=True, next_index=page_index)
-                    break
+                    state.records_written += emitted
+                    state.page_done = page_index + 1
+                    if not state.manual_verification_active:
+                        state.status_note = default_browser_status_note()
+                    emit_progress(next_index=page_index + 1)
+            else:
+                browser_pool = BrowserWorkerPool(
+                    browser_fetch_workers,
+                    lambda worker_index: client.clone_for_parallel_worker(
+                        worker_index,
+                        headless=True,
+                    ),
+                )
+                try:
+                    for chunk_start in range(resume_start_index, len(page_tasks), browser_fetch_workers):
+                        chunk = page_tasks[chunk_start : chunk_start + browser_fetch_workers]
+                        futures = [
+                            browser_pool.submit(
+                                fetch_page_task_with_client,
+                                partition,
+                                page_num,
+                                effective_page_size,
+                            )
+                            for partition, page_num in chunk
+                        ]
 
-                emitted = 0
-                for item in items:
-                    source_job_id = clean_text(item.get("jobId", ""))
-                    if not source_job_id or source_job_id in seen_job_ids:
-                        continue
-                    row = normalize_job_row(item, partition, page_num)
-                    if not row["jd_text_raw"] and not keep_empty_jd:
-                        state.empty_jd_dropped += 1
-                        continue
-                    seen_job_ids.add(source_job_id)
-                    raw_file.write(json.dumps(row, ensure_ascii=False) + "\n")
-                    emitted += 1
+                        chunk_results: list[tuple[Partition, int, list[dict[str, Any]]]] = []
+                        failed_index: int | None = None
+                        for offset, future in enumerate(futures):
+                            partition, page_num = chunk[offset]
+                            state.current_label = f"{partition.function_label} | {partition.job_area_label} | page {page_num}"
+                            try:
+                                _, _, _, items = future.result()
+                            except Exception as exc:
+                                print("", flush=True)
+                                print(
+                                    f"page fetch failed for {partition.function_code}/{partition.job_area}/page={page_num}: {exc}",
+                                    flush=True,
+                                )
+                                state.page_failures += 1
+                                state.status_note = "page fetch failed; rerun will resume from this page"
+                                failed_index = chunk_start + offset
+                                for pending_future in futures[offset + 1 :]:
+                                    pending_future.cancel()
+                                break
+                            chunk_results.append((partition, page_num, items))
 
-                raw_file.flush()
-                state.records_written += emitted
-                state.page_done = page_index + 1
-                state.status_note = ""
-                emit_progress(next_index=page_index + 1)
+                        if failed_index is not None:
+                            for offset, (partition, page_num, items) in enumerate(chunk_results):
+                                emitted = write_page_items(
+                                    raw_file=raw_file,
+                                    items=items,
+                                    partition=partition,
+                                    page_num=page_num,
+                                    seen_job_ids=seen_job_ids,
+                                    state=state,
+                                    keep_empty_jd=keep_empty_jd,
+                                    flush_gate=raw_flush_gate,
+                                )
+                                state.records_written += emitted
+                                state.page_done = chunk_start + offset + 1
+                                state.current_label = (
+                                    f"{partition.function_label} | {partition.job_area_label} | page {page_num}"
+                                )
+                                state.status_note = "page fetch failed; rerun will resume from this page"
+                                emit_progress(next_index=state.page_done)
+                            emit_progress(force_render=True, next_index=failed_index, force_write=True)
+                            break
+
+                        for offset, (partition, page_num, items) in enumerate(chunk_results):
+                            emitted = write_page_items(
+                                raw_file=raw_file,
+                                items=items,
+                                partition=partition,
+                                page_num=page_num,
+                                seen_job_ids=seen_job_ids,
+                                state=state,
+                                keep_empty_jd=keep_empty_jd,
+                                flush_gate=raw_flush_gate,
+                            )
+                            state.records_written += emitted
+                            state.page_done = chunk_start + offset + 1
+                            state.current_label = (
+                                f"{partition.function_label} | {partition.job_area_label} | page {page_num}"
+                            )
+                            if not state.manual_verification_active:
+                                state.status_note = default_browser_status_note()
+                            emit_progress(next_index=state.page_done)
+                finally:
+                    browser_pool.close()
         else:
             with ThreadPoolExecutor(max_workers=max(workers, 1)) as executor:
                 future_map = {
@@ -902,23 +1662,19 @@ def crawl_scope(
                         )
                         state.page_done += 1
                         state.page_failures += 1
-                        emit_progress(force_render=True, next_index=state.page_done)
+                        emit_progress(force_render=True, next_index=state.page_done, force_write=True)
                         continue
 
-                    emitted = 0
-                    for item in items:
-                        source_job_id = clean_text(item.get("jobId", ""))
-                        if not source_job_id or source_job_id in seen_job_ids:
-                            continue
-                        row = normalize_job_row(item, partition, page_num)
-                        if not row["jd_text_raw"] and not keep_empty_jd:
-                            state.empty_jd_dropped += 1
-                            continue
-                        seen_job_ids.add(source_job_id)
-                        raw_file.write(json.dumps(row, ensure_ascii=False) + "\n")
-                        emitted += 1
-
-                    raw_file.flush()
+                    emitted = write_page_items(
+                        raw_file=raw_file,
+                        items=items,
+                        partition=partition,
+                        page_num=page_num,
+                        seen_job_ids=seen_job_ids,
+                        state=state,
+                        keep_empty_jd=keep_empty_jd,
+                        flush_gate=raw_flush_gate,
+                    )
                     state.records_written += emitted
                     state.page_done += 1
                     state.status_note = ""
@@ -937,7 +1693,7 @@ def crawl_scope(
         }
 
     state.stage = "completed"
-    emit_progress(force_render=True, next_index=state.page_total)
+    emit_progress(force_render=True, next_index=state.page_total, force_write=True)
     state.newline()
     print(
         f"saved {state.records_written} unique raw jobs to {output_raw}; "
@@ -966,6 +1722,8 @@ def main() -> None:
         function_path=function_path,
         area_path=area_path,
         verbose=True,
+        refresh_live=args.refresh_taxonomies,
+        timeout_seconds=args.taxonomy_timeout,
     )
     function_codes = select_function_codes(raw_function_codes, args.specific_only)
     if clean_text(args.function_code):
@@ -979,7 +1737,7 @@ def main() -> None:
     )
 
     state = ProgressState(function_total=len(function_codes))
-    write_progress(progress_path, state)
+    write_progress(progress_path, state, force=True)
     state.render(force=True)
 
     print("", flush=True)
@@ -1001,6 +1759,8 @@ def main() -> None:
         browser_cdp_url=args.browser_cdp_url,
         browser_min_interval=args.browser_min_interval,
         browser_max_retries=args.browser_max_retries,
+        browser_speed_profile=args.browser_speed_profile,
+        browser_max_effective_workers=args.browser_max_effective_workers,
     )
     try:
         crawl_scope(
@@ -1020,6 +1780,7 @@ def main() -> None:
             root_area_limit=args.top_level_area_limit,
             append_output=args.append_output,
             append_manifest=args.append_manifest,
+            progress_write_interval=max(args.progress_write_interval, 0.0),
         )
     finally:
         close_client(client)

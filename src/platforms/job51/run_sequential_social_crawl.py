@@ -18,16 +18,30 @@ from platforms.job51.fetch_social_jobs import (  # noqa: E402
     CAP_THRESHOLD,
     PAGE_SIZE,
     FunctionCode,
+    PlanningSnapshot,
+    ProgressState,
+    ThrottledAction,
     build_client,
     close_client,
     crawl_scope,
+    deserialize_planning_snapshot,
+    load_existing_job_ids,
+    plan_partition_scope,
     refresh_taxonomies,
+    serialize_planning_snapshot,
     select_function_codes,
     select_root_children,
+    split_planning_snapshot_by_root,
 )
 
 
-DEFAULT_CURSOR_FILE = "data/raw/51job/manifests/51job_social_cursor.json"
+DEFAULT_CURSOR_FILE = "data/raw/51job/manifests/51job_social_cursor_with_publish.json"
+DEFAULT_CURSOR_WRITE_INTERVAL = 2.0
+DEFAULT_REFRESH_CLEAN_EVERY_BATCHES = 20
+DEFAULT_REFRESH_CLEAN_MIN_SECONDS = 300.0
+DEFAULT_PLAN_CACHE_DIR = "data/raw/51job/manifests/51job_social_plan_cache_with_publish"
+DEFAULT_PLAN_PREFETCH_AREAS = 4
+PLAN_CACHE_SCHEMA = "51job_social_plan_cache_v1"
 
 
 def parse_args() -> argparse.Namespace:
@@ -36,18 +50,24 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--output-raw",
-        default="data/raw/51job/records/51job_social_jobs_raw.jsonl",
+        default="data/raw/51job/records/51job_social_jobs_raw_with_publish.jsonl",
         help="Output JSONL with normalized 51job social job rows",
     )
     parser.add_argument(
         "--partition-manifest",
-        default="data/raw/51job/manifests/51job_social_partition_manifest.jsonl",
+        default="data/raw/51job/manifests/51job_social_partition_manifest_with_publish.jsonl",
         help="Partition planning manifest JSONL",
     )
     parser.add_argument(
         "--progress-file",
-        default="data/raw/51job/manifests/51job_social_progress.json",
+        default="data/raw/51job/manifests/51job_social_progress_with_publish.json",
         help="Per-batch progress snapshot JSON file",
+    )
+    parser.add_argument(
+        "--progress-write-interval",
+        type=float,
+        default=2.0,
+        help="Minimum seconds between progress snapshot writes; smaller values improve checkpoint freshness but add more scheduler I/O",
     )
     parser.add_argument(
         "--cursor-file",
@@ -55,14 +75,43 @@ def parse_args() -> argparse.Namespace:
         help="Sequential scheduler cursor JSON file",
     )
     parser.add_argument(
+        "--cursor-write-interval",
+        type=float,
+        default=DEFAULT_CURSOR_WRITE_INTERVAL,
+        help="Minimum seconds between non-forced cursor writes; smaller values improve checkpoint freshness but add more scheduler I/O",
+    )
+    parser.add_argument(
+        "--plan-cache-dir",
+        default=DEFAULT_PLAN_CACHE_DIR,
+        help="Directory used to cache per-function/per-top-level-area partition plans so later batches can skip replanning",
+    )
+    parser.add_argument(
+        "--plan-prefetch-areas",
+        type=int,
+        default=DEFAULT_PLAN_PREFETCH_AREAS,
+        help="When the current top-level area has no cached partition plan, pre-plan this many consecutive areas for the same function in one shot",
+    )
+    parser.add_argument(
         "--clean-output",
-        default="data/processed/51job/51job_social_jobs_clean.csv",
+        default="data/processed/51job/51job_social_jobs_clean_with_publish.csv",
         help="Optional clean CSV refreshed after each batch when --refresh-clean is enabled",
     )
     parser.add_argument(
         "--refresh-clean",
         action="store_true",
-        help="Refresh the clean CSV after each completed batch",
+        help="Refresh the clean CSV periodically while the sequential crawl is running",
+    )
+    parser.add_argument(
+        "--refresh-clean-every-batches",
+        type=int,
+        default=DEFAULT_REFRESH_CLEAN_EVERY_BATCHES,
+        help="When --refresh-clean is enabled, rebuild the clean CSV after this many completed batches",
+    )
+    parser.add_argument(
+        "--refresh-clean-min-seconds",
+        type=float,
+        default=DEFAULT_REFRESH_CLEAN_MIN_SECONDS,
+        help="When --refresh-clean is enabled, also rebuild the clean CSV once this many seconds have elapsed since the previous refresh",
     )
     parser.add_argument(
         "--function-file",
@@ -73,6 +122,17 @@ def parse_args() -> argparse.Namespace:
         "--area-file",
         default="data/input/51job/51job_search_area_tree.json",
         help="Cached area tree JSON extracted from the live search bundle",
+    )
+    parser.add_argument(
+        "--refresh-taxonomies",
+        action="store_true",
+        help="Force a live refresh of the cached 51job function/area taxonomies before crawling",
+    )
+    parser.add_argument(
+        "--taxonomy-timeout",
+        type=float,
+        default=12.0,
+        help="Per-request timeout in seconds for live taxonomy refresh; ignored unless a live refresh is attempted",
     )
     parser.add_argument(
         "--specific-only",
@@ -128,7 +188,7 @@ def parse_args() -> argparse.Namespace:
         "--workers",
         type=int,
         default=1,
-        help="Concurrent workers for page fetching; default 1 for stability",
+        help="Requested workers for page fetching; browser mode auto-caps this, and shared manual-verification mode now supports adaptive multi-lane concurrency",
     )
     parser.add_argument(
         "--page-size",
@@ -172,13 +232,25 @@ def parse_args() -> argparse.Namespace:
         "--browser-min-interval",
         type=float,
         default=0.6,
-        help="Minimum seconds between browser-side 51job API requests",
+        help="Minimum seconds between requests from one browser worker; together with --workers determines effective speed",
     )
     parser.add_argument(
         "--browser-max-retries",
         type=int,
         default=4,
         help="Maximum retries for one browser-side 51job API request",
+    )
+    parser.add_argument(
+        "--browser-speed-profile",
+        choices=["conservative", "balanced", "aggressive", "max"],
+        default="balanced",
+        help="Adaptive browser speed profile; more aggressive profiles allow higher effective worker caps",
+    )
+    parser.add_argument(
+        "--browser-max-effective-workers",
+        type=int,
+        default=0,
+        help="Optional hard ceiling for the auto-derived effective browser workers; 0 keeps pure profile-based auto scaling",
     )
     parser.add_argument(
         "--manual-verify",
@@ -217,6 +289,8 @@ def load_selected_scope(
         function_path=function_path,
         area_path=area_path,
         verbose=True,
+        refresh_live=args.refresh_taxonomies,
+        timeout_seconds=args.taxonomy_timeout,
     )
     function_codes = select_function_codes(raw_function_codes, args.specific_only)
     if clean_text(args.function_code):
@@ -290,6 +364,20 @@ def load_progress_snapshot(path: Path) -> dict[str, Any]:
 
 
 def write_cursor(path: Path, cursor: dict[str, Any]) -> None:
+    ensure_parent(path)
+    cursor["updated_at"] = time.time()
+    path.write_text(json.dumps(cursor, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def write_cursor_throttled(
+    path: Path,
+    cursor: dict[str, Any],
+    *,
+    throttle: ThrottledAction | None = None,
+    force: bool = False,
+) -> None:
+    if throttle is not None and not throttle.ready(force=force):
+        return
     ensure_parent(path)
     cursor["updated_at"] = time.time()
     path.write_text(json.dumps(cursor, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -396,6 +484,222 @@ def extract_resume_state(
     return None
 
 
+def should_refresh_clean_snapshot(
+    *,
+    refresh_enabled: bool,
+    completed_batches: int,
+    last_refresh_batches: int,
+    last_refresh_at: float,
+    every_batches: int,
+    min_seconds: float,
+    force: bool = False,
+) -> bool:
+    if not refresh_enabled:
+        return False
+    if force:
+        return True
+    if every_batches > 0 and completed_batches - last_refresh_batches >= every_batches:
+        return True
+    if min_seconds > 0 and time.time() - last_refresh_at >= min_seconds:
+        return True
+    return False
+
+
+def plan_cache_path(plan_cache_dir: Path, function_code: str, job_area: str) -> Path:
+    return plan_cache_dir / clean_text(function_code) / f"{clean_text(job_area)}.json"
+
+
+def load_plan_cache(
+    plan_cache_dir: Path,
+    *,
+    function_code: str,
+    job_area: str,
+    cap_threshold: int,
+) -> PlanningSnapshot | None:
+    cache_path = plan_cache_path(plan_cache_dir, function_code, job_area)
+    if not cache_path.exists():
+        return None
+    try:
+        payload = json.loads(cache_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    if clean_text(payload.get("schema", "")) != PLAN_CACHE_SCHEMA:
+        return None
+    if clean_text(payload.get("function_code", "")) != clean_text(function_code):
+        return None
+    if clean_text(payload.get("root_job_area", "")) != clean_text(job_area):
+        return None
+    cached_cap_threshold = int(payload.get("cap_threshold") or 0)
+    if cached_cap_threshold != max(cap_threshold, 1):
+        return None
+    return deserialize_planning_snapshot(payload)
+
+
+def write_plan_cache(
+    plan_cache_dir: Path,
+    *,
+    function_code: str,
+    function_label: str,
+    root_job_area: str,
+    root_job_area_label: str,
+    cap_threshold: int,
+    snapshot: PlanningSnapshot,
+) -> None:
+    cache_path = plan_cache_path(plan_cache_dir, function_code, root_job_area)
+    ensure_parent(cache_path)
+    payload = serialize_planning_snapshot(snapshot)
+    payload.update(
+        {
+            "schema": PLAN_CACHE_SCHEMA,
+            "function_code": clean_text(function_code),
+            "function_label": clean_text(function_label),
+            "root_job_area": clean_text(root_job_area),
+            "root_job_area_label": clean_text(root_job_area_label),
+            "cap_threshold": max(cap_threshold, 1),
+            "planned_at": time.time(),
+        }
+    )
+    cache_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def warm_plan_cache_for_current_area(
+    *,
+    client: Any,
+    fn: FunctionCode,
+    selected_areas: list[Any],
+    current_area_index: int,
+    area_tree: list[Any],
+    area_index: dict[str, Any],
+    manifest_path: Path,
+    plan_cache_dir: Path,
+    cap_threshold: int,
+    workers: int,
+    page_size: int,
+    progress_write_interval: float,
+    plan_prefetch_areas: int,
+) -> PlanningSnapshot | None:
+    current_area = selected_areas[current_area_index]
+    current_job_area = clean_text(getattr(current_area, "area_id", ""))
+    current_snapshot = load_plan_cache(
+        plan_cache_dir,
+        function_code=fn.function_code,
+        job_area=current_job_area,
+        cap_threshold=cap_threshold,
+    )
+    if current_snapshot is not None:
+        return current_snapshot
+
+    prefetch_limit = 0
+    max_prefetch = max(plan_prefetch_areas, 1)
+    total_areas = len(selected_areas)
+    while current_area_index + prefetch_limit < total_areas and prefetch_limit < max_prefetch:
+        candidate_area = selected_areas[current_area_index + prefetch_limit]
+        candidate_job_area = clean_text(getattr(candidate_area, "area_id", ""))
+        if prefetch_limit > 0:
+            cached_candidate = load_plan_cache(
+                plan_cache_dir,
+                function_code=fn.function_code,
+                job_area=candidate_job_area,
+                cap_threshold=cap_threshold,
+            )
+            if cached_candidate is not None:
+                break
+        prefetch_limit += 1
+
+    prefetch_limit = max(prefetch_limit, 1)
+    print(
+        "Warming sequential partition cache: "
+        f"function={fn.function_code} "
+        f"area_index={current_area_index} "
+        f"window={prefetch_limit}",
+        flush=True,
+    )
+    planning_state = ProgressState(function_total=1)
+    planning_snapshot = plan_partition_scope(
+        client=client,
+        function_codes=[fn],
+        area_tree=area_tree,
+        area_index=area_index,
+        manifest_path=manifest_path,
+        progress_path=None,
+        state=planning_state,
+        cap_threshold=max(cap_threshold, 1),
+        workers=max(workers, 1),
+        page_size=max(page_size, 1),
+        root_area_offset=max(current_area_index, 0),
+        root_area_limit=prefetch_limit,
+        append_manifest=True,
+        write_manifest=True,
+        progress_write_interval=max(progress_write_interval, 0.0),
+        render_progress=False,
+    )
+    grouped_snapshots = split_planning_snapshot_by_root(planning_snapshot)
+    for offset in range(prefetch_limit):
+        cached_area = selected_areas[current_area_index + offset]
+        root_job_area = clean_text(getattr(cached_area, "area_id", ""))
+        root_job_area_label = clean_text(getattr(cached_area, "label", ""))
+        snapshot = grouped_snapshots.get(root_job_area)
+        if snapshot is None:
+            continue
+        write_plan_cache(
+            plan_cache_dir,
+            function_code=fn.function_code,
+            function_label=fn.function_label,
+            root_job_area=root_job_area,
+            root_job_area_label=root_job_area_label,
+            cap_threshold=cap_threshold,
+            snapshot=snapshot,
+        )
+
+    return load_plan_cache(
+        plan_cache_dir,
+        function_code=fn.function_code,
+        job_area=current_job_area,
+        cap_threshold=cap_threshold,
+    )
+
+
+def create_runtime_client(args: argparse.Namespace) -> Any:
+    transport = clean_text(args.transport) or "browser"
+    if transport == "browser":
+        if args.manual_verify and not clean_text(args.browser_cdp_url):
+            print(
+                "Initializing 51job browser client with auto-start manual verification "
+                "enabled; a local visible browser should launch next.",
+                flush=True,
+            )
+        elif clean_text(args.browser_cdp_url):
+            print(
+                f"Initializing 51job browser client on shared CDP endpoint: {clean_text(args.browser_cdp_url)}",
+                flush=True,
+            )
+        elif args.browser_visible:
+            print(
+                "Initializing 51job browser client in visible Playwright mode.",
+                flush=True,
+            )
+        else:
+            print(
+                "Initializing 51job browser client in headless Playwright mode.",
+                flush=True,
+            )
+    else:
+        print("Initializing 51job requests client.", flush=True)
+
+    return build_client(
+        transport=transport,
+        browser_visible=args.browser_visible,
+        browser_profile_dir=args.browser_profile_dir,
+        manual_verify=args.manual_verify,
+        manual_verify_wait=args.manual_verify_wait,
+        browser_cdp_url=args.browser_cdp_url,
+        browser_min_interval=args.browser_min_interval,
+        browser_max_retries=args.browser_max_retries,
+        browser_speed_profile=args.browser_speed_profile,
+        browser_max_effective_workers=args.browser_max_effective_workers,
+    )
+
+
 def main() -> None:
     configure_utf8_stdio()
     args = parse_args()
@@ -405,10 +709,12 @@ def main() -> None:
     progress_path = ROOT_DIR / args.progress_file
     clean_output = ROOT_DIR / args.clean_output
     cursor_path = ROOT_DIR / args.cursor_file
+    plan_cache_dir = ROOT_DIR / args.plan_cache_dir
+    cursor_writer = ThrottledAction(max(args.cursor_write_interval, 0.0))
 
     if args.reset_cursor or not cursor_path.exists():
         cursor = build_cursor(function_codes, selected_areas)
-        write_cursor(cursor_path, cursor)
+        write_cursor_throttled(cursor_path, cursor, throttle=cursor_writer, force=True)
     else:
         cursor = load_cursor(cursor_path)
         validate_cursor(cursor, function_codes, selected_areas)
@@ -416,9 +722,23 @@ def main() -> None:
     if int(cursor.get("function_index", 0)) >= len(function_codes):
         cursor["status"] = "completed"
         cursor["current_batch"] = None
-        write_cursor(cursor_path, cursor)
+        write_cursor_throttled(cursor_path, cursor, throttle=cursor_writer, force=True)
         print("Sequential crawl cursor is already completed; nothing to do.", flush=True)
         return
+
+    seen_job_ids = load_existing_job_ids(output_raw)
+    if seen_job_ids:
+        print(
+            f"Loaded {len(seen_job_ids)} existing social job ids once for duplicate filtering: {output_raw}",
+            flush=True,
+        )
+
+    if clean_output.exists():
+        last_clean_refresh_at = clean_output.stat().st_mtime
+        last_clean_refresh_batches = int(cursor.get("done_batches", 0))
+    else:
+        last_clean_refresh_at = 0.0
+        last_clean_refresh_batches = 0
 
     print(
         f"Loaded sequential queue with {len(function_codes)} functions and {len(selected_areas)} areas; "
@@ -431,23 +751,35 @@ def main() -> None:
         flush=True,
     )
 
-    client = build_client(
-        transport=args.transport,
-        browser_visible=args.browser_visible,
-        browser_profile_dir=args.browser_profile_dir,
-        manual_verify=args.manual_verify,
-        manual_verify_wait=args.manual_verify_wait,
-        browser_cdp_url=args.browser_cdp_url,
-        browser_min_interval=args.browser_min_interval,
-        browser_max_retries=args.browser_max_retries,
-    )
+    client = create_runtime_client(args)
     batches_processed = 0
     try:
         while int(cursor.get("function_index", 0)) < len(function_codes):
             if args.max_batches > 0 and batches_processed >= args.max_batches:
                 cursor["status"] = "paused"
                 cursor["current_batch"] = None
-                write_cursor(cursor_path, cursor)
+                if output_raw.exists() and output_raw.stat().st_size > 0 and should_refresh_clean_snapshot(
+                    refresh_enabled=args.refresh_clean,
+                    completed_batches=int(cursor.get("done_batches", 0)),
+                    last_refresh_batches=last_clean_refresh_batches,
+                    last_refresh_at=last_clean_refresh_at,
+                    every_batches=max(args.refresh_clean_every_batches, 0),
+                    min_seconds=max(args.refresh_clean_min_seconds, 0.0),
+                    force=True,
+                ):
+                    cleaned_count, dropped_empty_jd = clean_jsonl_to_csv(
+                        output_raw,
+                        clean_output,
+                        allow_empty_jd=args.keep_empty_jd,
+                    )
+                    last_clean_refresh_at = time.time()
+                    last_clean_refresh_batches = int(cursor.get("done_batches", 0))
+                    print(
+                        f"Refreshed clean CSV before pausing: rows={cleaned_count} "
+                        f"dropped_empty_jd={dropped_empty_jd}",
+                        flush=True,
+                    )
+                write_cursor_throttled(cursor_path, cursor, throttle=cursor_writer, force=True)
                 print(
                     f"Reached --max-batches={args.max_batches}; cursor saved to {cursor_path}",
                     flush=True,
@@ -496,9 +828,21 @@ def main() -> None:
                 current_batch["status_note"] = clean_text(resume_state.get("status_note", ""))
                 if resume_state.get("next_page"):
                     current_batch["resume_next_page"] = resume_state.get("next_page")
+
+            cached_plan_snapshot = load_plan_cache(
+                plan_cache_dir,
+                function_code=fn.function_code,
+                job_area=batch_job_area,
+                cap_threshold=max(args.cap_threshold, 1),
+            )
+            if cached_plan_snapshot is not None:
+                current_batch["plan_source"] = "cache"
+                current_batch["planned_partition_total"] = cached_plan_snapshot.partition_total
+                current_batch["planned_final_partition_total"] = cached_plan_snapshot.final_partition_total
+                current_batch["planned_capped_partition_total"] = cached_plan_snapshot.capped_partition_total
             cursor["status"] = "running"
             cursor["current_batch"] = current_batch
-            write_cursor(cursor_path, cursor)
+            write_cursor_throttled(cursor_path, cursor, throttle=cursor_writer, force=True)
 
             print(
                 f"[batch {batch_number}/{cursor.get('total_batches')}] "
@@ -528,17 +872,50 @@ def main() -> None:
                         "empty_jd_dropped": checkpoint.get("empty_jd_dropped"),
                         "current_label": checkpoint.get("current_label"),
                         "status_note": checkpoint.get("status_note"),
+                        "browser_requested_workers": checkpoint.get("browser_requested_workers"),
+                        "browser_planning_workers": checkpoint.get("browser_planning_workers"),
+                        "browser_fetch_workers": checkpoint.get("browser_fetch_workers"),
+                        "browser_speed_profile": checkpoint.get("browser_speed_profile"),
+                        "browser_max_effective_workers": checkpoint.get("browser_max_effective_workers"),
+                        "manual_verification_active": checkpoint.get("manual_verification_active"),
+                        "manual_verification_owner": checkpoint.get("manual_verification_owner"),
+                        "manual_verification_wait_seconds": checkpoint.get("manual_verification_wait_seconds"),
+                        "manual_verification_pause_count": checkpoint.get("manual_verification_pause_count"),
+                        "manual_verification_started_at": checkpoint.get("manual_verification_started_at"),
+                        "manual_verification_last_resumed_at": checkpoint.get("manual_verification_last_resumed_at"),
                         "resume_page_index": checkpoint.get("resume_page_index"),
                         "resume_next_page": checkpoint.get("resume_next_page"),
                         "checkpoint_updated_at": time.time(),
                     }
                 )
                 cursor["current_batch"] = dict(current_batch)
-                write_cursor(cursor_path, cursor)
+                write_cursor_throttled(cursor_path, cursor, throttle=cursor_writer)
 
             attempt = 0
             while True:
                 try:
+                    cached_plan_snapshot = warm_plan_cache_for_current_area(
+                        client=client,
+                        fn=fn,
+                        selected_areas=selected_areas,
+                        current_area_index=area_index_value,
+                        area_tree=area_tree,
+                        area_index=area_index,
+                        manifest_path=manifest_path,
+                        plan_cache_dir=plan_cache_dir,
+                        cap_threshold=max(args.cap_threshold, 1),
+                        workers=max(args.workers, 1),
+                        page_size=max(args.page_size, 1),
+                        progress_write_interval=max(args.progress_write_interval, 0.0),
+                        plan_prefetch_areas=max(args.plan_prefetch_areas, 1),
+                    )
+                    if cached_plan_snapshot is not None:
+                        current_batch["plan_source"] = "cache"
+                        current_batch["planned_partition_total"] = cached_plan_snapshot.partition_total
+                        current_batch["planned_final_partition_total"] = cached_plan_snapshot.final_partition_total
+                        current_batch["planned_capped_partition_total"] = cached_plan_snapshot.capped_partition_total
+                        cursor["current_batch"] = dict(current_batch)
+                        write_cursor_throttled(cursor_path, cursor, throttle=cursor_writer, force=True)
                     summary = crawl_scope(
                         client=client,
                         function_codes=[fn],
@@ -557,6 +934,9 @@ def main() -> None:
                         write_manifest=resume_state is None,
                         resume_state=resume_state,
                         progress_callback=sync_current_batch,
+                        existing_job_ids=seen_job_ids,
+                        progress_write_interval=max(args.progress_write_interval, 0.0),
+                        planned_snapshot=cached_plan_snapshot,
                     )
                     break
                 except Exception as exc:
@@ -571,7 +951,7 @@ def main() -> None:
                         }
                     )
                     cursor["current_batch"] = failed_batch
-                    write_cursor(cursor_path, cursor)
+                    write_cursor_throttled(cursor_path, cursor, throttle=cursor_writer, force=True)
                     resume_state = extract_resume_state(
                         cursor,
                         batch_number=batch_number,
@@ -585,16 +965,7 @@ def main() -> None:
                         flush=True,
                     )
                     close_client(client)
-                    client = build_client(
-                        transport=args.transport,
-                        browser_visible=args.browser_visible,
-                        browser_profile_dir=args.browser_profile_dir,
-                        manual_verify=args.manual_verify,
-                        manual_verify_wait=args.manual_verify_wait,
-                        browser_cdp_url=args.browser_cdp_url,
-                        browser_min_interval=args.browser_min_interval,
-                        browser_max_retries=args.browser_max_retries,
-                    )
+                    client = create_runtime_client(args)
                     time.sleep(2.0)
             state = summary["state"]
             latest_batch_state = dict(cursor.get("current_batch") or current_batch)
@@ -615,12 +986,21 @@ def main() -> None:
             cursor["last_completed_batch"] = batch_summary
             append_recent_batch(cursor, batch_summary)
 
-            if args.refresh_clean:
+            if output_raw.exists() and output_raw.stat().st_size > 0 and should_refresh_clean_snapshot(
+                refresh_enabled=args.refresh_clean,
+                completed_batches=int(cursor.get("done_batches", 0)) + 1,
+                last_refresh_batches=last_clean_refresh_batches,
+                last_refresh_at=last_clean_refresh_at,
+                every_batches=max(args.refresh_clean_every_batches, 0),
+                min_seconds=max(args.refresh_clean_min_seconds, 0.0),
+            ):
                 cleaned_count, dropped_empty_jd = clean_jsonl_to_csv(
                     output_raw,
                     clean_output,
                     allow_empty_jd=args.keep_empty_jd,
                 )
+                last_clean_refresh_at = time.time()
+                last_clean_refresh_batches = int(cursor.get("done_batches", 0)) + 1
                 batch_summary["clean_rows"] = cleaned_count
                 batch_summary["clean_dropped_empty"] = dropped_empty_jd
                 cursor["last_completed_batch"] = batch_summary
@@ -639,7 +1019,28 @@ def main() -> None:
                 )
                 cursor["status"] = "paused"
                 cursor["current_batch"] = failed_batch
-                write_cursor(cursor_path, cursor)
+                if output_raw.exists() and output_raw.stat().st_size > 0 and should_refresh_clean_snapshot(
+                    refresh_enabled=args.refresh_clean,
+                    completed_batches=int(cursor.get("done_batches", 0)),
+                    last_refresh_batches=last_clean_refresh_batches,
+                    last_refresh_at=last_clean_refresh_at,
+                    every_batches=max(args.refresh_clean_every_batches, 0),
+                    min_seconds=max(args.refresh_clean_min_seconds, 0.0),
+                    force=True,
+                ):
+                    cleaned_count, dropped_empty_jd = clean_jsonl_to_csv(
+                        output_raw,
+                        clean_output,
+                        allow_empty_jd=args.keep_empty_jd,
+                    )
+                    last_clean_refresh_at = time.time()
+                    last_clean_refresh_batches = int(cursor.get("done_batches", 0))
+                    print(
+                        f"Refreshed clean CSV before pause: rows={cleaned_count} "
+                        f"dropped_empty_jd={dropped_empty_jd}",
+                        flush=True,
+                    )
+                write_cursor_throttled(cursor_path, cursor, throttle=cursor_writer, force=True)
                 print(
                     f"Paused because batch {batch_number} still has page_failures={state.page_failures}; "
                     f"fix the browser session, then rerun the same command to resume from the saved page checkpoint.",
@@ -654,7 +1055,28 @@ def main() -> None:
 
             if int(cursor.get("function_index", 0)) >= len(function_codes):
                 cursor["status"] = "completed"
-                write_cursor(cursor_path, cursor)
+                if output_raw.exists() and output_raw.stat().st_size > 0 and should_refresh_clean_snapshot(
+                    refresh_enabled=args.refresh_clean,
+                    completed_batches=int(cursor.get("done_batches", 0)),
+                    last_refresh_batches=last_clean_refresh_batches,
+                    last_refresh_at=last_clean_refresh_at,
+                    every_batches=max(args.refresh_clean_every_batches, 0),
+                    min_seconds=max(args.refresh_clean_min_seconds, 0.0),
+                    force=True,
+                ):
+                    cleaned_count, dropped_empty_jd = clean_jsonl_to_csv(
+                        output_raw,
+                        clean_output,
+                        allow_empty_jd=args.keep_empty_jd,
+                    )
+                    last_clean_refresh_at = time.time()
+                    last_clean_refresh_batches = int(cursor.get("done_batches", 0))
+                    print(
+                        f"Refreshed clean CSV at completion: rows={cleaned_count} "
+                        f"dropped_empty_jd={dropped_empty_jd}",
+                        flush=True,
+                    )
+                write_cursor_throttled(cursor_path, cursor, throttle=cursor_writer, force=True)
                 print(
                     f"Sequential crawl completed all {cursor.get('total_batches')} batches; "
                     f"records_written_total={cursor.get('records_written_total')}",
@@ -662,7 +1084,7 @@ def main() -> None:
                 )
                 break
 
-            write_cursor(cursor_path, cursor)
+            write_cursor_throttled(cursor_path, cursor, throttle=cursor_writer, force=True)
     finally:
         close_client(client)
 

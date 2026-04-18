@@ -30,7 +30,7 @@
 ## 当前主线文件
 
 - `51job/records/51job_campus_jobs_raw.jsonl`：51job 校招 RAW，`249` 条
-- `51job/records/51job_social_jobs_raw.jsonl`：51job 社招阶段性 RAW 快照，`14141` 条
+- `51job/records/51job_social_jobs_raw_with_publish.jsonl`：51job 社招带发布时间的 active RAW 检查点，`8294` 条
 - `51job/manifests/51job_campus_seed_manifest.jsonl`：51job 校招处理 manifest
 - `51job/html/pages/`：51job 校招专题页 HTML 快照
 - `ncss/records/ncss_listings_all_areas_raw.jsonl`：NCSS 全国列表 RAW
@@ -40,7 +40,7 @@
 
 ## 哪些是数据快照，哪些是运行态
 
-- `NCSS` 主线 RAW、`51job` 校招 RAW 和 `51job` 社招 RAW 快照都可以作为分析或复核输入进入版本库
+- `NCSS` 主线 RAW、`51job` 校招 RAW 和 `51job` 社招带发布时间检查点都可以作为分析或复核输入进入版本库
 - `51job` 社招顺序抓取的 `cursor`、`progress` 和调度日志属于本地运行态，默认不提交
 - 如果后续继续跑 51job 社招，新数据可以定期固化成新的 RAW checkpoint 再提交
 

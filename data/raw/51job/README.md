@@ -20,15 +20,20 @@
 
 ## 社招链路
 
-- `records/51job_social_jobs_raw.jsonl`：社招阶段性 RAW 快照，当前 `14141` 条
-- `manifests/51job_social_partition_manifest.jsonl`：全国顺序分批规划与调度日志
-- `manifests/51job_social_progress.json`：watcher 读取的进度快照
-- `manifests/51job_social_cursor.json`：顺序调度器断点文件
-- `manifests/51job_social_scheduler.stdout.log`
-- `manifests/51job_social_scheduler.stderr.log`
+- `records/51job_social_jobs_raw_with_publish.jsonl`：社招带发布时间的 active RAW 检查点，当前 `8294` 条
+- `manifests/51job_social_partition_manifest_with_publish.jsonl`：当前续跑主线的全国顺序分批规划与调度日志
+- `manifests/51job_social_progress_with_publish.json`：watcher 读取的进度快照
+- `manifests/51job_social_cursor_with_publish.json`：顺序调度器断点文件
+- 旧的无发布时间 social 快照、旧 `cursor / progress / manifest / scheduler` 日志已经退场，可用清理脚本一次性清走
 
 ## 版本管理建议
 
-- `records/51job_social_jobs_raw.jsonl` 可以作为阶段性数据快照提交，方便组员直接分析
+- `records/51job_social_jobs_raw_with_publish.jsonl` 可以作为阶段性数据快照提交，方便组员直接分析
 - `progress`、`cursor` 和调度日志仍然属于本地运行态，默认不提交
 - 如果后续继续跑全国全量，建议按阶段固定新快照，而不是把运行中的状态文件一起推上去
+
+## 清理命令
+
+```powershell
+python src/platforms/job51/cleanup_social_legacy_data.py --skip-runtime-profiles
+```

@@ -19,11 +19,11 @@ DEFAULT_CAMPUS_SEED = "data/input/51job/campus_seed_urls.csv"
 DEFAULT_CAMPUS_MANIFEST = "data/raw/51job/manifests/51job_campus_seed_manifest.jsonl"
 DEFAULT_CAMPUS_RAW = "data/raw/51job/records/51job_campus_jobs_raw.jsonl"
 DEFAULT_CAMPUS_CLEAN = "data/processed/51job/51job_campus_jobs_clean.csv"
-DEFAULT_SOCIAL_PROGRESS = "data/raw/51job/manifests/51job_social_progress.json"
-DEFAULT_SOCIAL_MANIFEST = "data/raw/51job/manifests/51job_social_partition_manifest.jsonl"
-DEFAULT_SOCIAL_RAW = "data/raw/51job/records/51job_social_jobs_raw.jsonl"
-DEFAULT_SOCIAL_CLEAN = "data/processed/51job/51job_social_jobs_clean.csv"
-DEFAULT_SOCIAL_CURSOR = "data/raw/51job/manifests/51job_social_cursor.json"
+DEFAULT_SOCIAL_PROGRESS = "data/raw/51job/manifests/51job_social_progress_with_publish.json"
+DEFAULT_SOCIAL_MANIFEST = "data/raw/51job/manifests/51job_social_partition_manifest_with_publish.jsonl"
+DEFAULT_SOCIAL_RAW = "data/raw/51job/records/51job_social_jobs_raw_with_publish.jsonl"
+DEFAULT_SOCIAL_CLEAN = "data/processed/51job/51job_social_jobs_clean_with_publish.csv"
+DEFAULT_SOCIAL_CURSOR = "data/raw/51job/manifests/51job_social_cursor_with_publish.json"
 
 
 def parse_args() -> argparse.Namespace:
@@ -178,6 +178,17 @@ def render_social(snapshot: dict, manifest_total: int, raw_total: int, clean_tot
     done, total = social_primary_progress(snapshot)
     started_at = snapshot.get("started_at")
     updated_at = snapshot.get("updated_at")
+    browser_requested_workers = int(snapshot.get("browser_requested_workers") or 0)
+    browser_planning_workers = int(snapshot.get("browser_planning_workers") or 0)
+    browser_fetch_workers = int(snapshot.get("browser_fetch_workers") or 0)
+    browser_speed_profile = str(snapshot.get("browser_speed_profile") or "").strip()
+    browser_max_effective_workers = int(snapshot.get("browser_max_effective_workers") or 0)
+    manual_verification_active = bool(snapshot.get("manual_verification_active"))
+    manual_verification_owner = str(snapshot.get("manual_verification_owner") or "").strip()
+    manual_verification_wait_seconds = int(snapshot.get("manual_verification_wait_seconds") or 0)
+    manual_verification_pause_count = int(snapshot.get("manual_verification_pause_count") or 0)
+    manual_verification_started_at = snapshot.get("manual_verification_started_at")
+    manual_verification_last_resumed_at = snapshot.get("manual_verification_last_resumed_at")
     elapsed = None
     eta = None
     stale_hint = ""
@@ -191,10 +202,16 @@ def render_social(snapshot: dict, manifest_total: int, raw_total: int, clean_tot
     if updated_at:
         stale_seconds = max(int(time.time() - float(updated_at)), 0)
         if stale_seconds >= 60 and str(snapshot.get("stage") or "") != "completed":
-            stale_hint = (
-                f"进度快照已 {format_seconds(stale_seconds)} 未更新，"
-                "可能在等待人工验证、浏览器重试或网络阻塞"
-            )
+            if manual_verification_active:
+                stale_hint = (
+                    f"进度快照已 {format_seconds(stale_seconds)} 未更新，"
+                    "当前更像是在等待人工验证恢复"
+                )
+            else:
+                stale_hint = (
+                    f"进度快照已 {format_seconds(stale_seconds)} 未更新，"
+                    "可能在等待人工验证、浏览器重试或网络阻塞"
+                )
 
     lines = [
         "51job 社招顺序抓取进度",
@@ -219,8 +236,31 @@ def render_social(snapshot: dict, manifest_total: int, raw_total: int, clean_tot
         f"已运行     {elapsed or '--'}",
         f"估计剩余   {eta or '--'}",
     ]
+    if browser_requested_workers > 0 or browser_planning_workers > 0 or browser_fetch_workers > 0:
+        browser_plan_line = (
+            "浏览器计划 "
+            f"req {browser_requested_workers or '--'}"
+            f" | plan x{browser_planning_workers or '--'}"
+            f" | fetch x{browser_fetch_workers or '--'}"
+        )
+        if browser_speed_profile:
+            browser_plan_line += f" | profile {browser_speed_profile}"
+        if browser_max_effective_workers > 0:
+            browser_plan_line += f" | max {browser_max_effective_workers}"
+        lines.append(browser_plan_line)
     if status_note:
         lines.append(f"状态说明   {status_note}")
+    if manual_verification_active or manual_verification_pause_count > 0:
+        manual_state = "等待中" if manual_verification_active else "最近已恢复"
+        owner_label = manual_verification_owner or "--"
+        wait_label = f"{manual_verification_wait_seconds}s" if manual_verification_wait_seconds > 0 else "--"
+        lines.append(
+            f"人工校验   {manual_state} | owner {owner_label} | wait {wait_label} | pauses {manual_verification_pause_count}"
+        )
+        if manual_verification_started_at:
+            lines.append(f"校验开始   {format_timestamp(manual_verification_started_at)}")
+        if manual_verification_last_resumed_at:
+            lines.append(f"最近恢复   {format_timestamp(manual_verification_last_resumed_at)}")
     if stale_hint:
         lines.append(f"状态提示   {stale_hint}")
     if cursor:
@@ -284,7 +324,12 @@ def main() -> None:
         raw_file = resolve_path(args.raw_file, DEFAULT_SOCIAL_RAW)
         clean_file = resolve_path(args.clean_file, DEFAULT_SOCIAL_CLEAN)
         progress_file = social_progress_file
-        cursor_file = social_cursor_file
+        if args.cursor_file:
+            cursor_file = social_cursor_file
+        elif args.progress_file and Path(args.progress_file) != Path(DEFAULT_SOCIAL_PROGRESS):
+            cursor_file = None
+        else:
+            cursor_file = social_cursor_file
     else:
         seed_file = resolve_path(args.seed_file, DEFAULT_CAMPUS_SEED)
         manifest_file = resolve_path(args.manifest, DEFAULT_CAMPUS_MANIFEST)
@@ -299,7 +344,7 @@ def main() -> None:
         clean_total = count_csv_rows(clean_file)
         if mode == "social":
             snapshot = load_progress_snapshot(progress_file)
-            cursor = load_cursor_snapshot(cursor_file)
+            cursor = load_cursor_snapshot(cursor_file) if cursor_file is not None else None
             output = render_social(snapshot, manifest_total, raw_total, clean_total, cursor)
         else:
             seed_total = count_seed_rows(seed_file) if seed_file else 0

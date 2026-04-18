@@ -11,3 +11,9 @@ data/raw/51job/manifests/51job_social_progress.json
 data/raw/51job/manifests/51job_social_partition_manifest.jsonl
 data/raw/51job/manifests/51job_social_scheduler.stdout.log
 data/raw/51job/manifests/51job_social_scheduler.stderr.log
+data/raw/51job/manifests/51job_social_cursor_with_publish.json
+data/raw/51job/manifests/51job_social_progress_with_publish.json
+data/raw/51job/manifests/51job_social_partition_manifest_with_publish.jsonl
+data/raw/51job/manifests/51job_social_plan_cache_with_publish/
+data/raw/51job/manifests/51job_social_scheduler_with_publish.stdout.log
+data/raw/51job/manifests/51job_social_scheduler_with_publish.stderr.log

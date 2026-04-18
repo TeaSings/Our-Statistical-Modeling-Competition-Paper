@@ -4,6 +4,7 @@ import json
 import socket
 import subprocess
 import sys
+import threading
 import time
 from dataclasses import dataclass
 from pathlib import Path
@@ -37,6 +38,86 @@ def discover_browser_path() -> str:
     raise RuntimeError("could not find Edge or Chrome executable on this machine")
 
 
+class ManualVerificationCoordinator:
+    def __init__(self) -> None:
+        self._condition = threading.Condition()
+        self._active = False
+        self._owner = ""
+        self._search_url = ""
+        self._wait_seconds = 0
+        self._pause_count = 0
+        self._last_started_at = 0.0
+        self._last_resumed_at = 0.0
+
+    def snapshot(self) -> dict[str, Any]:
+        with self._condition:
+            return self._snapshot_unlocked()
+
+    def _snapshot_unlocked(self) -> dict[str, Any]:
+        return {
+            "manual_verification_active": self._active,
+            "owner": self._owner,
+            "search_url": self._search_url,
+            "wait_seconds": self._wait_seconds,
+            "pause_count": self._pause_count,
+            "started_at": self._last_started_at,
+            "last_resumed_at": self._last_resumed_at,
+        }
+
+    def wait_if_paused(self, worker_label: str) -> None:
+        with self._condition:
+            while self._active and self._owner != worker_label:
+                self._condition.wait(timeout=0.5)
+
+    def begin(
+        self,
+        *,
+        worker_label: str,
+        search_url: str,
+        wait_seconds: int,
+        status_callback: Callable[[str, dict[str, Any]], None] | None,
+    ) -> bool:
+        with self._condition:
+            if self._active:
+                return self._owner == worker_label
+            self._active = True
+            self._owner = worker_label
+            self._search_url = search_url
+            self._wait_seconds = wait_seconds
+            self._pause_count += 1
+            self._last_started_at = time.time()
+            payload = self._snapshot_unlocked()
+            self._condition.notify_all()
+        if callable(status_callback):
+            status_callback("manual_verification_waiting", payload)
+        return True
+
+    def finish(
+        self,
+        *,
+        worker_label: str,
+        status_callback: Callable[[str, dict[str, Any]], None] | None,
+    ) -> None:
+        payload = None
+        with self._condition:
+            if not self._active or self._owner != worker_label:
+                return
+            self._active = False
+            self._last_resumed_at = time.time()
+            payload = self._snapshot_unlocked()
+            self._owner = ""
+            self._search_url = ""
+            self._wait_seconds = 0
+            self._condition.notify_all()
+        if callable(status_callback):
+            status_callback("manual_verification_resumed", payload or {})
+
+    def wait_for_resume(self) -> None:
+        with self._condition:
+            while self._active:
+                self._condition.wait(timeout=0.5)
+
+
 @dataclass
 class BrowserSearchClient:
     timeout: float = 30.0
@@ -50,28 +131,43 @@ class BrowserSearchClient:
     allow_manual_verification: bool = False
     manual_verification_wait_ms: int = 180000
     cdp_url: str | None = None
+    speed_profile: str = "balanced"
+    max_effective_workers: int = 0
+    startup_stagger_seconds: float = 0.0
     status_callback: Callable[[str, dict[str, Any]], None] | None = None
+    worker_label: str = "browser-main"
+    manual_verification_coordinator: ManualVerificationCoordinator | None = None
+    reuse_existing_page_on_cdp: bool = True
 
     def __post_init__(self) -> None:
         _ensure_playwright_import()
         from playwright.sync_api import sync_playwright
 
         self.browser_path = self.browser_path or discover_browser_path()
+        if self.allow_manual_verification and self.manual_verification_coordinator is None:
+            self.manual_verification_coordinator = ManualVerificationCoordinator()
         self._playwright_manager = sync_playwright()
         self._playwright = self._playwright_manager.start()
         self._browser = None
         self._attached_via_cdp = False
         self._spawned_browser_process: subprocess.Popen[str] | None = None
         self._owns_browser_process = False
+        self._owns_page = False
+        self._startup_stagger_applied = False
         if self.cdp_url:
             self._browser = self._playwright.chromium.connect_over_cdp(self.cdp_url)
             self._attached_via_cdp = True
             if not self._browser.contexts:
                 raise RuntimeError(f"no browser contexts available at {self.cdp_url}")
             self._context = self._browser.contexts[0]
-            self._page = self._context.pages[0] if self._context.pages else self._context.new_page()
+            self._page = None
+            if self.reuse_existing_page_on_cdp and self._context.pages:
+                self._page = self._context.pages[0]
+                self._prime()
+            elif not self._attached_via_cdp:
+                self._page = self._context.new_page()
+                self._owns_page = True
             self._last_request_at = 0.0
-            self._prime()
             return
 
         # When manual verification is enabled, auto-start a real visible browser
@@ -115,13 +211,18 @@ class BrowserSearchClient:
         self._last_request_at = 0.0
         self._prime()
 
-    def _resolve_profile_dir(self) -> Path:
+    def _resolve_profile_dir(self, *, isolated_session: bool = False) -> Path:
         profile_dir = Path(self.user_data_dir or "data/runtime/51job/browser_profile_auto")
         if not profile_dir.is_absolute():
             profile_dir = ROOT_DIR / profile_dir
         # Keep the auto-started browser on a dedicated sub-profile so it does not
-        # conflict with other normal Edge / Chrome sessions.
+        # conflict with other normal Edge / Chrome sessions. When this stable
+        # profile is already occupied by an existing browser process, we can
+        # fall back to a one-off isolated session so CDP startup still succeeds.
         profile_dir = profile_dir / "manual_verify_cdp"
+        if isolated_session:
+            session_name = f"session_{int(time.time() * 1000)}"
+            profile_dir = profile_dir / session_name
         profile_dir.mkdir(parents=True, exist_ok=True)
         return profile_dir
 
@@ -154,48 +255,142 @@ class BrowserSearchClient:
         raise RuntimeError(f"timed out waiting for CDP browser at {cdp_url}: {last_error}")
 
     def _launch_auto_debug_browser(self) -> None:
-        profile_dir = self._resolve_profile_dir()
-        port = self._pick_free_port()
-        cdp_url = f"http://127.0.0.1:{port}"
-        launch_args = [
-            self.browser_path,
-            f"--user-data-dir={profile_dir}",
-            f"--remote-debugging-port={port}",
-            "--no-first-run",
-            "--disable-blink-features=AutomationControlled",
-            SEARCH_PAGE_URL,
-        ]
-        print(
-            "Auto-starting a local browser for 51job manual verification: "
-            f"{cdp_url}",
-            flush=True,
-        )
-        self._spawned_browser_process = subprocess.Popen(
-            launch_args,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            text=True,
-        )
-        self._browser = self._connect_over_cdp_with_retry(cdp_url)
-        self._attached_via_cdp = True
-        self._owns_browser_process = True
-        self.cdp_url = cdp_url
-        self._context = self._browser.contexts[0]
-        self._page = self._context.pages[0] if self._context.pages else self._context.new_page()
-        self._last_request_at = 0.0
-        self._prime()
+        last_error: Exception | None = None
+        for isolated_session in (False, True):
+            profile_dir = self._resolve_profile_dir(isolated_session=isolated_session)
+            port = self._pick_free_port()
+            cdp_url = f"http://127.0.0.1:{port}"
+            launch_args = [
+                self.browser_path,
+                f"--user-data-dir={profile_dir}",
+                f"--remote-debugging-port={port}",
+                "--no-first-run",
+                "--disable-blink-features=AutomationControlled",
+                SEARCH_PAGE_URL,
+            ]
+            print(
+                "Auto-starting a local browser for 51job manual verification: "
+                f"{cdp_url}",
+                flush=True,
+            )
+            self._spawned_browser_process = subprocess.Popen(
+                launch_args,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                text=True,
+            )
+            try:
+                self._browser = self._connect_over_cdp_with_retry(cdp_url)
+                self._attached_via_cdp = True
+                self._owns_browser_process = True
+                self.cdp_url = cdp_url
+                self._context = self._browser.contexts[0]
+                self._page = self._context.pages[0] if self._context.pages else self._context.new_page()
+                self._owns_page = False
+                self._last_request_at = 0.0
+                self._prime()
+                return
+            except Exception as exc:
+                last_error = exc
+                if self._spawned_browser_process is not None and self._spawned_browser_process.poll() is None:
+                    try:
+                        self._spawned_browser_process.terminate()
+                        self._spawned_browser_process.wait(timeout=5)
+                    except Exception:
+                        try:
+                            self._spawned_browser_process.kill()
+                        except Exception:
+                            pass
+                self._spawned_browser_process = None
+                self._browser = None
+                if not isolated_session:
+                    print(
+                        "Auto-started browser did not stay attached on the shared profile; "
+                        "retrying with an isolated session profile.",
+                        flush=True,
+                    )
+                    continue
+                raise
+        if last_error is not None:
+            raise last_error
 
     def _prime(self) -> None:
-        self._page.goto(SEARCH_PAGE_URL, wait_until="domcontentloaded", timeout=int(self.timeout * 1000))
-        self._page.wait_for_timeout(self.ready_wait_ms)
+        page = self._ensure_page()
+        timeout_ms = int(self.timeout * 1000)
+        try:
+            page.goto(SEARCH_PAGE_URL, wait_until="domcontentloaded", timeout=timeout_ms)
+        except Exception:
+            # Shared CDP pages occasionally stall on DOMContentLoaded even though the
+            # navigation has already committed and the 51job origin is ready for API fetches.
+            fallback_timeout_ms = max(min(timeout_ms // 2, 15000), 5000)
+            page.goto(SEARCH_PAGE_URL, wait_until="commit", timeout=fallback_timeout_ms)
+        page.wait_for_timeout(self.ready_wait_ms)
+
+    def _ensure_page(self) -> Any:
+        if getattr(self, "_page", None) is None:
+            self._page = self._context.new_page()
+            self._owns_page = True
+        return self._page
+
+    def supports_parallel_workers(self) -> bool:
+        return True
+
+    def derive_worker_profile_dir(self, worker_index: int) -> str | None:
+        if not self.user_data_dir:
+            return None
+        base = Path(self.user_data_dir)
+        worker_suffix = max(int(worker_index), 0) + 1
+        return str(base.with_name(f"{base.name}_worker_{worker_suffix:02d}"))
+
+    def derive_worker_startup_stagger(self, worker_index: int) -> float:
+        ordinal = max(int(worker_index), 0) + 1
+        interval = max(float(self.min_interval_seconds), 0.0)
+        if interval <= 0:
+            return min(0.08 * ordinal, 0.40)
+        return min(max(interval * 0.35 * ordinal, 0.05 * ordinal), 1.50)
+
+    def clone_for_parallel_worker(
+        self,
+        worker_index: int,
+        *,
+        headless: bool | None = None,
+    ) -> "BrowserSearchClient":
+        worker_label = f"browser-worker-{max(int(worker_index), 0) + 1:02d}"
+        shared_cdp_url = self.cdp_url if self._attached_via_cdp else None
+        return BrowserSearchClient(
+            timeout=self.timeout,
+            headless=self.headless if headless is None else headless,
+            browser_path=self.browser_path,
+            ready_wait_ms=self.ready_wait_ms,
+            request_timeout_ms=self.request_timeout_ms,
+            max_retries=self.max_retries,
+            min_interval_seconds=self.min_interval_seconds,
+            user_data_dir=None if shared_cdp_url else self.derive_worker_profile_dir(worker_index),
+            allow_manual_verification=self.allow_manual_verification if shared_cdp_url else False,
+            manual_verification_wait_ms=self.manual_verification_wait_ms,
+            cdp_url=shared_cdp_url,
+            speed_profile=self.speed_profile,
+            max_effective_workers=self.max_effective_workers,
+            startup_stagger_seconds=self.derive_worker_startup_stagger(worker_index),
+            status_callback=self.status_callback,
+            worker_label=worker_label,
+            manual_verification_coordinator=self.manual_verification_coordinator if shared_cdp_url else None,
+            reuse_existing_page_on_cdp=False,
+        )
 
     def close(self) -> None:
         try:
-            if not self._attached_via_cdp:
+            if self._attached_via_cdp:
+                if self._owns_page:
+                    try:
+                        self._page.close()
+                    except Exception:
+                        pass
+            else:
                 self._context.close()
         finally:
             try:
-                if self._browser is not None:
+                if self._browser is not None and (not self._attached_via_cdp or self._owns_browser_process):
                     self._browser.close()
             finally:
                 try:
@@ -211,50 +406,160 @@ class BrowserSearchClient:
 
     def _reprime(self) -> None:
         try:
-            self._page.close()
+            if self._page is not None:
+                self._page.close()
         except Exception:
             pass
         self._page = self._context.new_page()
+        self._owns_page = True
         self._prime()
 
     def _respect_rate_limit(self) -> None:
+        if not self._startup_stagger_applied:
+            self._startup_stagger_applied = True
+            if self.startup_stagger_seconds > 0:
+                time.sleep(self.startup_stagger_seconds)
         if self.min_interval_seconds <= 0:
             return
         delay = self.min_interval_seconds - (time.time() - self._last_request_at)
         if delay > 0:
             time.sleep(delay)
 
+    def _is_blocked_response_text(self, text: str) -> bool:
+        lowered = text.lower()
+        return "滑动验证页面" in text or "<title>405" in lowered
+
+    def _wait_until_manual_verification_resolved(self, page: Any) -> bool:
+        deadline = time.time() + max(self.manual_verification_wait_ms, 1000) / 1000.0
+        while time.time() < deadline:
+            try:
+                current_url = str(getattr(page, "url", "") or "")
+            except Exception:
+                current_url = ""
+            try:
+                current_title = str(page.title() or "")
+            except Exception:
+                current_title = ""
+            if "滑动验证" not in current_title and "405" not in current_title:
+                if current_url.startswith("https://we.51job.com"):
+                    try:
+                        page.wait_for_timeout(max(min(self.ready_wait_ms, 1500), 300))
+                    except Exception:
+                        pass
+                    return True
+            try:
+                page.wait_for_timeout(1000)
+            except Exception:
+                return False
+        return False
+
+    def _fetch_json_via_page(self, api_path: str) -> dict[str, Any]:
+        page = self._ensure_page()
+        current_url = ""
+        try:
+            current_url = str(getattr(page, "url", "") or "")
+        except Exception:
+            current_url = ""
+        if not current_url.startswith("https://we.51job.com"):
+            self._prime()
+            page = self._ensure_page()
+        return page.evaluate(
+            """
+            async ({ apiPath, timeoutMs }) => {
+              const controller = new AbortController();
+              const timer = setTimeout(() => controller.abort("timeout"), timeoutMs);
+              try {
+                const response = await fetch(apiPath, {
+                  credentials: "include",
+                  signal: controller.signal,
+                  headers: {
+                    "Accept": "application/json, text/plain, */*"
+                  }
+                });
+                const text = await response.text();
+                return {
+                  status: response.status,
+                  contentType: response.headers.get("content-type") || "",
+                  text,
+                  error: ""
+                };
+              } catch (error) {
+                return {
+                  status: 0,
+                  contentType: "",
+                  text: "",
+                  error: String(error)
+                };
+              } finally {
+                clearTimeout(timer);
+              }
+            }
+            """,
+            {"apiPath": api_path, "timeoutMs": self.request_timeout_ms},
+        )
+
     def _wait_for_manual_verification(self, search_url: str) -> bool:
         if not self.allow_manual_verification or (self.headless and not self._attached_via_cdp):
             return False
         wait_seconds = self.manual_verification_wait_ms // 1000
-        if callable(self.status_callback):
-            self.status_callback(
-                "manual_verification_waiting",
-                {
-                    "search_url": search_url,
-                    "wait_seconds": wait_seconds,
-                },
+        coordinator = self.manual_verification_coordinator
+        if coordinator is not None:
+            is_owner = coordinator.begin(
+                worker_label=self.worker_label,
+                search_url=search_url,
+                wait_seconds=wait_seconds,
+                status_callback=self.status_callback,
             )
+            if not is_owner:
+                coordinator.wait_for_resume()
+                return True
+        else:
+            if callable(self.status_callback):
+                self.status_callback(
+                    "manual_verification_waiting",
+                    {
+                        "search_url": search_url,
+                        "wait_seconds": wait_seconds,
+                        "owner": self.worker_label,
+                        "manual_verification_active": True,
+                    },
+                )
         print(
             "51job requires manual intervention in the opened browser window. "
             f"Waiting up to {wait_seconds} seconds...",
             flush=True,
         )
+        page = self._ensure_page()
         try:
-            self._page.bring_to_front()
-        except Exception:
-            pass
-        self._page.goto(search_url, wait_until="domcontentloaded", timeout=int(self.timeout * 1000))
-        self._page.wait_for_timeout(self.manual_verification_wait_ms)
-        self._reprime()
-        if callable(self.status_callback):
-            self.status_callback(
-                "manual_verification_resumed",
-                {
-                    "search_url": search_url,
-                },
-            )
+            try:
+                page.bring_to_front()
+            except Exception:
+                pass
+            try:
+                page.goto(search_url, wait_until="domcontentloaded", timeout=int(self.timeout * 1000))
+            except Exception:
+                fallback_timeout_ms = max(min(int(self.timeout * 1000) // 2, 15000), 5000)
+                page.goto(search_url, wait_until="commit", timeout=fallback_timeout_ms)
+            resolved = self._wait_until_manual_verification_resolved(page)
+            if not self._attached_via_cdp:
+                self._reprime()
+            elif resolved:
+                page.wait_for_timeout(max(min(self.ready_wait_ms, 1000), 250))
+        finally:
+            if coordinator is not None:
+                coordinator.finish(
+                    worker_label=self.worker_label,
+                    status_callback=self.status_callback,
+                )
+            elif callable(self.status_callback):
+                self.status_callback(
+                    "manual_verification_resumed",
+                    {
+                        "search_url": search_url,
+                        "owner": self.worker_label,
+                        "manual_verification_active": False,
+                    },
+                )
         return True
 
     def _matches_search_response(self, response: Any, params: dict[str, str]) -> bool:
@@ -281,59 +586,60 @@ class BrowserSearchClient:
             }
         )
         api_path = f"/api/job/search-pc?{query}"
+        api_url = f"https://we.51job.com{api_path}"
         for attempt in range(1, self.max_retries + 1):
+            if self.manual_verification_coordinator is not None:
+                self.manual_verification_coordinator.wait_if_paused(self.worker_label)
             self._respect_rate_limit()
             self._last_request_at = time.time()
             try:
                 if self._attached_via_cdp:
-                    result = self._page.evaluate(
-                        """
-                        async ({ apiPath, timeoutMs }) => {
-                          const controller = new AbortController();
-                          const timer = setTimeout(() => controller.abort("timeout"), timeoutMs);
-                          try {
-                            const response = await fetch(apiPath, {
-                              credentials: "include",
-                              signal: controller.signal,
-                              headers: {
-                                "Accept": "application/json, text/plain, */*"
-                              }
-                            });
-                            const text = await response.text();
-                            return {
-                              status: response.status,
-                              contentType: response.headers.get("content-type") || "",
-                              text,
-                              error: ""
-                            };
-                          } catch (error) {
-                            return {
-                              status: 0,
-                              contentType: "",
-                              text: "",
-                              error: String(error)
-                            };
-                          } finally {
-                            clearTimeout(timer);
-                          }
-                        }
-                        """,
-                        {"apiPath": api_path, "timeoutMs": self.request_timeout_ms},
+                    response = self._context.request.get(
+                        api_url,
+                        timeout=self.request_timeout_ms,
+                        headers={
+                            "Accept": "application/json, text/plain, */*",
+                            "Accept-Language": DEFAULT_HEADERS["Accept-Language"],
+                            "Origin": "https://we.51job.com",
+                            "Referer": search_url,
+                            "User-Agent": DEFAULT_HEADERS["User-Agent"],
+                        },
                     )
-                    if "json" in result.get("contentType", "").lower():
-                        return json.loads(result["text"])
-                    response_text = result.get("text", "")
+                    response_text = response.text()
+                    content_type = response.headers.get("content-type", "")
+                    if "json" in content_type.lower():
+                        return json.loads(response_text)
                     last_error = (
-                        f"status={result.get('status')} contentType={result.get('contentType')} "
-                        f"error={result.get('error')} pageUrl={self._page.url} "
+                        f"status={response.status} contentType={content_type} "
+                        f"worker={self.worker_label} apiUrl={api_url} "
                         f"sample={response_text[:200]!r}"
                     )
-                    blocked = "滑动验证页面" in response_text or "<title>405" in response_text.lower()
+                    blocked = self._is_blocked_response_text(response_text)
                     if (
                         blocked
                         and self._wait_for_manual_verification(search_url)
                     ):
                         continue
+                    page_result = self._fetch_json_via_page(api_path)
+                    page_text = str(page_result.get("text", "") or "")
+                    page_content_type = str(page_result.get("contentType", "") or "")
+                    if "json" in page_content_type.lower():
+                        return json.loads(page_text)
+                    page_blocked = self._is_blocked_response_text(page_text)
+                    if (
+                        page_blocked
+                        and self._wait_for_manual_verification(search_url)
+                    ):
+                        continue
+                    blocked = blocked or page_blocked
+                    last_error = (
+                        f"context={last_error}; "
+                        f"page_fetch=status={page_result.get('status')} "
+                        f"contentType={page_content_type} "
+                        f"error={page_result.get('error')} "
+                        f"worker={self.worker_label} "
+                        f"sample={page_text[:200]!r}"
+                    )
                     raise RuntimeError(last_error)
 
                 with self._page.expect_response(
@@ -354,7 +660,7 @@ class BrowserSearchClient:
                     f"status={response.status} contentType={content_type} "
                     f"pageUrl={self._page.url} sample={text[:200]!r}"
                 )
-                blocked = "滑动验证页面" in text or "<title>405" in text.lower()
+                blocked = self._is_blocked_response_text(text)
                 if blocked and self._wait_for_manual_verification(search_url):
                     continue
             except Exception as exc:

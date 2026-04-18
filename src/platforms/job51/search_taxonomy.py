@@ -74,9 +74,13 @@ def _js_object_array_to_json_text(array_text: str) -> str:
     return re.sub(r'([{\[,])([A-Za-z_]\w*):', r'\1"\2":', array_text)
 
 
-def discover_search_bundles(session: requests.Session | None = None) -> list[str]:
+def discover_search_bundles(
+    session: requests.Session | None = None,
+    *,
+    timeout: float = 30.0,
+) -> list[str]:
     session = _prepare_session(session)
-    response = session.get(SEARCH_PAGE_URL, timeout=30)
+    response = session.get(SEARCH_PAGE_URL, timeout=timeout)
     response.raise_for_status()
     soup = BeautifulSoup(response.text, "html.parser")
     script_urls: list[str] = []
@@ -90,13 +94,18 @@ def discover_search_bundles(session: requests.Session | None = None) -> list[str
     return script_urls
 
 
-def find_taxonomy_bundle_urls(script_urls: list[str], session: requests.Session | None = None) -> tuple[str, str]:
+def find_taxonomy_bundle_urls(
+    script_urls: list[str],
+    session: requests.Session | None = None,
+    *,
+    timeout: float = 30.0,
+) -> tuple[str, str]:
     session = _prepare_session(session)
 
     area_url = ""
     function_url = ""
     for script_url in script_urls:
-        text = session.get(script_url, timeout=30).text
+        text = session.get(script_url, timeout=timeout).text
         if not area_url and 'id:"010000",c:"北京",l:"北京"' in text:
             area_url = script_url
         if not function_url and 'value:"3000",label:"销售人员"' in text:
@@ -169,13 +178,14 @@ def fetch_search_taxonomies(
     session: requests.Session | None = None,
     area_output: Path | None = None,
     function_output: Path | None = None,
+    timeout: float = 30.0,
 ) -> tuple[list[AreaNode], list[dict[str, str]]]:
     session = _prepare_session(session)
-    script_urls = discover_search_bundles(session)
-    area_url, function_url = find_taxonomy_bundle_urls(script_urls, session)
+    script_urls = discover_search_bundles(session, timeout=timeout)
+    area_url, function_url = find_taxonomy_bundle_urls(script_urls, session, timeout=timeout)
 
-    area_bundle = session.get(area_url, timeout=30).text
-    function_bundle = session.get(function_url, timeout=30).text
+    area_bundle = session.get(area_url, timeout=timeout).text
+    function_bundle = session.get(function_url, timeout=timeout).text
 
     area_tree = extract_area_tree_from_bundle(area_bundle)
     function_codes = extract_function_codes_from_bundle(function_bundle)

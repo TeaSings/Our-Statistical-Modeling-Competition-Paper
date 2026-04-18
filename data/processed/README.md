@@ -13,10 +13,10 @@
 - `ncss/ncss_listings_all_areas_flat.csv`：全国职位覆盖底表，`41407` 个唯一职位
 - `ncss/ncss_list_query_summary_all_areas.csv`：全国列表抓取摘要
 - `51job/51job_campus_jobs_clean.csv`：51job 校招 clean 样本，`245` 条
-- `51job/51job_social_jobs_clean.csv`：51job 社招阶段性 clean 快照，`13989` 条
+- `51job/51job_social_jobs_clean_with_publish.csv`：51job 社招带发布时间的 active clean 检查点，`8184` 条
 
 ## 使用建议
 
 - 现在就开始正文分析、技能抽取和招聘要求建模：优先用 `ncss/ncss_jobs_all_areas_clean.csv`
 - 需要说明全国覆盖范围：配合 `ncss/ncss_listings_all_areas_flat.csv` 与 `ncss/ncss_list_query_summary_all_areas.csv`
-- 需要对比市场化岗位和 NCSS 的正文质量：再看 `51job/51job_social_jobs_clean.csv`
+- 需要对比市场化岗位和 NCSS 的正文质量：再看 `51job/51job_social_jobs_clean_with_publish.csv`
