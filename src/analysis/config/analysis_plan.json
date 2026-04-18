@@ -1,0 +1,380 @@
+{
+  "study_meta": {
+    "title": "生成式人工智能冲击下城市就业技能结构重塑研究：基于招聘文本与大模型信息抽取",
+    "window": "2021-2026",
+    "primary_unit": "city-job_family-quarter",
+    "secondary_units": [
+      "job",
+      "city-quarter"
+    ],
+    "document_version": "v1.0"
+  },
+  "research_questions": [
+    "2021-2026 年间，随着 GenAI 扩散，中国城市招聘市场中的技能信息熵是否发生系统性变化。",
+    "技能信息熵的变化表现为技能组合扩张，还是在部分岗位中出现标准化与收敛。",
+    "GenAI 发展对技能信息熵的影响是否在高暴露岗位族与低暴露岗位族之间存在显著差异。",
+    "GenAI 对技能信息熵的影响是否通过高阶技能提升、互补技能增加和常规技能压缩实现。",
+    "技能信息熵的变化是否具有显著空间溢出效应，即高 GenAI 发展城市是否带动邻近城市同步重塑技能结构。"
+  ],
+  "theory_chain": [
+    "GenAI发展 -> 岗位任务结构变化 -> 技能需求组合重构 -> 技能信息熵变化 -> 城市间异质性分化与空间扩散"
+  ],
+  "mechanisms": [
+    {
+      "name": "substitution_effect",
+      "label": "替代效应",
+      "description": "GenAI 替代规则明确、重复性强的任务，压缩常规技能需求，使部分岗位技能结构收敛。"
+    },
+    {
+      "name": "complementarity_effect",
+      "label": "互补效应",
+      "description": "GenAI 与 Prompt 工程、审校优化、业务理解、跨部门协同等能力互补，推动技能维度扩展。"
+    },
+    {
+      "name": "task_reorganization_effect",
+      "label": "任务重组效应",
+      "description": "岗位从单点执行转向生成、筛选、审校、优化和交付的链式结构，提升复合技能需求。"
+    },
+    {
+      "name": "skill_upgrading_effect",
+      "label": "技能升级效应",
+      "description": "招聘要求更强调高阶认知、沟通、项目管理和 AI 工具使用能力。"
+    },
+    {
+      "name": "spatial_spillover_effect",
+      "label": "空间溢出效应",
+      "description": "高数字化与高创新城市率先吸收 GenAI，并通过技术、产业和人才流动影响邻近城市。"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "H1",
+      "statement": "GenAI 发展水平越高，城市-岗位族-季度层面的技能信息熵越高。",
+      "basis": "互补效应与任务重组效应扩大技能组合维度。",
+      "direction": "positive"
+    },
+    {
+      "id": "H2",
+      "statement": "GenAI 发展对高暴露岗位族技能信息熵的促进作用显著强于低暴露岗位族。",
+      "basis": "高暴露岗位更易被技术重组。",
+      "direction": "positive_interaction"
+    },
+    {
+      "id": "H3",
+      "statement": "GenAI 发展会显著提高高阶认知技能占比。",
+      "basis": "技能升级效应增强分析、判断和设计能力需求。",
+      "direction": "positive"
+    },
+    {
+      "id": "H4",
+      "statement": "GenAI 发展会显著提高互补技能占比。",
+      "basis": "人机协同使 AI 工具使用、审校优化和业务理解能力重要性上升。",
+      "direction": "positive"
+    },
+    {
+      "id": "H5",
+      "statement": "GenAI 发展会显著压缩常规技能占比。",
+      "basis": "替代效应使标准化与重复性任务被弱化。",
+      "direction": "negative"
+    },
+    {
+      "id": "H6",
+      "statement": "高阶技能和互补技能是 GenAI 影响技能信息熵的重要中介机制。",
+      "basis": "技能熵变化来自结构性技能重组，而非单纯 AI 词频提升。",
+      "direction": "mediated_positive"
+    },
+    {
+      "id": "H7",
+      "statement": "GenAI 发展与技能信息熵之间存在非线性关系。",
+      "basis": "扩散初期技能扩张，后期部分岗位技能标准化趋稳。",
+      "direction": "positive_then_flatten"
+    },
+    {
+      "id": "H8",
+      "statement": "高数字经济、高创新和高高教资源城市中，GenAI 的技能重塑效应更强。",
+      "basis": "技术吸收能力与人才供给能力更强。",
+      "direction": "positive_heterogeneity"
+    },
+    {
+      "id": "H9",
+      "statement": "技能信息熵存在显著空间集聚与溢出效应。",
+      "basis": "技术扩散、产业链联系与人才流动具有区域传导性。",
+      "direction": "positive_spillover"
+    }
+  ],
+  "data_tables": [
+    {
+      "name": "job_level_panel",
+      "level": "job",
+      "purpose": "岗位微观主表"
+    },
+    {
+      "name": "skill_extraction_table",
+      "level": "job",
+      "purpose": "技能与任务抽取结果表"
+    },
+    {
+      "name": "city_quarter_external_table",
+      "level": "city-quarter",
+      "purpose": "城市季度外部控制变量表"
+    },
+    {
+      "name": "city_spatial_table",
+      "level": "city",
+      "purpose": "空间关系表"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "step": 1,
+      "name": "merge_platform_data",
+      "label": "多平台岗位数据合并",
+      "input": ["platform raw csv/json"],
+      "logic": "统一字段名、编码、平台标识和日期格式。",
+      "output": "job_level_panel_union_raw",
+      "automation": "high",
+      "manual_review": "low"
+    },
+    {
+      "step": 2,
+      "name": "clean_job_text",
+      "label": "岗位正文清洗",
+      "input": ["jd_text_raw"],
+      "logic": "删除 HTML、模板文本和乱码，保留职责、要求、技能相关正文。",
+      "output": "job_level_panel_text_clean",
+      "automation": "high",
+      "manual_review": "medium"
+    },
+    {
+      "step": 3,
+      "name": "standardize_city",
+      "label": "城市标准化",
+      "input": ["city_raw", "province_raw"],
+      "logic": "统一到地级市口径，映射区县和园区到城市级。",
+      "output": "city_std_final",
+      "automation": "high",
+      "manual_review": "high"
+    },
+    {
+      "step": 4,
+      "name": "standardize_time",
+      "label": "时间标准化",
+      "input": ["publish_date"],
+      "logic": "派生月份、季度和年份字段。",
+      "output": "job_level_panel_time_std",
+      "automation": "high",
+      "manual_review": "low"
+    },
+    {
+      "step": 5,
+      "name": "standardize_job_family",
+      "label": "岗位族标准化",
+      "input": ["job_title_std", "jd_text_clean", "industry_std"],
+      "logic": "采用规则词典加 LLM 辅助，把岗位映射到统一岗位族。",
+      "output": "job_family_std",
+      "automation": "medium",
+      "manual_review": "high"
+    },
+    {
+      "step": 6,
+      "name": "normalize_skill_tokens",
+      "label": "技能词归一化",
+      "input": ["skill_list"],
+      "logic": "做同义词归并、中英文统一和工具类技能标准化。",
+      "output": "skill_token_norm",
+      "automation": "medium",
+      "manual_review": "high"
+    },
+    {
+      "step": 7,
+      "name": "build_skill_taxonomy",
+      "label": "技能分类体系构建",
+      "input": ["skill_token_norm"],
+      "logic": "构建技能词到一级技能类、二级技能类的映射。",
+      "output": "skill_category_dict",
+      "automation": "medium",
+      "manual_review": "high"
+    },
+    {
+      "step": 8,
+      "name": "build_task_taxonomy",
+      "label": "任务分类体系构建",
+      "input": ["task_list"],
+      "logic": "建立统一任务类别，用于任务熵和机制分析。",
+      "output": "task_category_dict",
+      "automation": "medium",
+      "manual_review": "medium"
+    },
+    {
+      "step": 9,
+      "name": "dual_channel_extraction",
+      "label": "双通道抽取融合",
+      "input": ["rule extraction", "llm extraction"],
+      "logic": "规则先抽显式技能与任务，LLM 补充隐性技能、GenAI 标签和任务属性。",
+      "output": "skill_extraction_table_final",
+      "automation": "medium",
+      "manual_review": "high"
+    },
+    {
+      "step": 10,
+      "name": "handle_missing_values",
+      "label": "缺失值处理",
+      "input": ["job_level_panel", "skill_extraction_table_final"],
+      "logic": "核心文本和城市字段缺失样本剔除，薪资与学历缺失分层处理。",
+      "output": "job_level_panel_missing_handled",
+      "automation": "high",
+      "manual_review": "low"
+    },
+    {
+      "step": 11,
+      "name": "deduplicate_jobs",
+      "label": "岗位去重",
+      "input": ["job_level_panel_missing_handled"],
+      "logic": "按平台、企业、城市、岗位、月份和薪资去重，优先保留文本最完整记录。",
+      "output": "job_level_panel_dedup",
+      "automation": "high",
+      "manual_review": "medium"
+    },
+    {
+      "step": 12,
+      "name": "handle_outliers",
+      "label": "异常值处理",
+      "input": ["salary_avg_month", "text length", "skill count"],
+      "logic": "薪资 winsorize，异常文本长度与异常技能数样本抽查。",
+      "output": "job_level_panel_ready",
+      "automation": "high",
+      "manual_review": "medium"
+    },
+    {
+      "step": 13,
+      "name": "build_panel_cgt",
+      "label": "构建城市-岗位族-季度面板",
+      "input": ["job_level_panel_ready", "skill_extraction_table_final"],
+      "logic": "聚合生成岗位数、技能分布、任务分布、薪资和学历指标。",
+      "output": "panel_cgt_base",
+      "automation": "high",
+      "manual_review": "low"
+    },
+    {
+      "step": 14,
+      "name": "build_panel_ct",
+      "label": "构建城市-季度面板",
+      "input": ["panel_cgt_base"],
+      "logic": "城市层再聚合，用于空间模型与城市层冲击分析。",
+      "output": "panel_ct_base",
+      "automation": "high",
+      "manual_review": "low"
+    },
+    {
+      "step": 15,
+      "name": "compute_entropy_indices",
+      "label": "构建技能熵与任务熵指标",
+      "input": ["panel_cgt_base", "panel_ct_base"],
+      "logic": "计算技能熵、标准化技能熵和任务熵。",
+      "output": ["entropy_panel_cgt", "entropy_panel_ct"],
+      "automation": "high",
+      "manual_review": "low"
+    },
+    {
+      "step": 16,
+      "name": "build_genai_index",
+      "label": "构建 GenAI 发展指数",
+      "input": ["city_quarter_external_table", "explicit_genai_share_ct"],
+      "logic": "标准化指标后用 PCA 或熵值法合成城市季度 GenAI 指数和全国季度 GenAI 指数。",
+      "output": ["genai_index_ct", "genai_index_t"],
+      "automation": "high",
+      "manual_review": "medium"
+    },
+    {
+      "step": 17,
+      "name": "build_exposure",
+      "label": "构建岗位族暴露度",
+      "input": ["task characteristics", "llm labels", "external mapping"],
+      "logic": "构建岗位族 GenAI 暴露度，用于交互模型和 shift-share。",
+      "output": "exposure_g",
+      "automation": "medium",
+      "manual_review": "high"
+    },
+    {
+      "step": 18,
+      "name": "build_shift_share_shock",
+      "label": "构建城市冲击强度",
+      "input": ["base shares", "exposure_g", "genai_index_t"],
+      "logic": "基于基期岗位结构与暴露度构造城市层 shift-share 冲击。",
+      "output": "shock_ct",
+      "automation": "high",
+      "manual_review": "low"
+    },
+    {
+      "step": 19,
+      "name": "merge_spatial_inputs",
+      "label": "拼接空间分析底表",
+      "input": ["panel_ct_base", "city_spatial_table"],
+      "logic": "生成空间权重矩阵和空间计量所需底表。",
+      "output": "spatial_panel_ct",
+      "automation": "high",
+      "manual_review": "low"
+    }
+  ],
+  "spatiotemporal_analysis": {
+    "main_results": [
+      "时间趋势分析",
+      "分阶段演化分析",
+      "全局空间自相关分析",
+      "局部空间自相关分析",
+      "城市分层演化分析"
+    ],
+    "enhancement_results": [
+      "关键事件前后变化分析",
+      "时空迁移分析",
+      "热点/冷点识别",
+      "空间 Markov 或 ESTDA"
+    ]
+  },
+  "robustness": [
+    "更换核心解释变量口径：gdi_ct / gdi_t / explicit_genai_share_ct",
+    "更换熵指标口径：技能类别熵 / 技能词熵 / 任务熵",
+    "更换时间粒度：季度 / 月度 / 半年",
+    "更换样本范围：前100城 / 去掉直辖市 / 非AI原生岗位",
+    "剔除 AI 原生岗位",
+    "替代事件时间点：2022-11-30 / 2023-03-14 / 2023-08-15",
+    "滞后项检验：L1.gdi_ct / L2.gdi_ct",
+    "空间权重矩阵替代：邻接 / 距离倒数 / 经济距离",
+    "替代暴露度测算：规则法 / LLM 法 / 文献映射法",
+    "内生性缓解：shift-share、滞后项、固定效应、基期 AI 专利与数字基础设施候选工具变量"
+  ],
+  "paper_structure": [
+    "绪论",
+    "文献综述与理论分析",
+    "数据来源、处理流程与指标构建",
+    "技能信息熵的时空演化特征",
+    "GenAI 发展对技能信息熵的实证检验",
+    "机制、异质性与空间溢出分析",
+    "稳健性检验",
+    "结论与政策建议"
+  ],
+  "fallback_plan": {
+    "time_window": ["2022-2026", "2023-2026"],
+    "city_scope": ["前100城", "前50城"],
+    "job_family_granularity": ["12类", "8类", "6类"],
+    "must_keep_models": ["描述统计", "基准双向固定效应", "GDI×Exposure 交互模型"],
+    "optional_models_to_drop": ["空间杜宾模型", "复杂中介链", "事件研究", "shift-share"]
+  },
+  "recommended_script_order": [
+    "01_merge_raw_platforms.py",
+    "02_clean_text_and_time.py",
+    "03_standardize_city_and_job_family.py",
+    "04_extract_skills_and_tasks.py",
+    "05_normalize_skill_tokens.py",
+    "06_build_skill_task_dicts.py",
+    "07_build_panel_cgt.py",
+    "08_compute_entropy_indices.py",
+    "09_build_genai_index.py",
+    "10_build_exposure_and_shock.py",
+    "11_run_fe_models.py",
+    "12_run_mediation_models.py",
+    "13_run_event_study.py",
+    "14_run_spatial_models.py",
+    "15_make_tables_and_figures.py"
+  ]
+}

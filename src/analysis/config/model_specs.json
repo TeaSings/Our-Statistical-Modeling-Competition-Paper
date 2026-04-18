@@ -1,0 +1,156 @@
+{
+  "models": [
+    {
+      "id": "descriptive",
+      "label": "描述统计模型",
+      "tier": "supporting",
+      "formula": "N/A",
+      "dependent_variables": [
+        "skill_entropy_ct",
+        "skill_entropy_cgt",
+        "gdi_t",
+        "gdi_ct"
+      ],
+      "purpose": "展示结构事实、时间趋势、城市差异和岗位族差异。",
+      "identification_logic": "不做因果识别，作为后续计量模型的事实基础。",
+      "advantages": ["直观", "适合答辩展示", "便于定位关键拐点"],
+      "limitations": ["不能识别净效应", "无法剥离共同趋势"],
+      "recommended": true
+    },
+    {
+      "id": "fe_baseline",
+      "label": "基准双向固定效应模型",
+      "tier": "main",
+      "formula": "Y_cgt = alpha + beta1 * GDI_ct + beta2 * X_ct + mu_c + nu_g + tau_t + eps_cgt",
+      "dependent_variables": ["skill_entropy_cgt", "task_entropy_cgt", "sri_cgt"],
+      "core_regressors": ["GDI_ct", "X_ct"],
+      "fixed_effects": ["city_fe", "job_family_fe", "quarter_fe"],
+      "purpose": "检验 GenAI 发展对技能熵和技能重塑的总体影响。",
+      "identification_logic": "利用城市、岗位族和时间三个维度的面板变化，并控制固定效应。",
+      "advantages": ["结构清楚", "实现简单", "适合作为基准回归"],
+      "limitations": ["城市层内生性仍可能存在", "不能直接体现岗位暴露差异"],
+      "recommended": true
+    },
+    {
+      "id": "interaction_main",
+      "label": "GenAI发展指数 × 岗位暴露度交互模型",
+      "tier": "main",
+      "formula": "Y_cgt = alpha + beta1 * (GDI_ct * Exposure_g) + beta2 * GDI_ct + beta3 * Exposure_g + beta4 * X_ct + mu_c + nu_g + tau_t + eps_cgt",
+      "dependent_variables": ["skill_entropy_cgt", "task_entropy_cgt", "sri_cgt", "hos_cgt", "css_cgt", "rss_cgt"],
+      "core_regressors": ["GDI_ct", "Exposure_g", "GDI_ct * Exposure_g"],
+      "fixed_effects": ["city_fe", "job_family_fe", "quarter_fe"],
+      "purpose": "识别高暴露岗位族是否更快发生技能结构重塑。",
+      "identification_logic": "利用城市技术发展差异与岗位族暴露差异的交互进行异质化识别。",
+      "advantages": ["最贴合论文题目", "解释力强", "非常适合答辩展示边际效应图"],
+      "limitations": ["暴露度测算质量决定结果上限", "岗位族过细时样本会变稀"],
+      "recommended": true
+    },
+    {
+      "id": "continuous_gdi",
+      "label": "连续型 GenAI 指数模型",
+      "tier": "supporting",
+      "formula": "Y_cgt = alpha + beta1 * GDI_ct + beta2 * X_ct + mu_c + nu_g + tau_t + eps_cgt",
+      "dependent_variables": ["skill_entropy_cgt", "task_entropy_cgt"],
+      "core_regressors": ["GDI_ct"],
+      "purpose": "强调技术扩散是连续进程，而非单一事件冲击。",
+      "identification_logic": "使用连续指数替代虚拟变量，识别技术扩散随时间累计的影响。",
+      "advantages": ["更贴合 2021-2026 现实", "与技术发展路径一致"],
+      "limitations": ["时间趋势共线性问题更强"],
+      "recommended": false
+    },
+    {
+      "id": "shift_share",
+      "label": "城市层 shift-share 冲击模型",
+      "tier": "main",
+      "formula": "Y_ct = alpha + beta1 * Shock_ct + beta2 * X_ct + mu_c + tau_t + eps_ct ; Shock_ct = sum_g(Share_cg0 * Exposure_g * GDI_t)",
+      "dependent_variables": ["skill_entropy_ct", "norm_skill_entropy_ct", "sri_ct"],
+      "core_regressors": ["Shock_ct"],
+      "fixed_effects": ["city_fe", "quarter_fe"],
+      "purpose": "识别城市基期岗位结构差异导致的异质冲击。",
+      "identification_logic": "将全国技术前沿视为共同冲击，城市基期结构视为预先给定的传导权重。",
+      "advantages": ["识别逻辑更强", "劳动经济学范式清晰", "能增强论文学术性"],
+      "limitations": ["对基期结构质量要求高", "基期选择敏感"],
+      "recommended": true
+    },
+    {
+      "id": "mediation",
+      "label": "中介效应模型",
+      "tier": "supporting",
+      "formula": "M_cgt = alpha + theta1 * (GDI_ct * Exposure_g) + theta2 * X_ct + FE + eps ; Y_cgt = alpha + beta1 * (GDI_ct * Exposure_g) + beta2 * M_cgt + beta3 * X_ct + FE + eps",
+      "dependent_variables": ["hos_cgt", "css_cgt", "rss_cgt", "skill_entropy_cgt"],
+      "core_regressors": ["GDI_ct * Exposure_g", "M_cgt"],
+      "purpose": "解释 GenAI 如何通过高阶技能、互补技能和常规技能变化传导到技能熵。",
+      "identification_logic": "检验技术发展对机制变量的影响，以及机制变量对核心结果变量的影响。",
+      "advantages": ["能把机制讲透", "适合论文主体中的解释章节"],
+      "limitations": ["中介识别的因果解释弱于实验设计", "模型层数增加后展示复杂"],
+      "recommended": true
+    },
+    {
+      "id": "nonlinear",
+      "label": "非线性模型",
+      "tier": "enhancement",
+      "formula": "Y_cgt = alpha + beta1 * GDI_ct + beta2 * GDI_ct_sq + beta3 * X_ct + mu_c + nu_g + tau_t + eps_cgt",
+      "dependent_variables": ["skill_entropy_cgt", "sri_cgt"],
+      "core_regressors": ["GDI_ct", "GDI_ct_sq"],
+      "purpose": "检验技能熵是否存在先扩张后趋稳的阶段性变化。",
+      "identification_logic": "用二次项刻画技术扩散初期与中后期的差异化影响。",
+      "advantages": ["与理论阶段性一致", "容易形成有层次的结论"],
+      "limitations": ["对长时间序列质量要求更高"],
+      "recommended": false
+    },
+    {
+      "id": "event_study",
+      "label": "事件研究模型",
+      "tier": "enhancement",
+      "formula": "Y_cgt = alpha + sum_{k != -1}(delta_k * D_event_k_t * Exposure_g) + mu_c + nu_g + tau_t + eps_cgt",
+      "dependent_variables": ["skill_entropy_cgt", "hos_cgt", "css_cgt", "rss_cgt"],
+      "core_regressors": ["relative_time_dummies * Exposure_g"],
+      "events": ["2022-11-30", "2023-08-15"],
+      "purpose": "观察关键事件前后高暴露岗位族技能结构变化的动态路径。",
+      "identification_logic": "通过相对事件时间哑变量检验前趋势和平行趋势。",
+      "advantages": ["动态图形强", "适合答辩展示"],
+      "limitations": ["对早期样本要求高", "事件窗口过长时估计不稳"],
+      "recommended": false
+    },
+    {
+      "id": "spatial_durbin",
+      "label": "空间杜宾模型",
+      "tier": "main",
+      "formula": "Y_ct = rho * W_Y_ct + beta * GDI_ct + theta * W_GDI_ct + gamma * X_ct + eta * W_X_ct + mu_c + tau_t + eps_ct",
+      "dependent_variables": ["skill_entropy_ct", "norm_skill_entropy_ct", "sri_ct"],
+      "core_regressors": ["GDI_ct", "W_GDI_ct", "W_Y_ct"],
+      "purpose": "识别技能熵的空间依赖与 GenAI 发展的城市间溢出效应。",
+      "identification_logic": "同时估计本地解释变量效应和邻近城市解释变量溢出效应。",
+      "advantages": ["最适合时空演化主题", "兼顾本地效应与外溢效应"],
+      "limitations": ["模型解释复杂", "对权重矩阵设定敏感"],
+      "recommended": true
+    },
+    {
+      "id": "heterogeneity",
+      "label": "异质性模型",
+      "tier": "supporting",
+      "formula": "Y_cgt = alpha + beta1 * (GDI_ct * Exposure_g * Z_c) + beta2 * X_ct + mu_c + nu_g + tau_t + eps_cgt",
+      "dependent_variables": ["skill_entropy_cgt", "sri_cgt"],
+      "core_regressors": ["GDI_ct", "Exposure_g", "Z_c", "three_way_interaction"],
+      "purpose": "识别不同类型城市中 GenAI 技能重塑效应的差异。",
+      "identification_logic": "通过城市特征分组或三重交互比较高低组差异。",
+      "advantages": ["政策含义强", "便于形成城市分类建议"],
+      "limitations": ["分组过多会稀释样本", "结果展示容易碎片化"],
+      "recommended": true
+    }
+  ],
+  "recommended_top3": [
+    {
+      "model_id": "interaction_main",
+      "reason": "最贴合题目，能同时体现城市技术发展差异和岗位暴露差异。"
+    },
+    {
+      "model_id": "shift_share",
+      "reason": "识别逻辑更强，能提升论文的学术说服力。"
+    },
+    {
+      "model_id": "spatial_durbin",
+      "reason": "最能体现时空序列变化与空间溢出机制。"
+    }
+  ]
+}
