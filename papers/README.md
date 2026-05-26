@@ -1,19 +1,11 @@
-# papers 说明
+# 研究文献
 
-这个目录只存放论文原文和下载记录，不再与 `docs/` 混放。
+本目录保存用于研究动机、方法定位和文献综述的论文材料。
 
-## 当前结构
-
-| 路径 | 作用 |
+| 路径 | 主题 |
 | --- | --- |
-| `pdfs/01_foundations/` | 劳动经济学与自动化基础文献 |
-| `pdfs/02_ai_employment/` | AI 与就业、技能需求变化相关论文 |
-| `pdfs/03_text_methods/` | 招聘文本解析、技能抽取方法论文 |
-| `pdfs/04_china_studies/` | 中国劳动力市场与招聘文本相关研究 |
-| `download_results.csv` | 论文下载结果与记录 |
-
-## 维护原则
-
-- `papers/` 只放论文 PDF、目录说明和下载记录
-- 论文解读、方法笔记和项目讨论统一放到 `docs/`
-- 不再创建 `papers/reference_library/` 或 `papers/libraries/` 这类额外中间层
+| `pdfs/01_foundations/` | 劳动经济学、自动化和任务框架 |
+| `pdfs/02_ai_employment/` | AI、就业和技能需求 |
+| `pdfs/03_text_methods/` | 招聘文本分析和技能抽取 |
+| `pdfs/04_china_studies/` | 中国劳动力市场和招聘文本研究 |
+| `download_results.csv` | 文献下载记录 |

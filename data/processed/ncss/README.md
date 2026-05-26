@@ -1,19 +1,5 @@
-# data/processed/ncss 说明
+# NCSS 清洗后数据
 
-NCSS 清洗后 CSV 和查询摘要已转入本地归档，不进入 GitHub 归档版本。
+本目录是 NCSS 清洗后数据的恢复位置，包括全国岗位表、列表平铺表和查询汇总表。
 
-恢复位置：
-
-```text
-_local_archive_not_for_github/data/processed/ncss/
-```
-
-主要文件包括：
-
-- `ncss_jobs_all_areas_clean.csv`
-- `ncss_jobs_balanced_clean.csv`
-- `ncss_listings_all_areas_flat.csv`
-- `ncss_list_query_summary.csv`
-- `ncss_list_query_summary_all_areas.csv`
-
-这些文件用于早期 NCSS 数据链路复核；当前论文归档优先查看 `analysis/` 下的最终表格与图。
+NCSS 数据用于辅助地区口径、流程验证和扩展分析。大体量 CSV 不进入 Git，需要完整复现时从 GitHub Release 数据包恢复。

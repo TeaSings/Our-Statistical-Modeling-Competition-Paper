@@ -1,34 +1,39 @@
-# 00 分支基线核对（A 线 / 51job-only）
+# 51job 静态抽取基线
 
-## 结论摘要
+该流程把 51job 社招清洗表整理为论文使用的 job-level 主表和抽取结果。当前分析采用静态截面口径，核心单元为 `city × job_family`。
 
-- 当前 A 线主样本固定为 `data/processed/51job/51job_social_jobs_clean_with_publish.csv`。
-- 实际样本量为 `1111676` 行，明显高于仓库 README 中遗留的 `8184` 条旧口径。
-- `data/processed/51job/README.md` 仍描述旧文件 `51job_social_jobs_clean.csv`，与当前主样本不一致。
-- 协作文档中提到的 `src/analysis/*`、`src/analysis/config/*` 等目录在当前工作区未找到，说明文档基线与实际仓库存在偏差。
-- 当前 51job 社招大表的 `job_title_std`、`company_name_std`、`city_std`、`publish_time_std` 和 `jd_text_clean` 覆盖率均可直接支撑 A 线主表构建。
+## 主输入
 
-## README/快照差异
+| 文件 | 说明 |
+| --- | --- |
+| `data/processed/51job/51job_social_jobs_clean_with_publish.csv` | 51job 社招清洗表，包含岗位标题、城市、企业、正文、薪资和发布时间 |
+| `data/input/ncss/ncss_area_codes_all.csv` | 全国地区码，用于城市标准化 |
+| `data/input/51job/51job_search_area_tree.json` | 51job 地区树，用于平台城市口径补充 |
 
-- 根目录 `README.md` 记载 `51job_social_jobs_clean_with_publish.csv` 为 `8184` 条。
-- `data/processed/README.md` 记载同一文件为 `8184` 条。
-- `data/processed/51job/README.md` 仍引用旧文件 `51job_social_jobs_clean.csv`，未切换到 `_with_publish` 版本。
+主样本规模为 `1111676` 条岗位记录。
 
-## 当前主样本建议
+## 主脚本
 
-- 主样本：`data/processed/51job/51job_social_jobs_clean_with_publish.csv`
-- 当前执行口径：`51job-only`、`city-job_family` 静态版主线
-- 当前不纳入：`NCSS`、其他平台、时间面板主线
+```powershell
+python src/analysis_static/a_extraction/build_51job_master_static.py
+python src/analysis_static/a_extraction/finalize_51job_master_static.py
+```
 
-## 字段可用性说明
+脚本负责：
 
-- 可直接进入主表的关键字段：`source_job_id`、`job_title_std`、`company_name_std`、`city_std`、`province_std`、`salary_avg_month`、`education_std`、`experience_std`、`publish_time_std`、`jd_text_clean`
-- 需要二次标准化的关键字段：`province_std`、`city_std`、`district_std`
-- 需要新增规则衍生的关键字段：`job_family_std`、`skill_list`、`task_list`、`genai_related_skill_list`、`skill_category_list`、`is_ai_native_job`、`is_ai_augmented_job`、`genai_exposure_level`
+- 统一字段 schema。
+- 标准化城市、省份和岗位族。
+- 基于规则词典抽取技能、任务和 GenAI 相关表达。
+- 生成抽取结果表、复核表和质量报告。
 
-## 未找到的协作文档预设目录
+## 主输出
 
-- `src/analysis/`
-- `src/analysis/config/analysis_plan.json`
-- `src/analysis/config/model_specs.json`
-- `src/analysis/config/variable_dictionary.csv`
+| 输出 | 用途 |
+| --- | --- |
+| `analysis/tables/extraction_outputs/schema_mapping_static.json` | 字段映射说明 |
+| `analysis/tables/extraction_outputs/city_mapping_table.csv` | 城市映射结果 |
+| `analysis/tables/extraction_outputs/job_family_rules.csv` | 岗位族规则 |
+| `analysis/tables/extraction_outputs/skill_extraction_table_final.csv` | 技能、任务和 GenAI 抽取结果 |
+| `analysis/tables/extraction_outputs/*_manual_review.csv` | 低置信和复核样本 |
+
+大体量全量中间表在 Release 数据包中归档，Git 仓库保留论文所需的紧凑输出和复核表。

@@ -1,35 +1,36 @@
-        # 03 岗位族标准化说明
+# 岗位族标准化
 
-        ## 方法
+岗位族标准化把招聘标题、搜索关键词和岗位标签映射为统一的岗位大类，供 `city × job_family` 聚合和岗位族暴露度测算使用。
 
-        - 岗位族标准化仅基于 51job 的 `job_title_std`、`keyword_seed` 与 `job_tags_raw`。
-        - 第一版共设置 `21` 个岗位族代码，其中常用主族包括：`AI/算法`、`软件开发`、`销售/商务`、`市场/运营`、`供应链/物流/采购`、`机械工程`、`生产/质量` 等。
-        - 规则命中后按 `score -> priority` 排序，形成 `job_family_std` 与 `job_family_confidence`。
+## 输入字段
 
-        ## 结果摘要
+- `job_title_std`
+- `keyword_seed`
+- `job_tags_raw`
+- `jd_text_clean`
 
-        - 总样本：`1111676`
-        - 高置信岗位族：`789356`
-        - 中置信岗位族：`169922`
-        - 低置信岗位族：`152398`
+## 标准化逻辑
 
-        ## 高频岗位族
+1. 优先使用岗位标题中的强规则词。
+2. 使用搜索关键词和岗位标签进行补充判断。
+3. 对泛化标题使用正文中的任务和技能线索辅助分类。
+4. 多个规则冲突时按规则优先级确定岗位族。
+5. 低置信记录进入人工复核清单。
 
-        - 销售/商务: 194138
-- 生产/质量: 102689
-- 技工/操作: 90793
-- 机械工程: 90658
-- 供应链/物流/采购: 89472
-- 其他/待定: 85532
-- 市场/运营: 60585
-- 硬件/电气: 43903
-- 人力/行政: 42853
-- 软件开发: 40093
-- 产品/项目: 38051
-- 财务/会计: 37887
+## 输出
 
-        ## 产物
+| 文件 | 用途 |
+| --- | --- |
+| `job_family_rules.csv` | 岗位族规则表 |
+| `job_family_manual_review.csv` | 低置信和待复核样本 |
+| `skill_extraction_table_final.csv` | 带岗位族字段的抽取结果 |
 
-        - `data/processed/analysis_static/a_extraction/job_family_rules.csv`
-        - `data/processed/analysis_static/a_extraction/job_family_manual_review.csv`
-        - `data/processed/analysis_static/a_extraction/job_level_panel_job_family_std.csv`
+## 质量结果
+
+| 置信度 | 数量 |
+| --- | ---: |
+| 高置信 | 789356 |
+| 中置信 | 169922 |
+| 低置信 | 152398 |
+
+样本量较大的岗位族包括销售/商务、生产/质量、技工/操作、机械工程、供应链/物流/采购、市场/运营、硬件/电气、人力/行政、软件开发、产品/项目和财务/会计。
