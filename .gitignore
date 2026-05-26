@@ -1,0 +1,37 @@
+tmp/
+__pycache__/
+*.pyc
+.DS_Store
+_local_archive_not_for_github/
+data/runtime/
+third_party/
+
+# Local-only document render intermediates.
+analysis/job_level_scored.csv
+analysis/.tmp.drivedownload/
+analysis/.tmp.driveupload/
+analysis/.claude/
+analysis/tmp/
+analysis/output/
+analysis/figures/backup_*/
+
+# Large data payloads are kept locally, not in the final GitHub archive.
+data/raw/**/html/
+data/raw/**/records/
+data/raw/**/manifests/
+data/processed/**/*.csv
+data/processed/analysis_static/
+data/processed/analysis_static_refine_smoke/
+
+# 51job social crawl live outputs are rolling local artifacts.
+data/raw/51job/manifests/51job_social_cursor.json
+data/raw/51job/manifests/51job_social_progress.json
+data/raw/51job/manifests/51job_social_partition_manifest.jsonl
+data/raw/51job/manifests/51job_social_scheduler.stdout.log
+data/raw/51job/manifests/51job_social_scheduler.stderr.log
+data/raw/51job/manifests/51job_social_cursor_with_publish.json
+data/raw/51job/manifests/51job_social_progress_with_publish.json
+data/raw/51job/manifests/51job_social_partition_manifest_with_publish.jsonl
+data/raw/51job/manifests/51job_social_plan_cache_with_publish/
+data/raw/51job/manifests/51job_social_scheduler_with_publish.stdout.log
+data/raw/51job/manifests/51job_social_scheduler_with_publish.stderr.log

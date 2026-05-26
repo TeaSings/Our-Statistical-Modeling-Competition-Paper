@@ -1,0 +1,25 @@
+{
+  "base_url": "https://www.ncss.cn",
+  "list_api": "https://www.ncss.cn/student/jobs/jobslist/ajax/",
+  "referer": "https://www.ncss.cn/student/jobs/index.html",
+  "limit": 20,
+  "max_pages_per_query": 9,
+  "delay_seconds": 0.05,
+  "cities_path": "data/input/ncss_area_codes_all.json",
+  "request_params": {
+    "jobType": "",
+    "monthPay": "",
+    "industrySectors": "",
+    "recruitType": "",
+    "property": "",
+    "categoryCode": "",
+    "memberLevel": "",
+    "keyUnits": "",
+    "degreeCode": "",
+    "sourcesName": "",
+    "sourcesType": ""
+  },
+  "keywords": [
+    ""
+  ]
+}

@@ -1,0 +1,10 @@
+platform,page_type,url,group,description
+occupation_classification,reference,https://www.ndrc.gov.cn/fggz/jyysr/jysrsbxf/202210/t20221031_1340470.html,classification,新版职业分类大典说明页
+occupation_classification,reference,https://chrm.mohrss.gov.cn/%E6%96%B0%E7%89%88%E8%81%8C%E4%B8%9A%E5%88%86%E7%B1%BB%E5%A4%A7%E5%85%B8%E5%87%80%E5%A2%9E158%E4%B8%AA%E6%96%B0%E8%81%8C%E4%B8%9A/,classification,新版职业分类大典相关新闻
+industry_classification,reference,https://www.stats.gov.cn/xxgk/tjbz/gjtjbz/201710/t20171017_1758922.html,classification,国民经济行业分类页面
+stats_census,reference,https://www.stats.gov.cn/sj/pcsj/,official_data,普查数据入口
+stats_data,reference,https://data.stats.gov.cn/,official_data,国家数据首页
+mohrss_public,list,https://job.mohrss.gov.cn/cjobs/jobinfolist/listJobinfolist,job_board,中国公共招聘网岗位列表入口
+mohrss_ranking,reference,https://job.mohrss.gov.cn/cjobs/institution/rankingLists,aggregate_board,中国公共招聘网招聘排行榜
+ncss_jobs,list,https://www.ncss.cn/student/jobs/index.html,job_board,国家大学生就业服务平台职位列表入口
+clds_intro,reference,https://isg.sysu.edu.cn/article/300,survey,CLDS项目介绍页

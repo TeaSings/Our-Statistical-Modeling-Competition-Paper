@@ -1,0 +1,5878 @@
+[
+  {
+    "function_code": "0100",
+    "function_label": "后端开发"
+  },
+  {
+    "function_code": "0106",
+    "function_label": "高级软件工程师"
+  },
+  {
+    "function_code": "0107",
+    "function_label": "软件工程师"
+  },
+  {
+    "function_code": "0117",
+    "function_label": "ERP技术开发"
+  },
+  {
+    "function_code": "0120",
+    "function_label": "PHP开发工程师"
+  },
+  {
+    "function_code": "0121",
+    "function_label": "Java开发工程师"
+  },
+  {
+    "function_code": "0122",
+    "function_label": "C开发工程师 or C++开发工程师"
+  },
+  {
+    "function_code": "0123",
+    "function_label": "系统分析员"
+  },
+  {
+    "function_code": "0124",
+    "function_label": "Python开发工程师"
+  },
+  {
+    "function_code": "0126",
+    "function_label": ".NET开发工程师"
+  },
+  {
+    "function_code": "0128",
+    "function_label": "区块链开发"
+  },
+  {
+    "function_code": "0129",
+    "function_label": "Hadoop工程师"
+  },
+  {
+    "function_code": "0130",
+    "function_label": "大数据开发工程师"
+  },
+  {
+    "function_code": "0131",
+    "function_label": "爬虫开发工程师"
+  },
+  {
+    "function_code": "0132",
+    "function_label": "脚本开发工程师"
+  },
+  {
+    "function_code": "0133",
+    "function_label": "多媒体开发工程师"
+  },
+  {
+    "function_code": "0142",
+    "function_label": "后端开发"
+  },
+  {
+    "function_code": "0143",
+    "function_label": "系统架构设计师"
+  },
+  {
+    "function_code": "0149",
+    "function_label": "技术文员 or 技术助理"
+  },
+  {
+    "function_code": "0150",
+    "function_label": "技术文档工程师"
+  },
+  {
+    "function_code": "0151",
+    "function_label": "Ruby开发工程师"
+  },
+  {
+    "function_code": "0152",
+    "function_label": "Go开发工程师"
+  },
+  {
+    "function_code": "0153",
+    "function_label": "C#开发工程师"
+  },
+  {
+    "function_code": "0154",
+    "function_label": "全栈工程师"
+  },
+  {
+    "function_code": "0155",
+    "function_label": "GIS工程师"
+  },
+  {
+    "function_code": "0156",
+    "function_label": "C开发工程师"
+  },
+  {
+    "function_code": "0157",
+    "function_label": "C++开发工程师"
+  },
+  {
+    "function_code": "0158",
+    "function_label": "Node.js开发工程师"
+  },
+  {
+    "function_code": "0200",
+    "function_label": "销售高级管理"
+  },
+  {
+    "function_code": "0201",
+    "function_label": "销售总监"
+  },
+  {
+    "function_code": "0202",
+    "function_label": "销售经理"
+  },
+  {
+    "function_code": "0203",
+    "function_label": "销售主管"
+  },
+  {
+    "function_code": "0207",
+    "function_label": "渠道经理 or 分销经理"
+  },
+  {
+    "function_code": "0208",
+    "function_label": "客户经理 or 客户主管"
+  },
+  {
+    "function_code": "0220",
+    "function_label": "渠道主管 or 分销主管"
+  },
+  {
+    "function_code": "0226",
+    "function_label": "区域销售经理"
+  },
+  {
+    "function_code": "0230",
+    "function_label": "区域销售总监"
+  },
+  {
+    "function_code": "0231",
+    "function_label": "销售高级管理"
+  },
+  {
+    "function_code": "0232",
+    "function_label": "业务拓展经理 or 业务拓展主管"
+  },
+  {
+    "function_code": "0233",
+    "function_label": "渠道总监 or 分销总监"
+  },
+  {
+    "function_code": "0234",
+    "function_label": "团购经理 or 团购主管"
+  },
+  {
+    "function_code": "0235",
+    "function_label": "大客户管理"
+  },
+  {
+    "function_code": "0236",
+    "function_label": "区域销售主管"
+  },
+  {
+    "function_code": "0237",
+    "function_label": "城市经理"
+  },
+  {
+    "function_code": "0300",
+    "function_label": "市场 or 营销"
+  },
+  {
+    "function_code": "0301",
+    "function_label": "市场总监 or 营销总监 or 拓展总监"
+  },
+  {
+    "function_code": "0302",
+    "function_label": "市场经理 or 营销经理 or 拓展经理"
+  },
+  {
+    "function_code": "0303",
+    "function_label": "市场主管 or 营销主管 or 拓展主管"
+  },
+  {
+    "function_code": "0304",
+    "function_label": "市场专员 or 营销专员 or 拓展专员"
+  },
+  {
+    "function_code": "0305",
+    "function_label": "市场助理"
+  },
+  {
+    "function_code": "0306",
+    "function_label": "品牌经理"
+  },
+  {
+    "function_code": "0307",
+    "function_label": "品牌主管"
+  },
+  {
+    "function_code": "0308",
+    "function_label": "市场通路经理 or 市场通路主管"
+  },
+  {
+    "function_code": "0310",
+    "function_label": "促销经理"
+  },
+  {
+    "function_code": "0324",
+    "function_label": "市场分析人员 or 市场调研人员"
+  },
+  {
+    "function_code": "0329",
+    "function_label": "市场 or 营销"
+  },
+  {
+    "function_code": "0330",
+    "function_label": "品牌专员"
+  },
+  {
+    "function_code": "0335",
+    "function_label": "市场通路专员"
+  },
+  {
+    "function_code": "0336",
+    "function_label": "市场企划经理 or 市场企划主管"
+  },
+  {
+    "function_code": "0337",
+    "function_label": "市场企划专员"
+  },
+  {
+    "function_code": "0338",
+    "function_label": "选址拓展 or 新店开发"
+  },
+  {
+    "function_code": "0339",
+    "function_label": "SEO or SEM"
+  },
+  {
+    "function_code": "0340",
+    "function_label": "互联网营销师"
+  },
+  {
+    "function_code": "0400",
+    "function_label": "财务"
+  },
+  {
+    "function_code": "0401",
+    "function_label": "高级财务总监 or 财务总监"
+  },
+  {
+    "function_code": "0402",
+    "function_label": "财务经理"
+  },
+  {
+    "function_code": "0403",
+    "function_label": "财务主管 or 总账主管"
+  },
+  {
+    "function_code": "0404",
+    "function_label": "会计经理 or 会计主管"
+  },
+  {
+    "function_code": "0405",
+    "function_label": "会计师"
+  },
+  {
+    "function_code": "0406",
+    "function_label": "财务分析经理 or 财务分析主管"
+  },
+  {
+    "function_code": "0407",
+    "function_label": "财务分析员"
+  },
+  {
+    "function_code": "0408",
+    "function_label": "成本经理 or 成本主管"
+  },
+  {
+    "function_code": "0409",
+    "function_label": "成本管理员"
+  },
+  {
+    "function_code": "0410",
+    "function_label": "审计经理 or 审计主管"
+  },
+  {
+    "function_code": "0411",
+    "function_label": "税务经理 or 税务主管"
+  },
+  {
+    "function_code": "0412",
+    "function_label": "税务专员 or 税务助理"
+  },
+  {
+    "function_code": "0414",
+    "function_label": "出纳员"
+  },
+  {
+    "function_code": "0419",
+    "function_label": "审计专员 or 审计助理"
+  },
+  {
+    "function_code": "0422",
+    "function_label": "财务助理 or 财务文员"
+  },
+  {
+    "function_code": "0443",
+    "function_label": "财务"
+  },
+  {
+    "function_code": "0444",
+    "function_label": "首席财务官 or CFO"
+  },
+  {
+    "function_code": "0445",
+    "function_label": "财务顾问"
+  },
+  {
+    "function_code": "0446",
+    "function_label": "统计员"
+  },
+  {
+    "function_code": "0448",
+    "function_label": "固定资产会计"
+  },
+  {
+    "function_code": "0449",
+    "function_label": "资金经理 or 资金主管"
+  },
+  {
+    "function_code": "0450",
+    "function_label": "资金专员"
+  },
+  {
+    "function_code": "0457",
+    "function_label": "会计助理"
+  },
+  {
+    "function_code": "0458",
+    "function_label": "财务专员"
+  },
+  {
+    "function_code": "0460",
+    "function_label": "注册会计师"
+  },
+  {
+    "function_code": "0500",
+    "function_label": "工程 or 机械"
+  },
+  {
+    "function_code": "0510",
+    "function_label": "技术研发经理 or 技术研发主管"
+  },
+  {
+    "function_code": "0511",
+    "function_label": "技术研发工程师"
+  },
+  {
+    "function_code": "0512",
+    "function_label": "实验室负责人 or 实验室工程师"
+  },
+  {
+    "function_code": "0513",
+    "function_label": "工程经理 or 设备经理"
+  },
+  {
+    "function_code": "0514",
+    "function_label": "工程主管 or 设备主管"
+  },
+  {
+    "function_code": "0515",
+    "function_label": "工程工程师 or 设备工程师"
+  },
+  {
+    "function_code": "0523",
+    "function_label": "工程绘图员 or 机械绘图员"
+  },
+  {
+    "function_code": "0537",
+    "function_label": "维修工程师"
+  },
+  {
+    "function_code": "0539",
+    "function_label": "机械工程师"
+  },
+  {
+    "function_code": "0544",
+    "function_label": "机电工程师"
+  },
+  {
+    "function_code": "0547",
+    "function_label": "工艺工程师 or 制程工程师"
+  },
+  {
+    "function_code": "0548",
+    "function_label": "模具工程师"
+  },
+  {
+    "function_code": "0559",
+    "function_label": "产品规划工程师"
+  },
+  {
+    "function_code": "0560",
+    "function_label": "工业工程师"
+  },
+  {
+    "function_code": "0561",
+    "function_label": "结构工程师"
+  },
+  {
+    "function_code": "0562",
+    "function_label": "铸造工程师 or 锻造工程师 or 铸造技师 or 锻造技师"
+  },
+  {
+    "function_code": "0563",
+    "function_label": "注塑工程师 or 注塑技师"
+  },
+  {
+    "function_code": "0564",
+    "function_label": "焊接工程师 or 焊接技师"
+  },
+  {
+    "function_code": "0565",
+    "function_label": "夹具工程师 or 夹具技师"
+  },
+  {
+    "function_code": "0566",
+    "function_label": "CNC工程师 or 数控编程 or 数控操机"
+  },
+  {
+    "function_code": "0567",
+    "function_label": "冲压工程师 or 冲压技师"
+  },
+  {
+    "function_code": "0568",
+    "function_label": "锅炉工程师 or 锅炉技师"
+  },
+  {
+    "function_code": "0569",
+    "function_label": "电力工程师 or 电力技术员"
+  },
+  {
+    "function_code": "0570",
+    "function_label": "光源与照明工程"
+  },
+  {
+    "function_code": "0571",
+    "function_label": "汽车工程师 or 摩托车工程师"
+  },
+  {
+    "function_code": "0572",
+    "function_label": "船舶工程师"
+  },
+  {
+    "function_code": "0573",
+    "function_label": "飞行器设计与制造"
+  },
+  {
+    "function_code": "0574",
+    "function_label": "工程 or 机械"
+  },
+  {
+    "function_code": "0575",
+    "function_label": "轨道交通工程师 or 轨道交通技术员"
+  },
+  {
+    "function_code": "0576",
+    "function_label": "飞机维修机械师"
+  },
+  {
+    "function_code": "0577",
+    "function_label": "水利工程师 or 水电工程师"
+  },
+  {
+    "function_code": "0578",
+    "function_label": "石油天然气技术人员"
+  },
+  {
+    "function_code": "0579",
+    "function_label": "矿产勘探 or 地质勘测"
+  },
+  {
+    "function_code": "0580",
+    "function_label": "维修经理 or 维修主管"
+  },
+  {
+    "function_code": "0581",
+    "function_label": "装配工程师 or 装配技师"
+  },
+  {
+    "function_code": "0582",
+    "function_label": "材料工程师"
+  },
+  {
+    "function_code": "0583",
+    "function_label": "光伏系统工程师"
+  },
+  {
+    "function_code": "0584",
+    "function_label": "项目管理"
+  },
+  {
+    "function_code": "0585",
+    "function_label": "空调工程师 or 热能工程师"
+  },
+  {
+    "function_code": "0586",
+    "function_label": "机械设计"
+  },
+  {
+    "function_code": "0587",
+    "function_label": "模具设计"
+  },
+  {
+    "function_code": "0600",
+    "function_label": "人力资源"
+  },
+  {
+    "function_code": "0601",
+    "function_label": "人事总监"
+  },
+  {
+    "function_code": "0602",
+    "function_label": "人事经理"
+  },
+  {
+    "function_code": "0603",
+    "function_label": "人事主管"
+  },
+  {
+    "function_code": "0604",
+    "function_label": "人事专员"
+  },
+  {
+    "function_code": "0605",
+    "function_label": "人事助理"
+  },
+  {
+    "function_code": "0606",
+    "function_label": "招聘经理 or 招聘主管"
+  },
+  {
+    "function_code": "0607",
+    "function_label": "薪资福利经理 or 薪资福利主管"
+  },
+  {
+    "function_code": "0608",
+    "function_label": "薪资福利专员 or 薪资福利助理"
+  },
+  {
+    "function_code": "0609",
+    "function_label": "培训经理 or 培训主管"
+  },
+  {
+    "function_code": "0610",
+    "function_label": "培训专员 or 培训助理 or 培训师"
+  },
+  {
+    "function_code": "0611",
+    "function_label": "HRBP"
+  },
+  {
+    "function_code": "0625",
+    "function_label": "人力资源"
+  },
+  {
+    "function_code": "0626",
+    "function_label": "招聘专员 or 招聘助理"
+  },
+  {
+    "function_code": "0627",
+    "function_label": "绩效考核经理 or 绩效考核主管"
+  },
+  {
+    "function_code": "0628",
+    "function_label": "绩效考核专员 or 绩效考核助理"
+  },
+  {
+    "function_code": "0629",
+    "function_label": "企业文化 or 员工关系 or 工会管理"
+  },
+  {
+    "function_code": "0630",
+    "function_label": "人力资源信息系统专员"
+  },
+  {
+    "function_code": "0635",
+    "function_label": "劳务派遣专员"
+  },
+  {
+    "function_code": "0700",
+    "function_label": "高级管理"
+  },
+  {
+    "function_code": "0701",
+    "function_label": "首席执行官 or CEO or 总裁"
+  },
+  {
+    "function_code": "0702",
+    "function_label": "副总经理 or 副总裁"
+  },
+  {
+    "function_code": "0703",
+    "function_label": "总裁助理 or 总经理助理"
+  },
+  {
+    "function_code": "0704",
+    "function_label": "合伙人"
+  },
+  {
+    "function_code": "0705",
+    "function_label": "总监 or 部门经理"
+  },
+  {
+    "function_code": "0706",
+    "function_label": "高级管理"
+  },
+  {
+    "function_code": "0707",
+    "function_label": "首席运营官COO"
+  },
+  {
+    "function_code": "0708",
+    "function_label": "办事处首席代表"
+  },
+  {
+    "function_code": "0709",
+    "function_label": "办事处经理 or 分公司经理 or 分支机构经理"
+  },
+  {
+    "function_code": "0710",
+    "function_label": "策略发展总监"
+  },
+  {
+    "function_code": "0711",
+    "function_label": "企业秘书 or 董事会秘书"
+  },
+  {
+    "function_code": "0800",
+    "function_label": "物流 or 运输"
+  },
+  {
+    "function_code": "0801",
+    "function_label": "物流经理"
+  },
+  {
+    "function_code": "0802",
+    "function_label": "物流主管"
+  },
+  {
+    "function_code": "0803",
+    "function_label": "物料经理"
+  },
+  {
+    "function_code": "0804",
+    "function_label": "物料主管 or 物料专员"
+  },
+  {
+    "function_code": "0808",
+    "function_label": "仓库经理 or 仓库主管"
+  },
+  {
+    "function_code": "0809",
+    "function_label": "仓库管理员"
+  },
+  {
+    "function_code": "0810",
+    "function_label": "运输经理 or 运输主管"
+  },
+  {
+    "function_code": "0811",
+    "function_label": "报关与报检"
+  },
+  {
+    "function_code": "0812",
+    "function_label": "单证员"
+  },
+  {
+    "function_code": "0813",
+    "function_label": "快递员"
+  },
+  {
+    "function_code": "0814",
+    "function_label": "物流专员 or 物流助理"
+  },
+  {
+    "function_code": "0815",
+    "function_label": "船务操作 or 空运陆运操作"
+  },
+  {
+    "function_code": "0823",
+    "function_label": "仓储理货员"
+  },
+  {
+    "function_code": "0824",
+    "function_label": "物流 or 运输"
+  },
+  {
+    "function_code": "0825",
+    "function_label": "供应链经理"
+  },
+  {
+    "function_code": "0826",
+    "function_label": "供应链主管 or 供应链专员"
+  },
+  {
+    "function_code": "0827",
+    "function_label": "物流总监"
+  },
+  {
+    "function_code": "0828",
+    "function_label": "供应链总监"
+  },
+  {
+    "function_code": "0829",
+    "function_label": "货运代理"
+  },
+  {
+    "function_code": "0830",
+    "function_label": "集装箱业务"
+  },
+  {
+    "function_code": "0831",
+    "function_label": "调度员"
+  },
+  {
+    "function_code": "0832",
+    "function_label": "海关事务管理"
+  },
+  {
+    "function_code": "0833",
+    "function_label": "项目经理 or 项目主管"
+  },
+  {
+    "function_code": "0834",
+    "function_label": "订单处理员"
+  },
+  {
+    "function_code": "0835",
+    "function_label": "安检员"
+  },
+  {
+    "function_code": "0836",
+    "function_label": "搬运工"
+  },
+  {
+    "function_code": "0837",
+    "function_label": "物流销售"
+  },
+  {
+    "function_code": "0838",
+    "function_label": "分拣员"
+  },
+  {
+    "function_code": "0839",
+    "function_label": "装卸工"
+  },
+  {
+    "function_code": "0840",
+    "function_label": "仓库文员"
+  },
+  {
+    "function_code": "0841",
+    "function_label": "物料专员"
+  },
+  {
+    "function_code": "0842",
+    "function_label": "物料主管"
+  },
+  {
+    "function_code": "0843",
+    "function_label": "供应链主管"
+  },
+  {
+    "function_code": "0844",
+    "function_label": "供应链专员"
+  },
+  {
+    "function_code": "0900",
+    "function_label": "工业设计"
+  },
+  {
+    "function_code": "0919",
+    "function_label": "工业设计 or 产品设计"
+  },
+  {
+    "function_code": "0920",
+    "function_label": "工艺品设计鉴定 or 珠宝设计鉴定"
+  },
+  {
+    "function_code": "0921",
+    "function_label": "工业设计"
+  },
+  {
+    "function_code": "0925",
+    "function_label": "展览设计 or 展示设计 or 店面设计"
+  },
+  {
+    "function_code": "0927",
+    "function_label": "包装设计"
+  },
+  {
+    "function_code": "0928",
+    "function_label": "家具设计 or 家居设计"
+  },
+  {
+    "function_code": "0929",
+    "function_label": "玩具设计"
+  },
+  {
+    "function_code": "0934",
+    "function_label": "照明设计"
+  },
+  {
+    "function_code": "0936",
+    "function_label": "陈列设计"
+  },
+  {
+    "function_code": "0940",
+    "function_label": "家具设计"
+  },
+  {
+    "function_code": "0941",
+    "function_label": "家居设计"
+  },
+  {
+    "function_code": "0942",
+    "function_label": "CAD绘图"
+  },
+  {
+    "function_code": "1000",
+    "function_label": "科研"
+  },
+  {
+    "function_code": "1001",
+    "function_label": "科研人员"
+  },
+  {
+    "function_code": "1002",
+    "function_label": "科研管理人员"
+  },
+  {
+    "function_code": "1100",
+    "function_label": "法务"
+  },
+  {
+    "function_code": "1101",
+    "function_label": "律师 or 法律顾问"
+  },
+  {
+    "function_code": "1102",
+    "function_label": "法务主管 or 法务专员"
+  },
+  {
+    "function_code": "1103",
+    "function_label": "律师助理"
+  },
+  {
+    "function_code": "1105",
+    "function_label": "法务"
+  },
+  {
+    "function_code": "1106",
+    "function_label": "法务经理"
+  },
+  {
+    "function_code": "1107",
+    "function_label": "法务专员 or 法务助理"
+  },
+  {
+    "function_code": "1108",
+    "function_label": "知识产权 or 专利 or 商标"
+  },
+  {
+    "function_code": "1109",
+    "function_label": "合规经理"
+  },
+  {
+    "function_code": "1110",
+    "function_label": "合规主管 or 合规专员"
+  },
+  {
+    "function_code": "1111",
+    "function_label": "法务总监"
+  },
+  {
+    "function_code": "1112",
+    "function_label": "企业贸易合规师"
+  },
+  {
+    "function_code": "1113",
+    "function_label": "法务主管"
+  },
+  {
+    "function_code": "1114",
+    "function_label": "法律顾问"
+  },
+  {
+    "function_code": "1200",
+    "function_label": "教师"
+  },
+  {
+    "function_code": "1201",
+    "function_label": "中学教师"
+  },
+  {
+    "function_code": "1204",
+    "function_label": "讲师 or 助教"
+  },
+  {
+    "function_code": "1205",
+    "function_label": "家教"
+  },
+  {
+    "function_code": "1206",
+    "function_label": "教师"
+  },
+  {
+    "function_code": "1207",
+    "function_label": "幼教"
+  },
+  {
+    "function_code": "1208",
+    "function_label": "大学教授"
+  },
+  {
+    "function_code": "1209",
+    "function_label": "小学教师"
+  },
+  {
+    "function_code": "1210",
+    "function_label": "兼职老师"
+  },
+  {
+    "function_code": "1211",
+    "function_label": "职业技术教师"
+  },
+  {
+    "function_code": "1214",
+    "function_label": "音乐教师 or 美术教师 or 音乐老师 or 美术老师"
+  },
+  {
+    "function_code": "1215",
+    "function_label": "外语老师"
+  },
+  {
+    "function_code": "1216",
+    "function_label": "体育老师"
+  },
+  {
+    "function_code": "1218",
+    "function_label": "在线辅导老师"
+  },
+  {
+    "function_code": "1219",
+    "function_label": "英语老师"
+  },
+  {
+    "function_code": "1220",
+    "function_label": "数学老师"
+  },
+  {
+    "function_code": "1221",
+    "function_label": "语文老师"
+  },
+  {
+    "function_code": "1222",
+    "function_label": "物理老师"
+  },
+  {
+    "function_code": "1223",
+    "function_label": "化学老师"
+  },
+  {
+    "function_code": "1224",
+    "function_label": "日语老师"
+  },
+  {
+    "function_code": "1225",
+    "function_label": "早教老师"
+  },
+  {
+    "function_code": "1226",
+    "function_label": "音乐老师"
+  },
+  {
+    "function_code": "1228",
+    "function_label": "美术老师"
+  },
+  {
+    "function_code": "1231",
+    "function_label": "初中教师"
+  },
+  {
+    "function_code": "1232",
+    "function_label": "高中教师"
+  },
+  {
+    "function_code": "1233",
+    "function_label": "钢琴老师"
+  },
+  {
+    "function_code": "1234",
+    "function_label": "留学考试老师 SAT or 留学考试老师 TOEFL or 留学考试老师 IELTS"
+  },
+  {
+    "function_code": "1235",
+    "function_label": "编程老师"
+  },
+  {
+    "function_code": "1300",
+    "function_label": "医生 or 医技"
+  },
+  {
+    "function_code": "1301",
+    "function_label": "内科医生"
+  },
+  {
+    "function_code": "1302",
+    "function_label": "医院管理人员"
+  },
+  {
+    "function_code": "1304",
+    "function_label": "药库主任 or 药剂师"
+  },
+  {
+    "function_code": "1305",
+    "function_label": "护士 or 护理"
+  },
+  {
+    "function_code": "1308",
+    "function_label": "麻醉医生"
+  },
+  {
+    "function_code": "1309",
+    "function_label": "心理医生"
+  },
+  {
+    "function_code": "1310",
+    "function_label": "医学检验"
+  },
+  {
+    "function_code": "1311",
+    "function_label": "医生 or 医技人员"
+  },
+  {
+    "function_code": "1313",
+    "function_label": "针灸师 or 推拿师"
+  },
+  {
+    "function_code": "1314",
+    "function_label": "营养师"
+  },
+  {
+    "function_code": "1315",
+    "function_label": "兽医"
+  },
+  {
+    "function_code": "1317",
+    "function_label": "外科医生"
+  },
+  {
+    "function_code": "1318",
+    "function_label": "专科医生"
+  },
+  {
+    "function_code": "1319",
+    "function_label": "牙科医生"
+  },
+  {
+    "function_code": "1320",
+    "function_label": "美容整形师"
+  },
+  {
+    "function_code": "1321",
+    "function_label": "理疗师"
+  },
+  {
+    "function_code": "1322",
+    "function_label": "中医科医生"
+  },
+  {
+    "function_code": "1323",
+    "function_label": "公共卫生 or 疾病控制"
+  },
+  {
+    "function_code": "1324",
+    "function_label": "护理主任 or 护士长"
+  },
+  {
+    "function_code": "1325",
+    "function_label": "儿科医生"
+  },
+  {
+    "function_code": "1326",
+    "function_label": "验光师"
+  },
+  {
+    "function_code": "1327",
+    "function_label": "超声影像医师 or 放射科医师"
+  },
+  {
+    "function_code": "1328",
+    "function_label": "综合门诊医生 or 全科医生 or 综合门诊 or 全科"
+  },
+  {
+    "function_code": "1329",
+    "function_label": "医美咨询"
+  },
+  {
+    "function_code": "1330",
+    "function_label": "健康管理师"
+  },
+  {
+    "function_code": "1331",
+    "function_label": "核酸检测员"
+  },
+  {
+    "function_code": "1332",
+    "function_label": "防疫员"
+  },
+  {
+    "function_code": "1333",
+    "function_label": "消毒员"
+  },
+  {
+    "function_code": "1335",
+    "function_label": "心理咨询师"
+  },
+  {
+    "function_code": "1336",
+    "function_label": "导医"
+  },
+  {
+    "function_code": "1337",
+    "function_label": "妇产科医生"
+  },
+  {
+    "function_code": "1339",
+    "function_label": "眼科医生"
+  },
+  {
+    "function_code": "1340",
+    "function_label": "医学顾问"
+  },
+  {
+    "function_code": "1341",
+    "function_label": "配班老师"
+  },
+  {
+    "function_code": "1400",
+    "function_label": "咨询 or 顾问"
+  },
+  {
+    "function_code": "1401",
+    "function_label": "专业顾问"
+  },
+  {
+    "function_code": "1402",
+    "function_label": "咨询总监"
+  },
+  {
+    "function_code": "1403",
+    "function_label": "咨询经理"
+  },
+  {
+    "function_code": "1404",
+    "function_label": "咨询员"
+  },
+  {
+    "function_code": "1405",
+    "function_label": "咨询专员 or 顾问"
+  },
+  {
+    "function_code": "1406",
+    "function_label": "专业培训师"
+  },
+  {
+    "function_code": "1407",
+    "function_label": "情报信息分析人员"
+  },
+  {
+    "function_code": "1408",
+    "function_label": "猎头 or 人才中介"
+  },
+  {
+    "function_code": "1409",
+    "function_label": "调研员"
+  },
+  {
+    "function_code": "1410",
+    "function_label": "管理咨询师"
+  },
+  {
+    "function_code": "1411",
+    "function_label": "行业研究员"
+  },
+  {
+    "function_code": "1500",
+    "function_label": "政府工作 or 非盈利机构"
+  },
+  {
+    "function_code": "1501",
+    "function_label": "公务员"
+  },
+  {
+    "function_code": "1502",
+    "function_label": "志愿者 or 社会工作者"
+  },
+  {
+    "function_code": "1503",
+    "function_label": "城市管理网格员"
+  },
+  {
+    "function_code": "1600",
+    "function_label": "在校学生"
+  },
+  {
+    "function_code": "1601",
+    "function_label": "中专生 or 职校生"
+  },
+  {
+    "function_code": "1602",
+    "function_label": "大学应届毕业生 or 大专应届毕业生"
+  },
+  {
+    "function_code": "1604",
+    "function_label": "在校学生"
+  },
+  {
+    "function_code": "1605",
+    "function_label": "研究生"
+  },
+  {
+    "function_code": "1700",
+    "function_label": "管培生"
+  },
+  {
+    "function_code": "1701",
+    "function_label": "管理培训生"
+  },
+  {
+    "function_code": "1702",
+    "function_label": "储备干部"
+  },
+  {
+    "function_code": "1703",
+    "function_label": "实习生"
+  },
+  {
+    "function_code": "1800",
+    "function_label": "交通运输服务"
+  },
+  {
+    "function_code": "1801",
+    "function_label": "乘务员"
+  },
+  {
+    "function_code": "1810",
+    "function_label": "商务司机"
+  },
+  {
+    "function_code": "1822",
+    "function_label": "飞机机长 or 副机长"
+  },
+  {
+    "function_code": "1823",
+    "function_label": "空乘人员"
+  },
+  {
+    "function_code": "1824",
+    "function_label": "地勤人员"
+  },
+  {
+    "function_code": "1825",
+    "function_label": "列车车长 or 地铁车长 or 列车长"
+  },
+  {
+    "function_code": "1826",
+    "function_label": "列车司机 or 地铁司机"
+  },
+  {
+    "function_code": "1827",
+    "function_label": "船长 or 副船长"
+  },
+  {
+    "function_code": "1828",
+    "function_label": "船员"
+  },
+  {
+    "function_code": "1829",
+    "function_label": "交通运输服务"
+  },
+  {
+    "function_code": "1830",
+    "function_label": "客运司机"
+  },
+  {
+    "function_code": "1831",
+    "function_label": "货运司机"
+  },
+  {
+    "function_code": "1832",
+    "function_label": "出租车司机"
+  },
+  {
+    "function_code": "1833",
+    "function_label": "班车司机"
+  },
+  {
+    "function_code": "1835",
+    "function_label": "特种车司机"
+  },
+  {
+    "function_code": "1839",
+    "function_label": "驾校教练"
+  },
+  {
+    "function_code": "1840",
+    "function_label": "代驾"
+  },
+  {
+    "function_code": "1842",
+    "function_label": "站务人员"
+  },
+  {
+    "function_code": "1900",
+    "function_label": "其他"
+  },
+  {
+    "function_code": "1901",
+    "function_label": "其他"
+  },
+  {
+    "function_code": "1A00",
+    "function_label": "服装设计"
+  },
+  {
+    "function_code": "1B00",
+    "function_label": "广告设计"
+  },
+  {
+    "function_code": "1C00",
+    "function_label": "高级设计管理"
+  },
+  {
+    "function_code": "1D00",
+    "function_label": "销售支持"
+  },
+  {
+    "function_code": "1D01",
+    "function_label": "解决方案经理"
+  },
+  {
+    "function_code": "1E00",
+    "function_label": "汽车销售"
+  },
+  {
+    "function_code": "1F00",
+    "function_label": "合规"
+  },
+  {
+    "function_code": "1F01",
+    "function_label": "合规主管"
+  },
+  {
+    "function_code": "1F02",
+    "function_label": "合规专员"
+  },
+  {
+    "function_code": "2000",
+    "function_label": "翻译"
+  },
+  {
+    "function_code": "2001",
+    "function_label": "英语翻译"
+  },
+  {
+    "function_code": "2002",
+    "function_label": "日语翻译"
+  },
+  {
+    "function_code": "2003",
+    "function_label": "德语翻译"
+  },
+  {
+    "function_code": "2004",
+    "function_label": "法语翻译"
+  },
+  {
+    "function_code": "2005",
+    "function_label": "俄语翻译"
+  },
+  {
+    "function_code": "2006",
+    "function_label": "西班牙语翻译"
+  },
+  {
+    "function_code": "2007",
+    "function_label": "韩语翻译 or 朝鲜语翻译"
+  },
+  {
+    "function_code": "2008",
+    "function_label": "翻译"
+  },
+  {
+    "function_code": "2009",
+    "function_label": "阿拉伯语翻译"
+  },
+  {
+    "function_code": "2010",
+    "function_label": "意大利语翻译"
+  },
+  {
+    "function_code": "2011",
+    "function_label": "葡萄牙语翻译"
+  },
+  {
+    "function_code": "2012",
+    "function_label": "泰语翻译"
+  },
+  {
+    "function_code": "2013",
+    "function_label": "中国方言翻译"
+  },
+  {
+    "function_code": "2014",
+    "function_label": "录入校对员"
+  },
+  {
+    "function_code": "2100",
+    "function_label": "建筑工程"
+  },
+  {
+    "function_code": "2101",
+    "function_label": "建筑工程师"
+  },
+  {
+    "function_code": "2102",
+    "function_label": "结构工程师 or 土木工程师 or 土建工程师"
+  },
+  {
+    "function_code": "2103",
+    "function_label": "建筑机电工程师"
+  },
+  {
+    "function_code": "2104",
+    "function_label": "给排水 or 暖通"
+  },
+  {
+    "function_code": "2105",
+    "function_label": "工程造价师 or 预结算经理 or 工程造价 or 预结算"
+  },
+  {
+    "function_code": "2106",
+    "function_label": "建筑工程管理 or 项目经理"
+  },
+  {
+    "function_code": "2107",
+    "function_label": "工程监理"
+  },
+  {
+    "function_code": "2111",
+    "function_label": "建筑安装施工员"
+  },
+  {
+    "function_code": "2112",
+    "function_label": "消防安全"
+  },
+  {
+    "function_code": "2116",
+    "function_label": "建筑工程"
+  },
+  {
+    "function_code": "2118",
+    "function_label": "公路 or 桥梁 or 港口 or 隧道"
+  },
+  {
+    "function_code": "2119",
+    "function_label": "岩土工程"
+  },
+  {
+    "function_code": "2120",
+    "function_label": "测绘 or 测量"
+  },
+  {
+    "function_code": "2121",
+    "function_label": "建筑工程验收"
+  },
+  {
+    "function_code": "2122",
+    "function_label": "幕墙工程师"
+  },
+  {
+    "function_code": "2123",
+    "function_label": "高级建筑工程师 or 总工"
+  },
+  {
+    "function_code": "2124",
+    "function_label": "预结算员 or 工程造价师 or 工程造价 or 预结算"
+  },
+  {
+    "function_code": "2125",
+    "function_label": "楼宇自动化"
+  },
+  {
+    "function_code": "2126",
+    "function_label": "智能大厦 or 综合布线 or 安防 or 弱电"
+  },
+  {
+    "function_code": "2127",
+    "function_label": "开发报建"
+  },
+  {
+    "function_code": "2128",
+    "function_label": "合同管理"
+  },
+  {
+    "function_code": "2129",
+    "function_label": "安全员"
+  },
+  {
+    "function_code": "2130",
+    "function_label": "资料员"
+  },
+  {
+    "function_code": "2132",
+    "function_label": "市政工程师"
+  },
+  {
+    "function_code": "2133",
+    "function_label": "建筑项目助理 or 建筑工程管理"
+  },
+  {
+    "function_code": "2134",
+    "function_label": "砌筑工"
+  },
+  {
+    "function_code": "2135",
+    "function_label": "瓦工"
+  },
+  {
+    "function_code": "2136",
+    "function_label": "混凝土工"
+  },
+  {
+    "function_code": "2137",
+    "function_label": "浇注工"
+  },
+  {
+    "function_code": "2138",
+    "function_label": "钢筋工"
+  },
+  {
+    "function_code": "2139",
+    "function_label": "木工"
+  },
+  {
+    "function_code": "2140",
+    "function_label": "油漆工"
+  },
+  {
+    "function_code": "2141",
+    "function_label": "电梯工"
+  },
+  {
+    "function_code": "2142",
+    "function_label": "抹灰工"
+  },
+  {
+    "function_code": "2143",
+    "function_label": "施工开料工"
+  },
+  {
+    "function_code": "2144",
+    "function_label": "管道 or 暖通"
+  },
+  {
+    "function_code": "2145",
+    "function_label": "工长"
+  },
+  {
+    "function_code": "2146",
+    "function_label": "精装修工程师"
+  },
+  {
+    "function_code": "2147",
+    "function_label": "房修工程师"
+  },
+  {
+    "function_code": "2149",
+    "function_label": "材料员"
+  },
+  {
+    "function_code": "2150",
+    "function_label": "劳务员"
+  },
+  {
+    "function_code": "2151",
+    "function_label": "标准员"
+  },
+  {
+    "function_code": "2152",
+    "function_label": "机械员"
+  },
+  {
+    "function_code": "2200",
+    "function_label": "银行"
+  },
+  {
+    "function_code": "2207",
+    "function_label": "行长 or 副行长"
+  },
+  {
+    "function_code": "2208",
+    "function_label": "资产评估师 or 分析师"
+  },
+  {
+    "function_code": "2209",
+    "function_label": "风险控制"
+  },
+  {
+    "function_code": "2210",
+    "function_label": "进出口结算员 or 信用证结算员"
+  },
+  {
+    "function_code": "2211",
+    "function_label": "清算人员"
+  },
+  {
+    "function_code": "2212",
+    "function_label": "外汇交易"
+  },
+  {
+    "function_code": "2213",
+    "function_label": "高级客户经理 or 客户经理"
+  },
+  {
+    "function_code": "2214",
+    "function_label": "客户主管 or 客户专员"
+  },
+  {
+    "function_code": "2215",
+    "function_label": "信贷管理"
+  },
+  {
+    "function_code": "2216",
+    "function_label": "银行柜员"
+  },
+  {
+    "function_code": "2221",
+    "function_label": "银行"
+  },
+  {
+    "function_code": "2222",
+    "function_label": "信用卡销售"
+  },
+  {
+    "function_code": "2223",
+    "function_label": "个人业务部门经理 or 个人业务部门主管"
+  },
+  {
+    "function_code": "2224",
+    "function_label": "个人业务客户经理"
+  },
+  {
+    "function_code": "2225",
+    "function_label": "公司业务部门经理 or 公司业务部门主管"
+  },
+  {
+    "function_code": "2226",
+    "function_label": "公司业务客户经理"
+  },
+  {
+    "function_code": "2227",
+    "function_label": "综合业务经理 or 综合业务主管"
+  },
+  {
+    "function_code": "2228",
+    "function_label": "综合业务专员"
+  },
+  {
+    "function_code": "2229",
+    "function_label": "信审核查"
+  },
+  {
+    "function_code": "2230",
+    "function_label": "营业部大堂经理"
+  },
+  {
+    "function_code": "2231",
+    "function_label": "银行客户总监"
+  },
+  {
+    "function_code": "2232",
+    "function_label": "呼叫中心客服"
+  },
+  {
+    "function_code": "2233",
+    "function_label": "理财经理"
+  },
+  {
+    "function_code": "2234",
+    "function_label": "小微信贷专员"
+  },
+  {
+    "function_code": "2235",
+    "function_label": "客户主管"
+  },
+  {
+    "function_code": "2236",
+    "function_label": "客户专员"
+  },
+  {
+    "function_code": "2300",
+    "function_label": "行政 or 后勤"
+  },
+  {
+    "function_code": "2301",
+    "function_label": "行政总监"
+  },
+  {
+    "function_code": "2302",
+    "function_label": "行政经理 or 行政主管 or 办公室主任"
+  },
+  {
+    "function_code": "2303",
+    "function_label": "行政专员 or 行政助理"
+  },
+  {
+    "function_code": "2304",
+    "function_label": "经理助理 or 秘书"
+  },
+  {
+    "function_code": "2305",
+    "function_label": "前台接待 or 总机 or 接待生"
+  },
+  {
+    "function_code": "2306",
+    "function_label": "后勤"
+  },
+  {
+    "function_code": "2307",
+    "function_label": "图书管理员 or 资料管理员"
+  },
+  {
+    "function_code": "2308",
+    "function_label": "电脑操作员 or 打字员"
+  },
+  {
+    "function_code": "2309",
+    "function_label": "行政人员 or 后勤人员"
+  },
+  {
+    "function_code": "2310",
+    "function_label": "党工团干事"
+  },
+  {
+    "function_code": "2311",
+    "function_label": "文员"
+  },
+  {
+    "function_code": "2312",
+    "function_label": "档案管理员"
+  },
+  {
+    "function_code": "2600",
+    "function_label": "技术管理"
+  },
+  {
+    "function_code": "2601",
+    "function_label": "首席技术执行官 or CTO or 首席信息官 or CIO"
+  },
+  {
+    "function_code": "2602",
+    "function_label": "技术总监 or 技术经理"
+  },
+  {
+    "function_code": "2603",
+    "function_label": "技术总监"
+  },
+  {
+    "function_code": "2604",
+    "function_label": "技术经理"
+  },
+  {
+    "function_code": "2605",
+    "function_label": "项目总监"
+  },
+  {
+    "function_code": "2606",
+    "function_label": "项目经理"
+  },
+  {
+    "function_code": "2607",
+    "function_label": "项目主管"
+  },
+  {
+    "function_code": "2608",
+    "function_label": "项目执行人员 or 项目协调人员"
+  },
+  {
+    "function_code": "2609",
+    "function_label": "技术管理"
+  },
+  {
+    "function_code": "2610",
+    "function_label": "项目助理"
+  },
+  {
+    "function_code": "2611",
+    "function_label": "首席技术执行官CTO"
+  },
+  {
+    "function_code": "2612",
+    "function_label": "首席信息官CIO"
+  },
+  {
+    "function_code": "2700",
+    "function_label": "测试"
+  },
+  {
+    "function_code": "2704",
+    "function_label": "标准化工程师"
+  },
+  {
+    "function_code": "2705",
+    "function_label": "测试经理"
+  },
+  {
+    "function_code": "2706",
+    "function_label": "系统测试"
+  },
+  {
+    "function_code": "2707",
+    "function_label": "软件测试工程师"
+  },
+  {
+    "function_code": "2711",
+    "function_label": "测试"
+  },
+  {
+    "function_code": "2718",
+    "function_label": "功能测试"
+  },
+  {
+    "function_code": "2719",
+    "function_label": "性能测试"
+  },
+  {
+    "function_code": "2720",
+    "function_label": "自动化测试"
+  },
+  {
+    "function_code": "2721",
+    "function_label": "移动端测试"
+  },
+  {
+    "function_code": "2722",
+    "function_label": "测试开发"
+  },
+  {
+    "function_code": "2723",
+    "function_label": "测试主管"
+  },
+  {
+    "function_code": "2724",
+    "function_label": "安全测试"
+  },
+  {
+    "function_code": "2725",
+    "function_label": "测试工程师"
+  },
+  {
+    "function_code": "2726",
+    "function_label": "测试总监"
+  },
+  {
+    "function_code": "2800",
+    "function_label": "通信技术开发与应用"
+  },
+  {
+    "function_code": "2801",
+    "function_label": "通信技术工程师"
+  },
+  {
+    "function_code": "2802",
+    "function_label": "有线传输工程师"
+  },
+  {
+    "function_code": "2803",
+    "function_label": "无线通信工程师"
+  },
+  {
+    "function_code": "2804",
+    "function_label": "电信交换工程师"
+  },
+  {
+    "function_code": "2805",
+    "function_label": "数据通信工程师"
+  },
+  {
+    "function_code": "2807",
+    "function_label": "通信网络工程师"
+  },
+  {
+    "function_code": "2808",
+    "function_label": "通信电源工程师"
+  },
+  {
+    "function_code": "2809",
+    "function_label": "通信技术开发与应用"
+  },
+  {
+    "function_code": "2812",
+    "function_label": "通信文档工程师"
+  },
+  {
+    "function_code": "2813",
+    "function_label": "通信产品经理 or 通信产品工程师"
+  },
+  {
+    "function_code": "2814",
+    "function_label": "光通信工程师"
+  },
+  {
+    "function_code": "2815",
+    "function_label": "射频工程师"
+  },
+  {
+    "function_code": "2816",
+    "function_label": "通信测试工程师"
+  },
+  {
+    "function_code": "2817",
+    "function_label": "通信销售工程师"
+  },
+  {
+    "function_code": "2818",
+    "function_label": "基站工程师"
+  },
+  {
+    "function_code": "2819",
+    "function_label": "核心网工程师"
+  },
+  {
+    "function_code": "2820",
+    "function_label": "通信设备工程师"
+  },
+  {
+    "function_code": "2821",
+    "function_label": "通信项目管理"
+  },
+  {
+    "function_code": "2900",
+    "function_label": "电子工程师 or 电器工程师 or 仪器仪表工程师"
+  },
+  {
+    "function_code": "2903",
+    "function_label": "电子工程师 or 电子技术员"
+  },
+  {
+    "function_code": "2904",
+    "function_label": "电气工程师 or 电气技术员"
+  },
+  {
+    "function_code": "2905",
+    "function_label": "电路工程师(模拟/数字) or 电路技术员(模拟/数字)"
+  },
+  {
+    "function_code": "2906",
+    "function_label": "电声工程师 or 音响工程师 or 音响技术员"
+  },
+  {
+    "function_code": "2908",
+    "function_label": "自动控制工程师 or 自动控制技术员"
+  },
+  {
+    "function_code": "2909",
+    "function_label": "电子软件开发 or ARM or 电子软件开发 or MCU"
+  },
+  {
+    "function_code": "2910",
+    "function_label": "嵌入式软件开发 Linux or 嵌入式软件开发 单片机 or 嵌入式软件开发 PLC or 嵌入式软件开发 DSP"
+  },
+  {
+    "function_code": "2911",
+    "function_label": "电池开发 or 电源开发"
+  },
+  {
+    "function_code": "2913",
+    "function_label": "家用电器研发 or 数码产品研发"
+  },
+  {
+    "function_code": "2914",
+    "function_label": "仪器分析师 or 仪表分析师 or 计量分析师"
+  },
+  {
+    "function_code": "2916",
+    "function_label": "电子工程师 or 电器工程师 or 仪器仪表工程师"
+  },
+  {
+    "function_code": "2917",
+    "function_label": "电子技术研发工程师"
+  },
+  {
+    "function_code": "2918",
+    "function_label": "激光技术 or 光电子技术"
+  },
+  {
+    "function_code": "2919",
+    "function_label": "嵌入式硬件开发(主板机等)"
+  },
+  {
+    "function_code": "2920",
+    "function_label": "电子维修工程师 or 电器维修工程师 or 电子维修技师 or 电器维修技师"
+  },
+  {
+    "function_code": "2921",
+    "function_label": "变压器与磁电工程师"
+  },
+  {
+    "function_code": "2925",
+    "function_label": "安防系统工程师"
+  },
+  {
+    "function_code": "2951",
+    "function_label": "电子工艺工程师"
+  },
+  {
+    "function_code": "2952",
+    "function_label": "电子销售工程师"
+  },
+  {
+    "function_code": "2953",
+    "function_label": "电子文档工程师"
+  },
+  {
+    "function_code": "2954",
+    "function_label": "电子产品经理 or 电子产品工程师"
+  },
+  {
+    "function_code": "2955",
+    "function_label": "硬件工程师"
+  },
+  {
+    "function_code": "2956",
+    "function_label": "高级硬件工程师"
+  },
+  {
+    "function_code": "2957",
+    "function_label": "硬件测试工程师"
+  },
+  {
+    "function_code": "2958",
+    "function_label": "计量工程师"
+  },
+  {
+    "function_code": "2959",
+    "function_label": "电子设备工程师"
+  },
+  {
+    "function_code": "2962",
+    "function_label": "电子元器件工程师"
+  },
+  {
+    "function_code": "2963",
+    "function_label": "机器人调试工程师"
+  },
+  {
+    "function_code": "2964",
+    "function_label": "PCB工程师"
+  },
+  {
+    "function_code": "2965",
+    "function_label": "SMT工程师"
+  },
+  {
+    "function_code": "2966",
+    "function_label": "PLC工程师"
+  },
+  {
+    "function_code": "2969",
+    "function_label": "服务机器人应用技术员"
+  },
+  {
+    "function_code": "2970",
+    "function_label": "智能硬件装调员"
+  },
+  {
+    "function_code": "2971",
+    "function_label": "工业视觉系统运维员"
+  },
+  {
+    "function_code": "2A00",
+    "function_label": "房地产销售"
+  },
+  {
+    "function_code": "2B00",
+    "function_label": "金融销售"
+  },
+  {
+    "function_code": "2C00",
+    "function_label": "教培销售"
+  },
+  {
+    "function_code": "2D00",
+    "function_label": "会计"
+  },
+  {
+    "function_code": "2D01",
+    "function_label": "总账会计"
+  },
+  {
+    "function_code": "2D02",
+    "function_label": "结算会计"
+  },
+  {
+    "function_code": "2D03",
+    "function_label": "建筑会计 or 工程会计"
+  },
+  {
+    "function_code": "2E00",
+    "function_label": "审计 or 税务"
+  },
+  {
+    "function_code": "2F00",
+    "function_label": "高级财务管理"
+  },
+  {
+    "function_code": "3000",
+    "function_label": "销售人员"
+  },
+  {
+    "function_code": "3001",
+    "function_label": "销售代表 or 客户代表"
+  },
+  {
+    "function_code": "3002",
+    "function_label": "渠道专员 or 分销专员"
+  },
+  {
+    "function_code": "3003",
+    "function_label": "客户代表"
+  },
+  {
+    "function_code": "3004",
+    "function_label": "销售工程师"
+  },
+  {
+    "function_code": "3005",
+    "function_label": "电话销售"
+  },
+  {
+    "function_code": "3006",
+    "function_label": "经销商"
+  },
+  {
+    "function_code": "3007",
+    "function_label": "销售人员"
+  },
+  {
+    "function_code": "3008",
+    "function_label": "团购业务员"
+  },
+  {
+    "function_code": "3009",
+    "function_label": "大客户销售"
+  },
+  {
+    "function_code": "3010",
+    "function_label": "网络销售 or 在线销售"
+  },
+  {
+    "function_code": "3011",
+    "function_label": "会籍顾问"
+  },
+  {
+    "function_code": "3012",
+    "function_label": "销售助理"
+  },
+  {
+    "function_code": "3013",
+    "function_label": "直播销售"
+  },
+  {
+    "function_code": "3014",
+    "function_label": "区域销售代表"
+  },
+  {
+    "function_code": "3015",
+    "function_label": "海外销售"
+  },
+  {
+    "function_code": "3016",
+    "function_label": "门店销售"
+  },
+  {
+    "function_code": "3017",
+    "function_label": "地推专员"
+  },
+  {
+    "function_code": "3100",
+    "function_label": "销售行政及商务"
+  },
+  {
+    "function_code": "3101",
+    "function_label": "销售行政经理 or 销售主管"
+  },
+  {
+    "function_code": "3102",
+    "function_label": "销售行政专员"
+  },
+  {
+    "function_code": "3103",
+    "function_label": "商务经理"
+  },
+  {
+    "function_code": "3104",
+    "function_label": "商务主管 or 商务专员"
+  },
+  {
+    "function_code": "3105",
+    "function_label": "商务助理"
+  },
+  {
+    "function_code": "3106",
+    "function_label": "销售行政助理"
+  },
+  {
+    "function_code": "3107",
+    "function_label": "销售行政及商务"
+  },
+  {
+    "function_code": "3108",
+    "function_label": "业务分析经理 or 业务分析主管"
+  },
+  {
+    "function_code": "3109",
+    "function_label": "业务分析专员 or 业务分析助理"
+  },
+  {
+    "function_code": "3110",
+    "function_label": "商务主管"
+  },
+  {
+    "function_code": "3111",
+    "function_label": "商务专员"
+  },
+  {
+    "function_code": "3200",
+    "function_label": "客服"
+  },
+  {
+    "function_code": "3201",
+    "function_label": "客服总监"
+  },
+  {
+    "function_code": "3202",
+    "function_label": "客服经理"
+  },
+  {
+    "function_code": "3203",
+    "function_label": "客服主管"
+  },
+  {
+    "function_code": "3204",
+    "function_label": "客服专员 or 客服助理"
+  },
+  {
+    "function_code": "3205",
+    "function_label": "售前技术支持经理 or 售后技术支持经理"
+  },
+  {
+    "function_code": "3206",
+    "function_label": "售前技术支持主管 or 售后技术支持主管"
+  },
+  {
+    "function_code": "3207",
+    "function_label": "售前技术支持工程师 or 售后技术支持工程师"
+  },
+  {
+    "function_code": "3208",
+    "function_label": "咨询热线客服 or 呼叫中心客服"
+  },
+  {
+    "function_code": "3209",
+    "function_label": "客服"
+  },
+  {
+    "function_code": "3210",
+    "function_label": "客户关系经理 or 客户关系主管"
+  },
+  {
+    "function_code": "3211",
+    "function_label": "投诉专员"
+  },
+  {
+    "function_code": "3212",
+    "function_label": "VIP专员"
+  },
+  {
+    "function_code": "3213",
+    "function_label": "网络客服 or 在线客服"
+  },
+  {
+    "function_code": "3300",
+    "function_label": "金融"
+  },
+  {
+    "function_code": "3301",
+    "function_label": "证券经纪人 or 期货经纪人 or 外汇经纪人"
+  },
+  {
+    "function_code": "3302",
+    "function_label": "证券分析师"
+  },
+  {
+    "function_code": "3303",
+    "function_label": "股票操盘手 or 期货操盘手"
+  },
+  {
+    "function_code": "3304",
+    "function_label": "金融研究员 or 经济研究员"
+  },
+  {
+    "function_code": "3310",
+    "function_label": "拍卖业务 or 担保业务 or 典当业务"
+  },
+  {
+    "function_code": "3311",
+    "function_label": "金融"
+  },
+  {
+    "function_code": "3312",
+    "function_label": "金融产品经理"
+  },
+  {
+    "function_code": "3314",
+    "function_label": "风险管理 or 风险控制"
+  },
+  {
+    "function_code": "3315",
+    "function_label": "金融产品销售"
+  },
+  {
+    "function_code": "3316",
+    "function_label": "量化研究"
+  },
+  {
+    "function_code": "3317",
+    "function_label": "机构业务销售"
+  },
+  {
+    "function_code": "3318",
+    "function_label": "营业部总经理 or 营业部副总经理"
+  },
+  {
+    "function_code": "3319",
+    "function_label": "期货分析师"
+  },
+  {
+    "function_code": "3320",
+    "function_label": "证券交易员"
+  },
+  {
+    "function_code": "3321",
+    "function_label": "公司金融顾问"
+  },
+  {
+    "function_code": "3326",
+    "function_label": "理财顾问"
+  },
+  {
+    "function_code": "3327",
+    "function_label": "证券投资顾问"
+  },
+  {
+    "function_code": "3334",
+    "function_label": "信托"
+  },
+  {
+    "function_code": "3335",
+    "function_label": "互联网金融"
+  },
+  {
+    "function_code": "3336",
+    "function_label": "金融衍生品"
+  },
+  {
+    "function_code": "3340",
+    "function_label": "催收"
+  },
+  {
+    "function_code": "3341",
+    "function_label": "基金经理"
+  },
+  {
+    "function_code": "3400",
+    "function_label": "保险"
+  },
+  {
+    "function_code": "3401",
+    "function_label": "保险精算师"
+  },
+  {
+    "function_code": "3402",
+    "function_label": "保险产品开发 or 保险项目策划"
+  },
+  {
+    "function_code": "3403",
+    "function_label": "保险业务经理 or 保险业务主管 or 保险经理 or 保险主管"
+  },
+  {
+    "function_code": "3404",
+    "function_label": "保险经纪人 or 保险代理"
+  },
+  {
+    "function_code": "3405",
+    "function_label": "理财顾问 or 财务规划师"
+  },
+  {
+    "function_code": "3406",
+    "function_label": "储备经理人"
+  },
+  {
+    "function_code": "3407",
+    "function_label": "保险核保"
+  },
+  {
+    "function_code": "3408",
+    "function_label": "保险理赔"
+  },
+  {
+    "function_code": "3409",
+    "function_label": "保险客户服务 or 保险续期管理"
+  },
+  {
+    "function_code": "3410",
+    "function_label": "保险培训师"
+  },
+  {
+    "function_code": "3411",
+    "function_label": "保险内勤"
+  },
+  {
+    "function_code": "3412",
+    "function_label": "保险"
+  },
+  {
+    "function_code": "3413",
+    "function_label": "契约管理"
+  },
+  {
+    "function_code": "3414",
+    "function_label": "保险电销"
+  },
+  {
+    "function_code": "3415",
+    "function_label": "保险业务推动 or 保险业务督导"
+  },
+  {
+    "function_code": "3500",
+    "function_label": "生产人员 or 营运人员"
+  },
+  {
+    "function_code": "3501",
+    "function_label": "工厂经理 or 厂长"
+  },
+  {
+    "function_code": "3502",
+    "function_label": "总工程师 or 副总工程师"
+  },
+  {
+    "function_code": "3503",
+    "function_label": "项目经理 or 项目主管"
+  },
+  {
+    "function_code": "3504",
+    "function_label": "项目工程师"
+  },
+  {
+    "function_code": "3505",
+    "function_label": "营运经理"
+  },
+  {
+    "function_code": "3506",
+    "function_label": "营运主管"
+  },
+  {
+    "function_code": "3507",
+    "function_label": "生产经理 or 车间主任"
+  },
+  {
+    "function_code": "3508",
+    "function_label": "生产计划管理 or 物料管理(PMC)"
+  },
+  {
+    "function_code": "3509",
+    "function_label": "生产主管"
+  },
+  {
+    "function_code": "3510",
+    "function_label": "化验员"
+  },
+  {
+    "function_code": "3511",
+    "function_label": "生产人员 or 营运人员"
+  },
+  {
+    "function_code": "3512",
+    "function_label": "生产文员"
+  },
+  {
+    "function_code": "3513",
+    "function_label": "项目总监"
+  },
+  {
+    "function_code": "3514",
+    "function_label": "生产总监"
+  },
+  {
+    "function_code": "3515",
+    "function_label": "生产领班 or 生产组长"
+  },
+  {
+    "function_code": "3516",
+    "function_label": "设备主管"
+  },
+  {
+    "function_code": "3517",
+    "function_label": "厂务"
+  },
+  {
+    "function_code": "3518",
+    "function_label": "生产跟单"
+  },
+  {
+    "function_code": "3600",
+    "function_label": "质量安全"
+  },
+  {
+    "function_code": "3601",
+    "function_label": "质量管理经理 or 测试经理 or QA经理 or QC经理"
+  },
+  {
+    "function_code": "3602",
+    "function_label": "质量管理主管 or 测试主管 or QA主管 or QC主管"
+  },
+  {
+    "function_code": "3603",
+    "function_label": "质量管理工程师 or 测试工程师 or QA工程师 or QC工程师"
+  },
+  {
+    "function_code": "3604",
+    "function_label": "质检员 or 测试员 or QC"
+  },
+  {
+    "function_code": "3605",
+    "function_label": "可靠度工程师"
+  },
+  {
+    "function_code": "3606",
+    "function_label": "故障分析工程师"
+  },
+  {
+    "function_code": "3607",
+    "function_label": "认证工程师"
+  },
+  {
+    "function_code": "3608",
+    "function_label": "体系工程师"
+  },
+  {
+    "function_code": "3609",
+    "function_label": "环境经理(EHS) or 健康经理(EHS) or 安全经理(EHS) or 环境主管(EHS) or 健康主管(EHS) or 安全主管(EHS)"
+  },
+  {
+    "function_code": "3610",
+    "function_label": "环境工程师(EHS) or 健康工程师(EHS) or 安全工程师(EHS)"
+  },
+  {
+    "function_code": "3611",
+    "function_label": "供应商管理"
+  },
+  {
+    "function_code": "3612",
+    "function_label": "采购材料、设备质量管理"
+  },
+  {
+    "function_code": "3613",
+    "function_label": "质量安全"
+  },
+  {
+    "function_code": "3614",
+    "function_label": "安全员"
+  },
+  {
+    "function_code": "3615",
+    "function_label": "审核员"
+  },
+  {
+    "function_code": "3616",
+    "function_label": "供应商质量工程师"
+  },
+  {
+    "function_code": "3700",
+    "function_label": "技工 or 普工 or 操作工 or 组装工 or 包装工"
+  },
+  {
+    "function_code": "3701",
+    "function_label": "技工"
+  },
+  {
+    "function_code": "3703",
+    "function_label": "焊工"
+  },
+  {
+    "function_code": "3706",
+    "function_label": "电工"
+  },
+  {
+    "function_code": "3707",
+    "function_label": "叉车司机 or 铲车司机 or 叉车工"
+  },
+  {
+    "function_code": "3708",
+    "function_label": "空调工"
+  },
+  {
+    "function_code": "3709",
+    "function_label": "水工"
+  },
+  {
+    "function_code": "3710",
+    "function_label": "普工 or 操作工 or 组装工 or 包装工"
+  },
+  {
+    "function_code": "3713",
+    "function_label": "技工 or 普工 or 操作工 or 组装工 or 包装工"
+  },
+  {
+    "function_code": "3715",
+    "function_label": "组装工"
+  },
+  {
+    "function_code": "3716",
+    "function_label": "包装工"
+  },
+  {
+    "function_code": "3717",
+    "function_label": "氩弧焊工"
+  },
+  {
+    "function_code": "3718",
+    "function_label": "电工"
+  },
+  {
+    "function_code": "3719",
+    "function_label": "旋压工"
+  },
+  {
+    "function_code": "3720",
+    "function_label": "仪表工"
+  },
+  {
+    "function_code": "3721",
+    "function_label": "电镀工"
+  },
+  {
+    "function_code": "3722",
+    "function_label": "喷塑工"
+  },
+  {
+    "function_code": "3723",
+    "function_label": "木工"
+  },
+  {
+    "function_code": "3724",
+    "function_label": "漆工"
+  },
+  {
+    "function_code": "3725",
+    "function_label": "电梯工"
+  },
+  {
+    "function_code": "3726",
+    "function_label": "锅炉工"
+  },
+  {
+    "function_code": "3727",
+    "function_label": "学徒工"
+  },
+  {
+    "function_code": "3728",
+    "function_label": "吊车司机"
+  },
+  {
+    "function_code": "3729",
+    "function_label": "挖掘机司机"
+  },
+  {
+    "function_code": "3730",
+    "function_label": "3D打印操作员"
+  },
+  {
+    "function_code": "3731",
+    "function_label": "模切"
+  },
+  {
+    "function_code": "3732",
+    "function_label": "叉车司机 or 叉车工"
+  },
+  {
+    "function_code": "3733",
+    "function_label": "铲车司机 or 叉车工"
+  },
+  {
+    "function_code": "3800",
+    "function_label": "服装 or 纺织 or 皮革"
+  },
+  {
+    "function_code": "3801",
+    "function_label": "服装设计 or 纺织设计"
+  },
+  {
+    "function_code": "3802",
+    "function_label": "面料辅料开发"
+  },
+  {
+    "function_code": "3803",
+    "function_label": "面料辅料采购"
+  },
+  {
+    "function_code": "3804",
+    "function_label": "服装跟单 or 纺织跟单 or 皮革跟单"
+  },
+  {
+    "function_code": "3805",
+    "function_label": "服装纺织质检员QA or 服装纺织质检员QC"
+  },
+  {
+    "function_code": "3806",
+    "function_label": "板房工作 or 楦头工作 or 底格出格师"
+  },
+  {
+    "function_code": "3807",
+    "function_label": "打样工作 or 制版工作"
+  },
+  {
+    "function_code": "3808",
+    "function_label": "纸样师 or 车板工"
+  },
+  {
+    "function_code": "3809",
+    "function_label": "裁床"
+  },
+  {
+    "function_code": "3810",
+    "function_label": "服装工作 or 纺织工作 or 皮革工作"
+  },
+  {
+    "function_code": "3811",
+    "function_label": "电脑放码员"
+  },
+  {
+    "function_code": "3812",
+    "function_label": "服装设计总监 or 纺织设计总监"
+  },
+  {
+    "function_code": "3813",
+    "function_label": "服装工艺师 or 纺织工艺师 or 皮革工艺师"
+  },
+  {
+    "function_code": "3814",
+    "function_label": "服装领班"
+  },
+  {
+    "function_code": "3815",
+    "function_label": "裁剪工"
+  },
+  {
+    "function_code": "3816",
+    "function_label": "缝纫工"
+  },
+  {
+    "function_code": "3817",
+    "function_label": "手缝工"
+  },
+  {
+    "function_code": "3818",
+    "function_label": "烫工"
+  },
+  {
+    "function_code": "3819",
+    "function_label": "样衣工"
+  },
+  {
+    "function_code": "3820",
+    "function_label": "纺织工"
+  },
+  {
+    "function_code": "3821",
+    "function_label": "针织工"
+  },
+  {
+    "function_code": "3822",
+    "function_label": "配色工"
+  },
+  {
+    "function_code": "3823",
+    "function_label": "印染工"
+  },
+  {
+    "function_code": "3824",
+    "function_label": "漂染工"
+  },
+  {
+    "function_code": "3825",
+    "function_label": "挡车工"
+  },
+  {
+    "function_code": "3826",
+    "function_label": "整经工"
+  },
+  {
+    "function_code": "3827",
+    "function_label": "细纱工"
+  },
+  {
+    "function_code": "3828",
+    "function_label": "浆纱工"
+  },
+  {
+    "function_code": "3900",
+    "function_label": "采购"
+  },
+  {
+    "function_code": "3901",
+    "function_label": "采购总监"
+  },
+  {
+    "function_code": "3902",
+    "function_label": "采购经理"
+  },
+  {
+    "function_code": "3903",
+    "function_label": "采购主管"
+  },
+  {
+    "function_code": "3904",
+    "function_label": "采购员"
+  },
+  {
+    "function_code": "3905",
+    "function_label": "采购助理"
+  },
+  {
+    "function_code": "3907",
+    "function_label": "采购"
+  },
+  {
+    "function_code": "3908",
+    "function_label": "买手"
+  },
+  {
+    "function_code": "3909",
+    "function_label": "供应商开发"
+  },
+  {
+    "function_code": "3A00",
+    "function_label": "硬件开发"
+  },
+  {
+    "function_code": "3B00",
+    "function_label": "技术项目管理"
+  },
+  {
+    "function_code": "3C00",
+    "function_label": "证券"
+  },
+  {
+    "function_code": "3D00",
+    "function_label": "期货"
+  },
+  {
+    "function_code": "3E00",
+    "function_label": "新能源汽车"
+  },
+  {
+    "function_code": "3F00",
+    "function_label": "配送管理"
+  },
+  {
+    "function_code": "4000",
+    "function_label": "贸易"
+  },
+  {
+    "function_code": "4001",
+    "function_label": "贸易经理 or 贸易主管 or 外贸经理 or 外贸主管"
+  },
+  {
+    "function_code": "4002",
+    "function_label": "贸易专员 or 外贸助理 or 外贸专员 or 外贸助理"
+  },
+  {
+    "function_code": "4003",
+    "function_label": "国内贸易人员"
+  },
+  {
+    "function_code": "4004",
+    "function_label": "业务跟单经理"
+  },
+  {
+    "function_code": "4005",
+    "function_label": "高级业务跟单"
+  },
+  {
+    "function_code": "4006",
+    "function_label": "业务跟单"
+  },
+  {
+    "function_code": "4007",
+    "function_label": "助理业务跟单"
+  },
+  {
+    "function_code": "4008",
+    "function_label": "贸易"
+  },
+  {
+    "function_code": "4009",
+    "function_label": "外贸销售"
+  },
+  {
+    "function_code": "4100",
+    "function_label": "生物制药"
+  },
+  {
+    "function_code": "4101",
+    "function_label": "生物工程 or 生物制药"
+  },
+  {
+    "function_code": "4102",
+    "function_label": "医药销售人员"
+  },
+  {
+    "function_code": "4103",
+    "function_label": "医药技术研发管理人员"
+  },
+  {
+    "function_code": "4104",
+    "function_label": "医药技术研发人员"
+  },
+  {
+    "function_code": "4105",
+    "function_label": "临床研究员"
+  },
+  {
+    "function_code": "4106",
+    "function_label": "临床协调员"
+  },
+  {
+    "function_code": "4107",
+    "function_label": "药品注册"
+  },
+  {
+    "function_code": "4108",
+    "function_label": "药品生产 or 质量管理"
+  },
+  {
+    "function_code": "4109",
+    "function_label": "药品市场推广经理"
+  },
+  {
+    "function_code": "4110",
+    "function_label": "药品市场推广主管 or 药品市场推广专员"
+  },
+  {
+    "function_code": "4111",
+    "function_label": "医药销售经理 or 医药销售主管"
+  },
+  {
+    "function_code": "4112",
+    "function_label": "医药代表"
+  },
+  {
+    "function_code": "4113",
+    "function_label": "医疗器械市场推广"
+  },
+  {
+    "function_code": "4114",
+    "function_label": "医疗器械销售代表"
+  },
+  {
+    "function_code": "4115",
+    "function_label": "生物制药"
+  },
+  {
+    "function_code": "4116",
+    "function_label": "化学分析测试员"
+  },
+  {
+    "function_code": "4117",
+    "function_label": "医疗器械注册"
+  },
+  {
+    "function_code": "4118",
+    "function_label": "医疗器械生产 or 医疗器械质量管理"
+  },
+  {
+    "function_code": "4119",
+    "function_label": "医疗器械维修人员"
+  },
+  {
+    "function_code": "4120",
+    "function_label": "医药招商"
+  },
+  {
+    "function_code": "4121",
+    "function_label": "政府事务管理"
+  },
+  {
+    "function_code": "4122",
+    "function_label": "招投标管理"
+  },
+  {
+    "function_code": "4123",
+    "function_label": "临床数据分析员"
+  },
+  {
+    "function_code": "4124",
+    "function_label": "医疗器械研发"
+  },
+  {
+    "function_code": "4125",
+    "function_label": "医疗器械销售经理 or 医疗器械销售主管"
+  },
+  {
+    "function_code": "4126",
+    "function_label": "医药学术推广"
+  },
+  {
+    "function_code": "4127",
+    "function_label": "临床监查员"
+  },
+  {
+    "function_code": "4128",
+    "function_label": "试剂研发经理"
+  },
+  {
+    "function_code": "4129",
+    "function_label": "试剂研发工程师"
+  },
+  {
+    "function_code": "4130",
+    "function_label": "制剂研究员"
+  },
+  {
+    "function_code": "4131",
+    "function_label": "药物分析研究员"
+  },
+  {
+    "function_code": "4132",
+    "function_label": "药理研究员"
+  },
+  {
+    "function_code": "4133",
+    "function_label": "病理研究员"
+  },
+  {
+    "function_code": "4134",
+    "function_label": "药物合成研究员 or 有机合成研究员"
+  },
+  {
+    "function_code": "4135",
+    "function_label": "细胞培养技术员"
+  },
+  {
+    "function_code": "4136",
+    "function_label": "药物警戒经理"
+  },
+  {
+    "function_code": "4137",
+    "function_label": "药物警戒专员"
+  },
+  {
+    "function_code": "4138",
+    "function_label": "动物实验技术员"
+  },
+  {
+    "function_code": "4139",
+    "function_label": "药品市场推广专员"
+  },
+  {
+    "function_code": "4140",
+    "function_label": "药品市场推广主管"
+  },
+  {
+    "function_code": "4200",
+    "function_label": "广告"
+  },
+  {
+    "function_code": "4201",
+    "function_label": "广告客户总监 or 广告客户副总监"
+  },
+  {
+    "function_code": "4202",
+    "function_label": "广告客户经理"
+  },
+  {
+    "function_code": "4203",
+    "function_label": "广告客户主管 or 广告客户专员"
+  },
+  {
+    "function_code": "4204",
+    "function_label": "广告创意经理 or 广告设计经理"
+  },
+  {
+    "function_code": "4205",
+    "function_label": "广告创意总监"
+  },
+  {
+    "function_code": "4206",
+    "function_label": "广告创意主管 or 广告设计主管 or 广告创意专员"
+  },
+  {
+    "function_code": "4207",
+    "function_label": "文案 or 策划"
+  },
+  {
+    "function_code": "4208",
+    "function_label": "企业发展经理 or 业务发展经理"
+  },
+  {
+    "function_code": "4209",
+    "function_label": "企业策划人员"
+  },
+  {
+    "function_code": "4210",
+    "function_label": "广告"
+  },
+  {
+    "function_code": "4211",
+    "function_label": "美术指导"
+  },
+  {
+    "function_code": "4212",
+    "function_label": "广告制作执行"
+  },
+  {
+    "function_code": "4213",
+    "function_label": "广告销售"
+  },
+  {
+    "function_code": "4214",
+    "function_label": "广告投放专员"
+  },
+  {
+    "function_code": "4215",
+    "function_label": "广告投放经理 or 广告投放主管"
+  },
+  {
+    "function_code": "4216",
+    "function_label": "广告创意主管 or 广告设计主管"
+  },
+  {
+    "function_code": "4217",
+    "function_label": "广告创意专员 or 广告设计专员"
+  },
+  {
+    "function_code": "4218",
+    "function_label": "广告客户主管"
+  },
+  {
+    "function_code": "4219",
+    "function_label": "广告客户专员"
+  },
+  {
+    "function_code": "4300",
+    "function_label": "公关 or 媒介"
+  },
+  {
+    "function_code": "4301",
+    "function_label": "公关经理"
+  },
+  {
+    "function_code": "4302",
+    "function_label": "公关主管"
+  },
+  {
+    "function_code": "4303",
+    "function_label": "公关专员"
+  },
+  {
+    "function_code": "4304",
+    "function_label": "会务经理 or 会展经理"
+  },
+  {
+    "function_code": "4305",
+    "function_label": "会务主管 or 会展主管"
+  },
+  {
+    "function_code": "4306",
+    "function_label": "会务专员 or 会展专员"
+  },
+  {
+    "function_code": "4307",
+    "function_label": "媒介经理"
+  },
+  {
+    "function_code": "4308",
+    "function_label": "媒介主管"
+  },
+  {
+    "function_code": "4309",
+    "function_label": "媒介专员"
+  },
+  {
+    "function_code": "4310",
+    "function_label": "公关助理 or 媒介助理"
+  },
+  {
+    "function_code": "4311",
+    "function_label": "公关工作 or 媒介工作"
+  },
+  {
+    "function_code": "4312",
+    "function_label": "媒介销售"
+  },
+  {
+    "function_code": "4313",
+    "function_label": "活动策划"
+  },
+  {
+    "function_code": "4314",
+    "function_label": "活动执行"
+  },
+  {
+    "function_code": "4315",
+    "function_label": "公关总监"
+  },
+  {
+    "function_code": "4400",
+    "function_label": "影视 or 媒体"
+  },
+  {
+    "function_code": "4401",
+    "function_label": "影视策划 or 制作人员"
+  },
+  {
+    "function_code": "4402",
+    "function_label": "导演 or 编导"
+  },
+  {
+    "function_code": "4403",
+    "function_label": "艺术总监 or 设计总监"
+  },
+  {
+    "function_code": "4404",
+    "function_label": "经纪人 or 星探"
+  },
+  {
+    "function_code": "4405",
+    "function_label": "主播工作 or 主持人"
+  },
+  {
+    "function_code": "4406",
+    "function_label": "摄影师 or 摄像师"
+  },
+  {
+    "function_code": "4407",
+    "function_label": "音效师"
+  },
+  {
+    "function_code": "4408",
+    "function_label": "配音员"
+  },
+  {
+    "function_code": "4410",
+    "function_label": "影视工作 or 媒体工作"
+  },
+  {
+    "function_code": "4411",
+    "function_label": "后期制作"
+  },
+  {
+    "function_code": "4412",
+    "function_label": "放映经理 or 放映主管"
+  },
+  {
+    "function_code": "4413",
+    "function_label": "放映员"
+  },
+  {
+    "function_code": "4414",
+    "function_label": "艺术指导 or 舞台美术设计"
+  },
+  {
+    "function_code": "4415",
+    "function_label": "灯光师"
+  },
+  {
+    "function_code": "4416",
+    "function_label": "视频剪辑"
+  },
+  {
+    "function_code": "4417",
+    "function_label": "编剧"
+  },
+  {
+    "function_code": "4418",
+    "function_label": "制片人"
+  },
+  {
+    "function_code": "4419",
+    "function_label": "直播场控"
+  },
+  {
+    "function_code": "4420",
+    "function_label": "直播中控"
+  },
+  {
+    "function_code": "4421",
+    "function_label": "直播助理"
+  },
+  {
+    "function_code": "4500",
+    "function_label": "编辑 or 出版"
+  },
+  {
+    "function_code": "4501",
+    "function_label": "总编 or 副总编"
+  },
+  {
+    "function_code": "4502",
+    "function_label": "编辑"
+  },
+  {
+    "function_code": "4503",
+    "function_label": "记者"
+  },
+  {
+    "function_code": "4504",
+    "function_label": "美术编辑"
+  },
+  {
+    "function_code": "4505",
+    "function_label": "排版设计"
+  },
+  {
+    "function_code": "4507",
+    "function_label": "出版 or 发行"
+  },
+  {
+    "function_code": "4508",
+    "function_label": "编辑工作 or 出版工作"
+  },
+  {
+    "function_code": "4516",
+    "function_label": "电话采编"
+  },
+  {
+    "function_code": "4517",
+    "function_label": "作家 or 撰稿人"
+  },
+  {
+    "function_code": "4600",
+    "function_label": "房地产开发"
+  },
+  {
+    "function_code": "4601",
+    "function_label": "房地产项目经理 or 策划经理"
+  },
+  {
+    "function_code": "4602",
+    "function_label": "房地产项目主管 or 策划主管 or 房地产项目专员"
+  },
+  {
+    "function_code": "4603",
+    "function_label": "房产项目配套工程师"
+  },
+  {
+    "function_code": "4604",
+    "function_label": "房地产投资管理"
+  },
+  {
+    "function_code": "4607",
+    "function_label": "房地产开发"
+  },
+  {
+    "function_code": "4608",
+    "function_label": "房地产项目招投标"
+  },
+  {
+    "function_code": "4610",
+    "function_label": "房地产投资分析"
+  },
+  {
+    "function_code": "4611",
+    "function_label": "房地产资产管理"
+  },
+  {
+    "function_code": "4612",
+    "function_label": "监察人员"
+  },
+  {
+    "function_code": "4613",
+    "function_label": "房地产项目专员 or 策划专员"
+  },
+  {
+    "function_code": "4614",
+    "function_label": "房地产项目主管 or 策划主管"
+  },
+  {
+    "function_code": "4700",
+    "function_label": "物业管理"
+  },
+  {
+    "function_code": "4701",
+    "function_label": "高级物业顾问 or 物业顾问"
+  },
+  {
+    "function_code": "4702",
+    "function_label": "物业管理经理"
+  },
+  {
+    "function_code": "4703",
+    "function_label": "物业管理专员 or 物业管理助理"
+  },
+  {
+    "function_code": "4704",
+    "function_label": "招商 or 租赁 or 租售"
+  },
+  {
+    "function_code": "4705",
+    "function_label": "物业设施管理人员"
+  },
+  {
+    "function_code": "4706",
+    "function_label": "物业维修员"
+  },
+  {
+    "function_code": "4707",
+    "function_label": "物业管理"
+  },
+  {
+    "function_code": "4708",
+    "function_label": "物业机电工程师"
+  },
+  {
+    "function_code": "4709",
+    "function_label": "停车管理员"
+  },
+  {
+    "function_code": "4710",
+    "function_label": "保安经理"
+  },
+  {
+    "function_code": "4711",
+    "function_label": "保安人员"
+  },
+  {
+    "function_code": "4712",
+    "function_label": "保洁"
+  },
+  {
+    "function_code": "4713",
+    "function_label": "绿化工"
+  },
+  {
+    "function_code": "4714",
+    "function_label": "物业管理主管"
+  },
+  {
+    "function_code": "4715",
+    "function_label": "物业机电维修工"
+  },
+  {
+    "function_code": "4716",
+    "function_label": "前介工程师"
+  },
+  {
+    "function_code": "4717",
+    "function_label": "长租公寓管家 or 养老专员"
+  },
+  {
+    "function_code": "4719",
+    "function_label": "写字楼运营"
+  },
+  {
+    "function_code": "4800",
+    "function_label": "前厅"
+  },
+  {
+    "function_code": "4801",
+    "function_label": "餐饮店长 or 餐饮经理"
+  },
+  {
+    "function_code": "4802",
+    "function_label": "餐厅领班"
+  },
+  {
+    "function_code": "4803",
+    "function_label": "餐饮服务员"
+  },
+  {
+    "function_code": "4804",
+    "function_label": "礼仪服务员 or 迎宾服务员"
+  },
+  {
+    "function_code": "4806",
+    "function_label": "行政主厨 or 厨师长"
+  },
+  {
+    "function_code": "4807",
+    "function_label": "中餐厨师"
+  },
+  {
+    "function_code": "4808",
+    "function_label": "调酒师 or 侍酒师 or 吧台员"
+  },
+  {
+    "function_code": "4809",
+    "function_label": "茶艺师"
+  },
+  {
+    "function_code": "4810",
+    "function_label": "前厅"
+  },
+  {
+    "function_code": "4811",
+    "function_label": "传菜主管"
+  },
+  {
+    "function_code": "4812",
+    "function_label": "厨师助理 or 厨师学徒"
+  },
+  {
+    "function_code": "4813",
+    "function_label": "配菜员 or 打荷员"
+  },
+  {
+    "function_code": "4814",
+    "function_label": "洗碗工"
+  },
+  {
+    "function_code": "4815",
+    "function_label": "送餐员"
+  },
+  {
+    "function_code": "4816",
+    "function_label": "咖啡师"
+  },
+  {
+    "function_code": "4817",
+    "function_label": "杂工"
+  },
+  {
+    "function_code": "4818",
+    "function_label": "餐饮收银员"
+  },
+  {
+    "function_code": "4819",
+    "function_label": "餐饮大堂经理"
+  },
+  {
+    "function_code": "4820",
+    "function_label": "西餐厨师"
+  },
+  {
+    "function_code": "4821",
+    "function_label": "日式厨师"
+  },
+  {
+    "function_code": "4822",
+    "function_label": "面点师"
+  },
+  {
+    "function_code": "4823",
+    "function_label": "西点师"
+  },
+  {
+    "function_code": "4824",
+    "function_label": "餐饮预订员"
+  },
+  {
+    "function_code": "4825",
+    "function_label": "传菜员"
+  },
+  {
+    "function_code": "4826",
+    "function_label": "调饮师"
+  },
+  {
+    "function_code": "4827",
+    "function_label": "食品安全管理师"
+  },
+  {
+    "function_code": "4900",
+    "function_label": "酒店"
+  },
+  {
+    "function_code": "4901",
+    "function_label": "酒店经理 or 宾馆经理"
+  },
+  {
+    "function_code": "4902",
+    "function_label": "酒店销售 or 宾馆销售"
+  },
+  {
+    "function_code": "4903",
+    "function_label": "酒店大堂经理"
+  },
+  {
+    "function_code": "4904",
+    "function_label": "楼面经理"
+  },
+  {
+    "function_code": "4905",
+    "function_label": "酒店前台"
+  },
+  {
+    "function_code": "4906",
+    "function_label": "客房服务员 or 楼面服务员"
+  },
+  {
+    "function_code": "4907",
+    "function_label": "行李员"
+  },
+  {
+    "function_code": "4908",
+    "function_label": "清洁服务人员"
+  },
+  {
+    "function_code": "4909",
+    "function_label": "导游 or 旅行顾问"
+  },
+  {
+    "function_code": "4910",
+    "function_label": "票务"
+  },
+  {
+    "function_code": "4911",
+    "function_label": "酒店"
+  },
+  {
+    "function_code": "4912",
+    "function_label": "宴会管理"
+  },
+  {
+    "function_code": "4913",
+    "function_label": "机场代表"
+  },
+  {
+    "function_code": "4914",
+    "function_label": "管家部经理 or 管家部主管"
+  },
+  {
+    "function_code": "4915",
+    "function_label": "宾客服务经理"
+  },
+  {
+    "function_code": "4916",
+    "function_label": "预订主管"
+  },
+  {
+    "function_code": "4917",
+    "function_label": "预订员"
+  },
+  {
+    "function_code": "4918",
+    "function_label": "健身房服务"
+  },
+  {
+    "function_code": "4919",
+    "function_label": "旅游产品销售"
+  },
+  {
+    "function_code": "4920",
+    "function_label": "行程管理 or 计调"
+  },
+  {
+    "function_code": "4921",
+    "function_label": "签证专员"
+  },
+  {
+    "function_code": "4922",
+    "function_label": "研学项目经理 or 研学项目主管"
+  },
+  {
+    "function_code": "4923",
+    "function_label": "旅游策划师"
+  },
+  {
+    "function_code": "4A00",
+    "function_label": "装卸搬运"
+  },
+  {
+    "function_code": "4B00",
+    "function_label": "仓储"
+  },
+  {
+    "function_code": "4C00",
+    "function_label": "供应链"
+  },
+  {
+    "function_code": "4D00",
+    "function_label": "建筑工人 or 装修工人"
+  },
+  {
+    "function_code": "4E00",
+    "function_label": "能源"
+  },
+  {
+    "function_code": "4F00",
+    "function_label": "临床试验"
+  },
+  {
+    "function_code": "5000",
+    "function_label": "美容美发"
+  },
+  {
+    "function_code": "5001",
+    "function_label": "美容顾问"
+  },
+  {
+    "function_code": "5002",
+    "function_label": "美容助理"
+  },
+  {
+    "function_code": "5003",
+    "function_label": "瘦身顾问"
+  },
+  {
+    "function_code": "5004",
+    "function_label": "发型师"
+  },
+  {
+    "function_code": "5005",
+    "function_label": "发型助理 or 发型学徒"
+  },
+  {
+    "function_code": "5006",
+    "function_label": "美甲师"
+  },
+  {
+    "function_code": "5007",
+    "function_label": "按摩"
+  },
+  {
+    "function_code": "5010",
+    "function_label": "宠物护理 or 宠物美容"
+  },
+  {
+    "function_code": "5011",
+    "function_label": "美容美发"
+  },
+  {
+    "function_code": "5013",
+    "function_label": "彩妆培训师"
+  },
+  {
+    "function_code": "5014",
+    "function_label": "专柜彩妆顾问(BA)"
+  },
+  {
+    "function_code": "5016",
+    "function_label": "美容培训师 or 美容导师"
+  },
+  {
+    "function_code": "5017",
+    "function_label": "美体师"
+  },
+  {
+    "function_code": "5018",
+    "function_label": "美容店长"
+  },
+  {
+    "function_code": "5019",
+    "function_label": "美容师"
+  },
+  {
+    "function_code": "5020",
+    "function_label": "化妆师"
+  },
+  {
+    "function_code": "5021",
+    "function_label": "造型师"
+  },
+  {
+    "function_code": "5022",
+    "function_label": "美发店长"
+  },
+  {
+    "function_code": "5023",
+    "function_label": "SPA 技师"
+  },
+  {
+    "function_code": "5024",
+    "function_label": "足疗"
+  },
+  {
+    "function_code": "5100",
+    "function_label": "零售"
+  },
+  {
+    "function_code": "5101",
+    "function_label": "门店经理 or 店长"
+  },
+  {
+    "function_code": "5102",
+    "function_label": "店员 or 营业员"
+  },
+  {
+    "function_code": "5103",
+    "function_label": "收银主管"
+  },
+  {
+    "function_code": "5104",
+    "function_label": "陈列员"
+  },
+  {
+    "function_code": "5105",
+    "function_label": "促销员 or 导购员"
+  },
+  {
+    "function_code": "5106",
+    "function_label": "兼职店员"
+  },
+  {
+    "function_code": "5107",
+    "function_label": "零售"
+  },
+  {
+    "function_code": "5108",
+    "function_label": "防损员 or 内保"
+  },
+  {
+    "function_code": "5109",
+    "function_label": "西点师 or 面包糕点加工"
+  },
+  {
+    "function_code": "5110",
+    "function_label": "生鲜食品加工 or 生鲜食品处理"
+  },
+  {
+    "function_code": "5111",
+    "function_label": "熟食加工"
+  },
+  {
+    "function_code": "5112",
+    "function_label": "品类管理"
+  },
+  {
+    "function_code": "5113",
+    "function_label": "安防主管"
+  },
+  {
+    "function_code": "5114",
+    "function_label": "品牌管理 or 连锁招商管理"
+  },
+  {
+    "function_code": "5115",
+    "function_label": "奢侈品业务"
+  },
+  {
+    "function_code": "5116",
+    "function_label": "珠宝销售顾问"
+  },
+  {
+    "function_code": "5117",
+    "function_label": "促销主管 or 督导 or 巡店员工"
+  },
+  {
+    "function_code": "5119",
+    "function_label": "收银员"
+  },
+  {
+    "function_code": "5120",
+    "function_label": "收货员"
+  },
+  {
+    "function_code": "5121",
+    "function_label": "理货员"
+  },
+  {
+    "function_code": "5122",
+    "function_label": "店长助理"
+  },
+  {
+    "function_code": "5123",
+    "function_label": "导购管理"
+  },
+  {
+    "function_code": "5124",
+    "function_label": "陈列管理"
+  },
+  {
+    "function_code": "5130",
+    "function_label": "商品管理"
+  },
+  {
+    "function_code": "5200",
+    "function_label": "家政服务"
+  },
+  {
+    "function_code": "5202",
+    "function_label": "保镖"
+  },
+  {
+    "function_code": "5203",
+    "function_label": "寻呼员 or 话务员"
+  },
+  {
+    "function_code": "5205",
+    "function_label": "清洁工"
+  },
+  {
+    "function_code": "5206",
+    "function_label": "家政服务 or 保姆"
+  },
+  {
+    "function_code": "5207",
+    "function_label": "家政服务"
+  },
+  {
+    "function_code": "5209",
+    "function_label": "月嫂"
+  },
+  {
+    "function_code": "5210",
+    "function_label": "育婴师 or 保育员"
+  },
+  {
+    "function_code": "5211",
+    "function_label": "护工"
+  },
+  {
+    "function_code": "5212",
+    "function_label": "钟点工"
+  },
+  {
+    "function_code": "5213",
+    "function_label": "洗衣工"
+  },
+  {
+    "function_code": "5214",
+    "function_label": "送水工"
+  },
+  {
+    "function_code": "5215",
+    "function_label": "空调维修"
+  },
+  {
+    "function_code": "5216",
+    "function_label": "家电维修"
+  },
+  {
+    "function_code": "5300",
+    "function_label": "兼职"
+  },
+  {
+    "function_code": "5301",
+    "function_label": "兼职"
+  },
+  {
+    "function_code": "5400",
+    "function_label": "汽车制造"
+  },
+  {
+    "function_code": "5404",
+    "function_label": "汽车质量工程师"
+  },
+  {
+    "function_code": "5406",
+    "function_label": "汽车装配工艺工程师"
+  },
+  {
+    "function_code": "5411",
+    "function_label": "汽车制造"
+  },
+  {
+    "function_code": "5422",
+    "function_label": "前期质量工程师"
+  },
+  {
+    "function_code": "5423",
+    "function_label": "过程质量工程师"
+  },
+  {
+    "function_code": "5424",
+    "function_label": "客户质量工程师"
+  },
+  {
+    "function_code": "5425",
+    "function_label": "总装工程师"
+  },
+  {
+    "function_code": "5426",
+    "function_label": "焊接工艺工程师"
+  },
+  {
+    "function_code": "5427",
+    "function_label": "冲压工艺工程师"
+  },
+  {
+    "function_code": "5428",
+    "function_label": "涂装工艺工程师"
+  },
+  {
+    "function_code": "5500",
+    "function_label": "化工"
+  },
+  {
+    "function_code": "5501",
+    "function_label": "化工技术应用 or 化工工程师"
+  },
+  {
+    "function_code": "5502",
+    "function_label": "化工实验室研究员 or 化工技术员"
+  },
+  {
+    "function_code": "5503",
+    "function_label": "涂料研发工程师"
+  },
+  {
+    "function_code": "5504",
+    "function_label": "配色技术员"
+  },
+  {
+    "function_code": "5505",
+    "function_label": "塑料工程师"
+  },
+  {
+    "function_code": "5506",
+    "function_label": "化妆品研发"
+  },
+  {
+    "function_code": "5507",
+    "function_label": "食品研发 or 饮料研发"
+  },
+  {
+    "function_code": "5508",
+    "function_label": "化工"
+  },
+  {
+    "function_code": "5509",
+    "function_label": "造纸研发"
+  },
+  {
+    "function_code": "5510",
+    "function_label": "酒体设计师"
+  },
+  {
+    "function_code": "5511",
+    "function_label": "有机合成研究员"
+  },
+  {
+    "function_code": "5600",
+    "function_label": "环保"
+  },
+  {
+    "function_code": "5601",
+    "function_label": "环保工程师"
+  },
+  {
+    "function_code": "5602",
+    "function_label": "水处理工程师"
+  },
+  {
+    "function_code": "5603",
+    "function_label": "环保"
+  },
+  {
+    "function_code": "5604",
+    "function_label": "环境影响评价工程师"
+  },
+  {
+    "function_code": "5605",
+    "function_label": "环保检测"
+  },
+  {
+    "function_code": "5606",
+    "function_label": "水质检测员"
+  },
+  {
+    "function_code": "5607",
+    "function_label": "固废工程师"
+  },
+  {
+    "function_code": "5608",
+    "function_label": "废气处理工程师"
+  },
+  {
+    "function_code": "5609",
+    "function_label": "生态治理 or 生态规划"
+  },
+  {
+    "function_code": "5610",
+    "function_label": "碳排放管理员"
+  },
+  {
+    "function_code": "5700",
+    "function_label": "特长教育 or 培训"
+  },
+  {
+    "function_code": "5701",
+    "function_label": "培训督导"
+  },
+  {
+    "function_code": "5702",
+    "function_label": "培训讲师"
+  },
+  {
+    "function_code": "5703",
+    "function_label": "培训策划"
+  },
+  {
+    "function_code": "5704",
+    "function_label": "培训助理"
+  },
+  {
+    "function_code": "5705",
+    "function_label": "特长教育 or 培训"
+  },
+  {
+    "function_code": "5707",
+    "function_label": "培训产品开发"
+  },
+  {
+    "function_code": "5708",
+    "function_label": "拓展培训"
+  },
+  {
+    "function_code": "5800",
+    "function_label": "农林牧渔"
+  },
+  {
+    "function_code": "5801",
+    "function_label": "养殖部主管"
+  },
+  {
+    "function_code": "5802",
+    "function_label": "农场长 or 林场长 or 牧场长 or 渔业场长"
+  },
+  {
+    "function_code": "5803",
+    "function_label": "农艺师"
+  },
+  {
+    "function_code": "5804",
+    "function_label": "畜牧师"
+  },
+  {
+    "function_code": "5805",
+    "function_label": "饲养员"
+  },
+  {
+    "function_code": "5806",
+    "function_label": "动物营养研究员 or 饲料研发"
+  },
+  {
+    "function_code": "5807",
+    "function_label": "农林牧渔"
+  },
+  {
+    "function_code": "5808",
+    "function_label": "农业技术员"
+  },
+  {
+    "function_code": "5810",
+    "function_label": "驯兽师 or 助理驯兽师"
+  },
+  {
+    "function_code": "5900",
+    "function_label": "汽车销售与服务"
+  },
+  {
+    "function_code": "5901",
+    "function_label": "4S店经理 or 维修站经理"
+  },
+  {
+    "function_code": "5902",
+    "function_label": "售后服务 or 客户服务"
+  },
+  {
+    "function_code": "5903",
+    "function_label": "汽车销售 or 汽车经纪人"
+  },
+  {
+    "function_code": "5904",
+    "function_label": "二手车评估师"
+  },
+  {
+    "function_code": "5905",
+    "function_label": "汽车检验 or 汽车检测"
+  },
+  {
+    "function_code": "5906",
+    "function_label": "汽车改装"
+  },
+  {
+    "function_code": "5907",
+    "function_label": "汽车维修"
+  },
+  {
+    "function_code": "5908",
+    "function_label": "洗车工"
+  },
+  {
+    "function_code": "5910",
+    "function_label": "加油站工作员"
+  },
+  {
+    "function_code": "5911",
+    "function_label": "汽车销售与服务"
+  },
+  {
+    "function_code": "5912",
+    "function_label": "汽车电工"
+  },
+  {
+    "function_code": "5913",
+    "function_label": "汽车钣金"
+  },
+  {
+    "function_code": "5914",
+    "function_label": "汽车喷漆"
+  },
+  {
+    "function_code": "5915",
+    "function_label": "车险定损 or 理赔"
+  },
+  {
+    "function_code": "5916",
+    "function_label": "汽车金融销售"
+  },
+  {
+    "function_code": "5917",
+    "function_label": "汽车金融专员"
+  },
+  {
+    "function_code": "5918",
+    "function_label": "汽车金融经理"
+  },
+  {
+    "function_code": "5919",
+    "function_label": "二手车经纪人"
+  },
+  {
+    "function_code": "5920",
+    "function_label": "汽车救援员"
+  },
+  {
+    "function_code": "5921",
+    "function_label": "汽车服务顾问"
+  },
+  {
+    "function_code": "5A00",
+    "function_label": "医疗器械"
+  },
+  {
+    "function_code": "5B00",
+    "function_label": "护理 or 护士"
+  },
+  {
+    "function_code": "5C00",
+    "function_label": "律师"
+  },
+  {
+    "function_code": "5C01",
+    "function_label": "律师合伙人"
+  },
+  {
+    "function_code": "5C02",
+    "function_label": "事务所律师"
+  },
+  {
+    "function_code": "5C03",
+    "function_label": "诉讼律师"
+  },
+  {
+    "function_code": "5C04",
+    "function_label": "民事律师"
+  },
+  {
+    "function_code": "5C05",
+    "function_label": "专利律师"
+  },
+  {
+    "function_code": "5C06",
+    "function_label": "知识产权律师"
+  },
+  {
+    "function_code": "5C07",
+    "function_label": "书记员"
+  },
+  {
+    "function_code": "5C08",
+    "function_label": "检察官助理"
+  },
+  {
+    "function_code": "5D00",
+    "function_label": "培训管理"
+  },
+  {
+    "function_code": "5E00",
+    "function_label": "保健理疗"
+  },
+  {
+    "function_code": "5F00",
+    "function_label": "宠物服务"
+  },
+  {
+    "function_code": "5F01",
+    "function_label": "宠物医生"
+  },
+  {
+    "function_code": "5F02",
+    "function_label": "宠物医生助理"
+  },
+  {
+    "function_code": "5F03",
+    "function_label": "宠物美容师助理"
+  },
+  {
+    "function_code": "5F04",
+    "function_label": "训犬师"
+  },
+  {
+    "function_code": "6000",
+    "function_label": "房地产销售与中介"
+  },
+  {
+    "function_code": "6001",
+    "function_label": "房地产中介 or 置业顾问"
+  },
+  {
+    "function_code": "6002",
+    "function_label": "房地产评估"
+  },
+  {
+    "function_code": "6004",
+    "function_label": "房地产店长 or 房地产经理"
+  },
+  {
+    "function_code": "6006",
+    "function_label": "房地产客服"
+  },
+  {
+    "function_code": "6007",
+    "function_label": "房地产内勤"
+  },
+  {
+    "function_code": "6008",
+    "function_label": "房地产销售与中介"
+  },
+  {
+    "function_code": "6009",
+    "function_label": "房地产销售经理 or 房地产销售主管"
+  },
+  {
+    "function_code": "6010",
+    "function_label": "房地产销售专员"
+  },
+  {
+    "function_code": "6100",
+    "function_label": "电商综合管理"
+  },
+  {
+    "function_code": "6101",
+    "function_label": "网店店长"
+  },
+  {
+    "function_code": "6102",
+    "function_label": "国内电商运营"
+  },
+  {
+    "function_code": "6103",
+    "function_label": "网店店铺管理员"
+  },
+  {
+    "function_code": "6104",
+    "function_label": "网店客服"
+  },
+  {
+    "function_code": "6105",
+    "function_label": "店铺推广"
+  },
+  {
+    "function_code": "6107",
+    "function_label": "网店模特"
+  },
+  {
+    "function_code": "6108",
+    "function_label": "电商综合管理"
+  },
+  {
+    "function_code": "6109",
+    "function_label": "电商专员"
+  },
+  {
+    "function_code": "6110",
+    "function_label": "电商经理 or 电商主管"
+  },
+  {
+    "function_code": "6111",
+    "function_label": "电商总监"
+  },
+  {
+    "function_code": "6112",
+    "function_label": "跨境电商运营"
+  },
+  {
+    "function_code": "6200",
+    "function_label": "机械机床"
+  },
+  {
+    "function_code": "6201",
+    "function_label": "数控操机"
+  },
+  {
+    "function_code": "6202",
+    "function_label": "数控编程"
+  },
+  {
+    "function_code": "6203",
+    "function_label": "机修工"
+  },
+  {
+    "function_code": "6204",
+    "function_label": "折弯工"
+  },
+  {
+    "function_code": "6205",
+    "function_label": "车工"
+  },
+  {
+    "function_code": "6206",
+    "function_label": "磨工"
+  },
+  {
+    "function_code": "6207",
+    "function_label": "铣工"
+  },
+  {
+    "function_code": "6208",
+    "function_label": "冲压工"
+  },
+  {
+    "function_code": "6209",
+    "function_label": "刨工"
+  },
+  {
+    "function_code": "6210",
+    "function_label": "钳工"
+  },
+  {
+    "function_code": "6211",
+    "function_label": "钻工"
+  },
+  {
+    "function_code": "6212",
+    "function_label": "镗工"
+  },
+  {
+    "function_code": "6213",
+    "function_label": "铆工"
+  },
+  {
+    "function_code": "6214",
+    "function_label": "钣金工"
+  },
+  {
+    "function_code": "6215",
+    "function_label": "抛光工"
+  },
+  {
+    "function_code": "6216",
+    "function_label": "切割技工"
+  },
+  {
+    "function_code": "6217",
+    "function_label": "模具工"
+  },
+  {
+    "function_code": "6218",
+    "function_label": "炼胶工"
+  },
+  {
+    "function_code": "6219",
+    "function_label": "硫化工"
+  },
+  {
+    "function_code": "6220",
+    "function_label": "吹膜工"
+  },
+  {
+    "function_code": "6221",
+    "function_label": "注塑工"
+  },
+  {
+    "function_code": "6222",
+    "function_label": "机械机床"
+  },
+  {
+    "function_code": "6300",
+    "function_label": "印刷包装"
+  },
+  {
+    "function_code": "6301",
+    "function_label": "印刷工"
+  },
+  {
+    "function_code": "6302",
+    "function_label": "校对员 or 录入员"
+  },
+  {
+    "function_code": "6304",
+    "function_label": "调色员"
+  },
+  {
+    "function_code": "6305",
+    "function_label": "烫金工"
+  },
+  {
+    "function_code": "6306",
+    "function_label": "晒版员"
+  },
+  {
+    "function_code": "6307",
+    "function_label": "印刷排版 or 制版"
+  },
+  {
+    "function_code": "6308",
+    "function_label": "装订工"
+  },
+  {
+    "function_code": "6309",
+    "function_label": "印刷机械机长"
+  },
+  {
+    "function_code": "6310",
+    "function_label": "数码直印 or 菲林输出"
+  },
+  {
+    "function_code": "6311",
+    "function_label": "调墨技师"
+  },
+  {
+    "function_code": "6312",
+    "function_label": "电分操作员"
+  },
+  {
+    "function_code": "6313",
+    "function_label": "打稿机操作员"
+  },
+  {
+    "function_code": "6314",
+    "function_label": "切纸机操作工"
+  },
+  {
+    "function_code": "6315",
+    "function_label": "裱胶工"
+  },
+  {
+    "function_code": "6316",
+    "function_label": "压痕工"
+  },
+  {
+    "function_code": "6317",
+    "function_label": "复卷工"
+  },
+  {
+    "function_code": "6318",
+    "function_label": "印刷包装"
+  },
+  {
+    "function_code": "6400",
+    "function_label": "运动健身"
+  },
+  {
+    "function_code": "6401",
+    "function_label": "健身顾问 or 健身教练"
+  },
+  {
+    "function_code": "6402",
+    "function_label": "瑜伽老师"
+  },
+  {
+    "function_code": "6403",
+    "function_label": "舞蹈老师"
+  },
+  {
+    "function_code": "6404",
+    "function_label": "游泳教练"
+  },
+  {
+    "function_code": "6405",
+    "function_label": "救生员"
+  },
+  {
+    "function_code": "6406",
+    "function_label": "高尔夫教练"
+  },
+  {
+    "function_code": "6407",
+    "function_label": "体育运动教练"
+  },
+  {
+    "function_code": "6408",
+    "function_label": "运动健身"
+  },
+  {
+    "function_code": "6500",
+    "function_label": "演员 or 主播"
+  },
+  {
+    "function_code": "6501",
+    "function_label": "司仪"
+  },
+  {
+    "function_code": "6502",
+    "function_label": "婚礼策划服务 or 庆典策划服务"
+  },
+  {
+    "function_code": "6503",
+    "function_label": "DJ"
+  },
+  {
+    "function_code": "6504",
+    "function_label": "驻唱艺人 or 歌手"
+  },
+  {
+    "function_code": "6505",
+    "function_label": "舞蹈演员"
+  },
+  {
+    "function_code": "6506",
+    "function_label": "模特"
+  },
+  {
+    "function_code": "6507",
+    "function_label": "演员 or 群众演员"
+  },
+  {
+    "function_code": "6508",
+    "function_label": "演员 or 主播"
+  },
+  {
+    "function_code": "6509",
+    "function_label": "娱乐领班"
+  },
+  {
+    "function_code": "6510",
+    "function_label": "娱乐服务员"
+  },
+  {
+    "function_code": "6511",
+    "function_label": "前台迎宾"
+  },
+  {
+    "function_code": "6512",
+    "function_label": "网络主播"
+  },
+  {
+    "function_code": "6513",
+    "function_label": "主播助理"
+  },
+  {
+    "function_code": "6514",
+    "function_label": "带货主播"
+  },
+  {
+    "function_code": "6600",
+    "function_label": "互联网产品经理"
+  },
+  {
+    "function_code": "6601",
+    "function_label": "产品专员"
+  },
+  {
+    "function_code": "6602",
+    "function_label": "产品经理 or 产品主管"
+  },
+  {
+    "function_code": "6603",
+    "function_label": "产品助理"
+  },
+  {
+    "function_code": "6604",
+    "function_label": "高级产品总监 or 产品总监"
+  },
+  {
+    "function_code": "6605",
+    "function_label": "互联网产品经理"
+  },
+  {
+    "function_code": "6606",
+    "function_label": "移动产品经理"
+  },
+  {
+    "function_code": "6607",
+    "function_label": "用户产品经理"
+  },
+  {
+    "function_code": "6608",
+    "function_label": "电商产品经理"
+  },
+  {
+    "function_code": "6609",
+    "function_label": "需求工程师"
+  },
+  {
+    "function_code": "6610",
+    "function_label": "互联网产品经理"
+  },
+  {
+    "function_code": "6611",
+    "function_label": "数据产品经理"
+  },
+  {
+    "function_code": "6612",
+    "function_label": "AI产品经理"
+  },
+  {
+    "function_code": "6613",
+    "function_label": "策略产品经理"
+  },
+  {
+    "function_code": "6614",
+    "function_label": "商业化产品经理"
+  },
+  {
+    "function_code": "6615",
+    "function_label": "平台产品经理"
+  },
+  {
+    "function_code": "6616",
+    "function_label": "增长产品经理"
+  },
+  {
+    "function_code": "6617",
+    "function_label": "用户研究"
+  },
+  {
+    "function_code": "6700",
+    "function_label": "半导体工程师 or 芯片工程师"
+  },
+  {
+    "function_code": "6701",
+    "function_label": "集成电路IC设计工程师 or 集成电路IC应用工程师"
+  },
+  {
+    "function_code": "6702",
+    "function_label": "IC验证工程师"
+  },
+  {
+    "function_code": "6707",
+    "function_label": "半导体技术"
+  },
+  {
+    "function_code": "6712",
+    "function_label": "FAE 现场应用工程师"
+  },
+  {
+    "function_code": "6722",
+    "function_label": "版图设计工程师"
+  },
+  {
+    "function_code": "6723",
+    "function_label": "半导体工艺工程师"
+  },
+  {
+    "function_code": "6727",
+    "function_label": "芯片架构工程师"
+  },
+  {
+    "function_code": "6728",
+    "function_label": "FPGA开发工程师"
+  },
+  {
+    "function_code": "6729",
+    "function_label": "MEMS工程师"
+  },
+  {
+    "function_code": "6730",
+    "function_label": "射频芯片设计"
+  },
+  {
+    "function_code": "6731",
+    "function_label": "模拟芯片工程师"
+  },
+  {
+    "function_code": "6732",
+    "function_label": "模拟版图工程师"
+  },
+  {
+    "function_code": "6733",
+    "function_label": "数字前端工程师"
+  },
+  {
+    "function_code": "6734",
+    "function_label": "FPGA原型验证工程师"
+  },
+  {
+    "function_code": "6735",
+    "function_label": "EDA工程师"
+  },
+  {
+    "function_code": "6736",
+    "function_label": "可测性设计工程师(DFT)"
+  },
+  {
+    "function_code": "6737",
+    "function_label": "数字后端工程师"
+  },
+  {
+    "function_code": "6738",
+    "function_label": "芯片测试工程师"
+  },
+  {
+    "function_code": "6739",
+    "function_label": "半导体设备工程师"
+  },
+  {
+    "function_code": "6740",
+    "function_label": "工艺整合工程师(PIE)"
+  },
+  {
+    "function_code": "6741",
+    "function_label": "失效分析工程师(FA)"
+  },
+  {
+    "function_code": "6744",
+    "function_label": "封装研发工程师"
+  },
+  {
+    "function_code": "6746",
+    "function_label": "芯片销售工程师"
+  },
+  {
+    "function_code": "6747",
+    "function_label": "半导体文档工程师"
+  },
+  {
+    "function_code": "6748",
+    "function_label": "半导体产品经理 or 半导体产品工程师"
+  },
+  {
+    "function_code": "6749",
+    "function_label": "半导体工程师 or 芯片工程师"
+  },
+  {
+    "function_code": "6750",
+    "function_label": "半导体测试工程师"
+  },
+  {
+    "function_code": "6760",
+    "function_label": "封装工程师"
+  },
+  {
+    "function_code": "6761",
+    "function_label": "半导体器件工程师"
+  },
+  {
+    "function_code": "6900",
+    "function_label": "建筑规划与设计"
+  },
+  {
+    "function_code": "6901",
+    "function_label": "室内设计"
+  },
+  {
+    "function_code": "6902",
+    "function_label": "软装设计"
+  },
+  {
+    "function_code": "6903",
+    "function_label": "精装设计"
+  },
+  {
+    "function_code": "6904",
+    "function_label": "规划与设计"
+  },
+  {
+    "function_code": "6905",
+    "function_label": "建筑设计师"
+  },
+  {
+    "function_code": "6906",
+    "function_label": "钢结构设计"
+  },
+  {
+    "function_code": "6907",
+    "function_label": "幕墙设计"
+  },
+  {
+    "function_code": "6908",
+    "function_label": "建筑结构设计"
+  },
+  {
+    "function_code": "6909",
+    "function_label": "建筑制图 or 建筑模型 or 建筑渲染"
+  },
+  {
+    "function_code": "6910",
+    "function_label": "建筑机电设计"
+  },
+  {
+    "function_code": "6911",
+    "function_label": "暖通设计"
+  },
+  {
+    "function_code": "6912",
+    "function_label": "给排水设计"
+  },
+  {
+    "function_code": "6913",
+    "function_label": "城市规划设计"
+  },
+  {
+    "function_code": "6914",
+    "function_label": "园艺设计 or 园林设计 or 景观设计"
+  },
+  {
+    "function_code": "6915",
+    "function_label": "建筑规划与设计"
+  },
+  {
+    "function_code": "6916",
+    "function_label": "BIM工程师"
+  },
+  {
+    "function_code": "6917",
+    "function_label": "室内设计师助理"
+  },
+  {
+    "function_code": "6918",
+    "function_label": "室内设计经理 or 室内设计主管"
+  },
+  {
+    "function_code": "6919",
+    "function_label": "室内设计总监"
+  },
+  {
+    "function_code": "6920",
+    "function_label": "家装顾问"
+  },
+  {
+    "function_code": "6921",
+    "function_label": "家装设计"
+  },
+  {
+    "function_code": "6A00",
+    "function_label": "婚庆"
+  },
+  {
+    "function_code": "6B00",
+    "function_label": "服务员"
+  },
+  {
+    "function_code": "6C00",
+    "function_label": "后厨"
+  },
+  {
+    "function_code": "6D00",
+    "function_label": "餐饮管理"
+  },
+  {
+    "function_code": "6E00",
+    "function_label": "普工 or 操作员 or 操作工 or 组装工 or 包装工 or 搬运工 or 装卸工 or 生产员 or 贴标员 or 质检员"
+  },
+  {
+    "function_code": "6F00",
+    "function_label": "技工 or 电工 or 电力线路工 or 空调工 or 锅炉工 or 电梯工 or 木工 or 水工 or 3D打印操作员"
+  },
+  {
+    "function_code": "7100",
+    "function_label": "汽车研发设计"
+  },
+  {
+    "function_code": "7101",
+    "function_label": "汽车项目管理"
+  },
+  {
+    "function_code": "7102",
+    "function_label": "汽车设计工程师"
+  },
+  {
+    "function_code": "7103",
+    "function_label": "车身设计 or 造型设计"
+  },
+  {
+    "function_code": "7104",
+    "function_label": "汽车结构工程师"
+  },
+  {
+    "function_code": "7105",
+    "function_label": "内外饰工程师"
+  },
+  {
+    "function_code": "7106",
+    "function_label": "汽车电子工程师"
+  },
+  {
+    "function_code": "7107",
+    "function_label": "电气工程师 or 电器工程师"
+  },
+  {
+    "function_code": "7108",
+    "function_label": "附件系统工程师"
+  },
+  {
+    "function_code": "7109",
+    "function_label": "动力总成工程师"
+  },
+  {
+    "function_code": "7110",
+    "function_label": "发动机工程师"
+  },
+  {
+    "function_code": "7111",
+    "function_label": "底盘工程师"
+  },
+  {
+    "function_code": "7112",
+    "function_label": "汽车安全性能工程师"
+  },
+  {
+    "function_code": "7113",
+    "function_label": "汽车试验工程师"
+  },
+  {
+    "function_code": "7114",
+    "function_label": "新能源电池工程师"
+  },
+  {
+    "function_code": "7115",
+    "function_label": "新能源电控工程师"
+  },
+  {
+    "function_code": "7116",
+    "function_label": "新能源电机工程师"
+  },
+  {
+    "function_code": "7117",
+    "function_label": "汽车标定工程师"
+  },
+  {
+    "function_code": "7118",
+    "function_label": "发动机匹配工程师"
+  },
+  {
+    "function_code": "7119",
+    "function_label": "车联网工程师"
+  },
+  {
+    "function_code": "7120",
+    "function_label": "智能驾驶工程师"
+  },
+  {
+    "function_code": "7121",
+    "function_label": "研发总监 or 研发部长 or 研发专家"
+  },
+  {
+    "function_code": "7122",
+    "function_label": "汽车研发设计"
+  },
+  {
+    "function_code": "7124",
+    "function_label": "智能驾驶测试工程师"
+  },
+  {
+    "function_code": "7200",
+    "function_label": "前端开发"
+  },
+  {
+    "function_code": "7201",
+    "function_label": "Web前端开发"
+  },
+  {
+    "function_code": "7202",
+    "function_label": "HTML5开发工程师"
+  },
+  {
+    "function_code": "7203",
+    "function_label": "前端开发"
+  },
+  {
+    "function_code": "7300",
+    "function_label": "人工智能"
+  },
+  {
+    "function_code": "7301",
+    "function_label": "机器学习工程师"
+  },
+  {
+    "function_code": "7302",
+    "function_label": "深度学习工程师"
+  },
+  {
+    "function_code": "7303",
+    "function_label": "图像算法工程师"
+  },
+  {
+    "function_code": "7304",
+    "function_label": "图像处理工程师"
+  },
+  {
+    "function_code": "7305",
+    "function_label": "图像识别工程师"
+  },
+  {
+    "function_code": "7306",
+    "function_label": "语音识别工程师"
+  },
+  {
+    "function_code": "7307",
+    "function_label": "机器视觉工程师"
+  },
+  {
+    "function_code": "7308",
+    "function_label": "自然语言处理(NLP)"
+  },
+  {
+    "function_code": "7309",
+    "function_label": "算法工程师"
+  },
+  {
+    "function_code": "7310",
+    "function_label": "推荐算法工程师"
+  },
+  {
+    "function_code": "7311",
+    "function_label": "搜索算法工程师"
+  },
+  {
+    "function_code": "7312",
+    "function_label": "人工智能"
+  },
+  {
+    "function_code": "7400",
+    "function_label": "互联网设计"
+  },
+  {
+    "function_code": "7401",
+    "function_label": "网页设计师"
+  },
+  {
+    "function_code": "7402",
+    "function_label": "交互设计师"
+  },
+  {
+    "function_code": "7403",
+    "function_label": "视觉设计师"
+  },
+  {
+    "function_code": "7404",
+    "function_label": "用户体验设计师 or 用户体验设计师 or UE or UX"
+  },
+  {
+    "function_code": "7405",
+    "function_label": "网站架构设计师"
+  },
+  {
+    "function_code": "7406",
+    "function_label": "Flash设计师"
+  },
+  {
+    "function_code": "7407",
+    "function_label": "特效设计师"
+  },
+  {
+    "function_code": "7408",
+    "function_label": "音效设计师"
+  },
+  {
+    "function_code": "7409",
+    "function_label": "计算机辅助设计工程师(CAD绘图)"
+  },
+  {
+    "function_code": "7410",
+    "function_label": "仿真应用工程师"
+  },
+  {
+    "function_code": "7411",
+    "function_label": "互联网设计"
+  },
+  {
+    "function_code": "7412",
+    "function_label": "UI设计师"
+  },
+  {
+    "function_code": "7413",
+    "function_label": "平面设计师"
+  },
+  {
+    "function_code": "7416",
+    "function_label": "多媒体设计"
+  },
+  {
+    "function_code": "7417",
+    "function_label": "绘画"
+  },
+  {
+    "function_code": "7418",
+    "function_label": "原画师"
+  },
+  {
+    "function_code": "7419",
+    "function_label": "美工设计师 or 电商设计师"
+  },
+  {
+    "function_code": "7420",
+    "function_label": "平面设计总监"
+  },
+  {
+    "function_code": "7421",
+    "function_label": "平面设计经理 or 平面设计主管"
+  },
+  {
+    "function_code": "7422",
+    "function_label": "动画设计 or 3D设计"
+  },
+  {
+    "function_code": "7423",
+    "function_label": "互联网设计总监"
+  },
+  {
+    "function_code": "7424",
+    "function_label": "互联网设计经理 or 互联网设计主管"
+  },
+  {
+    "function_code": "7500",
+    "function_label": "数据"
+  },
+  {
+    "function_code": "7501",
+    "function_label": "数据分析师"
+  },
+  {
+    "function_code": "7502",
+    "function_label": "数据分析经理 or 数据分析主管"
+  },
+  {
+    "function_code": "7503",
+    "function_label": "ETL开发工程师"
+  },
+  {
+    "function_code": "7504",
+    "function_label": "BI工程师"
+  },
+  {
+    "function_code": "7505",
+    "function_label": "数据仓库工程师"
+  },
+  {
+    "function_code": "7506",
+    "function_label": "数据采集工程师"
+  },
+  {
+    "function_code": "7507",
+    "function_label": "数据建模工程师"
+  },
+  {
+    "function_code": "7508",
+    "function_label": "数据治理工程师"
+  },
+  {
+    "function_code": "7509",
+    "function_label": "数据"
+  },
+  {
+    "function_code": "7510",
+    "function_label": "电子数据取证分析师"
+  },
+  {
+    "function_code": "7511",
+    "function_label": "密码技术应用员"
+  },
+  {
+    "function_code": "7512",
+    "function_label": "数据标注师"
+  },
+  {
+    "function_code": "7700",
+    "function_label": "移动开发"
+  },
+  {
+    "function_code": "7701",
+    "function_label": "Android开发工程师"
+  },
+  {
+    "function_code": "7702",
+    "function_label": "iOS开发工程师"
+  },
+  {
+    "function_code": "7703",
+    "function_label": "移动开发工程师"
+  },
+  {
+    "function_code": "7704",
+    "function_label": "移动开发"
+  },
+  {
+    "function_code": "7705",
+    "function_label": "小程序开发工程师"
+  },
+  {
+    "function_code": "7800",
+    "function_label": "游戏开发"
+  },
+  {
+    "function_code": "7801",
+    "function_label": "游戏策划师"
+  },
+  {
+    "function_code": "7802",
+    "function_label": "游戏系统策划"
+  },
+  {
+    "function_code": "7803",
+    "function_label": "游戏数值策划"
+  },
+  {
+    "function_code": "7804",
+    "function_label": "游戏关卡策划"
+  },
+  {
+    "function_code": "7805",
+    "function_label": "游戏文案策划 or 游戏剧情策划"
+  },
+  {
+    "function_code": "7806",
+    "function_label": "游戏界面设计师"
+  },
+  {
+    "function_code": "7807",
+    "function_label": "游戏原画师"
+  },
+  {
+    "function_code": "7808",
+    "function_label": "游戏动画师"
+  },
+  {
+    "function_code": "7809",
+    "function_label": "游戏开发工程师"
+  },
+  {
+    "function_code": "7810",
+    "function_label": "Cocos2d-x开发工程师"
+  },
+  {
+    "function_code": "7811",
+    "function_label": "Unity3d开发工程师"
+  },
+  {
+    "function_code": "7812",
+    "function_label": "游戏客户端开发工程师"
+  },
+  {
+    "function_code": "7813",
+    "function_label": "游戏服务端开发工程师"
+  },
+  {
+    "function_code": "7814",
+    "function_label": "游戏运营"
+  },
+  {
+    "function_code": "7815",
+    "function_label": "电子竞技运营"
+  },
+  {
+    "function_code": "7816",
+    "function_label": "游戏开发"
+  },
+  {
+    "function_code": "7817",
+    "function_label": "游戏特效设计师"
+  },
+  {
+    "function_code": "7818",
+    "function_label": "游戏动作设计师"
+  },
+  {
+    "function_code": "7819",
+    "function_label": "游戏场景设计师"
+  },
+  {
+    "function_code": "7820",
+    "function_label": "游戏角色设计师"
+  },
+  {
+    "function_code": "7821",
+    "function_label": "游戏测试"
+  },
+  {
+    "function_code": "7822",
+    "function_label": "UE4特效师"
+  },
+  {
+    "function_code": "7823",
+    "function_label": "UE4开发工程师"
+  },
+  {
+    "function_code": "7900",
+    "function_label": "运维工程师 or 技术支持工程师"
+  },
+  {
+    "function_code": "7901",
+    "function_label": "运维工程师"
+  },
+  {
+    "function_code": "7902",
+    "function_label": "系统工程师"
+  },
+  {
+    "function_code": "7903",
+    "function_label": "数据库工程师(DBA)"
+  },
+  {
+    "function_code": "7904",
+    "function_label": "系统集成工程师"
+  },
+  {
+    "function_code": "7905",
+    "function_label": "ERP实施顾问"
+  },
+  {
+    "function_code": "7906",
+    "function_label": "网络安全工程师"
+  },
+  {
+    "function_code": "7907",
+    "function_label": "网站维护工程师"
+  },
+  {
+    "function_code": "7908",
+    "function_label": "技术支持经理 or 维护经理"
+  },
+  {
+    "function_code": "7909",
+    "function_label": "技术支持工程师 or 维护工程师"
+  },
+  {
+    "function_code": "7910",
+    "function_label": "配置管理工程师"
+  },
+  {
+    "function_code": "7912",
+    "function_label": "IT经理 or IT主管"
+  },
+  {
+    "function_code": "7913",
+    "function_label": "网络工程师(IT工程师)"
+  },
+  {
+    "function_code": "7914",
+    "function_label": "网络管理(Helpdesk)"
+  },
+  {
+    "function_code": "7915",
+    "function_label": "运维开发"
+  },
+  {
+    "function_code": "7916",
+    "function_label": "网络维修"
+  },
+  {
+    "function_code": "7917",
+    "function_label": "手机维修"
+  },
+  {
+    "function_code": "7918",
+    "function_label": "电脑维修"
+  },
+  {
+    "function_code": "7919",
+    "function_label": "运维工程师 or 技术支持工程师"
+  },
+  {
+    "function_code": "7920",
+    "function_label": "自动化运维工程师"
+  },
+  {
+    "function_code": "7A00",
+    "function_label": "叉车司机 or 吊车司机 or 铲车司机 or 挖掘机司机"
+  },
+  {
+    "function_code": "7B00",
+    "function_label": "机械加工"
+  },
+  {
+    "function_code": "8000",
+    "function_label": "业务运营"
+  },
+  {
+    "function_code": "8003",
+    "function_label": "网站运营经理 or 网站运营主管"
+  },
+  {
+    "function_code": "8006",
+    "function_label": "网站策划"
+  },
+  {
+    "function_code": "8007",
+    "function_label": "网站编辑"
+  },
+  {
+    "function_code": "8010",
+    "function_label": "新媒体运营"
+  },
+  {
+    "function_code": "8011",
+    "function_label": "业务运营"
+  },
+  {
+    "function_code": "8016",
+    "function_label": "网站运营专员"
+  },
+  {
+    "function_code": "8030",
+    "function_label": "网站运营总监"
+  },
+  {
+    "function_code": "8032",
+    "function_label": "网络推广总监"
+  },
+  {
+    "function_code": "8033",
+    "function_label": "网络推广经理 or 网络推广主管"
+  },
+  {
+    "function_code": "8034",
+    "function_label": "网络推广专员"
+  },
+  {
+    "function_code": "8041",
+    "function_label": "用户运营"
+  },
+  {
+    "function_code": "8042",
+    "function_label": "活动运营"
+  },
+  {
+    "function_code": "8043",
+    "function_label": "内容运营"
+  },
+  {
+    "function_code": "8044",
+    "function_label": "数据运营"
+  },
+  {
+    "function_code": "8045",
+    "function_label": "线下运营"
+  },
+  {
+    "function_code": "8046",
+    "function_label": "信息流优化师"
+  },
+  {
+    "function_code": "8047",
+    "function_label": "运营专员"
+  },
+  {
+    "function_code": "8048",
+    "function_label": "运营主管"
+  },
+  {
+    "function_code": "8049",
+    "function_label": "运营经理"
+  },
+  {
+    "function_code": "8050",
+    "function_label": "运营总监"
+  },
+  {
+    "function_code": "8051",
+    "function_label": "品类运营"
+  },
+  {
+    "function_code": "8052",
+    "function_label": "内容审核"
+  },
+  {
+    "function_code": "8053",
+    "function_label": "运营助理"
+  },
+  {
+    "function_code": "8054",
+    "function_label": "微博运营"
+  },
+  {
+    "function_code": "8055",
+    "function_label": "微信运营"
+  },
+  {
+    "function_code": "8057",
+    "function_label": "产品运营"
+  },
+  {
+    "function_code": "8058",
+    "function_label": "社区运营 or 社群运营"
+  },
+  {
+    "function_code": "8059",
+    "function_label": "直播运营"
+  },
+  {
+    "function_code": "8100",
+    "function_label": "教育咨询"
+  },
+  {
+    "function_code": "8101",
+    "function_label": "课程顾问"
+  },
+  {
+    "function_code": "8102",
+    "function_label": "招生老师"
+  },
+  {
+    "function_code": "8103",
+    "function_label": "学习规划师"
+  },
+  {
+    "function_code": "8104",
+    "function_label": "留学顾问"
+  },
+  {
+    "function_code": "8105",
+    "function_label": "教育咨询"
+  },
+  {
+    "function_code": "8200",
+    "function_label": "教育管理"
+  },
+  {
+    "function_code": "8201",
+    "function_label": "校长"
+  },
+  {
+    "function_code": "8202",
+    "function_label": "班主任 or 辅导员"
+  },
+  {
+    "function_code": "8203",
+    "function_label": "院校教务管理人员"
+  },
+  {
+    "function_code": "8204",
+    "function_label": "园长"
+  },
+  {
+    "function_code": "8205",
+    "function_label": "教研组长 or 教研主管"
+  },
+  {
+    "function_code": "8206",
+    "function_label": "教研员"
+  },
+  {
+    "function_code": "8207",
+    "function_label": "教师培训 or 师训"
+  },
+  {
+    "function_code": "8208",
+    "function_label": "教育管理"
+  },
+  {
+    "function_code": "8300",
+    "function_label": "投融资"
+  },
+  {
+    "function_code": "8301",
+    "function_label": "投资总监"
+  },
+  {
+    "function_code": "8302",
+    "function_label": "投资经理"
+  },
+  {
+    "function_code": "8303",
+    "function_label": "投资顾问"
+  },
+  {
+    "function_code": "8304",
+    "function_label": "投资银行业务"
+  },
+  {
+    "function_code": "8305",
+    "function_label": "投资者关系"
+  },
+  {
+    "function_code": "8306",
+    "function_label": "投后管理"
+  },
+  {
+    "function_code": "8307",
+    "function_label": "投资并购"
+  },
+  {
+    "function_code": "8308",
+    "function_label": "资产管理"
+  },
+  {
+    "function_code": "8309",
+    "function_label": "投资银行财务分析"
+  },
+  {
+    "function_code": "8310",
+    "function_label": "融资总监"
+  },
+  {
+    "function_code": "8311",
+    "function_label": "融资顾问"
+  },
+  {
+    "function_code": "8312",
+    "function_label": "融资经理 or 融资主管"
+  },
+  {
+    "function_code": "8313",
+    "function_label": "融资专员"
+  },
+  {
+    "function_code": "8314",
+    "function_label": "投资项目经理 or 基金项目经理"
+  },
+  {
+    "function_code": "8315",
+    "function_label": "投资顾问 or 理财顾问"
+  },
+  {
+    "function_code": "8400",
+    "function_label": "销售技术支持"
+  },
+  {
+    "function_code": "8401",
+    "function_label": "售前技术支持工程师"
+  },
+  {
+    "function_code": "8402",
+    "function_label": "售后技术支持工程师"
+  },
+  {
+    "function_code": "8403",
+    "function_label": "售前技术支持经理 or 售前技术支持主管"
+  },
+  {
+    "function_code": "8404",
+    "function_label": "售后技术支持经理 or 售后技术支持主管"
+  },
+  {
+    "function_code": "8500",
+    "function_label": "游戏策划"
+  },
+  {
+    "function_code": "8501",
+    "function_label": "游戏制作人"
+  },
+  {
+    "function_code": "8600",
+    "function_label": "硬件产品经理"
+  },
+  {
+    "function_code": "8601",
+    "function_label": "芯片产品经理"
+  },
+  {
+    "function_code": "8602",
+    "function_label": "IoT产品经理"
+  },
+  {
+    "function_code": "8603",
+    "function_label": "AR产品经理 or VR产品经理"
+  },
+  {
+    "function_code": "8604",
+    "function_label": "智能硬件产品经理"
+  },
+  {
+    "function_code": "8700",
+    "function_label": "产品经理"
+  },
+  {
+    "function_code": "8701",
+    "function_label": "旅游产品经理"
+  },
+  {
+    "function_code": "8702",
+    "function_label": "医药产品经理"
+  },
+  {
+    "function_code": "8703",
+    "function_label": "化妆品产品经理"
+  },
+  {
+    "function_code": "8800",
+    "function_label": "高级产品管理"
+  },
+  {
+    "function_code": "8801",
+    "function_label": "首席产品官CPO"
+  },
+  {
+    "function_code": "8802",
+    "function_label": "产品VP"
+  },
+  {
+    "function_code": "8900",
+    "function_label": "医疗销售"
+  },
+  {
+    "function_code": "9000",
+    "function_label": "电商运营"
+  },
+  {
+    "function_code": "9100",
+    "function_label": "内容运营"
+  },
+  {
+    "function_code": "9200",
+    "function_label": "旅游"
+  },
+  {
+    "function_code": "9300",
+    "function_label": "线下运营"
+  },
+  {
+    "function_code": "9301",
+    "function_label": "线下拓展运营"
+  },
+  {
+    "function_code": "9302",
+    "function_label": "车辆运营"
+  },
+  {
+    "function_code": "9303",
+    "function_label": "线下推广"
+  },
+  {
+    "function_code": "9400",
+    "function_label": "高级运营管理"
+  },
+  {
+    "function_code": "9401",
+    "function_label": "首席营销官CMO"
+  },
+  {
+    "function_code": "9500",
+    "function_label": "动画设计"
+  },
+  {
+    "function_code": "9600",
+    "function_label": "平面设计"
+  },
+  {
+    "function_code": "9700",
+    "function_label": "建筑设计 or 室内设计"
+  },
+  {
+    "function_code": "9800",
+    "function_label": "游戏设计"
+  }
+]

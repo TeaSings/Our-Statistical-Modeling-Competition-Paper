@@ -1,0 +1,113 @@
+﻿match_value,skill_norm,skill_category,is_genai_skill,hit_count
+数据分析,数据分析,Business,0,130629
+excel,Excel,Office/BI,0,96111
+质量管理,质量管理,Business,0,94617
+项目管理,项目管理,Business,0,80831
+cad,CAD,Engineering,0,72478
+erp,ERP,ERP/CRM,0,52174
+solidworks,SolidWorks,Engineering,0,31767
+plc,PLC,Engineering,0,29359
+c++,C++,Programming,0,24080
+autocad,CAD,Engineering,0,21746
+java,Java,Programming,0,20202
+python,Python,Programming,0,19951
+ug,UG/NX,Engineering,0,19898
+linux,Linux,DevOps,0,16977
+sap,SAP,ERP/CRM,0,15751
+供应链管理,供应链管理,Business,0,14353
+sql,SQL,Data,0,13531
+账务处理,财务核算,Business,0,11279
+总账,财务核算,Business,0,11222
+c#,C#,Programming,0,10065
+mysql,SQL,Data,0,9603
+photoshop,Photoshop,Design,0,9239
+crm,CRM,ERP/CRM,0,8759
+catia,CATIA,Engineering,0,8453
+财务核算,财务核算,Business,0,7280
+oracle,Oracle,Data,0,7193
+pmp,项目管理,Business,0,7093
+matlab,MATLAB,Engineering,0,6238
+深度学习,深度学习,AI Framework,0,5964
+机器学习,机器学习,AI Framework,0,5567
+经营分析,数据分析,Business,0,5283
+eplan,Eplan,Engineering,0,4619
+大模型,LLM/大模型,GenAI,1,4584
+javascript,JavaScript,Programming,0,4188
+vue,Vue,Programming,0,4185
+redis,Redis,DevOps,0,4003
+illustrator,Illustrator,Design,0,3961
+git,Git,DevOps,0,3680
+seo,SEO/SEM,Marketing,0,3537
+cad制图,CAD,Engineering,0,3284
+docker,Docker,DevOps,0,3203
+tensorflow,TensorFlow,AI Framework,0,3012
+react,React,Programming,0,2829
+pytorch,PyTorch,AI Framework,0,2801
+.net,C#,Programming,0,2720
+sem,SEO/SEM,Marketing,0,2632
+人才招聘,招聘配置,Business,0,2501
+labview,LabVIEW,Engineering,0,2342
+agent,AI Agent,GenAI,1,2325
+premiere,Premiere,Design,0,1976
+cad图,CAD,Engineering,0,1955
+智能体,AI Agent,GenAI,1,1882
+power bi,Power BI,Office/BI,0,1841
+axure,Axure,Design,0,1824
+kafka,Kafka,DevOps,0,1695
+springboot,Spring Boot,Programming,0,1684
+spring boot,Spring Boot,Programming,0,1596
+计算机视觉,计算机视觉,AI Framework,0,1574
+nx,UG/NX,Engineering,0,1502
+postgresql,SQL,Data,0,1483
+tableau,Tableau,Office/BI,0,1440
+rag,RAG,GenAI,1,1427
+llm,LLM/大模型,GenAI,1,1345
+prompt,Prompt Engineering,GenAI,1,1280
+sqlserver,SQL,Data,0,1280
+spark,Spark,Data,0,1257
+报表分析,数据分析,Business,0,1158
+k8s,Kubernetes,DevOps,0,1122
+kubernetes,Kubernetes,DevOps,0,1120
+hadoop,Hadoop,Data,0,1098
+aigc,AIGC,GenAI,1,1060
+figma,Figma,Design,0,1035
+nlp,自然语言处理,AI Framework,0,939
+spss,SPSS,Office/BI,0,901
+restful,REST API,Programming,0,888
+langchain,LangChain,GenAI,1,869
+自然语言处理,自然语言处理,AI Framework,0,813
+typescript,TypeScript,Programming,0,790
+招聘配置,招聘配置,Business,0,747
+chatgpt,ChatGPT,GenAI,1,699
+php,PHP,Programming,0,672
+deepseek,DeepSeek,GenAI,1,644
+ai软件,Illustrator,Design,0,620
+提示词,Prompt Engineering,GenAI,1,613
+api接口,REST API,Programming,0,534
+sas,SAS,Office/BI,0,525
+after effects,After Effects,Design,0,513
+vue3,Vue,Programming,0,492
+midjourney,Midjourney,GenAI,1,490
+gpt,GPT,GenAI,1,462
+向量数据库,RAG,GenAI,1,445
+asp.net,C#,Programming,0,431
+powerbi,Power BI,Office/BI,0,427
+golang,Go,Programming,0,407
+检索增强,RAG,GenAI,1,357
+copilot,Copilot,GenAI,1,303
+stable diffusion,Stable Diffusion,GenAI,1,267
+qc工具,质量管理,Business,0,247
+r语言,R,Office/BI,0,207
+rust,Rust,Programming,0,174
+go开发,Go,Programming,0,114
+go语言,Go,Programming,0,105
+photoshop软件,Photoshop,Design,0,74
+ps设计,Photoshop,Design,0,56
+cv算法,计算机视觉,AI Framework,0,42
+openapi,REST API,Programming,0,29
+unigraphics,UG/NX,Engineering,0,26
+gpt-4,GPT,GenAI,1,22
+pr剪辑,Premiere,Design,0,18
+ae动画,After Effects,Design,0,7
+qa工具,质量管理,Business,0,4
+sdxl,Stable Diffusion,GenAI,1,1

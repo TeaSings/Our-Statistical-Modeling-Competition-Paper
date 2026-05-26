@@ -1,0 +1,7 @@
+﻿变量,含义,公式/口径,层级,来源表
+GDI_c,城市 GenAI 需求强度,城市 c 中 GenAI_i=1 的招聘占比,城市层,genai_index_c / panel_cg_model
+Exposure_g,岗位族 LLM 暴露度,岗位族 g 内 llm_exposure_total 的均值,岗位族层,exposure_g / panel_cg_model
+GDI_x_Exposure_z,核心解释变量,Z(GDI_c × Exposure_g)，不是 GDI_c_z × Exposure_g_z,city × job_family,panel_cg_model
+SkillEntropy_cg,技能熵,-Σ p_cgs ln(p_cgs),city × job_family,panel_cg_model
+SRI_cg_smooth,技能结构重塑指数,Z(GenAIShare)+Z(DigitalShare)+Z(HighOrderShare)-Z(RoutineShare)，lambda=10,city × job_family,panel_cg_model
+main_model_sample_flag,主模型样本标记,15类岗位族、n_cg>=10、total_skill_count>0、核心变量和因变量非缺失,city × job_family,panel_cg_model

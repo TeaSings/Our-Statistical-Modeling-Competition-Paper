@@ -1,0 +1,109 @@
+{
+  "scope": "analysis_static.a_extraction.51job_only",
+  "source_dataset": {
+    "path": "data/processed/51job/51job_social_jobs_clean_with_publish.csv",
+    "platform_filter": [
+      "51job_social"
+    ],
+    "row_count": 1111676,
+    "notes": [
+      "当前 A 线仅使用 51job_social_jobs_clean_with_publish.csv。",
+      "城市标准化先对齐到 city / province 静态口径，不再引入 NCSS。"
+    ]
+  },
+  "union_raw_fields": {
+    "job_id": "job_id",
+    "source_platform": "platform",
+    "source_job_id": "source_job_id",
+    "detail_url": "detail_url",
+    "city_seed": "city_seed",
+    "city_raw": "city_raw",
+    "province_std_source": "province_std",
+    "city_std_source": "city_std",
+    "district_std_source": "district_std",
+    "job_title_std": "job_title_std",
+    "company_name_std": "company_name_std",
+    "company_type_raw": "company_type_raw",
+    "company_industry_raw": "company_industry_raw",
+    "salary_avg_month": "salary_avg_month",
+    "education_std": "education_std",
+    "experience_std": "experience_std",
+    "publish_time_std": "publish_time_std",
+    "keyword_seed": "keyword_seed",
+    "job_tags_raw": "job_tags_raw"
+  },
+  "master_interface_fields": [
+    "job_id",
+    "source_platform",
+    "source_job_id",
+    "detail_url",
+    "job_title_std",
+    "job_family_code",
+    "job_family_std",
+    "job_family_confidence",
+    "company_name_std",
+    "company_type_raw",
+    "company_industry_raw",
+    "province_std_final",
+    "city_std_final",
+    "district_std_final",
+    "city_std_confidence",
+    "salary_avg_month",
+    "education_std",
+    "experience_std",
+    "publish_time_std",
+    "publish_date_std",
+    "keyword_seed",
+    "job_tags_raw",
+    "jd_text_clean",
+    "skill_list",
+    "task_list",
+    "genai_related_skill_list",
+    "skill_category_list",
+    "is_ai_native_job",
+    "is_ai_augmented_job",
+    "genai_exposure_level",
+    "skill_hit_count",
+    "task_hit_count"
+  ],
+  "city_standardization": {
+    "inputs": [
+      "city_std",
+      "city_raw",
+      "city_seed",
+      "province_std",
+      "district_std"
+    ],
+    "fallback_order": [
+      "hyphen city-district split",
+      "exact city alias",
+      "district to city lookup",
+      "province-only fallback",
+      "raw source fallback"
+    ]
+  },
+  "job_family_taxonomy": [
+    "AI/算法",
+    "产品/项目",
+    "人力/行政",
+    "供应链/物流/采购",
+    "医疗/生物",
+    "后勤/安保/服务",
+    "客服/支持",
+    "市场/运营",
+    "建筑/地产",
+    "技工/操作",
+    "教育/培训",
+    "数据分析",
+    "机械工程",
+    "法务/合规",
+    "生产/质量",
+    "研发/科研",
+    "硬件/电气",
+    "综合管理",
+    "设计/内容",
+    "财务/会计",
+    "软件开发",
+    "销售/商务"
+  ]
+}

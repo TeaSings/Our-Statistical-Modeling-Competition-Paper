@@ -1,0 +1,7 @@
+﻿model_id,outcome,estimator,weight_scheme,coef_GDI_x_Exposure_z,se_hc3,p_hc3_normal,n_obs,city_count,job_family_count,r2
+B4,genai_skill_share_smooth,WLS,sqrt(n_cg)*sqrt(n_c) normalized,0.01106,0.003504,0.0016,2820,324,15,0.882358
+C4,SkillEntropy_cg,WLS,sqrt(n_cg)*sqrt(n_c) normalized,0.048905,0.017365,0.004858,2820,324,15,0.685027
+D4,digital_skill_share_smooth,WLS,sqrt(n_cg)*sqrt(n_c) normalized,0.014179,0.004308,0.000997,2820,324,15,0.778623
+E4,high_order_skill_share_smooth,WLS,sqrt(n_cg)*sqrt(n_c) normalized,0.001475,0.003916,0.706378,2820,324,15,0.48181
+F4,routine_skill_share_smooth,WLS,sqrt(n_cg)*sqrt(n_c) normalized,-0.007378,0.004407,0.094075,2820,324,15,0.676017
+A4,SRI_cg_smooth,WLS,sqrt(n_cg)*sqrt(n_c) normalized,0.544329,0.131601,3.5e-05,2820,324,15,0.732517

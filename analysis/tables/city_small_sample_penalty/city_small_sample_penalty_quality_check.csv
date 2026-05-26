@@ -1,0 +1,14 @@
+﻿metric,value
+total_city_count,343
+small_sample_city_count,255
+large_sample_city_count,88
+min_city_job_count,2
+median_city_job_count,367.0
+max_city_job_count,136607
+penalty_weight_min,0.044721359549995794
+penalty_weight_median,0.6058052492344383
+penalty_weight_max,1.0
+large_sample_weight_all_equal_1,True
+small_sample_weight_all_lt_1,True
+original_indicator_preserved_flag,True
+old_weighted_display_not_used_as_main_flag,True

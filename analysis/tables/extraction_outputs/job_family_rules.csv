@@ -1,0 +1,111 @@
+﻿job_family_code,job_family_std,pattern,source_field,weight,priority,notes
+ai_algorithm,AI/算法,人工智能|算法|机器学习|深度学习|自然语言处理|AIGC|大模型|Prompt|智能体|LLM|RAG|计算机视觉|推荐算法|数据科学家,job_title_std,6,1,AI 原生/算法岗位
+ai_algorithm,AI/算法,人工智能|算法|机器学习|深度学习|自然语言处理|AIGC|大模型|Prompt|智能体|LLM|RAG|计算机视觉|推荐算法|数据科学家,keyword_seed,5,1,AI 原生/算法岗位
+ai_algorithm,AI/算法,^(图像算法工程师)$,keyword_seed,6,1,高频 AI keyword_seed 精修
+ai_algorithm,AI/算法,^(机器视觉工程师)$,job_title_std,8,1,高频机器视觉岗位精修
+data_analytics,数据分析,数据分析|数据运营|商业分析|BI|数据治理|数据挖掘|数据专员|数据建模|数仓|ETL|报表,job_title_std,5,2,数据分析与 BI
+data_analytics,数据分析,数据分析|数据运营|商业分析|BI|数据治理|数据挖掘|数据专员|数据建模|数仓|ETL|报表,keyword_seed,4,2,数据分析与 BI
+data_analytics,数据分析,^(数据分析师)$,keyword_seed,6,2,高频数据分析 keyword_seed 精修
+software_dev,软件开发,软件|开发工程师|后端|前端|全栈|程序员|架构师|运维工程师|测试开发|Java|Python|Go|PHP|C\+\+|C#|安卓|iOS|Web|小程序|嵌入式软件|网络工程师|网络安全工程师|系统工程师|信息安全工程师,job_title_std,5,3,软件研发岗位
+software_dev,软件开发,软件|开发工程师|后端|前端|全栈|程序员|架构师|运维工程师|测试开发|Java|Python|Go|PHP|C\+\+|C#|安卓|iOS|Web|小程序|嵌入式软件|网络工程师|网络安全工程师|系统工程师|信息安全工程师,keyword_seed,4,3,软件研发岗位
+software_dev,软件开发,^(网络工程师|网络安全工程师|系统工程师)$,job_title_std,8,3,高频 IT/网络岗位精修
+software_dev,软件开发,^(运维工程师|系统工程师|IT经理 or IT主管)$,keyword_seed,6,3,高频软件/IT keyword_seed 精修
+software_dev,软件开发,^(IT工程师)$,job_title_std,8,3,高频 IT 岗位精修
+software_dev,软件开发,^(高级软件工程师|电子软件开发 or ARM or 电子软件开发 or MCU|嵌入式硬件开发\(主板机等\))$,keyword_seed,6,3,高频软件 keyword_seed 精修
+software_dev,软件开发,^(嵌入式工程师)$,job_title_std,8,3,高频嵌入式岗位精修
+hardware_electrical,硬件/电气,硬件|电气|自动化|PLC|单片机|电路|仪器仪表|电子工程师|电控|嵌入式硬件|电机|电源,job_title_std,5,4,硬件、电气与自动化
+hardware_electrical,硬件/电气,硬件|电气|自动化|PLC|单片机|电路|仪器仪表|电子工程师|电控|嵌入式硬件|电机|电源,keyword_seed,4,4,硬件、电气与自动化
+hardware_electrical,硬件/电气,^(电力工程师 or 电力技术员|集成电路IC设计工程师 or 集成电路IC应用工程师|电子工程师 or 电子技术员|通信技术工程师|PCB工程师|激光技术 or 光电子技术|射频工程师|FPGA工程师)$,keyword_seed,6,4,高频硬件/电气 keyword_seed 精修
+hardware_electrical,硬件/电气,^(射频工程师|FPGA工程师|电子技术员)$,job_title_std,8,4,高频硬件岗位精修
+hardware_electrical,硬件/电气,^(机电工程师|自动控制工程师 or 自动控制技术员|自动化运维工程师)$,keyword_seed,6,4,高频自动化与机电 keyword_seed 精修
+hardware_electrical,硬件/电气,^(电机工程师|自控工程师)$,job_title_std,8,4,高频机电与自控岗位精修
+r_and_d_research,研发/科研,研发工程师|研发经理|研发总监|研发助理|研究员|科研人员|实验室研究员|技术研发工程师|技术研发经理|技术研发主管|医药技术研发人员,job_title_std,6,5,研发与科研岗位
+r_and_d_research,研发/科研,研发工程师|研发经理|研发总监|研发助理|研究员|科研人员|实验室研究员|技术研发工程师|技术研发经理|技术研发主管|医药技术研发人员,keyword_seed,5,5,研发与科研岗位
+r_and_d_research,研发/科研,^(技术研发工程师|食品研发 or 饮料研发)$,keyword_seed,6,5,高频研发 keyword_seed 精修
+r_and_d_research,研发/科研,^(产品开发工程师)$,job_title_std,12,5,高频产品研发岗位精修
+mechanical_engineering,机械工程,机械|结构工程师|模具|机电|设备工程师|工业工程|材料工程师|热设计|制造工程师|工艺工程师|光学工程师|设备主管|设备技术员|设备员|机修工,job_title_std,5,5,机械、结构与制造工程
+mechanical_engineering,机械工程,机械|结构工程师|结构设计工程师|模具|机电|设备工程师|工业工程|材料工程师|热设计|制造工程师|工艺工程师|工艺技术员|工艺员|精益工程师|PIE工程师|光学工程师|设备主管|设备技术员|设备员|机修工|焊接工程师|液压工程师|线束工程师,keyword_seed,4,5,机械、结构与制造工程
+mechanical_engineering,机械工程,^(IE工程师|PE工程师|NPI工程师|PIE工程师|光学工程师|结构设计工程师|工艺技术员|工艺员|精益工程师|设备主管|设备技术员|机修工|焊接工程师|液压工程师|线束工程师)$,job_title_std,8,5,高频制造工程岗位精修
+mechanical_engineering,机械工程,^(工艺工程师 or 制程工程师|工程工程师 or 设备工程师|机械工程师|汽车设计工程师|工程经理 or 设备经理|半导体工艺工程师|工程绘图员 or 机械绘图员|ME工程师|夹具工程师 or 夹具技师|机械设计)$,keyword_seed,6,5,高频机械 keyword_seed 精修
+mechanical_engineering,机械工程,^(设备经理|设备管理员|设备维护工程师|ME工程师|钣金工程师|工艺/制程工程师)$,job_title_std,8,5,高频机械岗位精修
+mechanical_engineering,机械工程,^(产品规划工程师|内外饰工程师)$,keyword_seed,6,5,高频机械设计 keyword_seed 精修
+mechanical_engineering,机械工程,^(机械产品工程师|制冷工程师|汽车内外饰设计工程师|机械装配技术员|结构助理工程师)$,job_title_std,12,5,高频机械标题精修
+production_quality,生产/质量,生产|车间|品质|质量|QA|QC|质检|检验|测试工程师|认证|体系工程师|生产主管|生产经理|安全工程师|EHS|安环,job_title_std,5,6,生产管理与质量
+production_quality,生产/质量,生产|车间|品质|质量|QA|QC|质检|检验|测试工程师|认证|体系工程师|生产主管|生产经理|安全工程师|EHS|安环|供应商质量|供应商管理|品检员|巡检员|三坐标测量员,keyword_seed,4,6,生产管理与质量
+production_quality,生产/质量,^(QE工程师|SQE工程师|DQE工程师|PQE工程师|CQE工程师|QE|SQE|DQE|PQE|CQE|安全工程师|品检员|巡检员|三坐标测量员)$,job_title_std,8,6,高频质量岗位精修
+production_quality,生产/质量,^(质检员 or 测试员 or QC|质量管理工程师 or 测试工程师 or QA工程师 or QC工程师|生产领班 or 生产组长|标准化工程师|环保工程师|药品生产 or 质量管理|供应商管理)$,keyword_seed,6,6,高频生产/质量 keyword_seed 精修
+production_quality,生产/质量,^(环保工程师|体系专员|品管员|检测工程师)$,job_title_std,12,6,高频生产/质量岗位精修
+production_quality,生产/质量,^(系统测试|功能测试|性能测试|质量管理主管 or 测试主管 or QA主管 or QC主管|质量管理经理 or 测试经理 or QA经理 or QC经理|仪器分析师 or 仪表分析师 or 计量分析师|SMT工程师|化学分析测试员)$,keyword_seed,6,6,高频测试/质量 keyword_seed 精修
+production_quality,生产/质量,^(测试技术员|SMT工程师|SMT技术员|品控主管|品控经理|计量工程师|化验员|TE工程师|失效分析工程师)$,job_title_std,12,6,高频测试与质量标题精修
+blue_collar_ops,技工/操作,普工|操作工|装配工|包装工|焊工|钳工|车工|铣工|磨工|数控|叉车|电工|维修工|技工|安装工|调机|注塑|冲压|喷涂|装卸|机修|维修技师,job_title_std,6,7,蓝领技术与操作
+blue_collar_ops,技工/操作,普工|操作工|装配工|包装工|焊工|钳工|车工|铣工|磨工|数控|叉车|电工|维修工|技工|安装工|调机|注塑|冲压|喷涂|装卸|机修|维修技师|折弯工,keyword_seed,5,7,蓝领技术与操作
+blue_collar_ops,技工/操作,^(普工 or 操作工 or 组装工 or 包装工)$,keyword_seed,6,7,高频操作工 keyword_seed 精修
+blue_collar_ops,技工/操作,^(生产操作员|生产工人|生产作业员|火花机师傅)$,job_title_std,8,7,高频操作岗位精修
+blue_collar_ops,技工/操作,^(组装工|锅炉工|油漆工|喷漆工|铆工|钣金工|缝纫工|样衣工|搬运工)$,job_title_std,12,7,高频蓝领岗位精修
+supply_chain_logistics,供应链/物流/采购,采购|供应链|仓库|仓管|仓储|物流|物料|物控|PMC|计划员|海运操作|跟单|报关|船务|配送|司机|外贸,job_title_std,5,8,供应链、仓储与物流
+supply_chain_logistics,供应链/物流/采购,采购|供应链|仓库|仓管|仓储|物流|物料|物控|PMC|计划员|海运操作|跟单|报关|船务|配送|司机|外贸,keyword_seed,4,8,供应链、仓储与物流
+supply_chain_logistics,供应链/物流/采购,^(船务操作 or 空运陆运操作|快递员|分拣员|仓库管理员|生产计划管理 or 物料管理\(PMC\)|单证员|关务专员|货代操作|供应链专员)$,keyword_seed,6,8,高频供应链 keyword_seed 精修
+supply_chain_logistics,供应链/物流/采购,^(单证员|库管员|驾驶员)$,job_title_std,8,8,高频供应链岗位精修
+supply_chain_logistics,供应链/物流/采购,^(报关与报检|海关事务管理)$,keyword_seed,6,8,高频关务 keyword_seed 精修
+supply_chain_logistics,供应链/物流/采购,^(关务专员|关务|进出口专员|国际贸易专员|国际贸易经理|外贸经理|贸易助理)$,job_title_std,8,8,高频关务与外贸标题精修
+sales_business,销售/商务,销售|客户经理|客户代表|商务拓展|BD|业务员|业务经理|商务专员|商务经理|招商主管|招商|渠道经理|渠道销售|置业顾问|大客户|医药销售|店员|营业员|门店经理|店长|招投标|投标|保险康养顾问,job_title_std,6,9,销售与商务拓展
+sales_business,销售/商务,销售|客户经理|客户代表|商务拓展|BD|业务员|业务经理|商务专员|商务经理|招商主管|招商|渠道经理|渠道销售|置业顾问|大客户|医药销售|店员|营业员|门店经理|店长|招投标|投标|保险康养顾问,keyword_seed,5,9,销售与商务拓展
+sales_business,销售/商务,^(商务专员|商务经理|业务经理|招投标专员|投标专员)$,job_title_std,8,9,高频商务岗位精修
+sales_business,销售/商务,^(商务助理|业务拓展经理 or 业务拓展主管|促销员 or 导购员|渠道专员 or 分销专员|保险经纪人 or 保险代理|销售代表 or 客户代表|医药销售人员|理财顾问)$,keyword_seed,6,9,高频销售/商务 keyword_seed 精修
+sales_business,销售/商务,^(商务助理|商务主管|医学信息沟通专员)$,job_title_std,8,9,高频商务岗位精修
+sales_business,销售/商务,^(销售经理|电话销售|销售总监)$,keyword_seed,6,9,高频销售 keyword_seed 精修
+marketing_operations,市场/运营,运营|新媒体|市场|营销|推广|投放|社群|活动策划|品牌|用户增长|电商运营|直播运营|SEO|SEM|主播|直播主播|主持人,job_title_std,5,10,市场与运营
+marketing_operations,市场/运营,运营|新媒体|市场|营销|推广|投放|社群|活动策划|品牌|用户增长|电商运营|直播运营|SEO|SEM|主播|直播主播|主持人,keyword_seed,4,10,市场与运营
+marketing_operations,市场/运营,^(市场专员 or 营销专员 or 拓展专员|主播工作 or 主持人)$,keyword_seed,6,10,高频市场/运营 keyword_seed 精修
+marketing_operations,市场/运营,^(营销总监)$,job_title_std,8,10,高频营销岗位精修
+marketing_operations,市场/运营,^(电商专员|国内电商运营|跨境电商运营|营运经理|营运主管|营运助理|营运专员|内容运营|市场经理 or 营销经理 or 拓展经理)$,keyword_seed,6,10,高频运营 keyword_seed 精修
+marketing_operations,市场/运营,^(电商专员|营运经理|营运主管|营运助理|营运专员|社区经理|企划经理|企划主管|企划专员)$,job_title_std,12,10,高频运营标题精修
+product_project,产品/项目,产品经理|产品专员|产品主管|产品工程师|项目经理|项目工程师|项目助理|项目管理工程师|项目主管|项目管理|需求分析|实施顾问|解决方案|售前工程师,job_title_std,5,11,产品与项目岗位
+product_project,产品/项目,产品经理|产品专员|产品主管|产品工程师|项目经理|项目工程师|项目助理|项目管理工程师|项目主管|项目管理|需求分析|实施顾问|解决方案|售前工程师,keyword_seed,4,11,产品与项目岗位
+product_project,产品/项目,^(建筑工程管理 or 项目经理|项目经理|产品经理 or 产品主管|项目执行人员 or 项目协调人员|项目助理)$,keyword_seed,6,11,高频产品/项目 keyword_seed 精修
+product_project,产品/项目,^(项目专员|PM)$,job_title_std,12,11,高频项目岗位精修
+product_project,产品/项目,^(项目管理|产品助理|项目总监)$,keyword_seed,6,11,高频项目 keyword_seed 精修
+product_project,产品/项目,^(产品助理|项目总监)$,job_title_std,8,11,高频产品与项目标题精修
+finance_accounting,财务/会计,会计|财务|审计|税务|出纳|成本|预算|核算|投融资|证券|基金|结算,job_title_std,5,12,财务与会计
+finance_accounting,财务/会计,会计|财务|审计|税务|出纳|成本|预算|核算|投融资|证券|基金|结算,keyword_seed,4,12,财务与会计
+finance_accounting,财务/会计,^(投资经理)$,job_title_std,8,12,高频投融资岗位精修
+hr_admin,人力/行政,人力资源|人事|HR|招聘|薪酬|绩效|培训|行政经理|行政主管|行政助理|行政专员|行政文员|人事助理|人事专员|人事经理|招聘助理|招聘专员|招聘经理|薪酬专员|绩效专员|培训专员|秘书|前台|总务|档案|办公室主任,job_title_std,5,13,人力资源与行政
+hr_admin,人力/行政,人力资源|人事|HR|招聘|薪酬|绩效|培训|行政经理|行政主管|行政助理|行政专员|行政文员|人事助理|人事专员|人事经理|招聘助理|招聘专员|招聘经理|薪酬专员|绩效专员|培训专员|秘书|前台|总务|档案|办公室主任,keyword_seed,4,13,人力资源与行政
+hr_admin,人力/行政,^(行政专员 or 行政助理|人事专员|经理助理 or 秘书)$,keyword_seed,6,13,高频人力/行政 keyword_seed 精修
+hr_admin,人力/行政,^(办公室文员|办公室助理|经理助理)$,job_title_std,8,13,高频行政岗位精修
+hr_admin,人力/行政,^(行政经理 or 行政主管 or 办公室主任|猎头 or 人才中介)$,keyword_seed,6,13,高频行政与招聘 keyword_seed 精修
+hr_admin,人力/行政,^(文员|内勤文员|工程文员|助理文员|猎头顾问)$,job_title_std,8,13,高频文职与招聘标题精修
+customer_service,客服/支持,客服|售后|售前支持|技术支持|呼叫中心|热线|客诉|服务顾问|服务工程师,job_title_std,5,14,客户服务与支持
+customer_service,客服/支持,客服|售后|售前支持|技术支持|呼叫中心|热线|客诉|服务顾问|服务工程师,keyword_seed,4,14,客户服务与支持
+customer_service,客服/支持,^(客服专员 or 客服助理|网络客服 or 在线客服|技术支持经理 or 维护经理|售后技术支持工程师)$,keyword_seed,6,14,高频客服 keyword_seed 精修
+customer_service,客服/支持,^(售后服务工程师)$,job_title_std,8,14,高频售后岗位精修
+customer_service,客服/支持,^(FAE 现场应用工程师|售前技术支持工程师)$,keyword_seed,6,14,高频售前与 FAE keyword_seed 精修
+customer_service,客服/支持,^(FAE工程师|FAE现场应用工程师|FAE 现场应用工程师|fae现场应用工程师)$,job_title_std,8,14,高频 FAE 标题精修
+customer_service,客服/支持,^(售后工程师)$,job_title_std,8,14,高频售后标题精修
+design_content,设计/内容,设计师|平面设计|UI|UX|视觉|美工|剪辑|视频|文案|编辑|动画|3D设计|工业设计|包装设计|室内设计|摄影|产品设计工程师,job_title_std,5,15,设计与内容生产
+design_content,设计/内容,设计师|平面设计|UI|UX|视觉|美工|剪辑|视频|文案|编辑|动画|3D设计|工业设计|包装设计|室内设计|摄影|产品设计工程师,keyword_seed,4,15,设计与内容生产
+design_content,设计/内容,^(工业设计 or 产品设计)$,keyword_seed,6,15,高频设计 keyword_seed 精修
+medical_bio,医疗/生物,护士|医生|医师|药师|药物|制药|生物|临床|医学|检验师|医疗器械|康复|护理,job_title_std,5,16,医疗健康与生物
+medical_bio,医疗/生物,护士|医生|医师|药师|药物|制药|生物|临床|医学|检验师|医疗器械|康复|护理,keyword_seed,4,16,医疗健康与生物
+medical_bio,医疗/生物,^(健康管理师)$,job_title_std,8,16,高频健康管理岗位精修
+education_training,教育/培训,教师|老师|教研|辅导员|班主任|培训师|讲师|课程顾问|教学|教育咨询,job_title_std,5,17,教育与培训
+education_training,教育/培训,教师|老师|教研|辅导员|班主任|培训师|讲师|课程顾问|教学|教育咨询,keyword_seed,4,17,教育与培训
+construction_real_estate,建筑/地产,建筑|土木|工程造价|造价工程师|施工|监理|房地产|物业|暖通|给排水|测绘|测量员|安全员|资料员,job_title_std,5,18,建筑工程与地产
+construction_real_estate,建筑/地产,建筑|土木|工程造价|造价工程师|施工|监理|房地产|物业|暖通|给排水|测绘|测量员|安全员|资料员,keyword_seed,4,18,建筑工程与地产
+construction_real_estate,建筑/地产,^(安全员|工程造价师 or 预结算经理 or 工程造价 or 预结算|厂务)$,keyword_seed,6,18,高频建筑/地产 keyword_seed 精修
+construction_real_estate,建筑/地产,^(土建工程师|测量工程师|厂务工程师)$,job_title_std,12,18,高频建筑工程岗位精修
+construction_real_estate,建筑/地产,^(建筑工程师)$,keyword_seed,6,18,高频建筑工程 keyword_seed 精修
+legal_compliance,法务/合规,法务|合规|律师|合同|知识产权|审查|风控|内控,job_title_std,5,19,法务与合规
+legal_compliance,法务/合规,法务|合规|律师|合同|知识产权|审查|风控|内控,keyword_seed,4,19,法务与合规
+legal_compliance,法务/合规,^(知识产权 or 专利 or 商标)$,keyword_seed,6,19,高频法务/合规 keyword_seed 精修
+legal_compliance,法务/合规,^(专利工程师|项目申报专员)$,job_title_std,8,19,高频合规岗位精修
+general_management,综合管理,管培生|储备干部|总经理助理|董事长助理|经营管理|管理培训生,job_title_std,4,20,综合管理与管培
+general_management,综合管理,管培生|储备干部|总经理助理|董事长助理|经营管理|管理培训生,keyword_seed,3,20,综合管理与管培
+general_management,综合管理,^(董事长助理|总经理助理|储备干部|管培生|管理培训生)$,job_title_std,8,20,高频综合管理岗位精修
+general_management,综合管理,^(首席执行官 or CEO or 总裁|工厂经理 or 厂长|总裁助理 or 总经理助理|副总经理 or 副总裁|营业部总经理 or 营业部副总经理|办事处经理 or 分公司经理 or 分支机构经理|首席运营官COO)$,keyword_seed,6,20,高频综合管理 keyword_seed 精修
+general_management,综合管理,^(副总经理|总经理|总裁助理|综合管理岗|综合管理)$,job_title_std,8,20,高频管理岗位精修
+service_support,后勤/安保/服务,保安|保安员|保洁|保洁员|厨师|后勤|物业服务|宿管|保姆|帮厨|服务员|餐饮服务员|乘务员|地勤人员|安检员|高铁工作人员|铁路工作人员|送餐员,job_title_std,7,21,后勤安保与生活服务
+service_support,后勤/安保/服务,保安|保安员|保洁|保洁员|厨师|后勤|物业服务|宿管|保姆|帮厨|服务员|餐饮服务员|乘务员|地勤人员|安检员|高铁工作人员|铁路工作人员|送餐员,keyword_seed,6,21,后勤安保与生活服务
+service_support,后勤/安保/服务,^(美容师|诚聘轨道巡检人员\+五险一金|列车工作人员/包吃住/五险一金)$,job_title_std,8,21,高频服务岗位精修
+service_support,后勤/安保/服务,^(餐饮收银员|杂工|配菜员 or 打荷员)$,keyword_seed,6,21,高频生活服务 keyword_seed 精修
+service_support,后勤/安保/服务,^(收银员|厨工|消防监控员|消控员|咖啡师)$,job_title_std,8,21,高频服务标题精修

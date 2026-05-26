@@ -1,0 +1,13 @@
+﻿model_id,estimator,weight_scheme,coef_GDI_x_Exposure_z,se_hc3,p_hc3_normal,n_obs,city_count
+unweighted_ols,OLS,unweighted_ols,0.424102,0.103664,4.3e-05,2820,324
+sqrt_ncg,WLS,sqrt_ncg,0.511294,0.117205,1.3e-05,2820,324
+sqrt_nc,WLS,sqrt_nc,0.533601,0.126663,2.5e-05,2820,324
+sqrt_ncg_sqrt_nc,WLS,sqrt_ncg_sqrt_nc,0.544329,0.131601,3.5e-05,2820,324
+raw_ncg_weight,WLS,raw_ncg_weight,0.458806,0.128945,0.000373,2820,324
+raw_nc_weight,WLS,raw_nc_weight,0.590354,0.154333,0.000131,2820,324
+threshold_ncg_5,WLS,threshold_ncg_5,0.5296,0.127234,3.1e-05,3426,333
+threshold_ncg_10,WLS,threshold_ncg_10,0.544329,0.131601,3.5e-05,2820,324
+threshold_ncg_20,WLS,threshold_ncg_20,0.55951,0.136824,4.3e-05,2186,302
+exclude_nc_lt_100,WLS,exclude_nc_lt_100,0.544926,0.131585,3.5e-05,2739,286
+exclude_nc_lt_200,WLS,exclude_nc_lt_200,0.547191,0.131518,3.2e-05,2456,227
+exclude_province_proxy_share_gt_20pct,WLS,exclude_province_proxy_share_gt_20pct,0.544329,0.131601,3.5e-05,2820,324
