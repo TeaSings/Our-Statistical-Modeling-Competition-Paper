@@ -3,6 +3,8 @@ __pycache__/
 *.pyc
 .DS_Store
 _local_archive_not_for_github/
+_release_assets/
+release_assets/
 data/runtime/
 third_party/
 

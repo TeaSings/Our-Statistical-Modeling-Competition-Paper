@@ -5,5 +5,6 @@
 | 文件 | 内容 |
 | --- | --- |
 | `build_manual_seed_sheet.py` | 构造人工来源复核表 |
+| `build_github_release_assets.py` | 生成 GitHub Release 数据附件和 SHA256 校验文件 |
 | `extract_links.py` | 从保存页面中提取详情链接 |
 | `parse_job_pages_by_text.py` | 使用文本规则快速检查和解析岗位页面 |

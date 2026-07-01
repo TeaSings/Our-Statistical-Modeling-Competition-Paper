@@ -22,7 +22,7 @@
 
 ## 数据归档
 
-全量原始抓取、HTML、JSONL 和大体量中间表不进入 Git 历史。仓库只保留代码、小型结果、schema 和说明文档；完整数据包计划通过 GitHub Release 附件分发，方案见 `docs/GitHubRelease数据归档方案.md`。
+全量原始抓取、HTML、JSONL 和大体量中间表不进入 Git 历史。仓库只保留代码、小型结果、schema 和说明文档；完整数据包通过 GitHub Release 附件分发，方案见 `docs/GitHubRelease数据归档方案.md`，清单见 `docs/数据Release清单.md`。
 
 ## 复现方式
 
