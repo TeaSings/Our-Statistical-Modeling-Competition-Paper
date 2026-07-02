@@ -8,4 +8,4 @@
 | `raw/` | 原始 HTML、JSONL、manifest 和抓取日志的恢复位置 |
 | `processed/` | 清洗后数据和分析主数据的恢复位置 |
 
-大体量原始数据和处理后数据不进入 Git 历史。论文直接使用的小型结果位于 `analysis/tables/`；完整数据包按 `docs/GitHubRelease数据归档方案.md` 从 GitHub Release 恢复。
+大体量原始数据和处理后数据不进入 Git 历史。论文直接使用的小型结果位于 `analysis/tables/`；完整数据包按 `docs/大体量数据获取说明.md` 从 GitHub Release 恢复。

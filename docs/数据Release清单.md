@@ -1,36 +1,29 @@
 # 数据 Release 清单
 
-本文件记录从本地归档目录生成 GitHub Release 附件的范围。Git 仓库保留论文、图片、代码、小型表格和说明文档；下列大体量数据通过 Release 附件恢复。
+本文件说明 `data-v1.0` Release 附件的内容和恢复路径。Git 仓库保留论文、图片、代码、小型表格和说明文档；下列大体量数据通过 Release 附件恢复。
+
+Release 地址：
+
+https://github.com/TeaSings/Our-Statistical-Modeling-Competition-Paper/releases/tag/data-v1.0
 
 ## 附件清单
 
-| 附件 | 本地来源 | 解压后路径 | 未压缩规模 |
+| 附件 | 内容 | 解压后路径 | 未压缩规模 |
 | --- | --- | --- | ---: |
-| `processed-51job-main.zip` | `_local_archive_not_for_github/data/processed/51job/` | `data/processed/51job/` | 约 3.06 GB |
-| `raw-51job-records.zip` | `_local_archive_not_for_github/data/raw/51job/records/` | `data/raw/51job/records/` | 约 2.56 GB |
-| `raw-51job-manifests.zip` | `_local_archive_not_for_github/data/raw/51job/manifests/` | `data/raw/51job/manifests/` | 约 0.06 GB |
-| `analysis-static-full.zip` | `_local_archive_not_for_github/data/processed/analysis_static/` | `data/processed/analysis_static/` | 约 2.99 GB |
-| `ncss-raw-and-processed.zip` | `_local_archive_not_for_github/data/raw/ncss/` 与 `_local_archive_not_for_github/data/processed/ncss/` | `data/raw/ncss/` 与 `data/processed/ncss/` | 约 0.18 GB |
-| `analysis-local-supplement.zip` | `_local_archive_not_for_github/analysis/job_level_scored.csv` | `analysis/job_level_scored.csv` | 约 0.21 GB |
+| `processed-51job-main.zip` | 51job 清洗后社招主样本和校招清洗表 | `data/processed/51job/` | 约 3.06 GB |
+| `raw-51job-records.zip` | 51job 原始 JSONL 抓取记录 | `data/raw/51job/records/` | 约 2.56 GB |
+| `raw-51job-manifests.zip` | 51job 抓取 manifest、cursor 和进度日志 | `data/raw/51job/manifests/` | 约 0.06 GB |
+| `analysis-static-full.zip` | 静态抽取全量中间表和完整 job-level 主表 | `data/processed/analysis_static/` | 约 2.99 GB |
+| `ncss-raw-and-processed.zip` | NCSS 原始记录、manifest 和清洗表 | `data/raw/ncss/`、`data/processed/ncss/` | 约 0.18 GB |
+| `analysis-local-supplement.zip` | 大体量补充分析表 | `analysis/job_level_scored.csv` | 约 0.21 GB |
+| `checksums-sha256.txt` | 附件 SHA256 校验值 | 下载目录 | - |
 
-不纳入 Release 的内容包括浏览器 profile、第三方依赖缓存、临时渲染文件、smoke-test 中间结果和运行态目录。
+## 恢复和校验
 
-## 打包命令
-
-先预览附件范围：
-
-```powershell
-python src/tools/build_github_release_assets.py --dry-run
-```
-
-生成附件和校验文件：
+在仓库根目录解压所需 zip 文件，保持压缩包内的相对路径。下载后可使用 `checksums-sha256.txt` 校验附件完整性。
 
 ```powershell
-python src/tools/build_github_release_assets.py
+Get-FileHash .\processed-51job-main.zip -Algorithm SHA256
 ```
 
-默认输出目录为 `_release_assets/data-v1.0/`。该目录已加入 `.gitignore`，不会进入 Git。
-
-## 发布建议
-
-Release 标签建议使用 `data-v1.0`。上传附件后，在 Release 说明中写明对应 Git commit、数据来源、生成日期和恢复方法。若某个压缩包超过 2 GiB，应进一步按平台、阶段或文件拆分后再上传。
+只阅读论文或检查正文图表时，不需要下载这些附件。

@@ -1,33 +1,53 @@
 # 生成式人工智能与城市就业技能结构重塑
 
-本仓库整理统计建模竞赛论文《生成式人工智能冲击下城市就业技能结构重塑研究：基于招聘文本的技能抽取与大模型暴露度测度》的代码、文档、图表和可复现结果。
+本仓库公开统计建模竞赛论文《生成式人工智能冲击下城市就业技能结构重塑研究：基于招聘文本的技能抽取与大模型暴露度测度》的论文材料、核心代码、表格图形和数据归档说明。
 
-## 仓库结构
+研究使用在线招聘文本刻画城市就业技能需求，围绕 51job 社招岗位构建岗位族、城市、技能任务和大模型暴露度指标，分析生成式人工智能对城市就业技能结构的重塑。
 
-| 路径 | 内容 |
+## 快速导航
+
+| 需要查看 | 位置 |
 | --- | --- |
-| `analysis/` | 论文文稿、正文图表、模型输入、写作修订记录和参考材料 |
-| `src/` | 数据抓取、清洗、静态抽取和辅助工具脚本 |
-| `data/` | 轻量输入配置、数据目录说明和恢复位置 |
-| `docs/` | 数据流程、方法口径、质量核验和 Release 数据归档方案 |
-| `papers/` | 研究文献与下载记录 |
+| 论文原稿、PDF 和附页 | `analysis/manuscript/` |
+| 正文图片 | `analysis/figures/` |
+| 正文表格和模型输入 | `analysis/tables/` |
+| 数据来源、方法和复现说明 | `docs/` |
+| 抓取、清洗和抽取脚本 | `src/` |
+| 研究文献和竞赛参考材料 | `papers/` |
 
-## 主要结果
+## 仓库内容
 
-- 论文文稿：`analysis/manuscript/`
-- 正文图片：`analysis/figures/`
-- 正文表格：`analysis/tables/paper_tables_csv/`
-- 模型输入：`analysis/tables/model_inputs/`
-- 抽取结果：`analysis/tables/extraction_outputs/`
+- `analysis/`：论文交付材料，包括 Word 原稿、PDF、正文图表、模型输入和抽取结果。
+- `src/`：招聘数据抓取、清洗、城市与岗位族标准化、技能任务抽取和 Release 数据打包脚本。
+- `data/`：轻量输入配置和大体量数据的恢复位置说明。
+- `docs/`：数据来源、实现流程、质量核验和 Release 数据恢复说明。
+- `papers/`：研究文献和往年优秀论文参考。
 
-## 数据归档
+## 数据获取
 
-全量原始抓取、HTML、JSONL 和大体量中间表不进入 Git 历史。仓库只保留代码、小型结果、schema 和说明文档；完整数据包通过 GitHub Release 附件分发，方案见 `docs/GitHubRelease数据归档方案.md`，清单见 `docs/数据Release清单.md`。
+Git 仓库不直接保存全量原始抓取、HTML、JSONL 和大体量中间表。完整数据已作为 GitHub Release 附件发布：
 
-## 复现方式
+https://github.com/TeaSings/Our-Statistical-Modeling-Competition-Paper/releases/tag/data-v1.0
+
+下载所有 zip 附件和 `checksums-sha256.txt` 后，在仓库根目录解压即可恢复原始数据和全量中间结果。附件说明见 `docs/数据Release清单.md`。
+
+## 复现入口
+
+安装 Python 依赖：
 
 ```powershell
 python -m pip install -r requirements.txt
 ```
 
-完整复现需要先从对应 GitHub Release 下载数据包，并按压缩包内的相对路径解压回仓库根目录。核心脚本位于 `src/`，关键流程说明位于 `docs/中文数据来源与脚本说明.md`。
+主要脚本入口：
+
+```powershell
+python src/analysis_static/a_extraction/build_51job_master_static.py
+python src/analysis_static/a_extraction/finalize_51job_master_static.py
+```
+
+完整复现需要先恢复 Release 数据包。只阅读论文、查看图表或检查正文表格时，不需要下载大体量数据。
+
+## 归档状态
+
+比赛已结束，仓库以 `main` 分支作为公开归档版本。早期开发分支中的爬虫实验、方法探索和大体量数据快照已收束为当前目录结构与 `data-v1.0` Release 数据包。
