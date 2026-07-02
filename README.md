@@ -4,6 +4,14 @@
 
 研究使用在线招聘文本刻画城市就业技能需求，围绕 51job 社招岗位构建岗位族、城市、技能任务和大模型暴露度指标，分析生成式人工智能对城市就业技能结构的重塑。
 
+## 小组成员
+
+| 成员 | GitHub |
+| --- | --- |
+| <img src="https://github.com/Xuanx-7.png?size=96" width="64" alt="李同学头像"><br>李同学 | [Xuanx-7](https://github.com/Xuanx-7) |
+| <img src="https://github.com/Gjt20051218.png?size=96" width="64" alt="郭同学头像"><br>郭同学 | [Gjt20051218](https://github.com/Gjt20051218) |
+| <img src="https://github.com/TeaSings.png?size=96" width="64" alt="陈同学头像"><br>陈同学 | [TeaSings](https://github.com/TeaSings) |
+
 ## 快速导航
 
 | 需要查看 | 位置 |
